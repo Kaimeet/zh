@@ -439,12 +439,14 @@ public class KunHeServiceImpl implements KunHeService {
         //1.中、下芯板长
         String zxblength="";
         String xxblength="";
-        if(caseDto.getDoorhigh()!=null&&caseDto.getSmWeight()!=null&&caseDto.getXmWeight()!=null&&caseDto.getXbDepth()!=null){
+        if(caseDto.getDoorhigh()!=null&&caseDto.getSmWeight()!=null&&caseDto.getXmWeight()!=null&&caseDto.getXbDepth()!=null&&caseDto.getXxHigh()!=null&&caseDto.getZdWeight()!=null){
             Double doorhigh=caseDto.getDoorhigh().doubleValue();
             Double smweight=caseDto.getSmWeight().doubleValue();
             Double xmweight=caseDto.getXmWeight().doubleValue();
             Double xbDepth=caseDto.getXbDepth().doubleValue();
-            zxblength=(doorhigh-smweight-xmweight +2*xbDepth)+"";
+            Double xxhigh=caseDto.getXxHigh().doubleValue();
+            Double zdweight=caseDto.getZdWeight().doubleValue();
+            zxblength=(doorhigh-smweight-xmweight +2*xbDepth-zdweight-xxhigh)+"";
             xxblength=(460+2*xbDepth)+"";
         }
         //计算中、下芯板宽
@@ -765,7 +767,7 @@ public Dto<List<ResultDto>>case4(Numbyser numbyser,List<ResultDto>resultDtoList,
             resultDtoList.add(resultDtoxxb);
         }
         //中中挺长
-        String zztlenth=caseDoubles.getDoorhigh()-caseDoubles.getSmWeight()-caseDoubles.getXmWeight()-caseDoubles.getXxHigh()-caseDoubles.getZdWeight()+4*caseDoubles.getZxWeight()+"";
+        String zztlenth=caseDoubles.getDoorhigh()-caseDoubles.getSmWeight()-caseDoubles.getXmWeight()-caseDoubles.getXxHigh()-caseDoubles.getZdWeight()+3*caseDoubles.getZxWeight()+"";
         //中中挺宽
         String zztwidth=String.valueOf(caseDoubles.getZztWeight());
         //中中挺数量（个）
@@ -863,7 +865,7 @@ public Dto<List<ResultDto>>case4(Numbyser numbyser,List<ResultDto>resultDtoList,
             resultDtoList.add(resultDtoxxb);
         }
         //中中挺长
-        String zztlenth=caseDoubles.getDoorhigh()-caseDoubles.getSmWeight()-caseDoubles.getXmWeight()-caseDoubles.getXxHigh()-caseDoubles.getZdWeight()+4*caseDoubles.getZxWeight()+"";
+        String zztlenth=caseDoubles.getDoorhigh()-caseDoubles.getSmWeight()-caseDoubles.getXmWeight()-caseDoubles.getXxHigh()-caseDoubles.getZdWeight()+3*caseDoubles.getZxWeight()+"";
         //下中挺长
         String xztlenth=caseDoubles.getXzthigh()+"";
         //中中挺宽
@@ -965,7 +967,7 @@ public Dto<List<ResultDto>>case4(Numbyser numbyser,List<ResultDto>resultDtoList,
 
         //中芯板长
         String zxblength="";
-        zxblength=caseDoubles.getDoorhigh()-caseDoubles.getSmWeight()-caseDoubles.getXmWeight()-caseDoubles.getXxHigh()-caseDoubles.getZdWeight()+4*caseDoubles.getXbDepth()+"";
+        zxblength=caseDoubles.getDoorhigh()-caseDoubles.getSmWeight()-caseDoubles.getXmWeight()-caseDoubles.getXxHigh()-caseDoubles.getSxHigh()-2*caseDoubles.getZdWeight()+6*caseDoubles.getXbDepth()+"";
         //下芯板长
         String xxblength="";
         xxblength=String.valueOf(caseDoubles.getXxHigh());
