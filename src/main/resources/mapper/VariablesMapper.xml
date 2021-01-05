@@ -1,0 +1,432 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pzm.zh.dao.VariablesMapper" >
+  <resultMap id="BaseResultMap" type="com.pzm.zh.entity.Variables" >
+    <constructor >
+      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="REVISION" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="CREATED_BY" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="CREATED_TIME" jdbcType="DATE" javaType="java.util.Date" />
+      <arg column="UPDATED_BY" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="UPDATED_TIME" jdbcType="DATE" javaType="java.util.Date" />
+      <arg column="doorhigh" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="style" jdbcType="NVARCHAR" javaType="java.lang.String" />
+      <arg column="doorweight" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="doornums" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="serizes" jdbcType="NVARCHAR" javaType="java.lang.String" />
+      <arg column="ztweight" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="plaThick" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="sztweight" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="bkweight" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="sxHigh" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="zxHigh" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="xxHigh" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="zdWeight" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="xbDepth" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="zxWeight" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="smWeight" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="xmWeight" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="glassDepth" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="zztWeight" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="xztWeight" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="memo1" jdbcType="NVARCHAR" javaType="java.lang.String" />
+      <arg column="memo2" jdbcType="NVARCHAR" javaType="java.lang.String" />
+      <arg column="memo3" jdbcType="NVARCHAR" javaType="java.lang.String" />
+      <arg column="memo4" jdbcType="NVARCHAR" javaType="java.lang.String" />
+      <arg column="memo5" jdbcType="NVARCHAR" javaType="java.lang.String" />
+      <arg column="memo6" jdbcType="NVARCHAR" javaType="java.lang.String" />
+      <arg column="serizesId" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, REVISION, CREATED_BY, CREATED_TIME, UPDATED_BY, UPDATED_TIME, doorhigh, style, 
+    doorweight, doornums, serizes, ztweight, plaThick, sztweight, bkweight, sxHigh, zxHigh, 
+    xxHigh, zdWeight, xbDepth, zxWeight, smWeight, xmWeight, glassDepth, zztWeight, xztWeight, 
+    memo1, memo2, memo3, memo4, memo5, memo6, serizesId
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from variables
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectbyseid" parameterType="int" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from variables
+    where serizesid = #{id}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from variables
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.pzm.zh.entity.Variables" >
+    insert into variables (id, REVISION, CREATED_BY, 
+      CREATED_TIME, UPDATED_BY, UPDATED_TIME, 
+      doorhigh, style, doorweight, 
+      doornums, serizes, ztweight, 
+      plaThick, sztweight, bkweight, 
+      sxHigh, zxHigh, xxHigh, 
+      zdWeight, xbDepth, zxWeight, 
+      smWeight, xmWeight, glassDepth, 
+      zztWeight, xztWeight, memo1, 
+      memo2, memo3, memo4, 
+      memo5, memo6, serizesId
+      )
+    values (#{id,jdbcType=INTEGER}, #{REVISION,jdbcType=INTEGER}, #{CREATED_BY,jdbcType=VARCHAR}, 
+      #{CREATED_TIME,jdbcType=DATE}, #{UPDATED_BY,jdbcType=VARCHAR}, #{UPDATED_TIME,jdbcType=DATE}, 
+      #{doorhigh,jdbcType=DECIMAL}, #{style,jdbcType=NVARCHAR}, #{doorweight,jdbcType=DECIMAL}, 
+      #{doornums,jdbcType=INTEGER}, #{serizes,jdbcType=NVARCHAR}, #{ztweight,jdbcType=DECIMAL}, 
+      #{plaThick,jdbcType=DECIMAL}, #{sztweight,jdbcType=DECIMAL}, #{bkweight,jdbcType=DECIMAL}, 
+      #{sxHigh,jdbcType=DECIMAL}, #{zxHigh,jdbcType=DECIMAL}, #{xxHigh,jdbcType=DECIMAL}, 
+      #{zdWeight,jdbcType=DECIMAL}, #{xbDepth,jdbcType=DECIMAL}, #{zxWeight,jdbcType=DECIMAL}, 
+      #{smWeight,jdbcType=DECIMAL}, #{xmWeight,jdbcType=DECIMAL}, #{glassDepth,jdbcType=DECIMAL}, 
+      #{zztWeight,jdbcType=DECIMAL}, #{xztWeight,jdbcType=DECIMAL}, #{memo1,jdbcType=NVARCHAR}, 
+      #{memo2,jdbcType=NVARCHAR}, #{memo3,jdbcType=NVARCHAR}, #{memo4,jdbcType=NVARCHAR}, 
+      #{memo5,jdbcType=NVARCHAR}, #{memo6,jdbcType=NVARCHAR}, #{serizesId,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.pzm.zh.entity.Variables" >
+    insert into variables
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="REVISION != null" >
+        REVISION,
+      </if>
+      <if test="CREATED_BY != null" >
+        CREATED_BY,
+      </if>
+      <if test="CREATED_TIME != null" >
+        CREATED_TIME,
+      </if>
+      <if test="UPDATED_BY != null" >
+        UPDATED_BY,
+      </if>
+      <if test="UPDATED_TIME != null" >
+        UPDATED_TIME,
+      </if>
+      <if test="doorhigh != null" >
+        doorhigh,
+      </if>
+      <if test="style != null" >
+        style,
+      </if>
+      <if test="doorweight != null" >
+        doorweight,
+      </if>
+      <if test="doornums != null" >
+        doornums,
+      </if>
+      <if test="serizes != null" >
+        serizes,
+      </if>
+      <if test="ztweight != null" >
+        ztweight,
+      </if>
+      <if test="plaThick != null" >
+        plaThick,
+      </if>
+      <if test="sztweight != null" >
+        sztweight,
+      </if>
+      <if test="bkweight != null" >
+        bkweight,
+      </if>
+      <if test="sxHigh != null" >
+        sxHigh,
+      </if>
+      <if test="zxHigh != null" >
+        zxHigh,
+      </if>
+      <if test="xxHigh != null" >
+        xxHigh,
+      </if>
+      <if test="zdWeight != null" >
+        zdWeight,
+      </if>
+      <if test="xbDepth != null" >
+        xbDepth,
+      </if>
+      <if test="zxWeight != null" >
+        zxWeight,
+      </if>
+      <if test="smWeight != null" >
+        smWeight,
+      </if>
+      <if test="xmWeight != null" >
+        xmWeight,
+      </if>
+      <if test="glassDepth != null" >
+        glassDepth,
+      </if>
+      <if test="zztWeight != null" >
+        zztWeight,
+      </if>
+      <if test="xztWeight != null" >
+        xztWeight,
+      </if>
+      <if test="memo1 != null" >
+        memo1,
+      </if>
+      <if test="memo2 != null" >
+        memo2,
+      </if>
+      <if test="memo3 != null" >
+        memo3,
+      </if>
+      <if test="memo4 != null" >
+        memo4,
+      </if>
+      <if test="memo5 != null" >
+        memo5,
+      </if>
+      <if test="memo6 != null" >
+        memo6,
+      </if>
+      <if test="serizesId != null" >
+        serizesId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="REVISION != null" >
+        #{REVISION,jdbcType=INTEGER},
+      </if>
+      <if test="CREATED_BY != null" >
+        #{CREATED_BY,jdbcType=VARCHAR},
+      </if>
+      <if test="CREATED_TIME != null" >
+        #{CREATED_TIME,jdbcType=DATE},
+      </if>
+      <if test="UPDATED_BY != null" >
+        #{UPDATED_BY,jdbcType=VARCHAR},
+      </if>
+      <if test="UPDATED_TIME != null" >
+        #{UPDATED_TIME,jdbcType=DATE},
+      </if>
+      <if test="doorhigh != null" >
+        #{doorhigh,jdbcType=DECIMAL},
+      </if>
+      <if test="style != null" >
+        #{style,jdbcType=NVARCHAR},
+      </if>
+      <if test="doorweight != null" >
+        #{doorweight,jdbcType=DECIMAL},
+      </if>
+      <if test="doornums != null" >
+        #{doornums,jdbcType=INTEGER},
+      </if>
+      <if test="serizes != null" >
+        #{serizes,jdbcType=NVARCHAR},
+      </if>
+      <if test="ztweight != null" >
+        #{ztweight,jdbcType=DECIMAL},
+      </if>
+      <if test="plaThick != null" >
+        #{plaThick,jdbcType=DECIMAL},
+      </if>
+      <if test="sztweight != null" >
+        #{sztweight,jdbcType=DECIMAL},
+      </if>
+      <if test="bkweight != null" >
+        #{bkweight,jdbcType=DECIMAL},
+      </if>
+      <if test="sxHigh != null" >
+        #{sxHigh,jdbcType=DECIMAL},
+      </if>
+      <if test="zxHigh != null" >
+        #{zxHigh,jdbcType=DECIMAL},
+      </if>
+      <if test="xxHigh != null" >
+        #{xxHigh,jdbcType=DECIMAL},
+      </if>
+      <if test="zdWeight != null" >
+        #{zdWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="xbDepth != null" >
+        #{xbDepth,jdbcType=DECIMAL},
+      </if>
+      <if test="zxWeight != null" >
+        #{zxWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="smWeight != null" >
+        #{smWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="xmWeight != null" >
+        #{xmWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="glassDepth != null" >
+        #{glassDepth,jdbcType=DECIMAL},
+      </if>
+      <if test="zztWeight != null" >
+        #{zztWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="xztWeight != null" >
+        #{xztWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="memo1 != null" >
+        #{memo1,jdbcType=NVARCHAR},
+      </if>
+      <if test="memo2 != null" >
+        #{memo2,jdbcType=NVARCHAR},
+      </if>
+      <if test="memo3 != null" >
+        #{memo3,jdbcType=NVARCHAR},
+      </if>
+      <if test="memo4 != null" >
+        #{memo4,jdbcType=NVARCHAR},
+      </if>
+      <if test="memo5 != null" >
+        #{memo5,jdbcType=NVARCHAR},
+      </if>
+      <if test="memo6 != null" >
+        #{memo6,jdbcType=NVARCHAR},
+      </if>
+      <if test="serizesId != null" >
+        #{serizesId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pzm.zh.entity.Variables" >
+    update variables
+    <set >
+      <if test="REVISION != null" >
+        REVISION = #{REVISION,jdbcType=INTEGER},
+      </if>
+      <if test="CREATED_BY != null" >
+        CREATED_BY = #{CREATED_BY,jdbcType=VARCHAR},
+      </if>
+      <if test="CREATED_TIME != null" >
+        CREATED_TIME = #{CREATED_TIME,jdbcType=DATE},
+      </if>
+      <if test="UPDATED_BY != null" >
+        UPDATED_BY = #{UPDATED_BY,jdbcType=VARCHAR},
+      </if>
+      <if test="UPDATED_TIME != null" >
+        UPDATED_TIME = #{UPDATED_TIME,jdbcType=DATE},
+      </if>
+      <if test="doorhigh != null" >
+        doorhigh = #{doorhigh,jdbcType=DECIMAL},
+      </if>
+      <if test="style != null" >
+        style = #{style,jdbcType=NVARCHAR},
+      </if>
+      <if test="doorweight != null" >
+        doorweight = #{doorweight,jdbcType=DECIMAL},
+      </if>
+      <if test="doornums != null" >
+        doornums = #{doornums,jdbcType=INTEGER},
+      </if>
+      <if test="serizes != null" >
+        serizes = #{serizes,jdbcType=NVARCHAR},
+      </if>
+      <if test="ztweight != null" >
+        ztweight = #{ztweight,jdbcType=DECIMAL},
+      </if>
+      <if test="plaThick != null" >
+        plaThick = #{plaThick,jdbcType=DECIMAL},
+      </if>
+      <if test="sztweight != null" >
+        sztweight = #{sztweight,jdbcType=DECIMAL},
+      </if>
+      <if test="bkweight != null" >
+        bkweight = #{bkweight,jdbcType=DECIMAL},
+      </if>
+      <if test="sxHigh != null" >
+        sxHigh = #{sxHigh,jdbcType=DECIMAL},
+      </if>
+      <if test="zxHigh != null" >
+        zxHigh = #{zxHigh,jdbcType=DECIMAL},
+      </if>
+      <if test="xxHigh != null" >
+        xxHigh = #{xxHigh,jdbcType=DECIMAL},
+      </if>
+      <if test="zdWeight != null" >
+        zdWeight = #{zdWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="xbDepth != null" >
+        xbDepth = #{xbDepth,jdbcType=DECIMAL},
+      </if>
+      <if test="zxWeight != null" >
+        zxWeight = #{zxWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="smWeight != null" >
+        smWeight = #{smWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="xmWeight != null" >
+        xmWeight = #{xmWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="glassDepth != null" >
+        glassDepth = #{glassDepth,jdbcType=DECIMAL},
+      </if>
+      <if test="zztWeight != null" >
+        zztWeight = #{zztWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="xztWeight != null" >
+        xztWeight = #{xztWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="memo1 != null" >
+        memo1 = #{memo1,jdbcType=NVARCHAR},
+      </if>
+      <if test="memo2 != null" >
+        memo2 = #{memo2,jdbcType=NVARCHAR},
+      </if>
+      <if test="memo3 != null" >
+        memo3 = #{memo3,jdbcType=NVARCHAR},
+      </if>
+      <if test="memo4 != null" >
+        memo4 = #{memo4,jdbcType=NVARCHAR},
+      </if>
+      <if test="memo5 != null" >
+        memo5 = #{memo5,jdbcType=NVARCHAR},
+      </if>
+      <if test="memo6 != null" >
+        memo6 = #{memo6,jdbcType=NVARCHAR},
+      </if>
+      <if test="serizesId != null" >
+        serizesId = #{serizesId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pzm.zh.entity.Variables" >
+    update variables
+    set REVISION = #{REVISION,jdbcType=INTEGER},
+      CREATED_BY = #{CREATED_BY,jdbcType=VARCHAR},
+      CREATED_TIME = #{CREATED_TIME,jdbcType=DATE},
+      UPDATED_BY = #{UPDATED_BY,jdbcType=VARCHAR},
+      UPDATED_TIME = #{UPDATED_TIME,jdbcType=DATE},
+      doorhigh = #{doorhigh,jdbcType=DECIMAL},
+      style = #{style,jdbcType=NVARCHAR},
+      doorweight = #{doorweight,jdbcType=DECIMAL},
+      doornums = #{doornums,jdbcType=INTEGER},
+      serizes = #{serizes,jdbcType=NVARCHAR},
+      ztweight = #{ztweight,jdbcType=DECIMAL},
+      plaThick = #{plaThick,jdbcType=DECIMAL},
+      sztweight = #{sztweight,jdbcType=DECIMAL},
+      bkweight = #{bkweight,jdbcType=DECIMAL},
+      sxHigh = #{sxHigh,jdbcType=DECIMAL},
+      zxHigh = #{zxHigh,jdbcType=DECIMAL},
+      xxHigh = #{xxHigh,jdbcType=DECIMAL},
+      zdWeight = #{zdWeight,jdbcType=DECIMAL},
+      xbDepth = #{xbDepth,jdbcType=DECIMAL},
+      zxWeight = #{zxWeight,jdbcType=DECIMAL},
+      smWeight = #{smWeight,jdbcType=DECIMAL},
+      xmWeight = #{xmWeight,jdbcType=DECIMAL},
+      glassDepth = #{glassDepth,jdbcType=DECIMAL},
+      zztWeight = #{zztWeight,jdbcType=DECIMAL},
+      xztWeight = #{xztWeight,jdbcType=DECIMAL},
+      memo1 = #{memo1,jdbcType=NVARCHAR},
+      memo2 = #{memo2,jdbcType=NVARCHAR},
+      memo3 = #{memo3,jdbcType=NVARCHAR},
+      memo4 = #{memo4,jdbcType=NVARCHAR},
+      memo5 = #{memo5,jdbcType=NVARCHAR},
+      memo6 = #{memo6,jdbcType=NVARCHAR},
+      serizesId = #{serizesId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

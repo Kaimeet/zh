@@ -1,0 +1,63 @@
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<div th:fragment="asid(menus,flag,flag2)">
+    <div class="left-side sticky-left-side">
+        <!--logo and iconic logo start-->
+        <div class="logo" style="border-bottom: 1px solid #dbdddf;">
+            <a href="" style="font-size: 20px;text-align: center;width: 100%;margin: 10px 0px 0px 0px;"></a>
+        </div>
+        <div class="logo-icon text-center">
+            <a href="" style="font-size: 20px;text-align: center;width: 100%;margin: 0px"></a>
+        </div>
+        <!--logo and iconic logo end-->
+        <div class="left-side-inner">
+            <!-- visible to small devices only -->
+            <div class="visible-xs hidden-sm hidden-md hidden-lg">
+                <div class="media logged-user">
+                    <img alt="" src="" class="media-object">
+                    <div class="media-body">
+                        <h4><a href="#"></a></h4>
+                    </div>
+                </div>
+                <h5 class="left-nav-title">账户信息</h5>
+                <ul class="nav nav-pills nav-stacked custom-nav">
+                    <li><a onclick="changePassword()"><i class="fa fa-sign-out"></i> 更改密码</a></li>
+                    <li><a onclick="logout()"><i class="fa fa-sign-out"></i> <span >退出</span></a></li>
+                </ul>
+            </div>
+            <!--sidebar nav start-->
+            <!--/*@thymesVar id="menus" type="java"*/-->
+            <ul class="nav nav-pills nav-stacked custom-nav">
+               <!-- <li class="menu-list"  th:each="parentmenu : ${menus}" th:classappend="${flag==parentmenu.anchorPoint}?'nav-active':''">
+                    <a href="index.html">
+                        <i  th:classappend="${parentmenu.icon}" > </i>&lt;!&ndash;class="fa fa-home"&ndash;&gt;
+                        <span th:text="${parentmenu.methodName}"></span>
+                    </a>
+                    <ul class="sub-menu-list">
+                        &lt;!&ndash;/*@thymesVar id="childmenu" type="java"*/&ndash;&gt;
+                        <li class="" th:each="childmenu : ${parentmenu.menusChildren}" th:classappend="${flag2==childmenu.anchorPoint}?'active':''">
+                            <a th:href="${childmenu.methodUrl+'?menuid='+childmenu.id}" th:target="${childmenu.targetType}" >
+                            <span th:text="${childmenu.methodName}"></span></a>
+                        </li>
+                    </ul>
+                </li>-->
+                <li class="menu-list" th:classappend="${flag == 'xtsz'} ?'active':''">
+                    <a href="index.html">
+                        <i class="fa fa-tags"> </i><!--class="fa fa-home"-->
+                        <span>订单拆解</span>
+                    </a>
+                    <ul class="sub-menu-list" style="display: block;">
+                        <li class="" th:classappend="${flag2 == 'xtsz_ckxx'} ?'active':''">
+                            <a href="../">
+                                <span>拆单运算</span></a>
+                        </li>
+                        <li class="" th:classappend="${flag2 == 'xtsz_ckxx2'} ?'active':''">
+                            <a href="../">
+                                <span>部件合并</span></a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+</html>

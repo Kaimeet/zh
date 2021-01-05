@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh-cn" xmlns:th="http://www.thymeleaf.org" style="overflow: hidden;">
+<head>
+    <title>管理成本系统</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="shortcut icon" th:href="@{/static/images/oupailogs.ico}">
+    <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}"/>
+    <link rel="stylesheet" th:href="@{/static/css/bootstrap/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{/static/css/bootstrap/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/static/css/bootstrap/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/static/css/bootstrap/bootstrap-table.min.css}">
+
+    <link rel="stylesheet" th:href="@{/static/css/app.css}">
+    <link rel="stylesheet" th:href="@{/static/css/font.css}">
+    <link rel="stylesheet" th:href="@{/static/awesome/css/font-awesome.min.css}">
+    <link th:href="@{/static/css/style-responsive.css}" rel="stylesheet">
+    <link th:href="@{/static/css/Material/manufacturingExpenses.css}" rel="stylesheet">
+
+</head>
+<body class="sticky-header">
+<!-- left side start-->
+<div  th:replace="Menu/menu::asid(${menus},'jcsjgl','jcsjgl_zzfy')"></div>
+
+<!-- left side end-->
+<div class="main-content" >
+    <!-- header start-->
+    <div class="navbar" th:replace="Menu/header::header(${user})"></div>
+    <!-- header end-->
+    <!--body wrapper start-->
+    <div class="wrapper wrapper-content animated fadeInUp clear ">
+        <div class="">
+            <div class="seccnt">
+                <div class="ibox">
+                    <div class="ibox-content ibox-content2 col-xs-12">
+                        <div class="search-list row  " >
+<!--                                <div class="col-md-5 col-xs-12 nopadding">-->
+<!--                                <input id="typeName" placeholder=""  class="layui-input"/>-->
+                            <div class="col-lg-2 col-md-3 col-xs-6 piccondition ">
+                                  <select id="typeName" class="form-control parsley-validated" name="d" >
+                                     <option value="">---请选择类型 ---</option>
+                                      <option th:each="bomTypeOne : ${bomTypeOneList}" th:value="${bomTypeOne.typeName}" ><span th:text="${bomTypeOne.typeName}"></span></option><!--th:selected=""-->
+                                 </select>
+                            </div>
+<!--                                <div class="col-md-5 col-xs-12 nopadding">-->
+<!--                                    <input id="variableValue" placeholder=""  class="layui-input"/>-->
+<!--                                </div>-->
+                                <div class="col-lg-2 col-md-3 col-xs-6 piccondition ">
+                                    <select  id="variableValue" class="form-control parsley-validated" name="d">
+                                        <option value="">---请选择产品分类 ---</option>
+                                        <option th:each="bomTypeTwo : ${bomTypeTwoList}" th:value="${bomTypeTwo.typeName}" ><span th:text="${bomTypeTwo.typeName}"></span></option><!--th:selected=""-->
+
+                                    </select>
+                                </div>
+                            <div class="col-lg-2 col-md-3 col-xs-6 piccondition ">
+                            <select id="baseName" class="form-control parsley-validated" name="d" >
+                                <option value="">---请选择生产基地 ---</option>
+                                <option th:each="productionBase : ${productionBaseList}" th:value="${productionBase.baseName}" ><span th:text="${productionBase.baseName}"></span></option><!--th:selected=""-->
+                            </select>
+                            </div>
+<!--                            <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12 nopadding" style="margin-top:15px;">-->
+<!--                                <label class="col-md-3 text-right visible-lg visible-md title" style="width:150px;line-height: 34px;">生产基地：</label>-->
+<!--                                <label class="col-xs-12 text-left visible-xs visible-sm nopadding title">生产基地</label>-->
+<!--                                <div class="col-md-5 col-xs-12 nopadding">-->
+<!--                                <input id="baseName" placeholder=""  class="layui-input"/>-->
+<!--                            </div>-->
+                            <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12 nopadding" style="margin-top:15px;display: none">
+                                <label class="col-md-3 text-right visible-lg visible-md title" style="width:150px;line-height: 34px;">工艺版本：</label>
+                                <label class="col-xs-12 text-left visible-xs visible-sm nopadding title">工艺版本</label>
+                                <div class="col-md-5 col-xs-12 nopadding">
+                                <input id="processVersion" placeholder=""  class="layui-input"/>
+                            </div>
+                            </div>
+                            <div class="col-lg-11 col-md-9 col-xs-12 piccondition " style="text-align: center;">
+                                <button type="button" class="btn btn-s-xs defaultbtn" onclick="onsearchtable()">搜索</button>
+                                <button type="button" th:if="${flag!=1}"  class="btn btn-s-xs greenbtn" style="margin-left: 30px;" onclick="add()">新增</button>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 search-condition">
+                            <div id="tableInfo">
+                                <table class="table table-striped visible-md visible-lg" >
+                                    <thead id="headlist">
+                                    <tr>
+                                        <th class="text-center">序号</th>
+                                        <th class="text-center">类型</th>
+                                        <th class="text-center">产品分类</th>
+                                        <th class="text-center">生产基地</th>
+                                        <th class="text-center" style="display: none">工艺版本</th>
+                                        <th class="text-center">单位</th>
+                                        <th class="text-center">固定制造费用</th>
+                                        <th class="text-center">电费</th>
+                                        <th class="text-center">电费(%)</th>
+                                        <th class="text-center">变动用制造费用</th>
+                                        <th class="text-center">制造费用合计</th>
+                                        <th class="text-center">制造费用合计(%)</th>
+                                        <th class="text-center">备注</th>
+                                        <th class="text-center">操作</th>
+                                    </tr>
+                                    </thead>
+                                </table>
+                                <div class="col-sm-12 table-content">
+                                    <table class="table table-striped">
+                                        <tbody id="contentlist" class="contentlist"></tbody>
+                                    </table>
+                                    <div class="loading col-xs-12" id="loading" onclick="$('.layui-flow-more a').click();">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 total_content">
+                                共<span class="total">0</span>条记录
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--0:电脑版；1：手机版；2：pad版-->
+    <input id="bwType" th:value="${bwType}" class="hidden"/>
+    <input id="id" th:if="${id!=null}"  th:value="${id}" class="hidden"/>
+
+    <!--body wrapper end-->
+    <!--footer section start-->
+    <div class="navbar" th:replace="Menu/footer::footer"></div>
+    <!--footer section end-->
+</div>
+
+<script type="text/javascript" th:src="@{/static/layui/layui.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/jQuery/jquery.min.js}"></script>
+<script th:src="@{/static/js/jquery-1.10.2.min.js}"></script>
+
+<script th:src="@{/static/js/iscroll-zoom.js}" type="text/javascript" ></script>
+<script th:src="@{/static/js/hammer.js}" type="text/javascript" ></script>
+<script th:src="@{/static/js/lrz.all.bundle.js}" type="text/javascript" ></script>
+<script th:src="@{/static/js/jquery.photoClip.min.js}" type="text/javascript"></script>
+
+<script th:src="@{/static/js/jquery-ui-1.9.2.custom.min.js}"></script>
+<script th:src="@{/static/js/jquery-migrate-1.2.1.min.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/bootstrap/bootstrap.min.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/bootstrap/bootstrap-table.min.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/bootstrap/bootstrap-table-zh-CN.js}"></script>
+
+
+<script th:src="@{/static/js/modernizr.min.js}"></script>
+<script th:src="@{/static/js/jquery.nicescroll.js}"></script>
+
+
+
+<!--common scripts for all pages-->
+<script th:src="@{/static/js/scripts.js}"></script>
+<script th:src="@{/static/js/app.js}"></script>
+
+<script th:src="@{/static/js/Material/manufacturingExpenses.js}"></script>
+
+
+
+
+</body>
+</html>

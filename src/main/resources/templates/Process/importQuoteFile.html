@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-cn" xmlns:th="http://www.thymeleaf.org" style="overflow: hidden;">
+<head>
+    <title>管理成本系统</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="shortcut icon" th:href="@{/static/images/oupailogs.ico}">
+    <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}"/>
+    <link rel="stylesheet" th:href="@{/static/css/bootstrap/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{/static/css/bootstrap/bootstrap.min.css}">
+    <!--    <link rel="stylesheet" th:href="@{/static/css/bootstrap/bootstrap-theme.css}">-->
+    <!--    <link rel="stylesheet" th:href="@{/static/css/bootstrap/bootstrap-theme.min.css}">-->
+    <link rel="stylesheet" th:href="@{/static/css/app.css}">
+    <link rel="stylesheet" th:href="@{/static/css/font.css}">
+    <!--    <link rel="stylesheet" th:href="@{/static/css/style.css}">-->
+    <link rel="stylesheet" th:href="@{/static/awesome/css/font-awesome.min.css}">
+    <link th:href="@{/static/css/style-responsive.css}" rel="stylesheet">
+    <link th:href="@{/static/css/Process/importQuoteFile.css}" rel="stylesheet">
+
+</head>
+<body class="sticky-header" style="overflow: hidden;">
+ <div class="main-content" style="padding-top: 0px">
+    <!--body wrapper start-->
+    <div class="wrapper wrapper-content animated fadeInUp clear " >
+        <div class="">
+            <div class="seccnt">
+                <div class="ibox">
+                    <div class="ibox-content ibox-content2 col-xs-12" style="height: 530px;">
+
+
+                        <div class="col-xs-12 nopadding" style="margin-top:15px;">
+                            <label class="col-md-3 text-right visible-lg visible-md title" style="width:150px;line-height: 34px;">附件：</label>
+                            <label class="col-xs-12 text-left visible-xs visible-sm nopadding title">附件</label>
+                            <div class="col-md-5 col-xs-12 nopadding">
+                                <div class="input-group">
+                                    <button type="button"  class="btn btn-s-xs defaultbtn" onclick="openfile4()">选择文件</button>
+                                </div>
+                                <input id="file4"  type="file" multiple="multiple" class="form-control parsley-validated hidden"  style="background-color:#fff"/>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 nopadding">
+                            <label class="col-md-3 text-right visible-lg visible-md title" style="width:150px;"></label>
+                            <label class="col-xs-12 text-left visible-xs visible-sm nopadding title"></label>
+                            <div class="col-md-5 col-xs-12 nopadding">
+                                <span style="color: red">附件最大为100M。</span>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 nopadding" style="margin-top:15px;">
+                            <label class="col-md-3 text-right visible-lg visible-md title" style="width:150px;line-height: 34px;"></label>
+                            <label class="col-xs-12 text-left visible-xs visible-sm nopadding title"></label>
+                            <div class="col-md-8 col-xs-12 nopadding">
+                                <ul class="otherfile-list4 ">
+                                    <li th:if="${quotationFiles!=null && quotationFiles.size()>0}" th:each="e,eStat:${quotationFiles}" class="file-item">
+                                        <span class="file-name" th:text="${e.fileName}"></span>
+                                        <span th:id="${e.id}"  class="file-del4">删除</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <button type="button" class="btn btn-s-xs greenbtn" style="position: absolute;top: 90%;right: 30px;right:50px" onclick="importExcel()">上传</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <input id="type" th:value="${type}" class="hidden"/><!--0:报价节点文件；1：图纸组附件-->
+    <input id="bwType" th:value="${bwType}" class="hidden"/>
+    <input id="fileSize" th:value="${fileSize}" class="hidden"/>
+
+</div>
+
+<script type="text/javascript" th:src="@{/static/layui/layui.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/jQuery/jquery.min.js}"></script>
+<script th:src="@{/static/js/jquery-1.10.2.min.js}"></script>
+<script th:src="@{/static/js/jquery-ui-1.9.2.custom.min.js}"></script>
+<script th:src="@{/static/js/jquery-migrate-1.2.1.min.js}"></script>
+<!--<script type="text/javascript" th:src="@{/static/js/bootstrap/bootstrap.js}"></script>-->
+<script type="text/javascript" th:src="@{/static/js/bootstrap/bootstrap.min.js}"></script>
+<script th:src="@{/static/js/modernizr.min.js}"></script>
+<script th:src="@{/static/js/jquery.nicescroll.js}"></script>
+<!--common scripts for all pages-->
+<script th:src="@{/static/js/scripts.js}"></script>
+<script th:src="@{/static/js/app.js}"></script>
+
+<script th:src="@{/static/js/Process/importQuoteFile.js}"></script>
+
+</body>
+</html>

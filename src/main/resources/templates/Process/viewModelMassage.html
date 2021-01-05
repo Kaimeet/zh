@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-cn" xmlns:th="http://www.thymeleaf.org" style="overflow: hidden;">
+<head>
+    <title>管理成本系统</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="shortcut icon" th:href="@{/static/images/oupailogs.ico}">
+    <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}"/>
+    <link rel="stylesheet" th:href="@{/static/css/bootstrap/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{/static/css/bootstrap/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/static/css/bootstrap/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/static/css/bootstrap/bootstrap-table.min.css}">
+    <link rel="stylesheet" th:href="@{/static/css/bootstrap/bootstrap-table.css}" />
+
+    <link rel="stylesheet" th:href="@{/static/css/app.css}">
+    <link rel="stylesheet" th:href="@{/static/css/font.css}">
+    <link rel="stylesheet" th:href="@{/static/awesome/css/font-awesome.min.css}">
+    <link th:href="@{/static/css/style-responsive.css}" rel="stylesheet">
+    <link th:href="@{/static/css/Process/viewModelMassage.css}" rel="stylesheet">
+
+</head>
+<body class="sticky-header">
+<!-- left side end-->
+<div class="main-content" style="padding-top:0px" >
+    <!--body wrapper start-->
+    <div class="wrapper wrapper-content animated fadeInUp clear ">
+        <div class="">
+            <div class="seccnt">
+                <div class="ibox "><!--iBoxLocation-->
+                    <div class="ibox-content ibox-content2 col-xs-12" style="overflow-y: auto;height:500px">
+                        <div class="col-xs-12 search-condition">
+                        <!--/*@thymesVar id="modelResultMappersReturn" type="java"*/-->
+                        <div class="col-lg-3 col-md-6 col-xs-12 col-sm-12 nopadding" style="margin-top:15px;" th:each="modelVariableMapper : ${modelResultMappersReturn}" >
+                            <label class="col-md-4 text-right visible-lg visible-md title" style="width:150px;line-height: 34px;" th:text="${modelVariableMapper.variablename}"></label>
+                            <label class="col-xs-12 text-left visible-xs visible-sm nopadding title" th:text="${modelVariableMapper.variablename}"></label>
+                            <div  class="col-md-5 col-xs-12 nopadding" th:switch="${modelVariableMapper.vainsType}">
+                                <input th:disabled="${disableFlag!=1  ? false : true }" th:if="${modelVariableMapper.vainsType==0}"  th:case="'0'" th:id="${modelVariableMapper.variablecode}" class="form-control parsley-validated"  th:value="${modelVariableMapper.variablevaule}" maxlength="11" style="background-color:#fff" />
+                                <select th:disabled="${flag==0 ? true : false}"  th:if="${modelVariableMapper.vainsType==1}" th:id="${modelVariableMapper.variablecode}" class="form-control parsley-validated" name="d">
+                                    <option value="">---请选择---</option>
+                                    <!--/*@thymesVar id="optionValueText" type="java"*/-->
+                                    <option th:each="optionValueText : ${modelVariableMapper.optionValue}" th:value="${optionValueText}" th:selected="${optionValueText == modelVariableMapper.variablevaule}"><span th:text="${optionValueText}"></span></option><!--th:selected=""-->
+                                </select>
+                            </div>
+                            <!--<div th:if="${flag==0}" class="col-md-5 col-xs-12 nopadding">
+                                <span th:text="${modelVariableMapper.variablevaule}"  th:disable="${modelVariableMapper.disableFlag == 1 ? true : false}"/>
+                            </div>-->
+                        </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 "  style="position: relative;bottom: 40px;text-align: right;"><!--btnLocation-->
+                        <button th:if="${flag==1||flag==2}" type="button" th:classappend="${saveMethod ==null ||saveMethod !=null && saveMethod==0 }?'':'hidden'" class="btn btn-s-xs greenbtn saveMethod" onclick="save()">提交</button>
+                        <button type="button" class="btn btn-s-xs btn-gray" onclick="back()">返回</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--0:电脑版；1：手机版；2：pad版-->
+    <input id="bwType" th:value="${bwType}" class="hidden"/>
+    <!--模型编号-->
+    <input id="modelCode" th:if="${modelCode!=null}"  th:value="${modelCode}" class="hidden"/>
+    <!--单据明细表数据-->
+    <input id="quoteDetailCode"  th:value="${quoteDetailCode}" class="hidden"/>
+    <input id="codeForModel"  th:value="${codeForModel}" class="hidden"/>
+
+    <input id="flag"  th:if="${flag}" class="hidden"/><!--1：设置模型参数；0：查看模型参数-->
+    <input id="parameterList"  th:value="${parameterList}" class="hidden"/><!--页面上的参数所对一个的code-->
+</div>
+
+<script type="text/javascript" th:src="@{/static/layui/layui.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/jQuery/jquery.min.js}"></script>
+<script th:src="@{/static/js/jquery-1.10.2.min.js}"></script>
+
+<script th:src="@{/static/js/iscroll-zoom.js}" type="text/javascript" ></script>
+<script th:src="@{/static/js/hammer.js}" type="text/javascript" ></script>
+<script th:src="@{/static/js/lrz.all.bundle.js}" type="text/javascript" ></script>
+<script th:src="@{/static/js/jquery.photoClip.min.js}" type="text/javascript"></script>
+
+<script th:src="@{/static/js/jquery-ui-1.9.2.custom.min.js}"></script>
+<script th:src="@{/static/js/jquery-migrate-1.2.1.min.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/bootstrap/bootstrap.min.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/bootstrap/bootstrap-table.min.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/bootstrap/bootstrap-table-export.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/bootstrap/bootstrap-table-zh-CN.js}"></script>
+
+
+<script th:src="@{/static/js/modernizr.min.js}"></script>
+<script th:src="@{/static/js/jquery.nicescroll.js}"></script>
+
+
+
+<!--common scripts for all pages-->
+<script th:src="@{/static/js/scripts.js}"></script>
+<script th:src="@{/static/js/app.js}"></script>
+
+<script th:src="@{/static/js/Process/viewModelMassage.js}"></script><!--addQuotationProcess-->
+
+</body>
+</html>

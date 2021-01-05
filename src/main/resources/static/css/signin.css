@@ -1,0 +1,38 @@
+@CHARSET "UTF-8";
+.imgpadding{padding-top:10px}
+.duiqi{margin-left:11px}
+.allbackground{position:absolute;top:0;bottom:0;left:0;right:0;width:100%;height:100%;background:url(/static/images/loginimage.jpg) no-repeat;background-size:100% 100%}
+.allbackgroundp{position:absolute;top:0;bottom:0;left:0;right:0;width:100%;height:100%;background:url(/static/images/loginimage.jpg) no-repeat;background-size:100% 100%}
+.vrrr{padding:0 10%}
+.login-verifycode{padding-bottom:5px}
+.ipp{padding-left:10px}
+.ippp{margin-left:0;margin-top:30px}
+.ipppp{margin-top:15%;margin-left:-10px}
+.iphfour{text-align:center;margin-top:10%;color:#6C6C6C}
+.ippstrong{font-size:25px;color:#fff}
+.ipemail{padding:5% 0 0 0;width:400px;height:296px}
+.ipforget{padding-right:10%}
+.hiddennature{display:none}
+.inputfloat{float:left}
+.login-verifycode-img{margin-left:20px}
+.comfirmcolor{background:#FF6600}
+.footnature{width:100%;position:absolute;bottom:0;background:#f0f0f0}
+input:focus{border:1px solid #FF6600}
+.logo{padding:5px 0 10px 5%}
+.logo-phone{text-align:center;padding:5px 0 10px 0}
+.login-message-error{color:#F60;margin:0 0 -10px 12px}
+.xssm-message-error{color:#F60;float:left;margin-top:-10px}
+.userlogin{padding:10px 0 0 2%;width:320px}
+.borderlimit-lg{width:300px;padding-bottom:5px}
+.login-button{width:100%;height:42px;border:0;display:inline-block;overflow:hidden;vertical-align:middle;line-height:42px;font-size:16px;font-weight:700;color:#fff;border-radius:3px;cursor:pointer;zoom:1;padding:0 12px}
+.backtologin-button{width:100%;height:42px;border:0;display:inline-block;background:#69b946 none repeat scroll 0 0;border-color:transparent;border-radius:3px;border-style:solid;border-width:1px;font-size:16px;font-weight:700;color:#fff;cursor:pointer;text-align:center;font-size:16px;font-weight:700}
+.borderlimit-sm{width:180px;padding-bottom:5px}
+.forget{text-align:right;padding:5% 4% 0 0}
+.fontcolor{color:#fff}
+#main-container{background-color:#FDEADC;padding:8% 0 60% 0}
+.rrrr{padding-right:8px}
+.lgheight{height:40px}
+@media (min-width:992px){.login-box{width:380px;padding:25px 25px;color:#6c6c6c;background:#fff;position:relative;margin-top:8%;left:60%}
+}
+@media (min-width:1400px){.login-box{width:380px;padding:25px 25px;color:#6c6c6c;background:#fff;position:relative;margin-top:8%;left:70%}
+}

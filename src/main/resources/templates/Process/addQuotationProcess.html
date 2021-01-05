@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="zh-cn" xmlns:th="http://www.thymeleaf.org" style="overflow: hidden;">
+<head>
+    <title>管理成本系统</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="shortcut icon" th:href="@{/static/images/oupailogs.ico}">
+    <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}"/>
+    <link rel="stylesheet" th:href="@{/static/css/bootstrap/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{/static/css/bootstrap/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/static/css/bootstrap/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/static/css/bootstrap/bootstrap-table.min.css}">
+    <link rel="stylesheet" th:href="@{/static/css/bootstrap/bootstrap-table.css}" />
+    <link rel="stylesheet" th:href="@{/static/css/app.css}">
+    <link rel="stylesheet" th:href="@{/static/css/font.css}">
+    <link rel="stylesheet" th:href="@{/static/css/yexu.css}">
+    <link rel="stylesheet" th:href="@{/static/awesome/css/font-awesome.min.css}">
+    <link th:href="@{/static/css/style-responsive.css}" rel="stylesheet">
+    <link th:href="@{/static/css/Process/addQuotationProcess.css}" rel="stylesheet">
+</head>
+<body class="sticky-header" id="loading1">
+<!-- left side start-->
+<div th:if="${quotationProcess.id!=null }" th:replace="Menu/menu::asid(${menus},'bjlc','bjlc_bjgl')"></div>
+<div th:if="${quotationProcess.id==null }" th:replace="Menu/menu::asid(${menus},'bjlc','bjlc_xzlc')"></div>
+
+<!-- left side end-->
+<div class="main-content" >
+    <!-- header start-->
+    <div class="navbar" th:replace="Menu/header::header(${user})"></div>
+    <!-- header end-->
+    <!--body wrapper start-->
+    <div class="wrapper wrapper-content animated fadeInUp clear ">
+        <div class="">
+            <div class="seccnt">
+                <div class="ibox "><!--iBoxLocation-->
+                    <div class="ibox-content ibox-content2 col-xs-12" style="overflow-y: auto;">
+                        <p>
+                            <span th:if="${quotationProcess.id==null }">新增报价单</span>
+                            <span th:if="${quotationProcess.id!=null }">编辑报价单</span>
+                        </p>
+                        <div class="col-xs-12 search-condition">
+                            <div  th:if="${quotationProcess.id!=null}" class="col-lg-4 col-md-6 col-xs-12 col-sm-12 nopadding" style="margin-top:15px;">
+                                <label class="col-md-4 text-right visible-lg visible-md title" style="width:150px;line-height: 34px;">报价单号：</label>
+                                <label class="col-xs-12 text-left visible-xs visible-sm nopadding title">报价单号</label>
+                                <div class="col-md-5 col-xs-12 nopadding">
+                                    <span id="quotationNumber" th:text="${quotationProcess.quotationNumber}" style="background-color:#fff" />
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-xs-12 col-sm-12 nopadding" style="margin-top:15px;">
+                                <label class="col-md-3 text-right visible-lg visible-md title" style="width:150px;line-height: 34px;">项目名称：</label>
+                                <label class="col-xs-12 text-left visible-xs visible-sm nopadding title">项目名称</label>
+                                <div class="col-md-5 col-xs-12 nopadding">
+                                    <input id="projectName" class="form-control parsley-validated"  th:value="${quotationProcess.projectName}" maxlength="32" style="background-color:#fff"  />
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-xs-12 col-sm-12 nopadding" style="margin-top:15px;">
+                                <label class="col-md-3 text-right visible-lg visible-md title" style="width:150px;line-height: 34px;">业务员姓名：</label>
+                                <label class="col-xs-12 text-left visible-xs visible-sm nopadding title">业务员姓名</label>
+                                <div class="col-md-5 col-xs-12 nopadding">
+                                    <input id="employeeName" disabled class="form-control parsley-validated"  th:value="${employeeName}" maxlength="32" style="background-color:#fff"  />
+                                </div>
+                                <!--<div class="col-md-5 col-xs-12 nopadding">
+                                     <div class="input-group">
+                                        <input id="employeeName" class="form-control parsley-validated"  th:value="${quotationProcess.employeeName}" maxlength="11" style="background-color:#fff" />
+                                        <span class="input-group-addon"  id="choose" onclick="chooseUser()">选择</span>
+                                    </div>
+                                 </div>-->
+                            </div>
+                            <!--通过业务员姓名获取-->
+                            <div    class="col-lg-4 col-md-6 col-xs-12 col-sm-12 nopadding" style="margin-top:15px;">
+                                <label class="col-md-3 text-right visible-lg visible-md title" style="width:150px;line-height: 34px;">申请部门：</label>
+                                <label class="col-xs-12 text-left visible-xs visible-sm nopadding title">申请部门</label>
+                                <div class="col-md-5 col-xs-12 nopadding">
+                                    <input id="departmentName" disabled class="form-control parsley-validated"  th:value="${departmentName}" maxlength="11" style="background-color:#fff" />
+                                </div>
+                            </div>
+                            <div    class="col-lg-4 col-md-6 col-xs-12 col-sm-12 nopadding" style="margin-top:15px;">
+                                <label class="col-md-3 text-right visible-lg visible-md title" style="width:150px;line-height: 34px;">报价方式：</label>
+                                <label class="col-xs-12 text-left visible-xs visible-sm nopadding title">报价方式</label>
+                                <div class="col-md-5 col-xs-12 nopadding">
+                                    <select  id="quotationMethod" class="form-control parsley-validated" name="d">
+                                        <option value="0" th:selected="${quotationProcess.quotationMethod==0}">报价</option>
+                                        <option value="1" th:selected="${quotationProcess.quotationMethod==1}">核算利润</option>
+                                        <option value="2" th:selected="${quotationProcess.quotationMethod==2}">其他</option>
+                                    </select>
+                                 </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-xs-12 col-sm-12 nopadding" style="margin-top:15px;">
+                                <label class="col-md-3 text-right visible-lg visible-md title" style="width:150px;line-height: 34px;">回复日期：</label>
+                                <label class="col-xs-12 text-left visible-xs visible-sm nopadding title">回复日期</label>
+                                <div class="col-md-5 col-xs-12 nopadding">
+                                    <input id="replyDate" placeholder="回复日期" th:value="${quotationProcess.replyDateMiddle}" class="layui-input"/>
+                                </div>
+                            </div>
+                            <div    class="col-lg-4 col-md-6 col-xs-12 col-sm-12 nopadding" style="margin-top:15px;">
+                                <label class="col-md-3 text-right visible-lg visible-md title" style="width:150px;line-height: 34px;">加急状态：</label>
+                                <label class="col-xs-12 text-left visible-xs visible-sm nopadding title">加急状态</label>
+                                <div class="col-md-5 col-xs-12 nopadding">
+                                    <select  id="urgentState" class="form-control parsley-validated" name="d">
+                                        <option value="0" th:selected="${quotationProcess.urgentState==0}">正常单</option>
+                                        <option value="1" th:selected="${quotationProcess.urgentState==1}">加急单</option>
+                                    </select>
+                                </div>
+                            </div>
+<!--                            <div class="layui-upload">-->
+<!--                                <button type="button" class="btn btn-s-xs greenbtn " onclick="daochu()">导出模板</button>-->
+<!--                                <button class="btn btn-s-xs greenbtn" id="test8" type="button">选择文件</button>-->
+<!--                                <button class="btn btn-s-xs greenbtn" id="test9" type="button">开始上传</button>-->
+<!--                            </div>-->
+                            <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 nopadding" style="margin-top:15px;">
+                                <ul class="layui-tab-title">
+                                    <li class="layui-this tabs one" th:onclick="changetabs(0)">门扇</li>
+                                    <li class="tabs two" th:onclick="changetabs(1)">门套</li>
+                                    <li class="tabs two" th:onclick="changetabs(2)">线条</li>
+                                    <li class="tabs two" th:onclick="changetabs(3)">副套</li>
+                                    <li class="tabs two" th:onclick="changetabs(4)">其他</li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 nopadding" id="table1" style="position: relative">
+                                <button class="btn btn-default delRowMethod" th:classappend="${delRowMethod==null || delRowMethod !=null &&  delRowMethod==0  }?'':'hidden'" style="position: absolute;top: 10px;left:50px" type="button" name="toggle" aria-label="Toggle"  title="删除" onclick="delRow(0)">
+                                    <i class="fa fa-minus"></i>
+                                </button>
+                                <button class="btn btn-default addRowMethod" th:classappend="${addRowMethod==null || addRowMethod !=null &&  addRowMethod==0  } ?'':'hidden'" style="position: absolute;top: 10px;" type="button" name="toggle" aria-label="Toggle" title="新增" onclick="addRow(0)">
+                                    <i class="fa fa-plus"></i>
+                                </button>
+                                <label style="position: absolute;top: 15px;left:100px" th:classappend="${copyMethod==null || copyMethod !=null &&  copyMethod==0  }?'':'hidden'"><span>复制</span><input id="countInput1" class="countInput"/><span>被选择的数据</span></label>
+                                <button type="button" class="btn btn-xs-xs greenbtn copyMethod" th:classappend="${copyMethod==null || copyMethod !=null &&  copyMethod==0  }?'':'hidden'" style="position: absolute;top: 10px;left:250px" title="复制" onclick="copy(0)">
+                                    复制
+                                </button>
+                                <table id="reportTable1" class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+                                </table>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 nopadding hidden" id="table2" style="position: relative">
+                                <button class="btn btn-default delRowMethod" th:classappend="${delRowMethod==null || delRowMethod !=null &&  delRowMethod==0  }?'':'hidden'" style="position: absolute;top: 10px;left:50px" type="button" name="toggle" aria-label="Toggle" title="删除" onclick="delRow(1)">
+                                    <i class="fa fa-minus"></i>
+                                </button>
+                                <button class="btn btn-default addRowMethod" th:classappend="${addRowMethod==null || addRowMethod !=null &&  addRowMethod==0  }?'':'hidden'" style="position: absolute;top: 10px;" type="button" name="toggle" aria-label="Toggle" title="新增" onclick="addRow(1)">
+                                    <i class="fa fa-plus"></i>
+                                </button>
+                                <label style="position: absolute;top: 15px;left:100px" th:classappend="${copyMethod==null || copyMethod !=null &&  copyMethod==0  }?'':'hidden'"><span>复制</span><input id="countInput2" class="countInput"/><span>被选择的数据</span></label>
+                                <button type="button" class="btn btn-xs-xs greenbtn copyMethod" th:classappend="${copyMethod==null || copyMethod !=null &&  copyMethod==0  }?'':'hidden'" style="position: absolute;top: 10px;left:250px" title="复制" onclick="copy(1)">
+                                    复制
+                                </button>
+                                <table id="reportTable2" class="col-lg-12 col-md-12 col-xs-12 col-sm-12 ">
+                                </table>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 nopadding hidden" id="table3" style="position: relative">
+                                <button class="btn btn-default delRowMethod" th:classappend="${delRowMethod==null || delRowMethod !=null &&  delRowMethod==0  }?'':'hidden'"style="position: absolute;top: 10px;left:50px" type="button" name="toggle" aria-label="Toggle" title="删除" onclick="delRow(2)">
+                                    <i class="fa fa-minus"></i>
+                                </button>
+                                <button class="btn btn-default addRowMethod" th:classappend="${addRowMethod==null || addRowMethod !=null &&  addRowMethod==0  }?'':'hidden'" style="position: absolute;top: 10px;" type="button" name="toggle" aria-label="Toggle" title="新增" onclick="addRow(2)">
+                                    <i class="fa fa-plus"></i>
+                                </button>
+                                <label style="position: absolute;top: 15px;left:100px" th:classappend="${copyMethod==null || copyMethod !=null &&  copyMethod==0  }?'':'hidden'"><span>复制</span><input id="countInput3" class="countInput"/><span>被选择的数据</span></label>
+                                <button type="button" class="btn btn-xs-xs greenbtn copyMethod" th:classappend="${copyMethod==null || copyMethod !=null &&  copyMethod==0  }?'':'hidden'" style="position: absolute;top: 10px;left:250px" title="复制" onclick="copy(2)">
+                                    复制
+                                </button>
+                                <table id="reportTable3" class="col-lg-12 col-md-12 col-xs-12 col-sm-12 ">
+                                </table>
+                            </div>
+
+
+                            <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 nopadding hidden" id="table4" style="position: relative">
+                                <button class="btn btn-default delRowMethod" th:classappend="${delRowMethod==null || delRowMethod !=null &&  delRowMethod==0  }?'':'hidden'"style="position: absolute;top: 10px;left:50px" type="button" name="toggle" aria-label="Toggle" title="删除" onclick="delRow(3)">
+                                    <i class="fa fa-minus"></i>
+                                </button>
+                                <button class="btn btn-default addRowMethod" th:classappend="${addRowMethod==null || addRowMethod !=null &&  addRowMethod==0  }?'':'hidden'" style="position: absolute;top: 10px;" type="button" name="toggle" aria-label="Toggle" title="新增" onclick="addRow(3)">
+                                    <i class="fa fa-plus"></i>
+                                </button>
+                                <label style="position: absolute;top: 15px;left:100px" th:classappend="${copyMethod==null || copyMethod !=null &&  copyMethod==0  }?'':'hidden'"><span>复制</span><input id="countInput4" class="countInput"/><span>被选择的数据</span></label>
+                                <button type="button" class="btn btn-xs-xs greenbtn copyMethod" th:classappend="${copyMethod==null || copyMethod !=null &&  copyMethod==0  }?'':'hidden'" style="position: absolute;top: 10px;left:250px" title="复制" onclick="copy(3)">
+                                    复制
+                                </button>
+                                <table id="reportTable4" class="col-lg-12 col-md-12 col-xs-12 col-sm-12 ">
+                                </table>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 nopadding hidden" id="table5" style="position: relative">
+                                <button class="btn btn-default delRowMethod" th:classappend="${delRowMethod==null || delRowMethod !=null &&  delRowMethod==0  }?'':'hidden'"style="position: absolute;top: 10px;left:50px" type="button" name="toggle" aria-label="Toggle" title="删除" onclick="delRow(4)">
+                                    <i class="fa fa-minus"></i>
+                                </button>
+                                <button class="btn btn-default addRowMethod" th:classappend="${addRowMethod==null || addRowMethod !=null &&  addRowMethod==0  }?'':'hidden'" style="position: absolute;top: 10px;" type="button" name="toggle" aria-label="Toggle" title="新增" onclick="addRow(4)">
+                                    <i class="fa fa-plus"></i>
+                                </button>
+                                <label style="position: absolute;top: 15px;left:100px" th:classappend="${copyMethod==null || copyMethod !=null &&  copyMethod==0  }?'':'hidden'"><span>复制</span><input id="countInput5" class="countInput"/><span>被选择的数据</span></label>
+                                <button type="button" class="btn btn-xs-xs greenbtn copyMethod" th:classappend="${copyMethod==null || copyMethod !=null &&  copyMethod==0  }?'':'hidden'" style="position: absolute;top: 10px;left:250px" title="复制" onclick="copy(4)">
+                                    复制
+                                </button>
+                                <table id="reportTable5" class="col-lg-12 col-md-12 col-xs-12 col-sm-12 ">
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 "  style="position: relative;bottom: 40px;left: 59%;"><!--btnLocation-->
+
+                        <button type="button" class="btn btn-s-xs greenbtn " onclick="daochu()">模板下载</button>
+                        <button class="btn btn-s-xs greenbtn" id="test3" type="button">批量导入</button>
+                        <button type="button" class="btn btn-s-xs greenbtn saveMethod0" th:classappend="${saveMethod0==null || saveMethod0 !=null &&  saveMethod0==0  }?'':'hidden'" onclick="save(0)">提交</button>
+                        <button type="button" class="btn btn-s-xs greenbtn projectSplitMethod" th:classappend="${projectSplitMethod==null || projectSplitMethod !=null &&  projectSplitMethod==0  }?'':'hidden'" id="btnOne" onclick="projectSplit()">产品归类</button>
+                        <button type="button" class="btn btn-s-xs greenbtn hidden categorizationReductionMethod" th:classappend="${categorizationReductionMethod==null ||categorizationReductionMethod !=null &&  categorizationReductionMethod==0  }?'':'hidden'" id="btnTwo" onclick="categorizationReduction()">归类还原</button>
+                        <button type="button" class="btn btn-s-xs greenbtn saveMethod1" th:classappend="${saveMethod1==null || saveMethod1 !=null &&  saveMethod1==0  }?'':'hidden'" onclick="save(1)">保存草稿</button>
+                        <button th:if="${quotationProcess.id!=null}" type="button"  class="btn btn-s-xs btn-gray backMethod" th:classappend="${backMethod==null || backMethod !=null &&  backMethod==0  }?'':'hidden'" onclick="back()">返回</button>
+                        <button th:if="${status==1}" type="button" class="btn btn-s-xs btn-gray delQuotationMethod" th:classappend="${delQuotationMethod==null || delQuotationMethod !=null &&  delQuotationMethod==0  }?'':'hidden'" onclick="delQuotation()">删除</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div style="display: none;">
+        <a id="exportExcel"></a>
+    </div>
+
+    <input id="id" th:value="${id}"  class="hidden"/><!--报价单表编号-->
+    <input id="status" th:value="${status}"  class="hidden"/>
+
+    <!--0:电脑版；1：手机版；2：pad版-->
+    <input id="bwType" th:value="${bwType}" class="hidden"/>
+    <input id="processCode" th:if="${quotationProcess.processCode!=null}"  th:value="${quotationProcess.processCode}" class="hidden"/>
+    <input id="userId"  th:value="${userId}" class="hidden"/>
+
+    <!--表单选模型是用于存放模型相关的中间变了-->
+    <input id="modelCode"  class="hidden"/>
+    <input id="modelName"  class="hidden"/>
+
+    <input id="color"  class="hidden"/>
+
+    <!--表单选生产基地是用于存放生产基地相关的中间变了-->
+    <input id="baseCode"  class="hidden"/>
+    <input id="baseName"  class="hidden"/>
+
+    <!--表单选组织是用于存放组织相关的中间变了-->
+    <input id="companyName"  class="hidden"/>
+    <input id="companyCode"  class="hidden"/>
+
+    <!--存放文件的临时数据-->
+    <input id="fileNamesAndIds"  value="" class="hidden"/>
+    <!--存放文件的临时数据-->
+    <input id="fileIds"  value="" class="hidden"/>
+
+    <input id="menuid"  th:value="${menuid}" class="hidden"/>
+
+    <input id="uploadFileMethod"   th:value="${uploadFileMethod}" class="hidden"/>
+
+
+
+
+
+    <input id="bomTypeOneMSHtml"   th:value="${bomTypeOneMSHtml}" class="hidden"/>
+    <input id="bomTypeOneMTHtml"   th:value="${bomTypeOneMTHtml}" class="hidden"/>
+    <input id="bomTypeOneXTHtml"   th:value="${bomTypeOneXTHtml}" class="hidden"/>
+    <input id="bomTypeOneFTHtml"   th:value="${bomTypeOneFTHtml}" class="hidden"/>
+    <input id="bomTypeOneQTHtml"   th:value="${bomTypeOneQTHtml}" class="hidden"/>
+
+    <input id="typeCodeMiddle"   th:value="${typeCodeMiddle}" class="hidden"/>
+
+    <!--<input id="msQuoteDetailCode"   th:value="${msQuoteDetailCode}" class="hidden"/>
+
+    <input id="mtQuoteDetailCode"   th:value="${mtQuoteDetailCode}" class="hidden"/>
+
+    <input id="xtQuoteDetailCode"   th:value="${xtQuoteDetailCode}" class="hidden"/>
+
+    <input id="ftQuoteDetailCode"   th:value="${ftQuoteDetailCode}" class="hidden"/>
+
+    <input id="qtQuoteDetailCode"   th:value="${qtQuoteDetailCode}" class="hidden"/>-->
+
+
+
+
+    <!--body wrapper end-->
+    <!--footer section start-->
+    <div class="navbar" th:replace="Menu/footer::footer"></div>
+    <!--footer section end-->
+</div>
+
+<script type="text/javascript" th:src="@{/static/layui/layui.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/jQuery/jquery.min.js}"></script>
+<script th:src="@{/static/js/jquery-1.10.2.min.js}"></script>
+
+<script th:src="@{/static/js/iscroll-zoom.js}" type="text/javascript" ></script>
+<script th:src="@{/static/js/hammer.js}" type="text/javascript" ></script>
+<script th:src="@{/static/js/lrz.all.bundle.js}" type="text/javascript" ></script>
+<script th:src="@{/static/js/jquery.photoClip.min.js}" type="text/javascript"></script>
+
+<script th:src="@{/static/js/jquery-ui-1.9.2.custom.min.js}"></script>
+<script th:src="@{/static/js/jquery-migrate-1.2.1.min.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/bootstrap/bootstrap.min.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/bootstrap/bootstrap-table.min.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/bootstrap/bootstrap-table-export.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/bootstrap/bootstrap-table-zh-CN.js}"></script>
+
+
+<script th:src="@{/static/js/modernizr.min.js}"></script>
+<script th:src="@{/static/js/jquery.nicescroll.js}"></script>
+
+
+
+<!--common scripts for all pages-->
+<script th:src="@{/static/js/scripts.js}"></script>
+<script th:src="@{/static/js/app.js}"></script>
+<script th:src="@{/static/js/yexu.js}"></script>
+<script type="text/javascript" src="${ctx }/layui/layui.js"></script>
+
+<script th:src="@{/static/js/Process/addQuotationProcess.js}"></script>
+
+</body>
+</html>

@@ -1,0 +1,46 @@
+.ib-ct {
+	padding: 8px 15px;
+	cursor: pointer;
+	color: gray;	
+	overflow: visible;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.ib-ct .arrow {
+	position: absolute;	
+	left: 50%;
+	margin-left: -7px;
+	font-size: 0;
+	line-height: 0;	
+	border-left: 7px solid transparent;
+	border-right: 7px solid transparent;
+	display: none;
+}
+
+.ib-aot .arrow {
+	top: 0px;
+	border-top: 7px solid white;
+}
+
+.ib-aob .arrow {
+	bottom: -1px;
+	border-bottom: 7px solid white;
+}
+
+.ib-over {
+	background-color: #ebebeb;	
+}
+
+.ib-pressed {
+	
+}
+
+.ib-hold {
+	opacity: .5;	
+	filter: alpha(opacity=50);	
+}
+
+.ib-pressed .arrow {
+	display: block;
+}

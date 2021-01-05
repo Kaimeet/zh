@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-cn" xmlns:th="http://www.thymeleaf.org" style="overflow: hidden;">
+<head>
+    <title>管理成本系统</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="shortcut icon" th:href="@{/static/images/oupailogs.ico}">
+    <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}"/>
+    <link rel="stylesheet" th:href="@{/static/css/bootstrap/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{/static/css/bootstrap/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/static/css/app.css}">
+    <link rel="stylesheet" th:href="@{/static/css/font.css}">
+    <link rel="stylesheet" th:href="@{/static/awesome/css/font-awesome.min.css}">
+    <link th:href="@{/static/css/style-responsive.css}" rel="stylesheet">
+    <link th:href="@{/static/css/Product/addAndEditColorCard.css}" rel="stylesheet">
+
+</head>
+<body class="sticky-header">
+<!-- left side start-->
+<div th:replace="Menu/menu::asid(${menus},'cpwx','cpwx_cpskwh')"></div>
+
+<!-- left side end-->
+<div class="main-content" >
+    <!-- header start-->
+    <div class="navbar" th:replace="Menu/header::header(${user})"></div>
+    <!-- header end-->
+    <!--body wrapper start-->
+    <div class="wrapper wrapper-content animated fadeInUp clear ">
+        <div class="">
+            <div class="seccnt">
+                <div class="ibox">
+                    <div class="ibox-content ibox-content2 col-xs-12" style="overflow-y: auto;">
+                        <p>
+                            <span th:if="${carousel!=null && carousel.enableFalg==null}">新增色卡</span>
+                            <span th:if="${carousel!=null && carousel.enableFalg==0}">编辑色卡</span>
+                            <span th:if="${carousel!=null && carousel.enableFalg==1}">查看色卡</span>
+                        </p>
+
+                        <div class="col-xs-12 search-condition">
+                            <div class="col-xs-12 nopadding" style="margin-top:15px;">
+                                <label class="col-md-3 text-right visible-lg visible-md title" style="width:150px;line-height: 34px;">色卡名称：</label>
+                                <label class="col-xs-12 text-left visible-xs visible-sm nopadding title">色卡名称</label>
+                                <div class="col-md-5 col-xs-12 nopadding">
+                                    <input id="colorCardName" maxlength="32" th:disabled="${carousel!=null && carousel.enableFalg==1}" class="form-control parsley-validated"  style="background-color:#fff" th:value="${carousel.colorCardName}" />
+                                </div>
+                            </div>
+                            <div class="col-xs-12 nopadding" style="margin-top:15px;">
+                                <label class="col-md-3 text-right visible-lg visible-md title" style="width:150px;line-height: 34px;">色卡图片：</label>
+                                <label class="col-xs-12 text-left visible-xs visible-sm nopadding title">色卡图片</label><!--colorCardUrl-->
+                                <div class="col-md-5 col-xs-12 nopadding">
+                                    <button type="button" th:disabled="${carousel!=null && carousel.enableFalg==1}" class="btn btn-s-xs defaultbtn" onclick="openfile()">选择色卡图片</button>
+                                    <input type="file" class="hidden" accept="image/jpg, image/jpeg, image/png" name="" id="choose-file" />
+                                </div>
+                            </div>
+                            <div class="col-xs-12 nopadding">
+                                <label class="col-md-3 text-right visible-lg visible-md title" style="width:150px;"></label>
+                                <label class="col-xs-12 text-left visible-xs visible-sm nopadding title"></label>
+                                <div class="col-md-5 col-xs-12 nopadding">
+                                    <span style="color: red">图片的格式必须为：jpg、jpeg、png</span>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 nopadding" style="margin-top:15px;min-height: 152px">
+                                <label class="col-md-3 text-right visible-lg visible-md title" style="width:150px;line-height: 34px;"></label>
+                                <label class="col-xs-12 text-left visible-xs visible-sm nopadding title"></label>
+                                <div class="col-md-8 col-xs-12 nopadding">
+                                    <ul class="file-list ">
+                                        <li th:if="${carousel.colorCardUrl!=null && carousel.colorCardUrl!=''}" style="border:solid #e1edff 1px; margin:5px 5px;text-align: center;"  class="file-item">
+                                            <img  th:src="${carousel.colorCardUrl}" class="imgshow" alt="" height="180px" width="440px" >
+                                            <span th:id="${carousel.id}" th:if="${carousel!=null && carousel.enableFalg!=1}" class="file-del" >删除</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 nopadding" id="btndiv" style="margin-top:18px;text-align: right;position: absolute;">
+                                <button type="button" id ="save"  th:if="${carousel!=null && carousel.enableFalg!=1}"  class="btn btn-s-xs greenbtn" onclick="releaseto(0)">保存</button>
+                                <button id ="releaseto" th:if="${carousel!=null && carousel.enableFalg!=1}" type="button" class="btn btn-s-xs defaultbtn" onclick="releaseback(1)">启用</button>
+                                <button id ="releaseback" th:if="${carousel!=null && carousel.enableFalg==1}" type="button" class="btn btn-s-xs defaultbtn" onclick="releaseback(0)">停用</button>
+                                <button id ="del" th:if="${id!=null && carousel!=null && carousel.enableFalg!=1}" type="button" class="btn btn-s-xs btn-gray" onclick="del()">作废</button>
+                                <button type="button" class="btn btn-s-xs btn-gray" onclick="back()">返回</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--0:电脑版；1：手机版；2：pad版-->
+    <input id="bwType" th:value="${bwType}" class="hidden"/>
+    <!--产品id-->
+    <input id="id" th:if="${id!=null}"  th:value="${id}" class="hidden"/>
+
+     <!--body wrapper end-->
+    <!--footer section start-->
+    <div class="navbar" th:replace="Menu/footer::footer"></div>
+    <!--footer section end-->
+</div>
+
+
+
+<script type="text/javascript" th:src="@{/static/layui/layui.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/jQuery/jquery.min.js}"></script>
+<script th:src="@{/static/js/jquery-1.10.2.min.js}"></script>
+
+<script th:src="@{/static/js/iscroll-zoom.js}" type="text/javascript" ></script>
+<script th:src="@{/static/js/hammer.js}" type="text/javascript" ></script>
+<script th:src="@{/static/js/lrz.all.bundle.js}" type="text/javascript" ></script>
+<script th:src="@{/static/js/jquery.photoClip.min.js}" type="text/javascript"></script>
+
+<script th:src="@{/static/js/jquery-ui-1.9.2.custom.min.js}"></script>
+<script th:src="@{/static/js/jquery-migrate-1.2.1.min.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/bootstrap/bootstrap.min.js}"></script>
+<script th:src="@{/static/js/modernizr.min.js}"></script>
+<script th:src="@{/static/js/jquery.nicescroll.js}"></script>
+
+
+
+<!--common scripts for all pages-->
+<script th:src="@{/static/js/scripts.js}"></script>
+<script th:src="@{/static/js/app.js}"></script>
+
+<script th:src="@{/static/js/Product/addAndEditColorCard.js}"></script>
+
+</body>
+</html>

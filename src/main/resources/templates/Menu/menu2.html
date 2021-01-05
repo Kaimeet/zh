@@ -1,0 +1,41 @@
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<div th:fragment="asid(flag)">
+    <div class="left-side sticky-left-side">
+        <!--logo and iconic logo start-->
+        <div class="logo">
+            <a href="index.html"><img src="" alt=""></a>
+        </div>
+        <div class="logo-icon text-center">
+            <a href="index.html"><img src="" alt=""></a>
+        </div>
+        <!--logo and iconic logo end-->
+        <div class="left-side-inner">
+            <!-- visible to small devices only -->
+            <div class="visible-xs hidden-sm hidden-md hidden-lg">
+                <div class="media logged-user">
+                    <img alt="" src="" class="media-object">
+                    <div class="media-body">
+                        <h4><a href="#">范舜</a></h4>
+                        <span>"Hello There..."</span>
+                         <p th:text="${flag} + ' - ' + ${flag}">...</p>
+                    </div>
+                </div>
+                <h5 class="left-nav-title">账户信息</h5>
+                <ul class="nav nav-pills nav-stacked custom-nav">
+                    <li><a href="#"><i class="fa fa-cog"></i> <span>设置</span></a></li>
+                    <li><a href="#"><i class="fa fa-sign-out"></i> <span>退出</span></a></li>
+                </ul>
+            </div>
+            <!--sidebar nav start-->
+            <ul class="nav nav-pills nav-stacked custom-nav">
+                <li class="menu-list nav-active"><a href="index.html"><i class="fa fa-home"></i> <span>系统设置</span></a>
+                    <ul class="sub-menu-list">
+                            <li><a href="../NoticeController/notice">查看消息</a></li>
+                        <li class="active"><a href="../NoticeController/notice">新增用户</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+</html>

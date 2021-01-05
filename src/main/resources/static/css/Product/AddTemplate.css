@@ -1,0 +1,418 @@
+.clear-title{clear:both;margin-bottom: 8px;color:#999;}
+.clear-title i{padding-left: 12px;}
+
+.ui-wrapper {height: 100%;}
+.ui-header{height:55px;width:100%;z-index:10; position: absolute;bottom: 0;left: 0; padding-right: 20px;}
+.ui-header .head-actions{float:right;;line-height:38px;height:38px;padding:0 5px;z-index:100}
+
+.ui-main{width:100%;height:calc(100% - 50px);overflow: hidden;padding: 0;}
+.ui-widgetspanel{
+/* 	width:200px; */
+	float:left;
+}
+.ui-formcanvas{
+	float:left;
+	height:calc(95% - 35px);
+/* 	width:61%; */
+/* 	margin-right:20px; */
+	margin-top: 33px;
+	border:1px solid #ccc;
+}
+.ui-settingpanel{
+/* 	width:320px; */
+	height: 100%;
+	float: left;
+}
+
+/* 左侧ui */
+.ui-panel-tab{height:32px}
+.ui-panel-tab .tabitem{display:inline-block;float:left;width:50%;height:35px;line-height:35px;font-size:17px;text-align:left;border-bottom:2px solid #ccc;color:#ccc}
+.ui-panel-tab .tabitem.current{color:#2db7f5;border-bottom:2px solid #2db7f5}
+.ui-panel-tab .fillitem{width:calc(100% - 20px);text-align:left!important}
+.ui-title .ui-settingpanel .ui-panel-tab .tabitem{width:33%;}
+.ui-title .ui-settingpanel .ui-formsettings a.act{border:1px solid blue;}
+
+.ignore-elements{cursor:not-allowed !important;color:#ddd !important;border-color:#ddd !important}
+.ignore-elements label{cursor:not-allowed !important;}
+.ui-widgetspanel .ui-panel-body{height: calc(100% - 50px);margin:30px 0 0 0;overflow:auto}
+.ui-widgetspanel .ui-widgetsitem{border:1px dashed rgba(5, 139, 255, 0.7);margin:0 15px 15px 0;width:148px;height:42px;float:left;font-size:12px;line-height:42px;text-align:left;padding-left:15px;cursor:move;color:rgba(87, 180, 247, 0.7);position:relative;overflow:hidden}
+.ui-widgetspanel .ui-widgetsitem label{cursor:move;font-weight: normal;}
+.ui-widgetspanel .ui-widgetsitem i{position:absolute;right:10px;top:9px}
+.ui-widgetspanel .ui-widgetsitem i{background:url(../../images/drag/drag_ui_blue.png) no-repeat;height:24px;width:24px;display:inline-block}
+.ui-widgetspanel .ui-widgetsitem i.textfield{background-position:0 0}
+.ui-widgetspanel .ui-widgetsitem i.textareafield{background-position:0 -24px}
+.ui-widgetspanel .ui-widgetsitem i.ddselectfield{background-position:0 -48px}
+.ui-widgetspanel .ui-widgetsitem i.dddatefield{background-position:0 -72px}
+.ui-widgetspanel .ui-widgetsitem i.dddaterangefield{background-position:0 -96px}
+.ui-widgetspanel .ui-widgetsitem i.numberfield{background-position:0 -120px}
+.ui-widgetspanel .ui-widgetsitem i.ddphotofield{background-position:0 -144px}
+.ui-widgetspanel .ui-widgetsitem i.tablefield{background-position:0 -168px}
+.ui-widgetspanel .ui-widgetsitem i.ddattachment {background-position: 0 -192px;}
+.ui-widgetspanel .ui-widgetsitem i.textnote{background-position:0 -216px}
+.ui-widgetspanel .ui-widgetsitem i.moneyfield{background-position:0 -240px}
+.ui-widgetspanel .ui-widgetsitem i.ddmultiselectfield{background-position:0 -264px}
+.ui-widgetspanel .ui-widgetsitem i.innercontactfield{background-position:0 -288px}
+.ui-widgetspanel .ui-widgetsitem i.package{background-position:0 -312px}
+.ui-widgetspanel .ui-widgetsitem i.ddlocationfield{background-position:0 -336px}
+.ui-widgetspanel .ui-widgetsitem i.phonefield{background-position:0 -360px}
+.ui-widgetspanel .ui-widgetsitem i.mobilefield{background-position:0 -382px}
+
+.ui-widgetspanel .ui-widgetsitem i.text{background-position:-24px 0}
+.ui-widgetspanel .ui-widgetsitem i.image{background-position:-24px -24px}
+.ui-widgetspanel .ui-widgetsitem i.splitline{background-position:-24px -48px}
+.ui-widgetspanel .ui-widgetsitem i.link{background-position:-24px -72px}
+.ui-widgetspanel .ui-widgetsitem i.title{background-position:-24px -96px}
+.ui-widgetspanel .ui-widgetsitem i.card{background-position:-24px -120px}
+.ui-widgetspanel .ui-widgetsitem i.button{background-position:-24px -144px}
+.ui-widgetspanel .ui-widgetsitem i.qrcode{background-position:-24px -168px}
+.ui-widgetspanel .ui-widgetsitem i.video{background-position:-24px -192px}
+.ui-widgetspanel .ui-widgetsitem i.audio{background-position:-24px -216px}
+
+.ui-widgetspanel .ui-widgetsitem i.apply-mobilefield{background-position:-24px -240px}
+.ui-widgetspanel .ui-widgetsitem i.apply-namefield{background-position:-24px -240px}
+.ui-widgetspanel .ui-widgetsitem i.apply-cardfield{background-position:-24px -264px}
+.ui-widgetspanel .ui-widgetsitem i.apply-sexfield{background-position:-24px -288px}
+.ui-widgetspanel .ui-widgetsitem i.apply-mailfield{background-position:-24px -312px}
+
+
+.ui-widgetspanel .ui-panel-body .ui-component{display:none;}
+.ishtml{display:none;}
+
+/* 中间目标区 */
+
+/* 中间目标区--背景图设置background:#f5f7f7 */
+.ui-formcanvas-inner{position: relative;overflow-x:hidden;overflow-y:auto;bottom:0;height:100%;}
+.ui-formcanvas-body{min-height:100%;height:auto;}
+.ui-formcanvas-body.empty{background:url(../../images/drag/tips.png) no-repeat center 35%;margin: 0;}
+.ui-formcanvas-body .ui-widgetsitem > label, .ui-formcanvas-body .ui-widgetsitem > i{display: none;}
+
+/* 中间目标区--初期加载效果 */
+.ui-formcanvas-load{position: absolute;top:0;display: none;height: 100%;width:100%;}
+.ui-formcanvas-load .load{height: 40px;width:100%;margin-top:150px;padding-left: 90px;}
+.ui-formcanvas-load .load .tips{padding-top: 5px; margin-left: 45px;}
+.ui-formcanvas .loading .ui-widgetsitem{display: none;}
+.ui-formcanvas .loading .ui-formcanvas-load{display: block;}
+
+/* 中间目标区--方便大篇幅拖动（拖动时） */
+.ui-formcanvas .ui-formcanvas-body .assistDrag{height:68px;overflow: hidden;}
+
+/* 中间目标区--分割线（拖动位置） */
+.ui-dragging-mark{display: none; background:#ff4500;height:2px;overflow:visible;position:relative;margin:3px 0}
+.ui-formcanvas .inmove .ui-dragging-mark{display: block;}
+
+.ui-dragging-mark:after,.ui-dragging-mark:before{position:absolute;content:'';display:block;height:0;width:0;border-style:solid;border-color:transparent;border-width:4px 8px;top:-3px}
+.ui-dragging-mark:before{left:0;border-left-color:#ff4500}
+.ui-dragging-mark:after{right:0;border-right-color:#ff4500}
+
+/* 中间目标区--控件按钮 */
+.top-edit{right:0;height:25px;line-height:25px;background:rgba(0,0,0,.1);position:absolute;text-align:right;padding:0 10px;display:none;top:0;z-index:10}
+.act .top-edit{display: block;}
+/* .top-edit a:nth-child(2){display:none;} */
+/* .top-edit a:nth-child(n + 2){padding-left:20px;} */
+.ui-formcanvas .top-edit .fa-trash-o{height:40px;width:40px;padding-top:15px;margin-top:-15px;margin-right:-10px;padding-right:10px}
+.ui-formcanvas .top-edit .fa-gears  {height:40px;width:40px;padding-top:15px;margin-top:-15px;margin-right:-10px;padding-right:10px}
+.ui-formcanvas .top-edit .fa-th {height:40px;width:30px;padding-top:15px;margin-top:-15px;margin-right:-10px;padding-right:15px}
+[contenteditable]:focus{outline: none;} /* ck内联时，取消该属性获得焦点时的边框 */
+
+/* 中间目标区--控件式样-阿里版（默认） */
+.ui-component{margin:0;overflow:hidden;position:relative}
+.ui-overlay{display:none;position:absolute;top:0;right:0;bottom:0;left:0;z-index:9;border:1px dashed transparent}
+/* .act .ui-component>.ui-overlay{display:block;border-width:2px;border-style:solid;border-color:rgba(0,127,252,1)} */
+.act .ui-component{border-width:2px;border-style:solid;border-color:rgba(0,127,252,1)}
+.ui-componentview .ui-componentview-content{padding-top: 0; padding-bottom: 0; margin-bottom: 5px;margin-top: 5px;}
+.act .ui-componentview .ui-componentview-content{padding-top: 5px; padding-bottom: 5px; margin-bottom: 0px;margin-top: 0px;}
+
+.ui-componentview {position: relative;}
+/* .ui-componentview>.ui-componentview-border{border-width:1px 0;border-style:solid;color: #858e99;border-color:#c8c8ca transparent;background:#fff;padding:13px 15px;white-space:nowrap} */
+.ui-componentview>.ui-componentview-border{border-width:1px;border-style:solid;color: #858e99;border-color:#c8c8ca;background:#fff;padding:13px 15px;white-space:nowrap}
+.ui-componentview .ui-componentview-label{width:80px; margin-bottom:0;font-weight: normal;font-size:14px;color:#4e4e4e;display:block;padding:10px 15px;white-space:normal;word-break:break-word;vertical-align:top}
+.ui-componentview>.ui-componentview-border>.ui-componentview-label{display:inline-block;padding:0 8px 0 0;color:#222}
+.ui-component-card .ui-componentview fieldset{padding:0;border:1px solid #e2e2e2}
+.ui-component-card .ui-componentview fieldset legend{margin-left:20px;padding:0 10px;font-size:20px;font-weight:300;width:auto;margin-bottom:0;border-bottom:none}
+.ui-component-card .ui-componentview fieldset div{padding: 10px 15px;}
+
+.ui-componentview-unit{float: right; font-color:#222;}
+
+.ui-component-textareafield .ui-componentview-placeholder{height:50px;display:inline-block}
+[class *="ui-component-dd" ] .ui-componentview-placeholder{position:absolute;right:35px;top:44px;color:#929292}
+[class *="ui-component-dd" ] .ui-componentview i{position:absolute;font-size:24px;right:15px;top:12px;color:#e0e0e0}
+[class *="ui-component-apply-dd" ] .ui-componentview-placeholder{position:absolute;right:35px;top:44px;color:#929292}
+[class *="ui-component-apply-dd" ] .ui-componentview i{position:absolute;font-size:24px;right:15px;top:12px;color:#e0e0e0}
+.ui-componentview .ui-componentview-border + .ui-componentview-border{border-top:0px}
+.ui-componentview .ui-componentview-content{color:#333333}/**padding:10px 15px;**/
+.nopostion{position: static !important;height: 40px;display: inline-block;}
+.nopostion2{position: static !important;display: inline-block;}
+.ui-component-moneyfield .cnformat {color: #858e99;font-size: 12px;padding: 5px 15px;border-bottom: 1px solid #c8c8ca;}
+.ui-formcanvas .ui-componentview-content > p {word-wrap:break-word ;}
+
+/* 中间目标区--控件式样-问卷版 */
+.wenj {margin-top:10px;margin-bottom:10px;border-bottom-width:0; } /** border:1px solid #ccc; **/
+.wenj .ui-componentview .ui-componentview-label{width: 100%; padding: 5px 2px;font-weight: bold;} /** background: #F7F7F7; **/
+.wenj .ui-componentview .ui-componentview-label.required:after{content: " *"; color:red;}
+.wenj.ui-component-ddselectfield .ui-componentview-placeholder, .wenj.ui-component-ddmultiselectfield .ui-componentview-placeholder{position:inherit;}
+.wenj.ui-component-ddselectfield .ui-componentview-img, .wenj.ui-component-ddmultiselectfield .ui-componentview-img, .wenj.ui-component-apply-sexfield .ui-componentview-img{float: right; width:24px; margin-top: -2px;}
+.wenj[class *="ui-component-dd" ] .ui-componentview i{right:15px;top:41px;float:right;}
+.wenj[class *="ui-component-apply-dd" ] .ui-componentview i{right:15px;top:41px;float:right;}
+.wenj .nopostion{float: none !important;}
+.wenj .nopostion2{float: none !important;}
+.wenj .ui-componentview .ui-calc{padding: 0;}
+.wenj .ui-componentview .ui-calc > .ui-componentview-label{font-size: 12px;background:#ffffff; color: #858e99;}
+
+/** 控件设置区 **/
+.empty{margin:25px 0;}
+.input-group-addon{border: 0px solid #E5E6E7;}
+.ui-formsettings{height: calc(100% - 75px); overflow: auto; width: 100%;padding-right: 20px;}
+.dgbtn{display:inline-block;padding:6px 12px;margin-bottom:0;font-size:14px;font-weight:400;line-height:1.42857143;text-align:center;white-space:nowrap;vertical-align:middle;cursor:pointer;color:#58666e;border:1px solid #ccc;border-radius:3px;background:#fff}
+
+.border-width-setting input{width: 60px; display: inline-block;}
+.border-width-setting input:not(:last-child){margin-right: 13px;}
+
+.border-color-setting input{width: 100px; display: inline-block;}
+.border-color-setting .fieldblock > *:not(:last-child){margin-right: 13px;}
+
+.ui-field{display:block;margin:25px 0 30px}
+.ui-field .fieldname{display:block;font-weight:700;font-size:12px;color:#666;margin-bottom:12px;padding-left:2px}
+.ui-field .fieldname spa {font-size: 12px;}
+.ui-field .fieldinfo{color:#ccc;font-size:12px!important;margin-left:8px;font-weight:400;opacity:.9}
+.ui-settingpanel .ui-field .fieldinfo{color:#8c8c8c}
+.ui-settingpanel .ui-field .fieldtips{font-size:12px;margin-top:6px}
+.ui-settingpanel .ui-field .fieldblock{display:block;margin:5px 0;line-height:normal}
+.ui-settingpanel .bootstrap-switch-label{font-weight: normal;font-size:13px;}
+.ui-settingpanel .ui-setting-options .ui-setting-option input{width:calc(100% - 85px); display: inline-block;}
+.ui-settingpanel .ui-setting-options .ui-setting-option .action{margin-left:5px; margin-top: -3px;display:inline-block;opacity:.6;text-align:center}
+.ui-settingpanel .ui-setting-options .ui-setting-option .disabled{background-color: #dee5e7;}
+.ui-settingpanel .ui-setting-style .fieldblock {clear:both;}
+.ui-settingpanel .ui-setting-style .fieldblock a{float:left;margin-left:15px;margin-bottom:3px;position: inherit;}
+.ui-formcanvas .resetbtn{position: inherit;}
+.ui-settingpanel .ui-field .fieldblock label{font-weight:normal}
+
+/** 控件设置区--图片上传 **/
+.ui-settingpanel #uploader .placeholder{border:3px dashed #e6e6e6;min-height:280px;padding-top:128px;text-align:center;background:url(../../images/image.png) center 63px no-repeat;color:#ccc;font-size:14px;position:relative}
+.ui-settingpanel #uploader .placeholder p{margin-top:10px;}
+.ui-settingpanel #uploader .info{line-height:16px;height: 20px;font-size: 12px;margin-top: 4px;color:#ccc;}
+.ui-settingpanel #uploader .placeholder .webuploader-pick{font-size:18px;background:#00b7ee;border-radius:3px;line-height:44px;padding:0 30px;color:#fff;display:inline-block;margin:20px auto;cursor:pointer;box-shadow:0 1px 1px rgba(0,0,0,.1)}
+
+#uploader #thelist {position: relative;}
+#uploader #thelist div.file-panel{position:absolute;height:0;filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr='#80000000', endColorstr='#80000000')\9;background:rgba(0,0,0,.5);width:100%;top:0;left:0;overflow:hidden;z-index:300}
+#uploader #thelist div.file-panel span{width:24px;height:24px;display:inline;float:right;text-indent:-9999px;overflow:hidden;background:url(../../images/icons.png) no-repeat;margin:5px 1px 1px;cursor:pointer}
+#uploader #thelist div.file-panel span.cancel{background-position:-48px -24px}
+#uploader #thelist div.file-panel span.rotateRight{background-position:-24px -24px}
+#uploader #thelist div.file-panel span.rotateLeft{background-position:0 -24px}
+
+#uploader .btns {position: relative;}
+#uploader .btns .uploadBtn{border:1px solid #cfcfcf;padding:0 18px;display:inline-block;border-radius:3px;font-size:14px;position: absolute;top:0;right:0;line-height:38px;background:#00b7ee;color:#fff;border-color:transparent}
+
+.ui-setting-replacer{margin-bottom:-10px;}
+/* .replacer_label{padding:2px 5px;background-color:#eff2f7;cursor:default;border:1px solid #ccd5e4;-webkit-border-radius:3px;border-radius:3px;margin:0 5px} */
+.replacer_label a{color:#2db7f5;}
+/* .ui-setting-replacer .mbsc-control{height:30px;line-height:28px\9;border:none;border-bottom:1px solid #2db7f5;color:#2db7f5;background-color:#fff;width:60px;text-align:center} */
+
+/* ipad版 -- 详情 */
+.ui-componentview .ui-componentview-content p{}
+.ui-componentview .ui-componentview-content img{}
+.ui-componentview .ui-componentview-content hr{margin-top: 10px;margin-bottom: 10px; height:0;border: 0;border-top: 1px solid #eee;background-color:transparent;}
+.ui-component-videofield .ui-componentview-content{text-align: center;}
+.ui-component-audiofield .ui-componentview-content{text-align: center;}
+
+
+.diy_select{min-width:144px;width:100%;height:34px;margin-right:0px;position:relative;color:#000;float:left;-webkit-border-radius:2px;-moz-border-radius:2px;border-radius:2px;cursor:pointer}
+.select-text{padding:0 10px;height:100%;width:100%}
+.diy_select_txt{width:calc(100% - 20px); padding-top: 4px;}
+.diy_select_btn{width:20px;background:url(../../images/select_log.png) no-repeat center}
+.diy_select_btn,.diy_select_txt{float:left;height:100%;line-height:20px}
+.diy_select,.diy_select_list{border:1px solid #cfdadd}
+.diy_select_list li,.diy_select_txt{overflow:hidden}
+.select-option{width:calc(100% + 2px)}
+.diy_select_list{height:200px;position:absolute;top:34px;left:-1px;z-index:88888;border-top:none;width:calc(100% + 2px);display:none;background:#fff;overflow:auto}
+.diy_select_list li{position: relative;margin:2px 20px;list-style:none;height:36px;line-height:34px;cursor:default;background:#fff;border-bottom:1px solid #b3b3b3}
+.diy_select_list li.focus{margin:0;padding:0 20px;cursor:pointer;background:#39F;color:#fff}
+
+/** 标题式样 **/
+[class*="_justify"] p:before{position: absolute;left:15px;bottom: 0;}
+[class*="_justify"] p:after{position: absolute;right:15px;bottom: 0;}
+[class*="_justify"] p{text-align: center !important;}
+
+.triangle_wrap p{text-align: center;}
+[class*="triangle_wrap"] p:before{content:url(../../images/svg/triangle.svg) ;}
+[class*="triangle_wrap"] p:after{content:url(../../images/svg/triangle1.svg) ;}
+    
+.splitline_wrap p{text-align: center;}
+.splitline_wrap p:before{content:"------"}
+.splitline_wrap p:after{content:"------"}
+.quote p{padding:5px;border-left:5px solid #009688;border-radius:0 2px 2px 0;background-color:#f2f2f2}
+
+/** 缩小控件区，扩大编辑区11.02 **/
+/* [class*="ui-ipad"] .ui-widgetspanel {width:200px;} */
+[class*="ui-ipad"] .ui-widgetspanel .ui-panel-body, [class*="ui-mac"] .ui-widgetspanel .ui-panel-body {margin-top:24px;}
+[class*="ui-ipad"] .ui-widgetspanel .ui-widgetsitem, [class*="ui-mac"] .ui-widgetspanel .ui-widgetsitem {width:85px;margin: 0 10px 16px 0;height: 35px;line-height: 35px;padding-left: 7px;}
+[class*="ui-ipad"] .ui-widgetspanel .ui-widgetsitem i, [class*="ui-mac"] .ui-widgetspanel .ui-widgetsitem i{top: 4px;right: 3px;}
+
+.ui-mac .ui-widgetspanel{
+/* 	width:300px; */
+	height: 100%;
+/* 	margin-right: 50px; */
+}
+
+
+/* 右侧浮动层 */
+.shadow{position:absolute;top:0;right:0;width:100%;height:100%;z-index:9999;background-color:#000;opacity:.3;display:none}
+
+
+/* vue v-if初期闪烁问题 */
+[v-cloak]{display:none}
+
+/*pad图片上传尺寸调整*/
+#WU_FILE_0 > img{height:320px;}
+
+
+/**有步骤菜单**/
+.clear2{display: none;pointer-events:none;clear:both;text-align: right;margin-right: 23px;}
+.seccnt4{width: calc(100% - 90px);float: left;margin-top:5px;}
+.seccnt4 .ui-widgetspanel{width:110px;height: 95%;margin-right: 10px;}
+.seccnt4 .ui-widgetspanel .ui-panel-body .clear2{display: block;pointer-events:auto;cursor:pointer;color:rgba(5, 139, 255, 0.7);margin-bottom: 10px;}
+.seccnt4 .ui-widgetspanel .ui-panel-body .notOften{display: none;}
+.seccnt4 .ui-formcanvas{margin-right: 10px;}
+
+
+
+/**颜色选择**/
+.sp-replacer{border: 1px solid #cfdadd;border-radius: 2px;width: 100%;}
+.sp-preview{width:calc(100% - 25px);height: 24px;border:none;}
+.sp-thumb-el{width: 25px!important;height: 25px!important;}  /**单个颜色快大小**/
+.sp-palette-container{min-height:65px;}
+.sp-palette {max-width: 278px;}
+
+@media (min-width:1204px) and (max-width:1390px){
+	.seccnt4 .ui-mac{margin-left:calc((100% - 1046px) / 2);}
+	.seccnt4 .ui-mac .ui-widgetspanel{width:200px; height: 100%;margin-right: 30px;}
+	.seccnt4 .ui-mac .ui-formcanvas{margin-right: 50px;}
+	.seccnt4 .ui-mac .ui-settingpanel{width:320px;}
+	.sp-palette {max-width: 272px;}
+}
+
+@media (min-width:1304px){
+	.seccnt4 .ui-mac{margin-left:calc((100% - 1146px) / 2);}
+	.seccnt4 .ui-mac .ui-widgetspanel{width:300px; height: 100%;margin-right: 30px;}
+	.seccnt4 .ui-mac .ui-formcanvas{margin-right: 50px;}
+	.seccnt4 .ui-mac .ui-settingpanel{width:320px;}
+	.sp-palette {max-width: 272px;}
+}
+
+@media (max-width:1390px){
+	.ui-widgetspanel {
+/* 	    width: 200px; */
+	    float: left;
+	}
+	.ui-settingpanel {
+/* 	    width: 220px; */
+	    height: 100%;
+	    float: left;
+	}
+}
+@media (max-width:1633px){
+	.ui-settingpanel {
+/* 	    width: 220px; */
+	    height: 100%;
+	    float: left;
+	}
+}
+@media (max-width:1393px){
+	.ui-settingpanel {
+/* 	    width: 200px; */
+	    height: 100%;
+	    float: left;
+	}
+}
+@media (max-width:1393px){
+	.ui-formcanvas{
+		float:left;height:calc(95% - 35px);
+/* 		width:59%; */
+/* 		margin-right:20px; */
+		margin-top: 33px;
+		border:1px solid #ccc;
+	}
+}
+@media (max-width:1295px){
+	.ui-formcanvas{
+		float:left;height:calc(95% - 35px);
+/* 		width:56%; */
+/* 		margin-right:20px; */
+		margin-top: 33px;
+		border:1px solid #ccc;
+	}
+}
+@media (max-width:1224px){
+	.ui-formcanvas{
+		float:left;height:calc(95% - 35px);
+/* 		width:54%; */
+/* 		margin-right:20px; */
+		margin-top: 33px;
+		border:1px solid #ccc;
+	}
+}
+@media (max-width:1180px){
+	.ui-formcanvas{
+		float:left;height:calc(95% - 35px);
+/* 		width:50%; */
+/* 		margin-right:20px; */
+		margin-top: 33px;
+		border:1px solid #ccc;
+	}
+}
+@media (max-width:1100px){
+	.ui-formcanvas{
+		float:left;height:calc(95% - 35px);
+/* 		width:46%; */
+/* 		margin-right:20px; */
+		margin-top: 33px;
+		border:1px solid #ccc;
+	}
+}
+@media (max-width:1078px){
+	.ui-formcanvas{
+		float:left;height:calc(95% - 35px);
+/* 		width:45%; */
+/* 		margin-right:20px; */
+		margin-top: 33px;
+		border:1px solid #ccc;
+	}
+}
+
+/* .sp-replacer{border: 1px solid #cfdadd;border-radius: 2px;} */
+/* .sp-preview{width:293px;height: 24px;border:none;} */
+/* .sp-thumb-el{width: 25px!important;height: 25px!important;} */
+
+
+/* .bg_white{background:#fff;} */
+.ps_left{text-align:left !important;}
+.ps_center{text-align:center !important;}
+.ps_right{text-align:right !important;}
+
+/* .ui-widgetsitem{background:#fff;} */
+
+/** 二维码 **/
+.qcdiv{ margin:0 auto; width:310px; overflow:hidden}
+.qcdiv .dgqcimg img{width:100px; height:100px}
+.qcdiv.oneline .dgqctxt{width:200px;}
+
+/* .qcdiv{ margin:0 auto; width:310px; overflow:hidden} */
+/* .qcdiv > span{float:left;} */
+/* .qcdiv img{width:100px; height:100px} */
+/* .qcdiv .right{ float:right; width:188px; text-align:left} */
+/* .qcdiv .right div{ height:100px;overflow:hidden} */
+
+/** 部分秀米的标题式样bug **/
+.Powered-by-XIUMI section section section > br {display: none;}
+.fa-gears:before{content: "\f0c5";}
+
+.bootstrap-switch-handle-off{width:52px;}
+.webuploader-pick {
+    padding: 10px 3px !important;;
+    float: left
+}
+#uploader .btns .uploadBtn {
+    padding: 0 4px !important;;
+}
+.ui-field {
+    margin: 50px 0 30px !important;;
+}

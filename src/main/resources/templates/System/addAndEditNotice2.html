@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-cn" xmlns:th="http://www.thymeleaf.org" style="overflow: hidden;">
+<head>
+    <title>管理成本系统</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="shortcut icon" th:href="@{/static/images/oupailogs.ico}">
+    <link rel="stylesheet" th:href="@{/static/css/bootstrap/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}"/>
+
+    <link rel="stylesheet" th:href="@{/static/css/app.css}">
+    <link rel="stylesheet" th:href="@{/static/css/font.css}">
+
+    <link th:href="@{/static/froalaEditor/font-awesome-4.7.0/css/font-awesome.min.css}" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" th:href="@{/static/awesome/css/font-awesome.min.css}">
+
+    <link rel="stylesheet" th:href="@{/static/froalaEditor/codemirror/codemirror-5.40.2/lib/codemirror.css}">
+    <link th:href="@{/static/froalaEditor/css/themes/dark.min.css}" rel="stylesheet" type="text/css" />
+    <!-- Include Editor style. -->
+    <link th:href="@{/static/froalaEditor/css/froala_editor.pkgd.min.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/static/froalaEditor/css/froala_style.min.css}" rel="stylesheet" type="text/css" />
+
+
+    <link rel="stylesheet" th:href="@{/static/css/System/addAndEditNotice2.css}">
+    <style>
+        .fr-wrapper > div[style*='z-index: 9999'] {
+            position: absolute;
+            top: -10000px;
+            opacity: 0;
+        }
+    </style>
+</head>
+<body class="sticky-header">
+<!-- left side start-->
+<div th:replace="Menu/menu::asid(${menus},'xtsz','xtsz_xttzgl')"></div>
+
+<!-- left side end-->
+<div class="main-content" >
+    <!-- header start-->
+    <div class="navbar" th:replace="Menu/header::header(${user})"></div>
+    <!-- header end-->
+    <!--body wrapper start-->
+    <div class="wrapper wrapper-content animated fadeInUp clear ">
+        <div class="">
+            <div class="seccnt">
+                <div class="ibox">
+                    <div class="ibox-title bcwhite">
+                    </div>
+                    <div class="ibox-content ibox-content2 col-xs-12" style="overflow-y: auto;">
+                        <p>
+                            <span th:if="${releaseFalg==0}">编辑公告图文</span>
+                            <span th:if="${releaseFalg==1}">查看公告图文（查看时导入图片无效）</span>
+                        </p>
+                        <div class="col-xs-12 search-condition">
+                            <div class="cl col-lg-12 paddingl" ><p style="color: red">暂时不支持编辑视屏功能。</p></div>
+                            <div class="cl col-lg-12 paddingl" >
+                                <div id="edit">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 nopadding" id="btndiv" style="margin-top:18px;text-align: right">
+
+
+                            <button type="button" id="releaseFalgbtn" th:if="${releaseFalg!=null && releaseFalg ==0}" class="btn btn-s-xs defaultbtn" onclick="saveArticle(1)">发布</button>
+                            <button type="button" class="btn btn-s-xs greenbtn" th:if="${releaseFalg!=null && releaseFalg ==0}" onclick="saveArticle(0)">保存</button>
+                            <button type="button" class="btn btn-s-xs defaultbtn" onclick="back()">上一步</button>
+                            <button type="button" class="btn btn-s-xs btn-gray" onclick="backtoList()">返回列表</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--0:电脑版；1：手机版；2：pad版-->
+    <input id="bwType" th:value="${bwType}" class="hidden"/>
+    <!--产品id-->
+    <input id="id" th:if="${id!=null}"  th:value="${id}" class="hidden"/>
+    <!--文本编辑编辑的内容-->
+    <input id="html" th:if="${html!=null}"  th:value="${html}" class="hidden"/>
+    <input id="releaseFalg"  th:value="${releaseFalg}" class="hidden"/>
+
+    <!--body wrapper end-->
+    <!--footer section start-->
+    <div class="navbar" th:replace="Menu/footer::footer"></div>
+    <!--footer section end-->
+</div>
+<!-- 全局js -->
+<script type="text/javascript" th:src="@{/static/layui/layui.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/jQuery/jquery.min.js}"></script>
+<script th:src="@{/static/js/jquery-1.10.2.min.js}"></script>
+<script th:src="@{/static/js/jquery-ui-1.9.2.custom.min.js}"></script>
+<script th:src="@{/static/js/jquery-migrate-1.2.1.min.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/bootstrap/bootstrap.min.js}"></script>
+<script th:src="@{/static/js/modernizr.min.js}"></script>
+<script th:src="@{/static/js/jquery.nicescroll.js}"></script>
+<script th:src="@{/static/js/scripts.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/app.js}"></script>
+
+<!-- <script type="text/javascript" th:src="@{${ctx}/common/lib/layer/2.4/layer.js}"></script>-->
+<script type="text/javascript" th:src="@{/static/froalaEditor/codemirror/codemirror-5.40.2/lib/codemirror.js}"></script>
+<script type="text/javascript" th:src="@{/static/froalaEditor/codemirror/codemirror-5.40.2/mode/xml/xml.js}"></script>
+
+<!-- Include Editor JS files. -->
+<script type="text/javascript" th:src="@{/static/froalaEditor/js/froala_editor.pkgd.min.js}"></script>
+<!--中文字体包，注意要放在最下面，不然会报错-->
+<script type="text/javascript" th:src="@{/static/froalaEditor/js/languages/zh_cn.js}"></script>
+
+
+<script th:src="@{/static/js/System/addAndEditNotice2.js}"></script>
+
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh-cn" xmlns:th="http://www.thymeleaf.org" style="">
+<head>
+    <title>管理成本系统</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="shortcut icon" th:href="@{/static/images/oupailogs.ico}">
+    <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}"/>
+    <link rel="stylesheet" th:href="@{/static/css/bootstrap/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{/static/css/bootstrap/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/static/css/app.css}">
+    <link rel="stylesheet" th:href="@{/static/css/font.css}">
+    <link rel="stylesheet" th:href="@{/static/awesome/css/font-awesome.min.css}">
+    <link th:href="@{/static/css/style-responsive.css}" rel="stylesheet">
+    <link th:href="@{/static/css/User/userManage.css}" rel="stylesheet">
+
+</head>
+<body class="sticky-header" style="overflow: hidden;">
+<!-- left side start-->
+<div  th:replace="Menu/menu::asid(${menus},'jcsjgl','jcsjgl_cljgcx')"></div>
+
+<!-- left side end-->
+<div class="main-content" >
+    <!-- header start-->
+    <div class="navbar" th:replace="Menu/header::header(${user})"></div>
+    <!-- header end-->
+    <!--body wrapper start-->
+    <div class="wrapper wrapper-content animated fadeInUp clear " >
+        <div class="">
+            <div class="seccnt">
+                <div class="ibox">
+                    <div class="ibox-title bcwhite">
+                    </div>
+                    <div class="ibox-content ibox-content2 col-xs-12">
+                        <div class="search-list row  " >
+
+                            <div class="col-lg-4 col-md-4 col-xs-12 col-sm-12 nopadding" style="margin-top:15px;">
+                                <label class="col-md-3 text-right visible-lg visible-md title" style="width:150px;line-height: 34px;">存货编码：</label>
+                                <label class="col-xs-12 text-left visible-xs visible-sm nopadding title">存货编码</label>
+                                <div class="col-md-5 col-xs-12 nopadding">
+                                    <input id="inventoryCode" placeholder=""  class="layui-input"/>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-xs-12 col-sm-12 nopadding" style="margin-top:15px;">
+                                <label class="col-md-3 text-right visible-lg visible-md title" style="width:150px;line-height: 34px;">原材料名称：</label>
+                                <label class="col-xs-12 text-left visible-xs visible-sm nopadding title">原材料名称</label>
+                                <div class="col-md-5 col-xs-12 nopadding">
+                                    <input id="material" placeholder=""  class="layui-input"/>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-xs-12 col-sm-12 nopadding" style="margin-top:15px;">
+                                <label class="col-md-3 text-right visible-lg visible-md title" style="width:150px;line-height: 34px;">查询日期时间：</label>
+                                <label class="col-xs-12 text-left visible-xs visible-sm nopadding title">查询日期时间</label>
+                                <div class="col-md-5 col-xs-12 nopadding">
+                                    <input id="createStartTime" placeholder=""  class="layui-input"/>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12 nopadding" style="margin-top:15px;display:none">
+                                    <label class="col-md-3 text-right visible-lg visible-md title" style="width:150px;line-height: 34px;">查询日期时间：</label>
+                                    <label class="col-xs-12 text-left visible-xs visible-sm nopadding title">查询日期时间</label>
+                                    <div class="col-md-5 col-xs-12 nopadding">
+                                        <input id="createEndTime" placeholder=""  class="layui-input"/>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-xs-12 col-sm-12 nopadding" style="margin-top:15px;">
+                                <label class="col-md-3 text-right visible-lg visible-md title" style="width:150px;line-height: 34px;">存货规格：</label>
+                                <label class="col-xs-12 text-left visible-xs visible-sm nopadding title">存货规格</label>
+                                <div class="col-md-5 col-xs-12 nopadding">
+                                    <input id="materialSpecification" placeholder=""  class="layui-input"/>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-xs-12 col-sm-12 nopadding" style="margin-top:15px;">
+                                <label class="col-md-3 text-right visible-lg visible-md title" style="width:150px;line-height: 34px;">组织：</label>
+                                <label class="col-xs-12 text-left visible-xs visible-sm nopadding title">组织</label>
+                                <div class="col-md-5 col-xs-12 nopadding">
+                                    <input id="organization" placeholder=""  class="layui-input"/>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-xs-12 col-sm-12 nopadding" style="margin-top:15px;">
+                                <label class="col-md-3 text-right visible-lg visible-md title" style="width:150px;line-height: 34px;">类型：</label>
+                                <label class="col-xs-12 text-left visible-xs visible-sm nopadding title">类型</label>
+                                <div class="col-md-5 col-xs-12 nopadding">
+                                    <input id="updateBy" placeholder=""  class="layui-input"/>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12 col-md-12 col-xs-12 piccondition "style="text-align: center;">
+                                <button type="button" class="btn btn-s-xs defaultbtn" onclick="DataInit()">搜索</button>
+                                <button type="button" class="btn btn-s-xs btn-gray" onclick="reset()">重置</button>
+                            </div>
+                        </div>
+
+
+                        <div class="col-xs-12 search-condition">
+                            <div style="overflow:scroll;">
+                                <table id="bomListContaner" class="table text-nowrap" lay-filter="demo"   style="min-width:1500px;">
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <input valiue="" id="bwType" th:value="${bwType}" class="hidden"/>
+    <!--body wrapper end-->
+    <!--footer section start-->
+    <div class="navbar" th:replace="Menu/footer::footer"></div>
+    <!--footer section end-->
+</div>
+
+<script type="text/javascript" th:src="@{/static/layui/layui.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/jQuery/jquery.min.js}"></script>
+<script th:src="@{/static/js/jquery-1.10.2.min.js}"></script>
+<script th:src="@{/static/js/jquery-ui-1.9.2.custom.min.js}"></script>
+<script th:src="@{/static/js/jquery-migrate-1.2.1.min.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/bootstrap/bootstrap.min.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/bootstrap/bootstrap-table.min.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/bootstrap/bootstrap-table-export.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/bootstrap/bootstrap-table-zh-CN.js}"></script>
+
+
+<script th:src="@{/static/js/modernizr.min.js}"></script>
+<script th:src="@{/static/js/jquery.nicescroll.js}"></script>
+<script th:src="@{/static/js/scripts.js}"></script>
+<script th:src="@{/static/js/app.js}"></script>
+<script th:src="@{/static/js/Material/materialPriceTwo.js}"></script>
+
+</body>
+<script>
+    $(document).ready(function () {
+        DataInit();
+    });
+</script>
+
+
+</html>

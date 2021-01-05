@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-cn" xmlns:th="http://www.thymeleaf.org" style="overflow: hidden;">
+<head>
+    <title>管理成本系统</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="shortcut icon" th:href="@{/static/images/oupailogs.ico}">
+    <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}"/>
+    <link rel="stylesheet" th:href="@{/static/css/bootstrap/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{/static/css/bootstrap/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/static/css/bootstrap/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/static/css/bootstrap/bootstrap-table.min.css}">
+    <link rel="stylesheet" th:href="@{/static/css/bootstrap/bootstrap-table.css}" />
+
+    <link rel="stylesheet" th:href="@{/static/css/app.css}">
+    <link rel="stylesheet" th:href="@{/static/css/font.css}">
+    <link rel="stylesheet" th:href="@{/static/awesome/css/font-awesome.min.css}">
+    <link th:href="@{/static/css/style-responsive.css}" rel="stylesheet">
+    <link th:href="@{/static/css/Process/viewQuotationProcess.css}" rel="stylesheet">
+
+</head>
+<body class="sticky-header">
+<!-- left side start-->
+<div  th:replace="Menu/menu::asid(${menus},'bjlc','bjlc_bjgl')"></div>
+<!-- left side end-->
+<div class="main-content" >
+    <!-- header start-->
+    <div class="navbar" th:replace="Menu/header::header(${user})"></div>
+    <!-- header end-->
+    <!--body wrapper start-->
+    <div class="wrapper wrapper-content animated fadeInUp clear ">
+        <div class="">
+            <div class="seccnt">
+                <div class="ibox "><!--iBoxLocation-->
+                    <div class="ibox-content ibox-content2 col-xs-12" style="overflow-y: auto;">
+                        <p>
+                            <span>查看报价单</span>
+                        </p>
+                        <div class="col-xs-12 search-condition">
+                            <div class="col-lg-4 col-md-6 col-xs-12 col-sm-12 nopadding" style="margin-top:15px;">
+                                <label class="col-md-4 text-right visible-lg visible-md title" style="width:150px;line-height: 34px;">报价单号：</label>
+                                <label class="col-xs-12 text-left visible-xs visible-sm nopadding title">报价单号</label>
+                                <div class="col-md-5 col-xs-12 nopadding">
+                                    <label id="quotationNumber" th:text="${quotationProcess.quotationNumber}" style="background-color:#fff" />
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-xs-12 col-sm-12 nopadding" style="margin-top:15px;">
+                                <label class="col-md-3 text-right visible-lg visible-md title" style="width:150px;line-height: 34px;">项目名称：</label>
+                                <label class="col-xs-12 text-left visible-xs visible-sm nopadding title">项目名称</label>
+                                <div class="col-md-5 col-xs-12 nopadding">
+                                    <label id="projectName" th:text="${quotationProcess.projectName}" style="background-color:#fff" />
+<!--                                    <input id="projectName" class="form-control parsley-validated"  th:value="${quotationProcess.projectName}" maxlength="32" style="background-color:#fff"  />-->
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-xs-12 col-sm-12 nopadding" style="margin-top:15px;">
+                                <label class="col-md-3 text-right visible-lg visible-md title" style="width:150px;line-height: 34px;">业务员姓名：</label>
+                                <label class="col-xs-12 text-left visible-xs visible-sm nopadding title">业务员姓名</label>
+                                <div class="col-md-5 col-xs-12 nopadding">
+                                    <label id="employeeName" th:text="${quotationProcess.employeeName}" style="background-color:#fff" />
+<!--                                    <input id="employeeName" disabled class="form-control parsley-validated"  th:value="${quotationProcess.employeeName}" maxlength="32" style="background-color:#fff"  />-->
+                                </div>
+                            </div>
+                            <!--通过业务员姓名获取-->
+                            <div    class="col-lg-4 col-md-6 col-xs-12 col-sm-12 nopadding" style="margin-top:15px;">
+                                <label class="col-md-3 text-right visible-lg visible-md title" style="width:150px;line-height: 34px;">申请部门：</label>
+                                <label class="col-xs-12 text-left visible-xs visible-sm nopadding title">申请部门</label>
+                                <div class="col-md-5 col-xs-12 nopadding">
+                                    <label id="departmentName" th:text="${quotationProcess.departmentName}" style="background-color:#fff" />
+<!--                                    <input id="departmentName" disabled class="form-control parsley-validated"  th:value="${quotationProcess.departmentName}" maxlength="11" style="background-color:#fff" />-->
+                                </div>
+                            </div>
+                            <div    class="col-lg-4 col-md-6 col-xs-12 col-sm-12 nopadding" style="margin-top:15px;">
+                                <label class="col-md-3 text-right visible-lg visible-md title" style="width:150px;line-height: 34px;">报价方式：</label>
+                                <label class="col-xs-12 text-left visible-xs visible-sm nopadding title">报价方式</label>
+                                <div class="col-md-5 col-xs-12 nopadding">
+                                    <label th:if="${quotationProcess.quotationMethod==0}" style="background-color:#fff" >报价</label>
+                                    <label th:if="${quotationProcess.quotationMethod==1}" style="background-color:#fff" >核算利润</label>
+                                    <label th:if="${quotationProcess.quotationMethod==2}" style="background-color:#fff" >其他</label>
+                                 </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-xs-12 col-sm-12 nopadding" style="margin-top:15px;">
+                                <label class="col-md-3 text-right visible-lg visible-md title" style="width:150px;line-height: 34px;">回复日期：</label>
+                                <label class="col-xs-12 text-left visible-xs visible-sm nopadding title">回复日期</label>
+                                <div class="col-md-5 col-xs-12 nopadding">
+                                    <label id="replyDate" th:text="${quotationProcess.replyDateMiddle}" style="background-color:#fff" />
+<!--                                    <input id="replyDate" placeholder="回复日期" th:value="${quotationProcess.replyDateMiddle}" class="layui-input"/>-->
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 nopadding" id="table1" style="position: relative">
+                                <table id="reportTable1" class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 "  style="position: relative;bottom: 40px;left: 80%;"><!--btnLocation-->
+                        <button type="button" class="btn btn-s-xs btn-gray" onclick="back()">返回</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="display: none;">
+        <a id="exportExcel"></a>
+    </div>
+    <!--0:电脑版；1：手机版；2：pad版-->
+    <input id="bwType" th:value="${bwType}" class="hidden"/>
+    <input id="processCode" th:if="${quotationProcess.processCode!=null}"  th:value="${quotationProcess.processCode}" class="hidden"/>
+
+    <!--body wrapper end-->
+    <!--footer section start-->
+    <div class="navbar" th:replace="Menu/footer::footer"></div>
+    <!--footer section end-->
+</div>
+
+<script type="text/javascript" th:src="@{/static/layui/layui.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/jQuery/jquery.min.js}"></script>
+<script th:src="@{/static/js/jquery-1.10.2.min.js}"></script>
+
+<script th:src="@{/static/js/iscroll-zoom.js}" type="text/javascript" ></script>
+<script th:src="@{/static/js/hammer.js}" type="text/javascript" ></script>
+<script th:src="@{/static/js/lrz.all.bundle.js}" type="text/javascript" ></script>
+<script th:src="@{/static/js/jquery.photoClip.min.js}" type="text/javascript"></script>
+
+<script th:src="@{/static/js/jquery-ui-1.9.2.custom.min.js}"></script>
+<script th:src="@{/static/js/jquery-migrate-1.2.1.min.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/bootstrap/bootstrap.min.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/bootstrap/bootstrap-table.min.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/bootstrap/bootstrap-table-export.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/bootstrap/bootstrap-table-zh-CN.js}"></script>
+
+
+<script th:src="@{/static/js/modernizr.min.js}"></script>
+<script th:src="@{/static/js/jquery.nicescroll.js}"></script>
+
+
+
+<!--common scripts for all pages-->
+<script th:src="@{/static/js/scripts.js}"></script>
+<script th:src="@{/static/js/app.js}"></script>
+
+<script th:src="@{/static/js/Process/viewQuotationProcess.js}"></script>
+
+</body>
+</html>

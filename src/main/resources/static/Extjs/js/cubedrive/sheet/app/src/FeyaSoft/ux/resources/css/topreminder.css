@@ -1,0 +1,26 @@
+.top-reminder .x-box-mc {
+    font-size:14px;
+}
+
+#top-reminder {
+    position: absolute;
+    left: 50%;
+    top: 0px;
+    width: 400px;
+    margin-left: -200px;
+    z-index: 20000;
+}
+
+#top-reminder .top-reminder {    
+    background: white;
+    opacity: .95;
+    filter: alpha(opacity=95);
+    padding: 10px 15px;
+    color: black;
+    text-align: center;
+    font-size: 16px;
+}
+
+#top-reminder .top-reminder p {
+    margin: 0;    
+}

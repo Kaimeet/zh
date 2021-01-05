@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="zh-cn" xmlns:th="http://www.thymeleaf.org" style="overflow: hidden;">
+<head>
+    <title>管理成本系统</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="shortcut icon" th:href="@{/static/images/oupailogs.ico}">
+    <link rel="stylesheet" th:href="@{/static/css/bootstrap/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}"/>
+    <link rel="stylesheet" th:href="@{/static/css/app.css}">
+    <link rel="stylesheet" th:href="@{/static/css/font.css}">
+    <link rel="stylesheet" th:href="@{/static/awesome/css/font-awesome.min.css}">
+
+    <link rel="stylesheet" th:href="@{/static/css/Product/addAndEditCategory.css}">
+
+</head>
+<body class="sticky-header">
+<!-- left side start-->
+<div th:replace="Menu/menu::asid(${menus},'cpwx','cpwx_cpflwh')"></div>
+
+<!-- left side end-->
+<div class="main-content" >
+    <!-- header start-->
+    <div class="navbar" th:replace="Menu/header::header(${user})"></div>
+    <!-- header end-->
+    <!--body wrapper start-->
+    <div class="wrapper wrapper-content animated fadeInUp clear ">
+        <div class="">
+            <div class="seccnt">
+                <div class="ibox">
+                    <div class="ibox-content ibox-content2 col-xs-12" style="overflow-y: auto;">
+                        <p>
+                            <span th:if="${classification!=null && classification.releaseFalg==null}">新增产品分类</span>
+                            <span th:if="${classification!=null && classification.releaseFalg==0}">编辑产品分类</span>
+                            <span th:if="${classification!=null && classification.releaseFalg==1}">查看产品分类</span>
+                        </p>
+                        <div class="col-xs-12 search-condition">
+                            <div class="col-xs-12 nopadding" style="margin-top:15px;">
+                                <label class="col-md-3 text-right visible-lg visible-md title" style="width:150px;line-height: 34px;">产品分类名称：</label>
+                                <label class="col-xs-12 text-left visible-xs visible-sm nopadding title">产品分类名称</label>
+                                <div class="col-md-5 col-xs-12 nopadding">
+                                    <input id="categoryName" maxlength="32"  class="form-control parsley-validated" th:value="${classification.className}"  style="background-color:#fff"  />
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 nopadding" style="margin-top:15px;">
+                                <label class="col-md-3 text-right visible-lg visible-md title" style="width:150px;line-height: 34px;">产品分类层级：</label>
+                                <label class="col-xs-12 text-left visible-xs visible-sm nopadding title">产品分类层级</label>
+                                <div class="col-md-5 col-xs-12 nopadding">
+                                    <input id="classLevel" maxlength="32"  onkeyup="value=value.replace(/[^\d]/g,'')"  class="form-control parsley-validated" th:value="${classification.classLevel}"  style="background-color:#fff"  />
+                                </div>
+                            </div>
+
+<!--                        <div class="col-xs-12 search-condition" id="classSuperiorDiv" style="display: none">-->
+                            <div class="col-xs-12 nopadding" id="classSuperiorDiv" style="margin-top:15px;display: none">
+                                <label class="col-md-3 text-right visible-lg visible-md title" style="width:150px;line-height: 34px;">上级分类：</label>
+                                <label class="col-xs-12 text-left visible-xs visible-sm nopadding title">上级分类</label>
+                                <div class="col-md-5 col-xs-12 nopadding"  id="classSuperiorSelectDiv">
+<!--                                    <input id="classSuperior " maxlength="32"   class="form-control parsley-validated" th:value="${classification.classSuperior}"  style="background-color:#fff"  />-->
+                                </div>
+                            </div>
+<!--                        </div>-->
+<!--                        <div class="col-xs-12 search-condition">-->
+                            <div class="col-xs-12 nopadding" style="margin-top:15px;">
+                                <label class="col-md-3 text-right visible-lg visible-md title" style="width:150px;line-height: 34px;">分类次序：</label>
+                                <label class="col-xs-12 text-left visible-xs visible-sm nopadding title">分类次序</label>
+                                <div class="col-md-5 col-xs-12 nopadding">
+                                    <input id="classOrder"  maxlength="32" onkeyup="value=value.replace(/[^\d]/g,'')"  class="form-control parsley-validated" th:value="${classification.classOrder}"  style="background-color:#fff"  />
+                                </div>
+                            </div>
+<!--                        </div>-->
+
+                            <div class="col-xs-12 nopadding" style="margin-top:15px;">
+                                <label class="col-md-3 text-right visible-lg visible-md title" style="width:150px;line-height: 34px;">分类所属：</label>
+                                <label class="col-xs-12 text-left visible-xs visible-sm nopadding title">分类所属</label>
+                                <div class="col-md-5 col-xs-12 nopadding">
+                                    <select id="belongType" class="form-control parsley-validated" name="d">
+                                        <option value="1" th:selected="${classification.belongType==1}">产品</option>
+                                        <option value="0" th:selected="${classification.belongType==0}">物料</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 nopadding hidden" style="margin-top:15px;" id="choose-fileDiv3">
+                                <label class="col-md-3 text-right visible-lg visible-md title" style="width:150px;line-height: 34px;">分类状态：</label>
+                                <label class="col-xs-12 text-left visible-xs visible-sm nopadding title">分类状态</label>
+                                <div class="col-md-5 col-xs-12 nopadding">
+                                    <select id="type" class="form-control parsley-validated" name="d" >
+                                        <option value="">---是否热销产品---</option>
+                                        <option value="0" th:selected="${classification.type==0}">否</option>
+                                        <option value="1" th:selected="${classification.type==1}">是</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 nopadding hidden" style="margin-top:15px;" id="choose-fileDiv1">
+                                <label class="col-md-3 text-right visible-lg visible-md title" style="width:150px;line-height: 34px;">分类图片：</label>
+                                <label class="col-xs-12 text-left visible-xs visible-sm nopadding title">分类图片</label>
+                                <div class="col-md-5 col-xs-12 nopadding">
+                                    <button type="button" class="btn btn-s-xs defaultbtn"  onclick="openfile()">选中分类图片</button>
+                                    <input type="file"  accept="image/jpg, image/jpeg, image/png" class="hidden"  name="" id="choose-file"/>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 nopadding hidden"  id="choose-fileDivMsg1">
+                                <label class="col-md-3 text-right visible-lg visible-md title" style="width:150px;"></label>
+                                <label class="col-xs-12 text-left visible-xs visible-sm nopadding title"></label>
+                                <div class="col-md-5 col-xs-12 nopadding">
+                                    <span style="color: red">图片的格式必须为：jpg、jpeg、png。图片最大为5M。</span>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 nopadding hidden" style="margin-top:15px;min-height: 152px;" id="choose-fileDiv2">
+                                <label class="col-md-3 text-right visible-lg visible-md title" style="width:150px;line-height: 34px;"></label>
+                                <label class="col-xs-12 text-left visible-xs visible-sm nopadding title"></label>
+                                <div class="col-md-8 col-xs-12 nopadding">
+                                    <ul class="file-list ">
+                                        <li th:if="${imageFile!=null && imageFile.size()>0}" th:each="e,eStat:${imageFile}" style="border:solid #e1edff 1px; margin:5px 5px;text-align: center;"  class="file-item">
+                                            <img th:src="${e.viewUrl}" class="imgshow" alt="" height="120px" width="120px" >
+                                            <span th:id="${e.id}"  class="file-del" >删除</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+
+                            <div class="col-xs-12 nopadding" style="margin-top:15px;" id="choose-fileotherDiv1">
+                                <label class="col-md-3 text-right visible-lg visible-md title" style="width:150px;line-height: 34px;">分类附件：</label>
+                                <label class="col-xs-12 text-left visible-xs visible-sm nopadding title">分类附件</label>
+                                <div class="col-md-5 col-xs-12 nopadding">
+                                    <div class="input-group">
+                                        <button type="button" class="btn btn-s-xs defaultbtn" onclick="openfile4()">选择文件</button>
+                                    </div>
+                                    <input id="file4" type="file" class="form-control parsley-validated hidden"  style="background-color:#fff"/>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 nopadding hidden"  id="choose-fileotherDivMsg">
+                                <label class="col-md-3 text-right visible-lg visible-md title" style="width:150px;"></label>
+                                <label class="col-xs-12 text-left visible-xs visible-sm nopadding title"></label>
+                                <div class="col-md-5 col-xs-12 nopadding">
+                                    <span style="color: red">附件格式必须为：ppt。图片最大为30M。</span>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 nopadding" style="margin-top:15px;"id="choose-fileotherDiv2">
+                                <label class="col-md-3 text-right visible-lg visible-md title" style="width:150px;line-height: 34px;"></label>
+                                <label class="col-xs-12 text-left visible-xs visible-sm nopadding title"></label>
+                                <div class="col-md-8 col-xs-12 nopadding">
+                                    <ul class="otherfile-list4 ">
+                                        <li th:if="${otherFileMiddle!=null && otherFileMiddle.size()>0}" th:each="e,eStat:${otherFileMiddle}" class="file-item">
+                                            <span class="file-name" th:text="${e.fileName}"></span>
+                                            <span  th:id="${e.id}"  class="file-del4">删除</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 nopadding" id="btndiv" style="margin-top:18px;text-align: right;position: absolute;">
+                                <button type="button"  class="btn btn-s-xs greenbtn" onclick="save()">保存</button>
+                                <button type="button" class="btn btn-s-xs btn-gray" onclick="back()">返回</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--0:电脑版；1：手机版；2：pad版-->
+    <input id="bwType" th:value="${bwType}" class="hidden"/>
+
+    <!--分类表id-->
+    <input id="id" th:value="${classification.id}" class="hidden"/>
+
+    <!--编辑时图片的张数-->
+    <input id="imageFileSize" th:value="${imageFileSize}" class="hidden"/>
+
+    <!--编辑时ppt文件个数-->
+    <input id="otherFileSize" th:value="${otherFileSize}" class="hidden"/>
+
+    <!--分类表id-->
+    <input id="classSuperiorMiddle" th:value="${classification.classSuperior}" class="hidden"/>
+
+    <input id="releaseFalg" th:value="${classification.releaseFalg}" class="hidden"/>
+
+    <!--body wrapper end-->
+    <!--footer section start-->
+        <div class="navbar" th:replace="Menu/footer::footer"></div>
+    <!--footer section end-->
+</div>
+</div>
+<!-- 全局js -->
+<script type="text/javascript" th:src="@{/static/layui/layui.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/jQuery/jquery.min.js}"></script>
+<script th:src="@{/static/js/jquery-1.10.2.min.js}"></script>
+<script th:src="@{/static/js/jquery-ui-1.9.2.custom.min.js}"></script>
+<script th:src="@{/static/js/jquery-migrate-1.2.1.min.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/bootstrap/bootstrap.min.js}"></script>
+<script th:src="@{/static/js/modernizr.min.js}"></script>
+<script th:src="@{/static/js/jquery.nicescroll.js}"></script>
+<script th:src="@{/static/js/scripts.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/app.js}"></script>
+
+<script th:src="@{/static/js/Product/addAndEditCategory.js}"></script>
+
+</body>
+</html>

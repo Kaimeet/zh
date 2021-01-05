@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-cn" xmlns:th="http://www.thymeleaf.org" style="overflow: hidden;">
+<head>
+    <title>管理成本系统</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="shortcut icon" th:href="@{/static/images/oupailogs.ico}">
+    <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}"/>
+    <link rel="stylesheet" th:href="@{/static/css/bootstrap/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{/static/css/bootstrap/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/static/css/app.css}">
+    <link rel="stylesheet" th:href="@{/static/css/font.css}">
+    <!--    <link rel="stylesheet" th:href="@{/static/css/style.css">-->
+    <link rel="stylesheet" th:href="@{/static/awesome/css/font-awesome.min.css}">
+    <link th:href="@{/static/css/style-responsive.css}" rel="stylesheet">
+    <!--拖拽控件样式-->
+    <link th:href="@{/static/Drag/css/app.css}" rel="stylesheet" type="text/css"/>
+
+    <link th:href="@{/static/css/Product/setSearchTerms.css}" rel="stylesheet">
+
+</head>
+<body class="sticky-header" style="overflow: hidden;">
+<div class="main-content" style="padding-top: 0px">
+    <!--body wrapper start-->
+    <div class="wrapper wrapper-content animated fadeInUp clear " >
+        <div class="">
+            <div class="seccnt">
+                <div class="ibox">
+                    <div class="ibox-title bcwhite">
+                    </div>
+                    <div class="ibox-content ibox-content2 col-xs-12">
+                        <div data-force="30" class="col-lg-2 col-md-5 col-sm-12 col-xs-12" style="border: 1px dotted #ff7373;margin-left: 15px;margin-top: 15px;min-height: 120px;">
+                            <div class="layer title">可选搜索条件</div>
+                            <ul id="foo" class="block__list block__list_tags"  style="min-height: 120px;">
+                                <li th:if="${pSearchItems.enableFlag==null || pSearchItems.enableFlag==0}" th:id="${pSearchItems.id}" th:each="pSearchItems : ${pSearchItemss}" >
+                                    <span  th:text="${pSearchItems.searchName}"></span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div data-force="18" class="col-lg-9 col-md-6 col-sm-12 col-xs-12"  style="border: 1px dotted #ff7373;margin-left: 15px;margin-top: 15px;">
+                            <div class="layer title">已选搜索条件</div>
+                            <ul id="bar" class="block__list block__list_tags" style="min-height: 120px;">
+                                <li th:if="${pSearchItems.enableFlag==1}" th:id="${pSearchItems.id}" th:each="pSearchItems : ${pSearchItemss}" >
+                                    <span  th:text="${pSearchItems.searchName}"></span>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                    <div class="col-xs-12" style="position: fixed;z-index: 9999;bottom: 0px ">
+                        <button type="button" class="btn btn-s-xs greenbtn" style="float: right;margin-right: 15px;margin-bottom: 15px" onclick="save()">保存</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <input valiue="" id="bwType" th:value="${bwType}" class="hidden"/>
+</div>
+
+<script type="text/javascript" th:src="@{/static/layui/layui.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/jQuery/jquery.min.js}"></script>
+<script th:src="@{/static/js/jquery-1.10.2.min.js}"></script>
+<script th:src="@{/static/js/jquery-ui-1.9.2.custom.min.js}"></script>
+<script th:src="@{/static/js/jquery-migrate-1.2.1.min.js}"></script>
+<!--<script type="text/javascript" th:src="@{/static/js/bootstrap/bootstrap.js}"></script>-->
+<script type="text/javascript" th:src="@{/static/js/bootstrap/bootstrap.min.js}"></script>
+<script th:src="@{/static/js/modernizr.min.js}"></script>
+<script th:src="@{/static/js/jquery.nicescroll.js}"></script>
+<!--common scripts for all pages-->
+<script th:src="@{/static/js/scripts.js}"></script>
+<script th:src="@{/static/js/app.js}"></script>
+<!--给拖拽控件使用-->
+<script th:src="@{/static/Drag/js/Sortable.js}"></script>
+<script th:src="@{/static/Drag/js/app.js}"></script>
+
+<script th:src="@{/static/js/Product/setSearchTerms.js}"></script>
+
+</body>
+</html>

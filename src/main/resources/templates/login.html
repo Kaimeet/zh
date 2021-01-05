@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-cn" xmlns:th="http://www.thymeleaf.org" style="overflow-y: hidden">
+<head>
+    <title>管理成本系统</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="shortcut icon" th:href="@{/static/images/oupailogs.ico}">
+    <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}"/>
+    <link rel="stylesheet" th:href="@{/static/css/bootstrap/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{/static/css/bootstrap/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/static/css/bootstrap/bootstrap-theme.css}">
+    <link rel="stylesheet" th:href="@{/static/css/bootstrap/bootstrap-theme.min.css}">
+    <link rel="stylesheet" th:href="@{/static/css/app.css}">
+    <link rel="stylesheet" th:href="@{/static/css/font.css}">
+    <link rel="stylesheet" th:href="@{/static/css/signin.css}">
+
+</head>
+
+<body style="">
+<section>
+    <header class="bg-glay-only header header-md navbar navbar-fixed-top-xs" >
+        <div class="navbar-header aside dk mrg ">
+            <!-- 电脑版logo -->
+            <img class="visible-lg visible-md visible-sm " src="http://www.oupaigroup.com/static/home/images/logo.png" alt="logo" height="40">
+            <!-- 手机版logo -->
+            <img class="visible-xs" src="http://www.oupaigroup.com/static/home/images/logo.png" alt="logo" style="height:30px">
+        </div>
+    </header>
+    <!-- // header end -->
+
+    <section >
+        <div id="main-container" class="allbackground visible-lg visible-md" >
+            <div class="login-box" id="login">
+                <h4>
+                    <strong id="logintitle" class="duiqi">产品信息维护系统用户登录</strong>
+                </h4>
+                <!-- 登录错误提示语 -->
+                <div id="errortips" class="login-message-error">
+                    <p><small id="errormessage">&nbsp;</small></p>
+                </div>
+                <div class="container userlogin">
+                    <div class="form-group borderlimit-lg">
+                        <input class="form-control lgheight " type="email" placeholder="用户名" id="login-email">
+                    </div>
+                    <div class="form-group borderlimit-lg">
+                        <input class="form-control lgheight" type="text" onfocus="this.type='password'" autocomplete="off" placeholder="密码" id="login-password">
+                    </div>
+                    <div class="form-group" id="loginbtn">
+                        <button type="button" class="btn btn-s-md btn-orange login-button comfirmcolor" onclick="checkuser()">登录</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 手机平板版 -->
+        <div id="main-container" class="allbackgroundp visible-xs visible-sm">
+            <div class="container visible-xs visible-sm  ipp">
+                <div class="ippp">
+                    <div class="row ipppp" id="login">
+                        <h4 class="iphfour">
+                            <strong class="ippstrong" id="xssm-logintitle">管理成本系统</strong>
+                        </h4>
+                        <!-- 登录错误提示语 -->
+                        <div class="container userlogin ipemail rrrr">
+                            <div id="xssm-errortips" class="xssm-message-error">
+                                <p><small id="xssm-errormessage">&nbsp;</small></p>
+                            </div>
+                            <div class="form-group borderlimit-lg">
+                                <input class="form-control lgheight " type="email" placeholder="用户名" id="xssm-email">
+                            </div>
+                            <div class="form-group borderlimit-lg">
+                                <input class="form-control lgheight" type="text" onfocus="this.type='password'" autocomplete="off" placeholder="密码" id="xssm-password">
+                            </div>
+                            <div class="form-group" id="xssm-loginbtn">
+                                <button type="button" class="btn btn-s-md btn-orange login-button comfirmcolor" onclick="xssmcheckuser()">登录</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- footer -->
+    <footer id="footer" class="bg-glay-only footer footnature " style="position:fixed">
+        <meta name="viewport" content="width=device-width">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1,user-scalable=no">
+        <meta name="format-detection" content="telephone=no,email=no,adress=no">
+
+        <!-- 脚注区 -->
+        <nav class="navbar navbar-default nobackground foot-height-style" role="navigation" style="border: none; background: none;">
+            <div class="container-fluid">
+                <div id="footbanner" class="visible-sm visible-md visible-lg">
+                    <div class="col-md-12 text-center" id="bottom-navbar-banquan" style="line-height: 50px;">
+                        <span class="foot-font">版权所有&nbsp;©&nbsp;江山欧派门业股份有限公司&nbsp;&nbsp;&nbsp;&nbsp;浙ICP备17058953-2号</span>
+                    </div>
+                </div>
+                <div class="text-center visible-xs" id="bottom-navbar-banquan" style="padding-top: 8px; font-size: 10px">
+                    <span class="foot-font">版权所有&nbsp;©&nbsp;江山欧派门业股份有限公司</span><br> <span class="foot-font">&nbsp;浙ICP备17058953-2号</span>
+                </div>
+            </div>
+        </nav>
+    </footer>
+</section>
+</body>
+
+    <script type="text/javascript" th:src="@{/static/layui/layui.js}"></script>
+    <script type="text/javascript" th:src="@{/static/js/jQuery/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/static/js/bootstrap/bootstrap.js}"></script>
+    <script type="text/javascript" th:src="@{/static/js/bootstrap/bootstrap.min.js}"></script>
+    <script type="text/javascript" th:src="@{/static/js/app.js}"></script>
+    <script type="text/javascript" th:src="@{/static/js/Common/login.js}"></script>
+
+</html>
+

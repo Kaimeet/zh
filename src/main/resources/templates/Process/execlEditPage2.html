@@ -1,0 +1,121 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn" xmlns:th="http://www.thymeleaf.org" style="overflow: hidden;">
+<head>
+    <title>管理成本系统</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+
+    <link rel="shortcut icon" href="resource/images/favicon.png" type="image/x-icon"></link>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/static/Extjs/js/extjs4.2.1/packages/ext-theme-gray/build/resources/ext-theme-gray-all.css}"></link>
+    <link rel="stylesheet" type="text/css" th:href="@{/static/Extjs/js/cubedrive/sheet/app/src/Swift/resources/css/common.css}"></link>
+    <link rel="stylesheet" type="text/css" th:href="@{/static/Extjs/js/cubedrive/sheet/app/src/Swift/resources/css/sheet.css}"></link>
+    <link rel="stylesheet" type="text/css" th:href="@{/static/Extjs/js/cubedrive/sheet/app/src/Swift/resources/css/toolbar.css}"></link>
+    <link rel="stylesheet" type="text/css" th:href="@{/static/Extjs/js/cubedrive/sheet/app/src/Swift/resources/css/icon.css}"></link>
+    <link rel="stylesheet" type="text/css" th:href="@{/static/Extjs/js/cubedrive/example/resources/css/example.css}"></link>
+    <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}"/>
+
+    <link rel="shortcut icon" th:href="@{/static/images/oupailogs.ico}">
+    <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}"/>
+    <link rel="stylesheet" th:href="@{/static/css/bootstrap/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{/static/css/bootstrap/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/static/css/bootstrap/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/static/css/bootstrap/bootstrap-table.min.css}">
+    <link rel="stylesheet" th:href="@{/static/css/bootstrap/bootstrap-table.css}" />
+
+    <link rel="stylesheet" th:href="@{/static/css/app.css}">
+    <link rel="stylesheet" th:href="@{/static/css/font.css}">
+    <link rel="stylesheet" th:href="@{/static/awesome/css/font-awesome.min.css}">
+    <link th:href="@{/static/css/style-responsive.css}" rel="stylesheet">
+    <link th:href="@{/static/css/Process/addAndEditBom.css}" rel="stylesheet">
+
+</head>
+<body class="sticky-header">
+<!-- left side start-->
+<div th:replace="Menu/menu::asid(${menus},'bomgl','bomgl_excelcj')"></div>
+
+<!-- left side end-->
+<div class="main-content" >
+    <!-- header start-->
+<!--    <div class="navbar" th:replace="Menu/header::header(${user})"></div>-->
+    <!-- header end-->
+    <!--body wrapper start-->
+    <div class="wrapper wrapper-content animated fadeInUp clear ">
+        <div class="">
+            <div class="seccnt">
+                <div class="ibox">
+                    <div class="ibox-content ibox-content2 col-xs-12" style="overflow-y: auto;">
+                        <p>
+                            <span th:if="${step=='0' }">编辑BOM</span>
+                            <span th:if="${step!='1' }">新增BOM</span>
+                        </p>
+                        <div class="col-xs-12 search-condition">
+                            <div class="api-pane" style="height:100%;width:180px;" >
+<!--                                <div class="api-title">应用程序界面功能</div>-->
+<!--                                <div class="api-action-btn" id="save-data" onclick="getDataFromGrid()">保存工作表数据</div>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--body wrapper end-->
+    <!--footer section start-->
+<!--    <div class="navbar" th:replace="Menu/footer::footer"></div>-->
+    <!--footer section end-->
+</div>
+
+
+
+
+
+<!--<script type="text/javascript" th:src="@{/static/layui/layui.js}"></script>-->
+<!--<script type="text/javascript" th:src="@{/static/js/jQuery/jquery.min.js}"></script>-->
+<!--<script th:src="@{/static/js/jquery-1.10.2.min.js}"></script>-->
+
+<!--<script th:src="@{/static/js/iscroll-zoom.js}" type="text/javascript" ></script>-->
+<!--<script th:src="@{/static/js/hammer.js}" type="text/javascript" ></script>-->
+<!--<script th:src="@{/static/js/lrz.all.bundle.js}" type="text/javascript" ></script>-->
+<!--<script th:src="@{/static/js/jquery.photoClip.min.js}" type="text/javascript"></script>-->
+
+<!--<script th:src="@{/static/js/jquery-ui-1.9.2.custom.min.js}"></script>-->
+<!--<script th:src="@{/static/js/jquery-migrate-1.2.1.min.js}"></script>-->
+<!--<script type="text/javascript" th:src="@{/static/js/bootstrap/bootstrap.min.js}"></script>-->
+<!--<script type="text/javascript" th:src="@{/static/js/bootstrap/bootstrap-table.min.js}"></script>-->
+<!--<script type="text/javascript" th:src="@{/static/js/bootstrap/bootstrap-table-export.js}"></script>-->
+<!--<script type="text/javascript" th:src="@{/static/js/bootstrap/bootstrap-table-zh-CN.js}"></script>-->
+
+
+
+
+
+<!--common scripts for all pages-->
+<script th:src="@{/static/js/scripts.js}"></script>
+<script th:src="@{/static/js/app.js}"></script>
+
+<!--<script th:src="@{/static/js/Process/addAndEditBom.js}"></script>-->
+
+<script type="text/javascript" th:src="@{/static/layui/layui.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/jQuery/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/static/Extjs/js/extjs4.2.1/ext-all.js}"></script>
+<script type="text/javascript" th:src="@{/static/Extjs/js/extjs4.2.1/locale/ext-lang-en.js}"></script>
+<script type="text/javascript" th:src="@{/static/Extjs/js/extjs4.2.1/examples/ux/BoxReorderer.js}"></script>
+<script type="text/javascript" th:src="@{/static/Extjs/js/cubedrive/sheet/app/src/Swift/lang/zh_CN.js}"></script>
+<script type="text/javascript" th:src="@{/static/Extjs/js/cubedrive/sheet/app/src/Swift/lang/Lang.js}"></script>
+<script type="text/javascript" th:src="@{/static/Extjs/js/cubedrive/sheet/CONFIG.js}"></script>
+<script type="text/javascript" th:src="@{/static/Extjs/js/cubedrive/sheet/enterprisesheetApi.js}"></script>
+<script type="text/javascript" th:src="@{/static/Extjs/js/cubedrive/example/GetDataWin.js}"></script>
+<script type="text/javascript" th:src="@{/static/Extjs/js/cubedrive/example/LoadDataWin.js}"></script>
+<script type="text/javascript" th:src="@{/static/Extjs/js/cubedrive/example/Example.js}"></script>
+<script type="text/javascript" th:src="@{/static/JSON-js-master/json2.js}"></script>
+
+<script th:src="@{/static/js/modernizr.min.js}"></script>
+<script th:src="@{/static/js/jquery.nicescroll.js}"></script>
+
+</body>
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh-cn" xmlns:th="http://www.thymeleaf.org" style="overflow: hidden;">
+<head>
+    <title>管理成本系统</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="shortcut icon" th:href="@{/static/images/oupailogs.ico}">
+    <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}"/>
+    <link rel="stylesheet" th:href="@{/static/css/bootstrap/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{/static/css/bootstrap/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/static/css/bootstrap/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/static/css/bootstrap/bootstrap-table.min.css}">
+    <link rel="stylesheet" th:href="@{/static/css/bootstrap/bootstrap-table.css}" />
+
+    <link rel="stylesheet" th:href="@{/static/css/app.css}">
+    <link rel="stylesheet" th:href="@{/static/css/font.css}">
+    <link rel="stylesheet" th:href="@{/static/awesome/css/font-awesome.min.css}">
+    <link th:href="@{/static/css/style-responsive.css}" rel="stylesheet">
+    <link th:href="@{/static/css/Material/addAndEditInventorySelect.css}" rel="stylesheet">
+
+</head>
+<body class="sticky-header" style="overflow: hidden;">
+<!-- left side start-->
+
+<!-- left side end-->
+<div class="main-content"  style="padding-top: 0px">
+    <!-- header start-->
+    <!-- header end-->
+    <!--body wrapper start-->
+    <div class="wrapper wrapper-content animated fadeInUp clear ">
+        <div class="">
+            <div class="seccnt">
+                <div class="ibox">
+                    <div class="ibox-content ibox-content2 col-xs-12" style="overflow-y: auto;">
+                        <p>
+                            <span th:if="${inventory.id !=null && inventory.id!='' }">编辑存货档案</span>
+                            <span th:if="${inventory == null && inventory.id == null }">新增存货档案</span>
+                        </p>
+                        <div class="col-xs-12 search-condition">
+                            <!--帐套信息和生产基地信息与系列对应-->
+                            <div   class="col-lg-6 col-md-6 col-xs-12 col-sm-12 nopadding" style="margin-top:15px;">
+                                <label class="col-md-3 text-right visible-lg visible-md title" style="width:150px;line-height: 34px;">存货编码：</label>
+                                <label class="col-xs-12 text-left visible-xs visible-sm nopadding title">存货编码</label>
+                                <div class="col-md-5 col-xs-12 nopadding">
+                                    <input id="inventoryCode" class="form-control parsley-validated" th:value="${inventory.inventoryCode}" maxlength="32" style="background-color:#fff"  disabled />
+                                </div>
+                            </div>
+                            <!--帐套信息和生产基地信息与系列对应-->
+                            <div   class="col-lg-6 col-md-6 col-xs-12 col-sm-12 nopadding" style="margin-top:15px;">
+                                <label class="col-md-3 text-right visible-lg visible-md title" style="width:150px;line-height: 34px;">存货名称：</label>
+                                <label class="col-xs-12 text-left visible-xs visible-sm nopadding title">存货名称</label>
+                                <div class="col-md-5 col-xs-12 nopadding">
+                                    <input id="inventoryName" class="form-control parsley-validated" th:value="${inventory.inventoryName}" maxlength="32" style="background-color:#fff"  />
+                                </div>
+                            </div>
+                            <div   class="col-lg-6 col-md-6 col-xs-12 col-sm-12 nopadding" style="margin-top:15px;">
+                                <label class="col-md-3 text-right visible-lg visible-md title" style="width:150px;line-height: 34px;">存货规格：</label>
+                                <label class="col-xs-12 text-left visible-xs visible-sm nopadding title">存货规格</label>
+                                <div class="col-md-5 col-xs-12 nopadding">
+                                    <input id="inventorySpecifications" class="form-control parsley-validated" th:value="${inventory.inventorySpecifications}" maxlength="32" style="background-color:#fff"  />
+                                </div>
+                            </div>
+                            <div   class="col-lg-6 col-md-6 col-xs-12 col-sm-12 nopadding" style="margin-top:15px; display: none">
+                                <label class="col-md-3 text-right visible-lg visible-md title" style="width:150px;line-height: 34px;">单价：</label>
+                                <label class="col-xs-12 text-left visible-xs visible-sm nopadding title">单价</label>
+                                <div class="col-md-5 col-xs-12 nopadding">
+                                    <input id="price" class="form-control parsley-validated" th:value="${inventory.price}" maxlength="32" style="background-color:#fff"  />
+                                </div>
+                            </div>
+                            <div   class="col-lg-6 col-md-6 col-xs-12 col-sm-12 nopadding" style="margin-top:15px;">
+                                <label class="col-md-3 text-right visible-lg visible-md title" style="width:150px;line-height: 34px;">长：</label>
+                                <label class="col-xs-12 text-left visible-xs visible-sm nopadding title">长</label>
+                                <div class="col-md-5 col-xs-12 nopadding">
+                                    <input id="longer" class="form-control parsley-validated" th:value="${inventory.longer}" maxlength="32" style="background-color:#fff"  />
+                                </div>
+                            </div>
+                            <div   class="col-lg-6 col-md-6 col-xs-12 col-sm-12 nopadding" style="margin-top:15px;">
+                                <label class="col-md-3 text-right visible-lg visible-md title" style="width:150px;line-height: 34px;">宽：</label>
+                                <label class="col-xs-12 text-left visible-xs visible-sm nopadding title">宽</label>
+                                <div class="col-md-5 col-xs-12 nopadding">
+                                    <input id="wide" class="form-control parsley-validated" th:value="${inventory.wide}" maxlength="32" style="background-color:#fff"  />
+                                </div>
+                            </div>
+                            <div   class="col-lg-6 col-md-6 col-xs-12 col-sm-12 nopadding" style="margin-top:15px;">
+                                <label class="col-md-3 text-right visible-lg visible-md title" style="width:150px;line-height: 34px;">厚：</label>
+                                <label class="col-xs-12 text-left visible-xs visible-sm nopadding title">厚</label>
+                                <div class="col-md-5 col-xs-12 nopadding">
+                                    <input id="thick" class="form-control parsley-validated" th:value="${inventory.thick}" maxlength="32" style="background-color:#fff"  />
+                                </div>
+                            </div>
+                            <div   class="col-lg-6 col-md-6 col-xs-12 col-sm-12 nopadding" style="margin-top:15px;">
+                                <label class="col-md-3 text-right visible-lg visible-md title" style="width:150px;line-height: 34px;">主单位：</label>
+                                <label class="col-xs-12 text-left visible-xs visible-sm nopadding title">主单位</label>
+                                <div class="col-md-5 col-xs-12 nopadding">
+                                    <input id="mainUnit" class="form-control parsley-validated" th:value="${inventory.mainUnit}" maxlength="32" style="background-color:#fff"  />
+                                </div>
+                            </div>
+                            <div   class="col-lg-6 col-md-6 col-xs-12 col-sm-12 nopadding" style="margin-top:15px;">
+                                <label class="col-md-3 text-right visible-lg visible-md title" style="width:150px;line-height: 34px;">辅单位：</label>
+                                <label class="col-xs-12 text-left visible-xs visible-sm nopadding title">辅单位</label>
+                                <div class="col-md-5 col-xs-12 nopadding">
+                                    <input id="subsidiaryUnit" class="form-control parsley-validated" th:value="${inventory.subsidiaryUnit}" maxlength="32" style="background-color:#fff"  />
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 btnLocation" >
+                        <button type="button" class="btn btn-s-xs defaultbtn" onclick="save()">保存</button>
+                        <button type="button" class="btn btn-s-xs btn-gray" onclick="back()">返回</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--0:电脑版；1：手机版；2：pad版-->
+    <input id="bwType" th:value="${bwType}" class="hidden"/>
+
+    <!--  当为编辑时,标准bom表对应的id  -->
+    <input id="id" th:if="${inventory.id!=null}" th:value="${inventory.id}" class="hidden"/>
+
+    <!--  0:标准bom;1:单据bom  -->
+    <input id="type" class="hidden"/>
+
+    <!--footer section start-->
+    <!--footer section end-->
+</div>
+
+
+
+<script type="text/javascript" th:src="@{/static/layui/layui.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/jQuery/jquery.min.js}"></script>
+<script th:src="@{/static/js/jquery-1.10.2.min.js}"></script>
+
+<script th:src="@{/static/js/iscroll-zoom.js}" type="text/javascript" ></script>
+<script th:src="@{/static/js/hammer.js}" type="text/javascript" ></script>
+<script th:src="@{/static/js/lrz.all.bundle.js}" type="text/javascript" ></script>
+<script th:src="@{/static/js/jquery.photoClip.min.js}" type="text/javascript"></script>
+
+<script th:src="@{/static/js/jquery-ui-1.9.2.custom.min.js}"></script>
+<script th:src="@{/static/js/jquery-migrate-1.2.1.min.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/bootstrap/bootstrap.min.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/bootstrap/bootstrap-table.min.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/bootstrap/bootstrap-table-export.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/bootstrap/bootstrap-table-zh-CN.js}"></script>
+
+
+<script th:src="@{/static/js/modernizr.min.js}"></script>
+<script th:src="@{/static/js/jquery.nicescroll.js}"></script>
+
+
+
+<!--common scripts for all pages-->
+<script th:src="@{/static/js/scripts.js}"></script>
+<script th:src="@{/static/js/app.js}"></script>
+
+<script th:src="@{/static/js/Material/addAndEditInventorySelect.js}"></script>
+
+</body>
+</html>

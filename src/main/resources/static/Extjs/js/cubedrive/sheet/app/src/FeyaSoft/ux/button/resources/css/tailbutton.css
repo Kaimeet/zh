@@ -1,0 +1,40 @@
+.tb-ct {
+		
+}
+
+.tb-tail {
+	display: none;
+	position: absolute;	
+	font-size: 0;
+	line-height: 0;
+	opacity: .35;	
+	filter:alpha(opacity=35);
+}
+
+
+.tb-text {	
+	height: 100%;
+	opacity: .5;	
+	filter: alpha(opacity=50);	
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.tb-nopacity .tb-text {
+	opacity: 1;	
+	filter: alpha(opacity=100);	
+}
+
+.tb-pressed .tb-tail {
+	display: block;
+}
+
+.tb-text-over, .tb-pressed .tb-text {
+	opacity: 1;	
+	filter: alpha(opacity=100);
+}
+
+.tb-hold .tb-text {	
+	opacity: .5;	
+	filter: alpha(opacity=50);
+}

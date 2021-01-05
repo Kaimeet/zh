@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-cn" xmlns:th="http://www.thymeleaf.org" style="overflow: hidden;">
+<head>
+    <title>管理成本系统</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="shortcut icon" th:href="@{/static/images/oupailogs.ico}">
+    <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}"/>
+    <link rel="stylesheet" th:href="@{/static/css/bootstrap/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{/static/css/bootstrap/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/static/css/app.css}">
+    <link rel="stylesheet" th:href="@{/static/css/font.css}">
+    <link rel="stylesheet" th:href="@{/static/awesome/css/font-awesome.min.css}">
+    <link th:href="@{/static/css/style-responsive.css}" rel="stylesheet">
+
+    <link th:href="@{/static/Drag/css/app.css}" rel="stylesheet" type="text/css"/>
+
+    <link th:href="@{/static/css/User/roleAssignments.css}" rel="stylesheet">
+
+</head>
+<body class="sticky-header">
+<!-- left side start-->
+
+<div th:replace="Menu/menu::asid(${menus},'yhgl',${matchmuean})"></div>
+
+<!-- left side end-->
+<div class="main-content" >
+    <!-- header start-->
+    <div class="navbar" th:replace="Menu/header::header(${user})"></div>
+    <!-- header end-->
+    <!--body wrapper start-->
+    <div class="wrapper wrapper-content animated fadeInUp clear ">
+        <div class="">
+            <div class="seccnt">
+                <div class="ibox">
+                    <div class="ibox-title bcwhite">
+                    </div>
+                    <div class="ibox-content ibox-content2 col-xs-12" style="overflow-y: auto;">
+                        <p>
+                            <span >用户角色分配</span>
+                        </p>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 search-condition">
+                            <div data-force="30" class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding-left: 30px;">
+                                <span>请通过拖拽，为用户设置角色。</span>
+                            </div>
+                            <div data-force="30" class="col-lg-2 col-md-5 col-sm-12 col-xs-12" style="border: 1px dotted #ff7373;margin-left: 15px;margin-top: 15px;min-height: 120px;">
+                                <div class="layer title">可选角色</div>
+                                <ul id="foo" class="block__list block__list_words"  style="min-height: 120px;">
+                                    <li th:if="${rola.giveflag==null || rola.giveflag==0}" th:id="${rola.id}" th:class="${rola.type}" th:each="rola : ${rolas}" >
+                                         <span  th:text="${rola.roleName}"></span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div data-force="18" class="col-lg-9 col-md-6 col-sm-12 col-xs-12"  style="border: 1px dotted #ff7373;margin-left: 15px;margin-top: 15px;">
+                                <div class="layer title">已选角色</div>
+                                <ul id="bar" class="block__list block__list_tags" style="min-height: 120px;">
+                                    <li th:if="${rola.giveflag==1}" th:id="${rola.id}" th:class="${rola.type}" th:each="rola : ${rolas}" >
+                                        <span  th:text="${rola.roleName}"></span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-xs-12 nopadding" id="btndiv" style="margin-top:18px;text-align: right;position: absolute;">
+                                <button type="button" class="btn btn-s-xs defaultbtn" onclick="save()">保存</button>
+                                <button type="button" class="btn btn-s-xs btn-gray" onclick="back()">返回</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--0:电脑版；1：手机版；2：pad版-->
+    <input id="bwType" th:value="${bwType}" class="hidden"/>
+    <!--编辑用户的id-->
+    <input id="id" th:if="${id!=null}"  th:value="${id}" class="hidden"/>
+    <input id="backflag" th:if="${backflag!=null}"  th:value="${backflag}" class="hidden"/>
+    <input id="type" th:if="${type!=null}"  th:value="${type}" class="hidden"/>
+
+     <!--body wrapper end-->
+    <!--footer section start-->
+    <div class="navbar" th:replace="Menu/footer::footer"></div>
+    <!--footer section end-->
+</div>
+
+
+
+<script type="text/javascript" th:src="@{/static/layui/layui.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/jQuery/jquery.min.js}"></script>
+<script th:src="@{/static/js/jquery-1.10.2.min.js}"></script>
+
+<script th:src="@{/static/js/iscroll-zoom.js}" type="text/javascript" ></script>
+<script th:src="@{/static/js/hammer.js}" type="text/javascript" ></script>
+<script th:src="@{/static/js/lrz.all.bundle.js}" type="text/javascript" ></script>
+<script th:src="@{/static/js/jquery.photoClip.min.js}" type="text/javascript"></script>
+
+<script th:src="@{/static/js/jquery-ui-1.9.2.custom.min.js}"></script>
+<script th:src="@{/static/js/jquery-migrate-1.2.1.min.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/bootstrap/bootstrap.min.js}"></script>
+<script th:src="@{/static/js/modernizr.min.js}"></script>
+<script th:src="@{/static/js/jquery.nicescroll.js}"></script>
+<!--common scripts for all pages-->
+<script th:src="@{/static/js/scripts.js}"></script>
+<script th:src="@{/static/js/app.js}"></script>
+<!--给拖拽控件使用-->
+<script th:src="@{/static/Drag/js/Sortable.js}"></script>
+<script th:src="@{/static/Drag/js/app.js}"></script>
+
+<script th:src="@{/static/js/User/roleAssignments.js}"></script>
+
+</body>
+</html>

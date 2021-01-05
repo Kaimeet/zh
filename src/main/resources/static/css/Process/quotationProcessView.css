@@ -1,0 +1,220 @@
+.paddingtop{
+    padding-top: 15px;
+}
+.nopadding{
+    padding: 0px;
+}
+
+.loading {
+    color: #bdbdbd;
+    font-size: 14px;
+    padding: 5px 10px;
+    text-align: center;
+    width: 100%;
+    margin: 0px auto;
+    border-radius: 5px;
+}
+.layui-flow-more{
+    text-align: -webkit-center;
+    text-align:-moz-center;
+}
+
+.arrow1 {
+    display: inline-block;
+    width: 27px;
+    height: 25px;
+    background: url(../../images/arrow.png) no-repeat;
+    _background-image: url(../../images/arrow.gif);
+    cursor: pointer;
+    z-index: 2;
+    opacity: .6;
+    -webkit-animation: up_down 1000ms linear infinite;
+    -moz-animation: up_down 1000ms linear infinite;
+    -ms-animation: up_down 1000ms linear infinite;
+    animation: up_down 1000ms linear infinite;
+    float:none;
+    margin:0;
+}
+
+
+.search-condition{margin:15px 0;padding:0}
+.searchcondition{width:18% ; float:left}
+.table-striped{margin:auto;}
+
+.layui-input{height:34px;}
+
+#type_dummy{background-color: #fff;}
+.resetbtn{margin-left:5px}
+.table-content{overflow-y:auto;overflow-x:hidden;padding:0}
+.total_content{text-align:center}
+
+
+.search-result{
+    max-height: 100px;
+    position: absolute;
+    top: 36px;
+    z-index: 100;
+    padding-right: 0px;
+    left:0px;
+    padding:0px;
+}
+.search-result-list {
+    border: 1px solid #cfdadd;
+    overflow-y: auto;
+    max-height: 100px;
+    background-color:#fff;
+}
+.search-ac{
+    padding:5px;
+    cursor: pointer;
+}
+.search-ac:hover{
+    background-color:#eee;
+}
+
+.search-result2 {
+    max-height: 100px;
+    position: absolute;
+    top: 36px;
+    z-index: 100;
+    padding-right: 0px;
+    left: auto;
+    /*     margin-left: 390px; */
+    padding: 0px;
+}
+
+.progress-sm {
+    height: 10px;
+}
+.nopadding {
+    padding: 0;
+}
+@media (max-width: 768px) {
+    body.fixed-sidebar.mini-navbar .navbar-static-side {
+        width: 0px;
+    }
+    body.fixed-sidebar.mini-navbar .navbar-static-side {
+        width: 0px;
+    }
+    body.fixed-sidebar.mini-navbar #page-wrapper {
+        margin: 0 0 0 0px;
+        left: 0px;
+    }
+    .navbar {
+        position: relative;
+        height: 70px;
+        margin-bottom: 20px;
+        border: 1px solid transparent;
+    }
+    .page-wrapper2 .ibox-title {
+        height: 45px;
+        padding-top: 15px;
+    }
+    .navbar-top-links li a {
+        padding: -15px 30px;
+        min-height: 50px;
+    }
+    #page-wrapper {
+        padding: 0 15px;
+        /* position: inherit; */
+        position: relative;
+        margin: 0 0 0 0px;
+        left: 220px;
+    }
+    .nopaddingl{
+        padding-left: 0px;
+    }
+    .nopaddingr{
+        padding-right: 0px;
+    }
+}
+.nopaddingl{
+    padding-left: 0px;
+}
+.nopaddingr{
+    padding-right: 0px;
+}
+.ibox-content {
+    background-color: #ffffff;
+    color: inherit;
+    padding: 15px 15px 20px 15px;
+    border-color: #e7eaec;
+    -webkit-border-image: none;
+    -o-border-image: none;
+    border-image: none;
+    border-style: solid solid none;
+    border-width: 1px 0px;
+}
+.nopadding2{
+    padding-left: 0px;
+    padding-right: 0px;
+}
+.piccondition {
+    padding-bottom: 10px;
+}
+.total_content {
+    text-align: center;
+    padding: 8px;
+}
+
+.styleonely{
+    background-color: #fff;
+    border-color: #cbd5dd;
+    width: 150px;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+
+
+/*多图片上传样式*/
+.add_div {
+    width: 400px;
+    height: 500px;
+    border: solid #ccc 1px;
+    margin-top: 40px;
+    margin-left: 170px;
+    padding-left: 20px;
+}
+
+.file-list {
+    height: 125px;
+    display: none;
+    list-style-type: none;
+}
+
+.file-list img {
+    max-width: 250px;
+    vertical-align: middle;
+}
+
+.file-list .file-item {
+    margin-bottom: 10px;
+    float: left;
+    margin-left: 20px;
+}
+
+
+.file-list .file-item .file-del {
+    display: block;
+    /*margin-left: 20px;*/
+    /*margin-top: 5px;*/
+    cursor: pointer;
+}
+.tdTitle{
+    width:80px;
+}
+.tdValue{
+    width:100px;
+}

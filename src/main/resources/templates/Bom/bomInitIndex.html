@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh-cn" xmlns:th="http://www.thymeleaf.org" style="overflow: hidden;">
+<head>
+    <title>Bom报价</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="shortcut icon" th:href="@{/static/images/oupailogs.ico}">
+    <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}"/>
+    <link rel="stylesheet" th:href="@{/static/css/bootstrap/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{/static/css/bootstrap/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/static/css/bootstrap/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/static/css/bootstrap/bootstrap-table.min.css}">
+    <link rel="stylesheet" th:href="@{/static/css/bootstrap/bootstrap-table.css}" />
+
+    <link rel="stylesheet" th:href="@{/static/css/app.css}">
+    <link rel="stylesheet" th:href="@{/static/css/font.css}">
+    <link rel="stylesheet" th:href="@{/static/awesome/css/font-awesome.min.css}">
+    <link th:href="@{/static/css/style-responsive.css}" rel="stylesheet">
+    <link th:href="@{/static/css/Process/addQuotationProcess.css}" rel="stylesheet">
+
+</head>
+<body class="sticky-header">
+<!-- left side start-->
+<div th:if="${quotationProcess.id!=null }" th:replace="Menu/menu::asid(${menus},'bjlc','bjlc_lclb')"></div>
+<div th:if="${quotationProcess.id==null }" th:replace="Menu/menu::asid(${menus},'bjlc','bjlc_xzlc')"></div>
+<!-- left side end-->
+<div class="main-content" >
+    <!-- header start-->
+    <div class="navbar" th:replace="Menu/header::header(${user})"></div>
+    <!-- header end-->
+    <!--body wrapper start-->
+    <div class="wrapper wrapper-content animated fadeInUp clear ">
+        <div class="">
+            <div class="seccnt">
+                <div class="ibox "><!--iBoxLocation-->
+                    <div class="ibox-content ibox-content2 col-xs-12" style="overflow-y: auto;">
+
+                        <p>
+                            <span>Bom报价结果 - 总览</span>
+                        </p>
+
+                        <div class="col-xs-12 search-condition">
+                            <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 nopadding" id="table2" style="position: relative">
+                                <table id="reportTable2" class="col-lg-12 col-md-12 col-xs-12 col-sm-12 ">
+                                </table>
+                            </div>
+                        </div>
+
+
+                        <p>
+                            <span>Bom报价结果 - 总览</span>
+                        </p>
+                        <div class="col-xs-12 search-condition">
+                            <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 nopadding" id="table3" style="position: relative">
+                                <table id="reportTable4" class="col-lg-12 col-md-12 col-xs-12 col-sm-12 ">
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 "  style="position: relative;bottom: 40px;left: 80%;"><!--btnLocation-->
+                        <button type="button" class="btn btn-s-xs greenbtn" onclick="calculation()">试算</button>
+<!--                        <button type="button" class="btn btn-s-xs btn-gray" onclick="back()">返回</button>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--0:电脑版；1：手机版；2：pad版-->
+    <input id="bwType" th:value="${bwType}" class="hidden"/>
+
+    <!--表单选模型是用于存放模型相关的中间变了-->
+    <input id="modelCode"  class="hidden"/>
+    <input id="modelName"  class="hidden"/>
+
+    <!--表单选生产基地是用于存放生产基地相关的中间变了-->
+    <input id="baseCode"  class="hidden"/>
+    <input id="baseName"  class="hidden"/>
+
+    <!--表单选组织是用于存放组织相关的中间变了-->
+    <input id="companyName"  class="hidden"/>
+    <input id="companyCode"  class="hidden"/>
+
+
+    <!--body wrapper end-->
+    <!--footer section start-->
+    <div class="navbar" th:replace="Menu/footer::footer"></div>
+    <!--footer section end-->
+
+
+    <input id="parameterString"  class="hidden"/> <!--存放模型参数-->
+
+    <input id="flag" value= 2 class="hidden"/><!--flag:0：查看；1：审核-->
+
+</div>
+
+
+
+<script type="text/javascript" th:src="@{/static/layui/layui.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/jQuery/jquery.min.js}"></script>
+<script th:src="@{/static/js/jquery-1.10.2.min.js}"></script>
+
+<script th:src="@{/static/js/iscroll-zoom.js}" type="text/javascript" ></script>
+<script th:src="@{/static/js/hammer.js}" type="text/javascript" ></script>
+<script th:src="@{/static/js/lrz.all.bundle.js}" type="text/javascript" ></script>
+<script th:src="@{/static/js/jquery.photoClip.min.js}" type="text/javascript"></script>
+
+<script th:src="@{/static/js/jquery-ui-1.9.2.custom.min.js}"></script>
+<script th:src="@{/static/js/jquery-migrate-1.2.1.min.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/bootstrap/bootstrap.min.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/bootstrap/bootstrap-table.min.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/bootstrap/bootstrap-table-export.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/bootstrap/bootstrap-table-zh-CN.js}"></script>
+
+<script th:src="@{/static/js/modernizr.min.js}"></script>
+<script th:src="@{/static/js/jquery.nicescroll.js}"></script>
+
+<!--common scripts for all pages-->
+<script th:src="@{/static/js/scripts.js}"></script>
+<script th:src="@{/static/js/app.js}"></script>
+<script th:src="@{/static/js/Bom/BomInit.js}"></script>
+</body>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        var orderDetailID = '8888888890';
+        var quotationDetailNumber = "123456789";
+        var obj =  {pargrams:
+                [
+                    {
+                        modelCode:"001",
+                        modelType:"DOOR_LEAF",
+                        "detailID":orderDetailID ,
+                        "quotationDetailNumber":quotationDetailNumber ,
+                        "param": {
+                            "height":2100,
+                            "width":800,
+                            "doorLeafThickness":40,
+                            "pvcColor":"深柚木1846-37（16S*1.25M）",
+                            "panelThickness":6,
+                            "type":"条玻门",
+                            "variableCodeOfType":"V001",
+                            "glassType":"钢化玉砂玻璃",
+                            "fillMode":"空心刨花板",
+                            "needInner":true,
+                            "innerMaterial":"LVL",
+                            "needHingeWood":true,
+                            "needShutter":true,
+                            "needMiddleLayer":false,
+                            "needHorizontalAluBar":false,
+                            "needKaraAluBar":false,
+                            "processVersion":"工程版本",
+                            "productionBaseCode":"01"
+                        }
+                    }
+                ]
+        };
+        //DataShow(obj ,"init",orderDetailID);
+        showView(["FMC84051766-66df-4bf6-a4f2-27e1aa1683ea"]);
+    });
+
+</script>
+</html>
