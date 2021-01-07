@@ -26,45 +26,48 @@ import java.util.List;
 @RestController
 @RequestMapping("/serizescontroll")
 public class SerizesController {
-     @Resource
+    @Resource
     SerizesMapper serizesMapper;
-     @Resource
+    @Resource
     VariablesMapper variablesMapper;
-     @RequestMapping(value = "/chooseserizes",method = RequestMethod.GET)
-    public Dto<String> getserizes(int type){
-         String selectHtml ="<option value=\"\">---请选择 ---</option>";
-         if(type==1){
-             List<Serizes>serizesList=serizesMapper.selectbyname("如图");
-             for(Serizes serizes:serizesList){
-                 selectHtml +="<option  value=\""+serizes.getId()+"\"><span>"+serizes.getName()+"</span></option>";
-             }
-         } else  if(type==2){
-             List<Serizes>serizesList=serizesMapper.selectbyname("坤和系列");
-             for(Serizes serizes:serizesList){
-                 selectHtml +="<option  value=\""+serizes.getId()+"\"><span>"+serizes.getName()+"</span></option>";
-             }
-         }
-        return DtoUtil.returnDataSuccess(selectHtml,"001");
-     }
-     @RequestMapping("/choosevari")
-     public Dto<Variables>getvari(int serid){
-         Variables variables=variablesMapper.selectbyseid(serid);
-         return DtoUtil.returnDataSuccess(variables,"001");
-     }
-     @RequestMapping(value = "/choosecaries",method = RequestMethod.GET)
-    public Dto<String>getcarizes(int seid){
-         List<Serizes>caserilist=serizesMapper.selectCase();
-         Serizes serizes=serizesMapper.selectByPrimaryKey(seid);
-         String selectHtml ="<option value=\"\">---请选择 ---</option>";
-         if(caserilist!=null && caserilist.size()>0){
-             for (Serizes cases:caserilist) {
-                     if(serizes!=null&&cases.getUntitled3().equals(serizes.getUntitled3())&&cases.getUntitled4().equals(serizes.getUntitled4())){
-                         selectHtml +="<option  value=\""+cases.getUntitled3()+"\"  selected=\"selected\"><span>"+cases.getCaserize()+"</span></option>";
-                     }else{
-                         selectHtml +="<option  value=\""+cases.getUntitled3()+"\"><span>"+cases.getCaserize()+"</span></option>";
-                     }
-             }
-         }
-         return DtoUtil. returnDataSuccess(selectHtml,"001");
-     }
+
+    @RequestMapping(value = "/chooseserizes", method = RequestMethod.GET)
+    public Dto<String> getserizes(int type) {
+        String selectHtml = "<option value=\"\">---请选择 ---</option>";
+        if (type == 1) {
+            List<Serizes> serizesList = serizesMapper.selectbyname("如图");
+            for (Serizes serizes : serizesList) {
+                selectHtml += "<option  value=\"" + serizes.getId() + "\"><span>" + serizes.getName() + "</span></option>";
+            }
+        } else if (type == 2) {
+            List<Serizes> serizesList = serizesMapper.selectbyname("坤和系列");
+            for (Serizes serizes : serizesList) {
+                selectHtml += "<option  value=\"" + serizes.getId() + "\"><span>" + serizes.getName() + "</span></option>";
+            }
+        }
+        return DtoUtil.returnDataSuccess(selectHtml, "001");
+    }
+
+    @RequestMapping("/choosevari")
+    public Dto<Variables> getvari(int serid) {
+        Variables variables = variablesMapper.selectbyseid(serid);
+        return DtoUtil.returnDataSuccess(variables, "001");
+    }
+
+    @RequestMapping(value = "/choosecaries", method = RequestMethod.GET)
+    public Dto<String> getcarizes(int seid) {
+        List<Serizes> caserilist = serizesMapper.selectCase();
+        Serizes serizes = serizesMapper.selectByPrimaryKey(seid);
+        String selectHtml = "<option value=\"\">---请选择 ---</option>";
+        if (caserilist != null && caserilist.size() > 0) {
+            for (Serizes cases : caserilist) {
+                if (serizes != null && cases.getUntitled3().equals(serizes.getUntitled3()) && cases.getUntitled4().equals(serizes.getUntitled4())) {
+                    selectHtml += "<option  value=\"" + cases.getUntitled3() + "\"  selected=\"selected\"><span>" + cases.getCaserize() + "</span></option>";
+                } else {
+                    selectHtml += "<option  value=\"" + cases.getUntitled3() + "\"><span>" + cases.getCaserize() + "</span></option>";
+                }
+            }
+        }
+        return DtoUtil.returnDataSuccess(selectHtml, "001");
+    }
 }

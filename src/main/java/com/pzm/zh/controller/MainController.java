@@ -31,34 +31,47 @@ import java.util.List;
  */
 public class MainController {
     @Resource
-    KunHeService kunHeService;
+    private KunHeService kunHeService;
     @Resource
-    SerizesMapper serizesMapper;
+    private SerizesMapper serizesMapper;
     @Resource
-    MainService mainService;
+    private MainService mainService;
+
     @RequestMapping(value = "/")
     public String homePage() {
         return "Material/inventorySelect";
-        }
-        @RequestMapping("/getserizes")
-        @ResponseBody
-    public Dto<List<Serizes>>getserizes(){
-        List<Serizes>serizesList=new ArrayList<>();
+    }
+
+    @RequestMapping(value = "/material/inventorySum")
+    public String sum(){
+        return "Material/inventorySum";
+    }
+
+    @RequestMapping(value = "/excelPlug/excelPage")
+    public String excelPage(){
+        return "ExcelPlug/excelPage2";
+    }
+
+    @RequestMapping("/getserizes")
+    @ResponseBody
+    public Dto<List<Serizes>> getserizes() {
+        List<Serizes> serizesList = new ArrayList<>();
         serizesList.add(serizesMapper.selectByPrimaryKey(1));
-        return DtoUtil.returnDataSuccess(serizesList,"000000");
-        }
-        @RequestMapping(value = "/getresult",method = RequestMethod.POST,produces = "application/json;charset=UTF-8")
-        @ResponseBody
-        public Dto<List<ResultDto>>getresult(@RequestBody CaseDto caseDto){
-        int caseid=caseDto.getSerizesId();
-        if(caseid<26){
+        return DtoUtil.returnDataSuccess(serizesList, "000000");
+    }
+
+    @RequestMapping(value = "/getresult", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public Dto<List<ResultDto>> getresult(@RequestBody CaseDto caseDto) {
+        int caseid = caseDto.getSerizesId();
+        if (caseid < 26) {
             System.out.println(JSONArray.fromObject(caseDto));
             System.out.println("如图计算");
             return mainService.maincase(caseDto);
-        }else {
+        } else {
             System.out.println("坤和计算");
-            return  kunHeService.maincase(caseDto);
+            return kunHeService.maincase(caseDto);
         }
 
-        }
+    }
 }
