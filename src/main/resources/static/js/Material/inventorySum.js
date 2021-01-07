@@ -25,7 +25,7 @@ function Upload(fileObj) {
                         ,{field: 'length', title: '长', minWidth: 100}
                         ,{field: 'width', title: '宽', minWidth: 100}
                         ,{field: 'high', title: '高', width: 100}
-                        ,{field: 'numbyZhuang', title: '数量张/片', width: 180}
+                        ,{field: 'numbyZhuang', title: '数量张(片)', width: 180}
                         ,{field: 'numbyGens', title: '数量根', width: 100}
                         ,{field: 'numbyGe', title: '数量个', width: 100}
                         ,{field: 'yuliaoLen', title: '余料长', width: 100}
@@ -49,7 +49,7 @@ function Upload(fileObj) {
                     '长',
                     '宽',
                     '高',
-                    '数量张/片',
+                    '数量张(片)',
                     '数量根',
                     '数量个',
                     '余料长',

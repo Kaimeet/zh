@@ -16,8 +16,8 @@ public class Emp {
     @ExcelColumn(value = "高", col = 4)
     private Double high;//高
 
-    @ExcelColumn(value = "数量张/片", col = 5)
-    private Double numbyZhuang;//数量张/片
+    @ExcelColumn(value = "数量张(片)", col = 5)
+    private Double numbyZhuang;//数量张(片)
 
     @ExcelColumn(value = "数量根", col = 6)
     private Double numbyGens;//数量根
