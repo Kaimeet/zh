@@ -48,11 +48,11 @@ public class ExcelController {
             Double hight = emps.get(0).getHigh();
             // 向上取整
             Double numbyZhuang = Math.ceil(emps.stream().collect(Collectors.summingDouble(Emp::getNumbyZhuang))); // 数量张(片)
-            Double numbyGens = Math.ceil(emps.stream().collect(Collectors.summingDouble(Emp::getNumbyGe))); // 数量根
+            Double numbyGens = Math.ceil(emps.stream().collect(Collectors.summingDouble(Emp::getNumbyGens))); // 数量根
             Double numbyGe = Math.ceil(emps.stream().collect(Collectors.summingDouble(Emp::getNumbyGe))); // 数量个
             // 向下取整
-            Double yuliaoLen = Math.ceil(emps.stream().collect(Collectors.summingDouble(Emp::getYuliaoLen))); // 余料长
-            Double yuliaoWidth = Math.ceil(emps.stream().collect(Collectors.summingDouble(Emp::getYuliaoWidth))); // 余料宽
+            Double yuliaoLen = Math.floor(emps.stream().collect(Collectors.summingDouble(Emp::getYuliaoLen))); // 余料长
+            Double yuliaoWidth = Math.floor(emps.stream().collect(Collectors.summingDouble(Emp::getYuliaoWidth))); // 余料宽
             Emp emp = new Emp();
             emp.setPartName(partName);
             emp.setLength(length);
