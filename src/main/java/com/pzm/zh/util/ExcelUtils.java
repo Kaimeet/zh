@@ -43,7 +43,7 @@ public class ExcelUtils {
     private final static String EXCEL2003 = "xls";
     private final static String EXCEL2007 = "xlsx";
 
-    public static <T> List<T> readExcel(String path, Class<T> cls, MultipartFile file){
+    public static <T> List<T> readExcel(String path, Class<T> cls, MultipartFile file) {
         String fileName = file.getOriginalFilename();
         if (!fileName.matches("^.+\\.(?i)(xls)$") && !fileName.matches("^.+\\.(?i)(xlsx)$")) {
             log.error("上传文件格式不正确");
@@ -80,61 +80,66 @@ public class ExcelUtils {
                             }
                         }
                 );
-                //索引-->columns
+                // 索引-->columns
                 Map<Integer, List<Field>> reflectionMap = new HashMap<>(16);
-                //默认读取第一个sheet
-                Sheet sheet = workbook.getSheetAt(0);
-                boolean firstRow = true;
-                for (int i = sheet.getFirstRowNum(); i <= sheet.getLastRowNum(); i++) {
-                    Row row = sheet.getRow(i);
-                    //首行  提取注解
-                    if (firstRow) {
-                        for (int j = row.getFirstCellNum(); j <= row.getLastCellNum(); j++) {
-                            Cell cell = row.getCell(j);
-                            String cellValue = getCellValue(cell);
-                            if (classMap.containsKey(cellValue)) {
-                                reflectionMap.put(j, classMap.get(cellValue));
-                            }
-                        }
-                        firstRow = false;
-                    } else {
-                        //忽略空白行
-                        if (row == null) {
-                            continue;
-                        }
-                        try {
-                            T t = cls.newInstance();
-                            //判断是否为空白行
-                            boolean allBlank = true;
+                // 获取表格中的所有sheets
+                int numberOfSheets = workbook.getNumberOfSheets();
+                log.info("当前表格中共有" + numberOfSheets + "个sheet!");
+                for (int num = 0; num < numberOfSheets; num++) {
+                    Sheet sheet = workbook.getSheetAt(num);
+                    boolean firstRow = true;
+                    for (int i = sheet.getFirstRowNum(); i <= sheet.getLastRowNum(); i++) {
+                        Row row = sheet.getRow(i);
+                        //首行  提取注解
+                        if (firstRow) {
                             for (int j = row.getFirstCellNum(); j <= row.getLastCellNum(); j++) {
-                                if (reflectionMap.containsKey(j)) {
-                                    Cell cell = row.getCell(j);
-                                    String cellValue = getCellValue(cell);
-                                    if (StringUtils.isNotBlank(cellValue)) {
-                                        allBlank = false;
-                                    }
-                                    List<Field> fieldList = reflectionMap.get(j);
-                                    fieldList.forEach(
-                                            x -> {
-                                                try {
-                                                    handleField(t, cellValue, x);
-                                                } catch (Exception e) {
-                                                    log.error(String.format("reflect field:%s value:%s exception!", x.getName(), cellValue), e);
-                                                }
-                                            }
-                                    );
+                                Cell cell = row.getCell(j);
+                                String cellValue = getCellValue(cell);
+                                if (classMap.containsKey(cellValue)) {
+                                    reflectionMap.put(j, classMap.get(cellValue));
                                 }
                             }
-                            if (!allBlank) {
-                                dataList.add(t);
-                            } else {
-                                log.warn(String.format("row:%s is blank ignore!", i));
+                            firstRow = false;
+                        } else {
+                            //忽略空白行
+                            if (row == null) {
+                                continue;
                             }
-                        } catch (Exception e) {
-                            log.error(String.format("parse row:%s exception!", i), e);
+                            try {
+                                T t = cls.newInstance();
+                                //判断是否为空白行
+                                boolean allBlank = true;
+                                for (int j = row.getFirstCellNum(); j <= row.getLastCellNum(); j++) {
+                                    if (reflectionMap.containsKey(j)) {
+                                        Cell cell = row.getCell(j);
+                                        String cellValue = getCellValue(cell);
+                                        if (StringUtils.isNotBlank(cellValue)) {
+                                            allBlank = false;
+                                        }
+                                        List<Field> fieldList = reflectionMap.get(j);
+                                        fieldList.forEach(
+                                                x -> {
+                                                    try {
+                                                        handleField(t, cellValue, x);
+                                                    } catch (Exception e) {
+                                                        log.error(String.format("reflect field:%s value:%s exception!", x.getName(), cellValue), e);
+                                                    }
+                                                }
+                                        );
+                                    }
+                                }
+                                if (!allBlank) {
+                                    dataList.add(t);
+                                } else {
+                                    log.warn(String.format("row:%s is blank ignore!", i));
+                                }
+                            } catch (Exception e) {
+                                log.error(String.format("parse row:%s exception!", i), e);
+                            }
                         }
                     }
                 }
+
             }
         } catch (Exception e) {
             log.error(String.format("parse excel exception!"), e);
@@ -222,7 +227,7 @@ public class ExcelUtils {
 
     }
 
-    public static <T> void writeExcel(HttpServletRequest request, HttpServletResponse response, List<T> dataList, Class<T> cls){
+    public static <T> void writeExcel(HttpServletRequest request, HttpServletResponse response, List<T> dataList, Class<T> cls) {
         Field[] fields = cls.getDeclaredFields();
         List<Field> fieldList = Arrays.stream(fields)
                 .filter(field -> {
@@ -284,7 +289,7 @@ public class ExcelUtils {
                     if (value != null) {
                         if (type == Date.class) {
                             cell.setCellValue(value.toString());
-                        } else if (type == LocalDateTime.class){
+                        } else if (type == LocalDateTime.class) {
                             DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
                             cell.setCellValue(df.format((LocalDateTime) value));
                         } else {
@@ -297,21 +302,22 @@ public class ExcelUtils {
         //冻结窗格
         wb.getSheet("Sheet1").createFreezePane(0, 1, 0, 1);
         //浏览器下载excel
-        buildExcelDocument(request.getParameter("fileName"),wb,response);
+        buildExcelDocument(request.getParameter("fileName"), wb, response);
         //生成excel文件
 //        buildExcelFile(".\\default.xlsx",wb);
     }
 
     /**
      * 浏览器下载excel
+     *
      * @param fileName
      * @param wb
      * @param response
      */
-    private static  void  buildExcelDocument(String fileName, Workbook wb, HttpServletResponse response){
+    private static void buildExcelDocument(String fileName, Workbook wb, HttpServletResponse response) {
         try {
             response.setContentType(MediaType.APPLICATION_OCTET_STREAM_VALUE);
-            response.setHeader("Content-Disposition", "attachment;filename="+ URLEncoder.encode(fileName, "utf-8"));
+            response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(fileName, "utf-8"));
             response.flushBuffer();
             ServletOutputStream outputStream = response.getOutputStream();
             wb.write(outputStream);
@@ -322,10 +328,11 @@ public class ExcelUtils {
 
     /**
      * 生成excel文件
+     *
      * @param path 生成excel路径
      * @param wb
      */
-    private static  void  buildExcelFile(String path, Workbook wb){
+    private static void buildExcelFile(String path, Workbook wb) {
 
         File file = new File(path);
         if (file.exists()) {
