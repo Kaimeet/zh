@@ -44,6 +44,9 @@
     xxHigh, zdWeight, xbDepth, zxWeight, smWeight, xmWeight, glassDepth, zztWeight, xztWeight, 
     memo1, memo2, memo3, memo4, memo5, memo6, serizesId
   </sql>
+  <select id="selecthigh" resultType="com.pzm.zh.entity.HighDto" parameterType="string">
+    select * from pzmhigh where name=#{name}
+  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />

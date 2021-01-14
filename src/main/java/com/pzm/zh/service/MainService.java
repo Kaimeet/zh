@@ -15,4 +15,7 @@ import java.util.List;
 public interface MainService {
 
     public Dto<List<ResultDto>> maincase(CaseDto caseDto);
+
+    public Dto<List<ResultDto>> mainfinalcase(CaseDto caseDto);
+
 }

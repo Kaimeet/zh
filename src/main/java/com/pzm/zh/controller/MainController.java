@@ -67,10 +67,10 @@ public class MainController {
         if (caseid < 26) {
             System.out.println(JSONArray.fromObject(caseDto));
             System.out.println("如图计算");
-            return mainService.maincase(caseDto);
+            return mainService.mainfinalcase(caseDto);
         } else {
             System.out.println("坤和计算");
-            return kunHeService.maincase(caseDto);
+            return kunHeService.mainfinalcase(caseDto);
         }
 
     }

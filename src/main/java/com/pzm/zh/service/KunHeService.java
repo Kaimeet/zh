@@ -15,5 +15,6 @@ import java.util.List;
 public interface KunHeService {
 
     public Dto<List<ResultDto>> maincase(CaseDto caseDto);
+    public Dto<List<ResultDto>> mainfinalcase(CaseDto caseDto);
 
 }

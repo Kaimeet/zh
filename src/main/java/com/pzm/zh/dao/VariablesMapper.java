@@ -1,6 +1,7 @@
 package com.pzm.zh.dao;
 
 import com.baomidou.dynamic.datasource.annotation.DS;
+import com.pzm.zh.entity.HighDto;
 import com.pzm.zh.entity.Variables;
 @DS("slave")
 public interface VariablesMapper {
@@ -17,4 +18,6 @@ public interface VariablesMapper {
     int updateByPrimaryKeySelective(Variables record);
 
     int updateByPrimaryKey(Variables record);
+
+    HighDto selecthigh(String names);
 }

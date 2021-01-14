@@ -66,6 +66,37 @@ public class MainServiceImpl implements MainService {
         }
         return null;
     }
+
+    @Override
+    public Dto<List<ResultDto>> mainfinalcase(CaseDto caseDto) {
+        Dto<List<ResultDto>> dto=maincase(caseDto);
+        List<ResultDto>resultDtoList=dto.getData();
+        List<ResultDto>newresultDto=new ArrayList<>();
+        for(ResultDto resultDto:resultDtoList){
+            if("边框".equals(resultDto.getPartName())){
+                resultDto.setHigh("40");
+            }else if("上帽".equals(resultDto.getPartName())){
+                resultDto.setHigh("37");
+            }else if("下帽".equals(resultDto.getPartName())){
+                resultDto.setHigh("37");
+            }else if("中档".equals(resultDto.getPartName())){
+                resultDto.setHigh("37");
+            }else if("上中挺".equals(resultDto.getPartName())){
+                resultDto.setHigh("34");
+            }else if("中中挺".equals(resultDto.getPartName())){
+                resultDto.setHigh("34");
+            }else if("下中挺".equals(resultDto.getPartName())){
+                resultDto.setHigh("34");
+            }else if("小中挡".equals(resultDto.getPartName())){
+                resultDto.setHigh("34");
+            }else if("小中挺".equals(resultDto.getPartName())){
+                resultDto.setHigh("34");
+            }
+            newresultDto.add(resultDto);
+        }
+        return DtoUtil.returnDataSuccess(newresultDto,"001");
+    }
+
     /**
      * 1.计算边框
      * 2.计算上帽
@@ -155,7 +186,6 @@ public class MainServiceImpl implements MainService {
             } else {
                 biankuanglength = "2440";
             }
-
         resultDtobk.setLength(biankuanglength);
         //2.计算边框宽
         resultDtobk.setWidth(String.valueOf(bkweight));

@@ -1,6 +1,7 @@
 package com.pzm.zh.service;
 
 import com.pzm.zh.dao.NumbyserMapper;
+import com.pzm.zh.dao.VariablesMapper;
 import com.pzm.zh.entity.CaseDoubles;
 import com.pzm.zh.entity.CaseDto;
 import com.pzm.zh.entity.Numbyser;
@@ -25,6 +26,8 @@ import java.util.List;
 public class KunHeServiceImpl implements KunHeService {
     @Resource
     NumbyserMapper numbyserMapper;
+    @Resource
+    VariablesMapper variablesMapper;
     @Override
     public Dto<List<ResultDto>> maincase(CaseDto caseDto) {
         System.out.println(caseDto.getSerizesId()+"idddddddd");
@@ -59,6 +62,56 @@ public class KunHeServiceImpl implements KunHeService {
         }
         return null;
     }
+
+    @Override
+    public Dto<List<ResultDto>> mainfinalcase(CaseDto caseDto) {
+        Dto<List<ResultDto>> dto=maincase(caseDto);
+        List<ResultDto> resultDtoList=dto.getData();
+        List<ResultDto> newresultDtolist=new ArrayList<>();
+        int serid=caseDto.getSerizesId();
+        for(ResultDto resultDto:resultDtoList){
+            if("边框".equals(resultDto.getPartName())){
+                resultDto.setHigh(variablesMapper.selecthigh("边框").getHigh());
+            }else if("上帽".equals(resultDto.getPartName())){
+                if(serid==30||serid==32||serid==35||serid==36||serid==37||serid==38||serid==39||serid==40||serid==41||serid==43){
+                    resultDto.setHigh(variablesMapper.selecthigh("插玻上帽").getHigh());
+                }else if(serid==42){
+                    resultDto.setHigh(variablesMapper.selecthigh("069上帽").getHigh());
+                }else {
+                    resultDto.setHigh(variablesMapper.selecthigh("上帽").getHigh());
+
+                }
+            }else if("下帽".equals(resultDto.getPartName())){
+                if(serid==42){
+                    resultDto.setHigh(variablesMapper.selecthigh("069下帽").getHigh());
+                }else {
+                    resultDto.setHigh(variablesMapper.selecthigh("下帽").getHigh());
+                }
+            }else if("中档".equals(resultDto.getPartName())){
+                if(serid==42){
+                    resultDto.setHigh(variablesMapper.selecthigh("069中档").getHigh());
+                }else  if(serid==32||serid==40){
+                    resultDto.setHigh(variablesMapper.selecthigh("插玻中档").getHigh());
+                }else {
+                    resultDto.setHigh(variablesMapper.selecthigh("中档").getHigh());
+                }
+
+            }else if("上中挺".equals(resultDto.getPartName())){
+                resultDto.setHigh(variablesMapper.selecthigh("上中挺").getHigh());
+            }else if("中中挺".equals(resultDto.getPartName())){
+                resultDto.setHigh(variablesMapper.selecthigh("中中挺").getHigh());
+            }else if("下中挺".equals(resultDto.getPartName())){
+                resultDto.setHigh(variablesMapper.selecthigh("下中挺").getHigh());
+            }else if("小中挡".equals(resultDto.getPartName())){
+                resultDto.setHigh(variablesMapper.selecthigh("小中挡").getHigh());
+            }else if("小中挺".equals(resultDto.getPartName())){
+                resultDto.setHigh(variablesMapper.selecthigh("小中挺").getHigh());
+            }
+            newresultDtolist.add(resultDto);
+        }
+        return DtoUtil.returnDataSuccess(newresultDtolist,"001");
+    }
+
     public CaseDoubles change(CaseDto caseDto){
         CaseDoubles caseDoubles=new CaseDoubles();
         if(caseDto.getDoorhigh()!=null){
