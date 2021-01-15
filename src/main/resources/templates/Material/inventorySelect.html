@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
     <link rel="shortcut icon" th:href="@{/static/images/oupailogs.ico}">
     <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}"/>
@@ -21,21 +22,22 @@
 <body class="sticky-header">
 <div th:replace="Menu/menu::asid(${menus},'xtsz','xtsz_ckxx')"></div>
 <!--<div>哦靠靠靠靠</div>-->
-<div class="main-content" >
+<div class="main-content">
     <!--body wrapper start-->
-    <div class="wrapper wrapper-content animated fadeInUp clear " >
+    <div class="wrapper wrapper-content animated fadeInUp clear ">
         <div class="">
             <div class="seccnt">
                 <div class="ibox">
                     <div class="ibox-title bcwhite">
                     </div>
                     <div class="ibox-content ibox-content2 col-xs-12">
-                        <div class="search-list row  " >
-                            <div  class="col-lg-6 col-md-6 col-xs-12 col-sm-12 nopadding" style="margin-top:8px;">
-                                <label class="col-md-3 text-right visible-lg visible-md title" style="width:150px;line-height: 34px;">系列：</label>
+                        <div class="search-list row  ">
+                            <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12 nopadding" style="margin-top:8px;">
+                                <label class="col-md-3 text-right visible-lg visible-md title"
+                                       style="width:150px;line-height: 34px;">系列：</label>
                                 <label class="col-xs-12 text-left visible-xs visible-sm nopadding title">系列</label>
                                 <div class="col-md-5 col-xs-12 nopadding">
-                                    <select  id="xilie"   class="form-control parsley-validated" name="a" >
+                                    <select id="xilie" class="form-control parsley-validated" name="a">
                                         <option value="0">---请选择系列 ---</option>
                                         <option value="1">如图系列</option>
                                         <option value="2">坤和系列</option>
@@ -43,201 +45,234 @@
                                 </div>
                             </div>
 
-                            <div  class="col-lg-6 col-md-6 col-xs-12 col-sm-12 nopadding" style="margin-top:8px;">
-                                <label class="col-md-3 text-right visible-lg visible-md title" style="width:150px;line-height: 34px;">款式：</label>
+                            <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12 nopadding" style="margin-top:8px;">
+                                <label class="col-md-3 text-right visible-lg visible-md title"
+                                       style="width:150px;line-height: 34px;">款式：</label>
                                 <label class="col-xs-12 text-left visible-xs visible-sm nopadding title">款式</label>
                                 <div class="col-md-5 col-xs-12 nopadding">
-                                    <select  id="kuanshi"   class="form-control parsley-validated" name="b" >
+                                    <select id="kuanshi" class="form-control parsley-validated" name="b">
                                     </select>
                                 </div>
                             </div>
 
-                            <div  class="col-lg-6 col-md-6 col-xs-12 col-sm-12 nopadding" style="margin-top:8px;">
-                                <label class="col-md-3 text-right visible-lg visible-md title" style="width:150px;line-height: 34px;">算法系列：</label>
+                            <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12 nopadding" style="margin-top:8px;">
+                                <label class="col-md-3 text-right visible-lg visible-md title"
+                                       style="width:150px;line-height: 34px;">算法系列：</label>
                                 <label class="col-xs-12 text-left visible-xs visible-sm nopadding title">算法系列</label>
                                 <div class="col-md-5 col-xs-12 nopadding">
-                                    <select  id="suanfaxilie"   class="form-control parsley-validated" name="d" >
+                                    <select id="suanfaxilie" class="form-control parsley-validated" name="d">
                                     </select>
                                 </div>
                             </div>
 
 
                             <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12 nopadding" style="margin-top:8px;">
-                                <label class="col-md-3 text-right visible-lg visible-md title" style="width:150px;line-height: 34px;">门扇高度：</label>
+                                <label class="col-md-3 text-right visible-lg visible-md title"
+                                       style="width:150px;line-height: 34px;">门扇高度：</label>
                                 <label class="col-xs-12 text-left visible-xs visible-sm nopadding title">门扇高度</label>
                                 <div class="col-md-5 col-xs-12 nopadding">
-                                    <input id="menshangao" onkeyup="value=value.replace(/[^\d.]/g,'')"  placeholder=""  class="layui-input"/>
+                                    <input id="menshangao" onkeyup="value=value.replace(/[^\d.]/g,'')" placeholder=""
+                                           class="layui-input"/>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12 nopadding" style="margin-top:8px;">
-                                <label class="col-md-3 text-right visible-lg visible-md title" style="width:150px;line-height: 34px;">门扇数量：</label>
+                                <label class="col-md-3 text-right visible-lg visible-md title"
+                                       style="width:150px;line-height: 34px;">门扇数量：</label>
                                 <label class="col-xs-12 text-left visible-xs visible-sm nopadding title">门扇数量</label>
                                 <div class="col-md-5 col-xs-12 nopadding">
-                                    <input id="menshannums" placeholder=""  class="layui-input"/>
+                                    <input id="menshannums" placeholder="" class="layui-input"/>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12 nopadding" style="margin-top:8px;">
-                                <label class="col-md-3 text-right visible-lg visible-md title" style="width:150px;line-height: 34px;">门扇宽度：</label>
+                                <label class="col-md-3 text-right visible-lg visible-md title"
+                                       style="width:150px;line-height: 34px;">门扇宽度：</label>
                                 <label class="col-xs-12 text-left visible-xs visible-sm nopadding title">门扇宽度</label>
                                 <div class="col-md-5 col-xs-12 nopadding">
-                                    <input id="menshankuan" placeholder=""  class="layui-input"/>
+                                    <input id="menshankuan" placeholder="" class="layui-input"/>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12 nopadding" style="margin-top:8px;">
-                                <label class="col-md-3 text-right visible-lg visible-md title" style="width:150px;line-height: 34px;">板材厚度：</label>
+                                <label class="col-md-3 text-right visible-lg visible-md title"
+                                       style="width:150px;line-height: 34px;">板材厚度：</label>
                                 <label class="col-xs-12 text-left visible-xs visible-sm nopadding title">板材厚度</label>
                                 <div class="col-md-5 col-xs-12 nopadding">
-                                    <input id="bancaihou" placeholder=""  class="layui-input"/>
+                                    <input id="bancaihou" placeholder="" class="layui-input"/>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12 nopadding" style="margin-top:8px;">
-                                <label class="col-md-3 text-right visible-lg visible-md title" style="width:150px;line-height: 34px;">中中挺宽度：</label>
+                                <label class="col-md-3 text-right visible-lg visible-md title"
+                                       style="width:150px;line-height: 34px;">中中挺宽度：</label>
                                 <label class="col-xs-12 text-left visible-xs visible-sm nopadding title">中中挺宽度</label>
                                 <div class="col-md-5 col-xs-12 nopadding">
-                                    <input id="ztkuan" placeholder=""  class="layui-input"/>
+                                    <input id="ztkuan" placeholder="" class="layui-input"/>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12 nopadding" style="margin-top:8px;">
-                                <label class="col-md-3 text-right visible-lg visible-md title" style="width:150px;line-height: 34px;">上中挺宽度：</label>
+                                <label class="col-md-3 text-right visible-lg visible-md title"
+                                       style="width:150px;line-height: 34px;">上中挺宽度：</label>
                                 <label class="col-xs-12 text-left visible-xs visible-sm nopadding title">上中挺宽度</label>
                                 <div class="col-md-5 col-xs-12 nopadding">
-                                    <input id="sztkuan" placeholder=""  class="layui-input"/>
+                                    <input id="sztkuan" placeholder="" class="layui-input"/>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12 nopadding" style="margin-top:8px;">
-                                <label class="col-md-3 text-right visible-lg visible-md title" style="width:150px;line-height: 34px;">边框：</label>
+                                <label class="col-md-3 text-right visible-lg visible-md title"
+                                       style="width:150px;line-height: 34px;">边框：</label>
                                 <label class="col-xs-12 text-left visible-xs visible-sm nopadding title">边框</label>
                                 <div class="col-md-5 col-xs-12 nopadding">
-                                    <input id="biankuang" placeholder=""  class="layui-input"/>
+                                    <input id="biankuang" placeholder="" class="layui-input"/>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12 nopadding" style="margin-top:8px;">
-                                <label class="col-md-3 text-right visible-lg visible-md title" style="width:150px;line-height: 34px;">上芯板：</label>
+                                <label class="col-md-3 text-right visible-lg visible-md title"
+                                       style="width:150px;line-height: 34px;">上芯板：</label>
                                 <label class="col-xs-12 text-left visible-xs visible-sm nopadding title">上芯板</label>
                                 <div class="col-md-5 col-xs-12 nopadding">
-                                    <input id="shangxin" placeholder=""  class="layui-input"/>
+                                    <input id="shangxin" placeholder="" class="layui-input"/>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12 nopadding" style="margin-top:8px;">
-                                <label class="col-md-3 text-right visible-lg visible-md title" style="width:150px;line-height: 34px;">中芯板：</label>
+                                <label class="col-md-3 text-right visible-lg visible-md title"
+                                       style="width:150px;line-height: 34px;">中芯板：</label>
                                 <label class="col-xs-12 text-left visible-xs visible-sm nopadding title">中芯板</label>
                                 <div class="col-md-5 col-xs-12 nopadding">
-                                    <input id="zhongxin" placeholder=""  class="layui-input"/>
+                                    <input id="zhongxin" placeholder="" class="layui-input"/>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12 nopadding" style="margin-top:8px;">
-                                <label class="col-md-3 text-right visible-lg visible-md title" style="width:150px;line-height: 34px;">下芯板：</label>
+                                <label class="col-md-3 text-right visible-lg visible-md title"
+                                       style="width:150px;line-height: 34px;">下芯板：</label>
                                 <label class="col-xs-12 text-left visible-xs visible-sm nopadding title">下芯板</label>
                                 <div class="col-md-5 col-xs-12 nopadding">
-                                    <input id="xiaxin" placeholder=""  class="layui-input"/>
+                                    <input id="xiaxin" placeholder="" class="layui-input"/>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12 nopadding" style="margin-top:8px;">
-                                <label class="col-md-3 text-right visible-lg visible-md title" style="width:150px;line-height: 34px;">中档宽：</label>
+                                <label class="col-md-3 text-right visible-lg visible-md title"
+                                       style="width:150px;line-height: 34px;">中档宽：</label>
                                 <label class="col-xs-12 text-left visible-xs visible-sm nopadding title">中档宽</label>
                                 <div class="col-md-5 col-xs-12 nopadding">
-                                    <input id="zhongdang" placeholder=""  class="layui-input"/>
+                                    <input id="zhongdang" placeholder="" class="layui-input"/>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12 nopadding" style="margin-top:8px;">
-                                <label class="col-md-3 text-right visible-lg visible-md title" style="width:150px;line-height: 34px;">造型宽：</label>
+                                <label class="col-md-3 text-right visible-lg visible-md title"
+                                       style="width:150px;line-height: 34px;">造型宽：</label>
                                 <label class="col-xs-12 text-left visible-xs visible-sm nopadding title">造型宽</label>
                                 <div class="col-md-5 col-xs-12 nopadding">
-                                    <input id="zaoxing" placeholder=""  class="layui-input"/>
+                                    <input id="zaoxing" placeholder="" class="layui-input"/>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12 nopadding" style="margin-top:8px;">
-                                <label class="col-md-3 text-right visible-lg visible-md title" style="width:150px;line-height: 34px;">芯板进槽深度：</label>
+                                <label class="col-md-3 text-right visible-lg visible-md title"
+                                       style="width:150px;line-height: 34px;">芯板进槽深度：</label>
                                 <label class="col-xs-12 text-left visible-xs visible-sm nopadding title">芯板进槽深度</label>
                                 <div class="col-md-5 col-xs-12 nopadding">
-                                    <input id="xinjincao" placeholder=""  class="layui-input"/>
+                                    <input id="xinjincao" placeholder="" class="layui-input"/>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12 nopadding" style="margin-top:8px;">
-                                <label class="col-md-3 text-right visible-lg visible-md title" style="width:150px;line-height: 34px;">上帽：</label>
+                                <label class="col-md-3 text-right visible-lg visible-md title"
+                                       style="width:150px;line-height: 34px;">上帽：</label>
                                 <label class="col-xs-12 text-left visible-xs visible-sm nopadding title">上帽</label>
                                 <div class="col-md-5 col-xs-12 nopadding">
-                                    <input id="shangmao" placeholder=""  class="layui-input"/>
+                                    <input id="shangmao" placeholder="" class="layui-input"/>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12 nopadding" style="margin-top:8px;">
-                                <label class="col-md-3 text-right visible-lg visible-md title" style="width:150px;line-height: 34px;">下帽：</label>
+                                <label class="col-md-3 text-right visible-lg visible-md title"
+                                       style="width:150px;line-height: 34px;">下帽：</label>
                                 <label class="col-xs-12 text-left visible-xs visible-sm nopadding title">下帽</label>
                                 <div class="col-md-5 col-xs-12 nopadding">
-                                    <input id="xiamao" placeholder=""  class="layui-input"/>
+                                    <input id="xiamao" placeholder="" class="layui-input"/>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12 nopadding" style="margin-top:8px;">
-                                <label class="col-md-3 text-right visible-lg visible-md title" style="width:150px;line-height: 34px;">中中挺长度：</label>
+                                <label class="col-md-3 text-right visible-lg visible-md title"
+                                       style="width:150px;line-height: 34px;">中中挺长度：</label>
                                 <label class="col-xs-12 text-left visible-xs visible-sm nopadding title">中中挺长度</label>
                                 <div class="col-md-5 col-xs-12 nopadding">
-                                    <input id="zzthigh" placeholder=""  class="layui-input"/>
+                                    <input id="zzthigh" placeholder="" class="layui-input"/>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12 nopadding" style="margin-top:8px;">
-                                <label class="col-md-3 text-right visible-lg visible-md title" style="width:150px;line-height: 34px;">下中挺宽度：</label>
+                                <label class="col-md-3 text-right visible-lg visible-md title"
+                                       style="width:150px;line-height: 34px;">下中挺宽度：</label>
                                 <label class="col-xs-12 text-left visible-xs visible-sm nopadding title">下中挺宽度</label>
                                 <div class="col-md-5 col-xs-12 nopadding">
-                                    <input id="xztkuan" placeholder=""  class="layui-input"/>
+                                    <input id="xztkuan" placeholder="" class="layui-input"/>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12 nopadding" style="margin-top:8px;">
-                                <label class="col-md-3 text-right visible-lg visible-md title" style="width:150px;line-height: 34px;">玻璃进槽深度：</label>
+                                <label class="col-md-3 text-right visible-lg visible-md title"
+                                       style="width:150px;line-height: 34px;">玻璃进槽深度：</label>
                                 <label class="col-xs-12 text-left visible-xs visible-sm nopadding title">玻璃进槽深度</label>
                                 <div class="col-md-5 col-xs-12 nopadding">
-                                    <input id="bolijincao" placeholder=""  class="layui-input"/>
+                                    <input id="bolijincao" placeholder="" class="layui-input"/>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12 nopadding" style="margin-top:8px;">
-                                <label class="col-md-3 text-right visible-lg visible-md title" style="width:150px;line-height: 34px;">下中挺长：</label>
+                                <label class="col-md-3 text-right visible-lg visible-md title"
+                                       style="width:150px;line-height: 34px;">下中挺长：</label>
                                 <label class="col-xs-12 text-left visible-xs visible-sm nopadding title">下中挺长</label>
                                 <div class="col-md-5 col-xs-12 nopadding">
-                                    <input id="xzthigh" placeholder=""  class="layui-input"/>
+                                    <input id="xzthigh" placeholder="" class="layui-input"/>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12 nopadding" style="margin-top:8px;">
-                                <label class="col-md-3 text-right visible-lg visible-md title" style="width:150px;line-height: 34px;">上中挺长：</label>
+                                <label class="col-md-3 text-right visible-lg visible-md title"
+                                       style="width:150px;line-height: 34px;">上中挺长：</label>
                                 <label class="col-xs-12 text-left visible-xs visible-sm nopadding title">上中挺长</label>
                                 <div class="col-md-5 col-xs-12 nopadding">
-                                    <input id="szthigh" placeholder=""  class="layui-input"/>
+                                    <input id="szthigh" placeholder="" class="layui-input"/>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12 nopadding" style="margin-top:8px;">
-                                <label class="col-md-3 text-right visible-lg visible-md title" style="width:150px;line-height: 34px;">小中档宽度：</label>
+                                <label class="col-md-3 text-right visible-lg visible-md title"
+                                       style="width:150px;line-height: 34px;">小中档宽度：</label>
                                 <label class="col-xs-12 text-left visible-xs visible-sm nopadding title">小中档宽度</label>
                                 <div class="col-md-5 col-xs-12 nopadding">
-                                    <input id="memo4" placeholder=""  class="layui-input"/>
+                                    <input id="memo4" placeholder="" class="layui-input"/>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12 nopadding" style="margin-top:8px;">
-                                <label class="col-md-3 text-right visible-lg visible-md title" style="width:150px;line-height: 34px;">小中挺宽度：</label>
+                                <label class="col-md-3 text-right visible-lg visible-md title"
+                                       style="width:150px;line-height: 34px;">小中挺宽度：</label>
                                 <label class="col-xs-12 text-left visible-xs visible-sm nopadding title">小中挺宽度</label>
                                 <div class="col-md-5 col-xs-12 nopadding">
-                                    <input id="memo5" placeholder=""  class="layui-input"/>
+                                    <input id="memo5" placeholder="" class="layui-input"/>
                                 </div>
                             </div>
                             <div class="col-lg-11 col-md-9 col-xs-12 piccondition " style="text-align: center;">
-                                <button type="button" class="btn btn-s-xs defaultbtn" onclick="save()">运算</button>
+                                <button type="button" class="btn btn-s-xs btn-red" onclick="addItem()">添加</button>
+                                <button type="button" class="btn btn-s-xs defaultbtn" onclick="calculate()">运算</button>
                                 <button type="button" class="btn btn-s-xs btn-gray" onclick="excelExport()">导出excel</button>
+                                <button type="button" class="btn btn-s-xs btn-gray" onclick="javascript:location.reload()">刷新</button>
                             </div>
                         </div>
-                        <div class="col-xs-12 search-condition">
-                            <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 nopadding" id="table1" style="position: relative">
-                                <table id="reportTable1" class="col-lg-12 col-md-12 col-xs-12 col-sm-12" style="margin-top: 20px;">
-                                </table>
-                            </div>
-                        </div>
+                        <table class="layui-hide" id="reportTable0" lay-filter="reportTable0"></table>
+                        <table class="layui-hide" id="reportTable1" lay-filter="reportTable1"></table>
+                        <table class="layui-hide" id="reportTable2" lay-filter="reportTable2"></table>
+                        <table class="layui-hide" id="reportTable3" lay-filter="reportTable3"></table>
+<!--                        <div class="col-xs-12 search-condition">-->
+<!--                            <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 nopadding" id="table1"-->
+<!--                                 style="position: relative">-->
+<!--                                <table id="reportTable1" class="col-lg-12 col-md-12 col-xs-12 col-sm-12"-->
+<!--                                       style="margin-top: 20px;">-->
+<!--                                </table>-->
+<!--                            </div>-->
+<!--                        </div>-->
                     </div>
                 </div>
             </div>
         </div>
     </div>
-<!--    <input  id="bwType" th:value="${bwType}" class="hidden"/>-->
-<!--    <input id="id" th:if="${id!=null}"  th:value="${id}" class="hidden"/>-->
-<!--    <input valiue="" id="flag" th:value="${flag}" class="hidden"/>-->
+    <!--    <input  id="bwType" th:value="${bwType}" class="hidden"/>-->
+    <!--    <input id="id" th:if="${id!=null}"  th:value="${id}" class="hidden"/>-->
+    <!--    <input valiue="" id="flag" th:value="${flag}" class="hidden"/>-->
     <!--body wrapper end-->
     <!--footer section start-->
-<!--    <div class="navbar" th:replace="Menu/footer::footer"></div>-->
+    <!--    <div class="navbar" th:replace="Menu/footer::footer"></div>-->
     <!--footer section end-->
 </div>
 <!--<script type="text/javascript" th:src="@{/static/layui/layui.js}"></script>-->
@@ -256,15 +291,13 @@
 <!--<script th:src="@{/static/js/Material/inventorySelect.js}"></script>-->
 
 
-
-
 <script type="text/javascript" th:src="@{/static/layui/layui.js}"></script>
 <script type="text/javascript" th:src="@{/static/js/jQuery/jquery.min.js}"></script>
 <script th:src="@{/static/js/jquery-1.10.2.min.js}"></script>
 
-<script th:src="@{/static/js/iscroll-zoom.js}" type="text/javascript" ></script>
-<script th:src="@{/static/js/hammer.js}" type="text/javascript" ></script>
-<script th:src="@{/static/js/lrz.all.bundle.js}" type="text/javascript" ></script>
+<script th:src="@{/static/js/iscroll-zoom.js}" type="text/javascript"></script>
+<script th:src="@{/static/js/hammer.js}" type="text/javascript"></script>
+<script th:src="@{/static/js/lrz.all.bundle.js}" type="text/javascript"></script>
 <script th:src="@{/static/js/jquery.photoClip.min.js}" type="text/javascript"></script>
 
 <script th:src="@{/static/js/jquery-ui-1.9.2.custom.min.js}"></script>
@@ -282,5 +315,8 @@
 <script th:src="@{/static/js/Material/outputExcel.js}"></script>
 <script th:src="@{/static/xlsx/xlsx.core.min.js}"></script>
 <script th:src="@{/static/js/bootstrap/perfect-scrollbar.min.js}"></script>
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
 </body>
 </html>
