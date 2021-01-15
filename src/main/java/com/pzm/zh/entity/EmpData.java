@@ -5,6 +5,9 @@ import java.util.List;
 
 public class EmpData {
 
+    // 计算后
+    private List<Emp> normal;
+
     // 正常料
     private List<Emp> result;
 
@@ -31,5 +34,16 @@ public class EmpData {
 
     public void setRemove(List<Emp> remove) {
         this.remove = remove;
+    }
+
+    public List<Emp> getNormal() {
+        if (normal == null || normal.size() == 0) {
+            normal = new ArrayList<>();
+        }
+        return normal;
+    }
+
+    public void setNormal(List<Emp> normal) {
+        this.normal = normal;
     }
 }

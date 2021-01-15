@@ -4,31 +4,34 @@ import com.pzm.zh.annotation.ExcelColumn;
 
 public class Emp {
 
-    @ExcelColumn(value = "部件名称", col = 1)
+    @ExcelColumn(value = "序号",col = 1)
+    private String dataIndex;
+
+    @ExcelColumn(value = "部件名称", col = 2)
     private String partName;//部件名称
 
-    @ExcelColumn(value = "长", col = 2)
+    @ExcelColumn(value = "长", col = 3)
     private Double length;//长
 
-    @ExcelColumn(value = "宽", col = 3)
+    @ExcelColumn(value = "宽", col = 4)
     private Double width;//宽
 
-    @ExcelColumn(value = "高", col = 4)
+    @ExcelColumn(value = "高", col = 5)
     private Double high;//高
 
-    @ExcelColumn(value = "数量张(片)", col = 5)
+    @ExcelColumn(value = "数量张(片)", col = 6)
     private Double numbyZhuang;//数量张(片)
 
-    @ExcelColumn(value = "数量根", col = 6)
+    @ExcelColumn(value = "数量根", col = 7)
     private Double numbyGens;//数量根
 
-    @ExcelColumn(value = "数量个", col = 6)
+    @ExcelColumn(value = "数量个", col = 8)
     private Double numbyGe;//数量个
 
-    @ExcelColumn(value = "余料长", col = 7)
+    @ExcelColumn(value = "余料长", col = 9)
     private Double yuliaoLen;//余料长
 
-    @ExcelColumn(value = "余料宽", col = 8)
+    @ExcelColumn(value = "余料宽", col = 10)
     private Double yuliaoWidth;//余料宽
 
     public String getPartName() {
@@ -101,5 +104,13 @@ public class Emp {
 
     public void setYuliaoWidth(Double yuliaoWidth) {
         this.yuliaoWidth = yuliaoWidth;
+    }
+
+    public String getDataIndex() {
+        return dataIndex;
+    }
+
+    public void setDataIndex(String dataIndex) {
+        this.dataIndex = dataIndex;
     }
 }
