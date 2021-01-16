@@ -360,7 +360,7 @@ public class DataServiceImpl implements DataService {
         Double zdnumsGe = new Double(0);
         Double zdnumsGen = new Double(0);
         Double zdnumsZhuang = new Double(0);
-        Double zzdnums = new Double(numbyser.getZzdnums());
+        String zzdnums = numbyser.getZzdnums();
         if (!StringUtils.isEmpty(zzdnums)) {
             zdnumsGe = (doornums * Double.valueOf(zzdnums));
             Double n = (doornums / ((int) (2440 / (doorweight - 2 * bkweight + 2 * zxWeight + 4 + 5))) * Double.valueOf(zzdnums));
@@ -539,7 +539,7 @@ public class DataServiceImpl implements DataService {
             }
             //14.计算下中挺数量（张）
             Double xztnumZhuang = new Double(0);
-            if (caseDto.getXztWeight() != null && !StringUtils.isEmpty(xztnumGen)) {
+            if (caseDto.getXztWeight() != null ) {
                 double xztweights = caseDto.getXztWeight().doubleValue();
                 double xztnums = Double.valueOf(xztnumGen);
                 double numszhauang = xztnums / (int) (1220 / (xztweights + 5));
@@ -777,7 +777,7 @@ public class DataServiceImpl implements DataService {
             }
             //14.计算上、下中挺数量（张）
             Double xztnumZhuang = new Double(0);
-            if (caseDto.getXztWeight() != null && !StringUtils.isEmpty(xztnumGen)) {
+            if (caseDto.getXztWeight() != null) {
                 Double xztweights = caseDto.getXztWeight().doubleValue();
                 Double xztnums = Double.valueOf(xztnumGen);
                 Double numszhauang = xztnums / (int) (1220 / (xztweights + 5));
@@ -799,7 +799,7 @@ public class DataServiceImpl implements DataService {
             Double zztnumsGen = new Double(0);
             Double zztlength = new Double(0);
             Double zztnumsZhang = new Double(0);
-            if (caseDto.getDoorhigh() != null && caseDto.getSmWeight() != null && caseDto.getZdWeight() != null && caseDto.getXmWeight() != null && caseDto.getDoornums() != null && caseDto.getZxWeight() != null && !StringUtils.isEmpty(xztlength)) {
+            if (caseDto.getDoorhigh() != null && caseDto.getSmWeight() != null && caseDto.getZdWeight() != null && caseDto.getXmWeight() != null && caseDto.getDoornums() != null && caseDto.getZxWeight() != null) {
                 Double doorhigh1 = caseDto.getDoorhigh().doubleValue();
                 Double smweight1 = caseDto.getSmWeight().doubleValue();
                 Double zdweight1 = caseDto.getZdWeight().doubleValue();
@@ -995,14 +995,10 @@ public class DataServiceImpl implements DataService {
             if (caseDto.getDoornums() != null) {
                 zztnumsGe = (doornums * (zdnumsGe + 1));
             }
-            if (!StringUtils.isEmpty(zztlength)) {
-                Double zztyuliaolenth = caseYuliaoLenth(Double.valueOf(zztlength));
-                empszt.setYuliaoLen(zztyuliaolenth);
-            }
-            if (!StringUtils.isEmpty(zztwidth)) {
-                Double yuliaowidth = caseYuliaoKuan(Double.valueOf(zztwidth));
-                empszt.setYuliaoWidth(yuliaowidth);
-            }
+            Double zztyuliaolenth = caseYuliaoLenth(Double.valueOf(zztlength));
+            empszt.setYuliaoLen(zztyuliaolenth);
+            Double yuliaowidth = caseYuliaoKuan(Double.valueOf(zztwidth));
+            empszt.setYuliaoWidth(yuliaowidth);
             empzzt.setLength(zztlength);
             empzzt.setWidth(zztwidth);
             empzzt.setNumbyGe(zztnumsGe);

@@ -401,7 +401,7 @@ public class DataHeServiceImpl implements DataHeService {
             Double zdnumsGe = new Double(0);
             Double zdnumsGen = new Double(0);
             Double zdnumsZhuang = new Double(0);
-            Double zzdnums = new Double(numbyser.getZzdnums());
+            String zzdnums = numbyser.getZzdnums();
             if (!StringUtils.isEmpty(zzdnums)) {
                 zdnumsGe = (doornums * Double.valueOf(zzdnums));
                 double n = (doornums / ((int) (2440 / (doorweight - 2 * bkweight + 2 * zxWeight + 4 + 5))) * Double.valueOf(zzdnums));
