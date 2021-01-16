@@ -103,13 +103,14 @@ public class MainController {
         // 处理后余料汇总
         List<Emp> removeList = new ArrayList<>();
         // 对正常料进行分组
-        Map<String, List<Emp>> resultCollect = list.stream().collect(Collectors.groupingBy(e -> e.getPartName() + "," + e.getHigh() + "," + e.getLength() + "," + e.getWidth()));
+        Map<String, List<Emp>> resultCollect = list.stream().collect(Collectors.groupingBy(e -> e.getPartName() + "," + e.getHigh() + "," + e.getLength() + "," + e.getWidth() + "," + e.getCaoweight()));
         for (String string : resultCollect.keySet()) {
             List<Emp> emps = resultCollect.get(string);
             String partName = emps.get(0).getPartName();
             Double length = emps.get(0).getLength();
             Double width = emps.get(0).getWidth();
             Double hight = emps.get(0).getHigh();
+            Double caoweight = emps.get(0).getCaoweight();
             // 向上取整
             Double numbyZhuang = Math.ceil(emps.stream().collect(Collectors.summingDouble(Emp::getNumbyZhuang))); // 数量张(片)
             Double numbyGens = Math.ceil(emps.stream().collect(Collectors.summingDouble(Emp::getNumbyGens))); // 数量根
@@ -119,6 +120,7 @@ public class MainController {
             emp.setLength(length);
             emp.setWidth(width);
             emp.setHigh(hight);
+            emp.setCaoweight(caoweight);
             emp.setNumbyZhuang(numbyZhuang);
             emp.setNumbyGens(numbyGens);
             emp.setNumbyGe(numbyGe);
@@ -134,13 +136,13 @@ public class MainController {
             Double yuliaowidth = emps.get(0).getYuliaoWidth();
             // 向下取整
             Double numbyZhuang = Math.floor(emps.stream().collect(Collectors.summingDouble(Emp::getNumbyZhuang))); // 数量张(片)
-            if (yuliaolen == 0){
+            if (yuliaolen == 0) {
                 continue;
             }
-            if (yuliaowidth == 0){
+            if (yuliaowidth == 0) {
                 continue;
             }
-            if (numbyZhuang == 0){
+            if (numbyZhuang == 0) {
                 continue;
             }
             Emp emp = new Emp();

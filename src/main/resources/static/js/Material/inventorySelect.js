@@ -797,6 +797,7 @@ function getSourceData() {
         doorhigh: $('#menshangao').val(),//门扇高度
         doornums: $('#menshannums').val(),//门扇数量
         doorweight: $('#menshankuan').val(),//门扇宽度
+        caoweight: $('#caokuan').val(), //槽宽
         plaThick: $('#bancaihou').val(),//板材厚度
         zztWeight: $('#ztkuan').val(),//中中挺宽度
         sztweight: $('#sztkuan').val(),//上中挺宽度
@@ -849,6 +850,7 @@ function transSourceData(tableData) {
                 , {field: 'doorhigh', title: '门扇高度', width: 100}
                 , {field: 'doornums', title: '门扇数量', width: 100}
                 , {field: 'doorweight', title: '门扇宽度', minWidth: 100}
+                , {field: 'caoweight', title: '槽宽', minWidth: 100}
                 , {field: 'plaThick', title: '板材厚度', minWidth: 100}
                 , {field: 'zztWeight', title: '中中挺宽度', minWidth: 100}
                 , {field: 'sztweight', title: '上中挺宽度', width: 100}
@@ -908,6 +910,7 @@ function clearSourceData() {
     $('#menshannums').val(""),//门扇数量
         $('#menshankuan').val(""),//门扇宽度
         $('#bancaihou').val(""),//板材厚度
+        $('#caokuan').val(""),//板材厚度
         $('#ztkuan').val(""),//中中挺宽度
         $('#sztkuan').val(""),//上中挺宽度
         $('#biankuang').val(""),//边框
@@ -962,6 +965,7 @@ function calculate() {
                         , {field: 'length', title: '长', width: 80}
                         , {field: 'width', title: '宽', width: 80}
                         , {field: 'high', title: '高', width: 80}
+                        , {field: 'caoweight', title: '槽宽', width: 80}
                         , {field: 'numbyZhuang', title: '数量张(片)', width: 100}
                         , {field: 'numbyGens', title: '数量根', width: 100}
                         , {field: 'numbyGe', title: '数量个', width: 80}
@@ -985,6 +989,7 @@ function calculate() {
                         , {field: 'length', title: '长', minWidth: 100}
                         , {field: 'width', title: '宽', minWidth: 100}
                         , {field: 'high', title: '高', width: 100}
+                        , {field: 'caoweight', title: '槽宽', width: 100}
                         , {field: 'numbyGe', title: '数量个', width: 100}
                         , {field: 'numbyGens', title: '数量根', width: 100}
                         , {field: 'numbyZhuang', title: '数量张(片)', width: 180}

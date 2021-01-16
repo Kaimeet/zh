@@ -19,19 +19,22 @@ public class Emp {
     @ExcelColumn(value = "高", col = 5)
     private Double high;//高
 
-    @ExcelColumn(value = "数量张(片)", col = 6)
+    @ExcelColumn(value = "槽宽", col = 6)
+    private Double caoweight;//槽宽
+
+    @ExcelColumn(value = "数量张(片)", col = 7)
     private Double numbyZhuang;//数量张(片)
 
-    @ExcelColumn(value = "数量根", col = 7)
+    @ExcelColumn(value = "数量根", col = 8)
     private Double numbyGens;//数量根
 
-    @ExcelColumn(value = "数量个", col = 8)
+    @ExcelColumn(value = "数量个", col = 9)
     private Double numbyGe;//数量个
 
-    @ExcelColumn(value = "余料长", col = 9)
+    @ExcelColumn(value = "余料长", col = 10)
     private Double yuliaoLen;//余料长
 
-    @ExcelColumn(value = "余料宽", col = 10)
+    @ExcelColumn(value = "余料宽", col = 11)
     private Double yuliaoWidth;//余料宽
 
     public String getPartName() {
@@ -112,5 +115,13 @@ public class Emp {
 
     public void setDataIndex(String dataIndex) {
         this.dataIndex = dataIndex;
+    }
+
+    public Double getCaoweight() {
+        return caoweight;
+    }
+
+    public void setCaoweight(Double caoweight) {
+        this.caoweight = caoweight;
     }
 }

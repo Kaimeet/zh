@@ -44,11 +44,14 @@ public class DataServiceImpl implements DataService {
     public List<Emp> mainfinalcase(CaseDto caseDto) {
         // 板材厚度 = 芯板高度
         BigDecimal plaThick = caseDto.getPlaThick();
+        // 槽宽
+        Double caoweight = caseDto.getCaoweight();
         // 序号
         String dataIndex = caseDto.getDataIndex();
         List<Emp> maincase = maincase(caseDto);
         int serid = caseDto.getSerizesId();
         for (Emp emp : maincase) {
+            emp.setCaoweight(caoweight);
             emp.setDataIndex(dataIndex);
             if ("边框".equals(emp.getPartName())) {
                 if (serid == 18) {

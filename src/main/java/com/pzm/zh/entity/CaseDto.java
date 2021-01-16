@@ -11,6 +11,8 @@ import java.util.Date;
  **/
 public class CaseDto extends Variables {
 
+    private Double caoweight; // 槽宽
+
     private String dataIndex; //序号
 
     private String caseires;//算法系列
@@ -46,5 +48,13 @@ public class CaseDto extends Variables {
 
     public void setDataIndex(String dataIndex) {
         this.dataIndex = dataIndex;
+    }
+
+    public Double getCaoweight() {
+        return caoweight;
+    }
+
+    public void setCaoweight(Double caoweight) {
+        this.caoweight = caoweight;
     }
 }

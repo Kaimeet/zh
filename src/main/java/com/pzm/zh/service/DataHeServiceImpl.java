@@ -31,6 +31,8 @@ public class DataHeServiceImpl implements DataHeService {
 
     @Override
     public List<Emp> mainfinalcase(CaseDto caseDto) {
+        // 槽宽
+        Double caoweight = caseDto.getCaoweight();
         // 板材厚度 = 芯板高度
         BigDecimal plaThick = caseDto.getPlaThick();
         // 序号
@@ -38,6 +40,7 @@ public class DataHeServiceImpl implements DataHeService {
         List<Emp> maincase = maincase(caseDto);
         int serid = caseDto.getSerizesId();
         for (Emp emp : maincase) {
+            emp.setCaoweight(caoweight);
             emp.setDataIndex(dataIndex);
             if ("边框".equals(emp.getPartName())) {
                 emp.setHigh(new Double(variablesMapper.selecthigh("边框").getHigh()));
