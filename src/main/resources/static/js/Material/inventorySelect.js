@@ -820,15 +820,15 @@ function getSourceData() {
         caseires: $('#suanfaxilie').val(),
         serizesId: $('#kuanshi').val()
     };
-    if (myTestData.caoweight == null || myTestData.caoweight == undefined || myTestData.caoweight == ''){
-        alert("请输入槽宽！")
-    } else if (myTestData.caseires == null || myTestData.caseires == undefined || myTestData.caseires == '') {
+     if (myTestData.caseires == null || myTestData.caseires == undefined || myTestData.caseires == '') {
         alert("请添加有效的数据！")
         return
     } else if (myTestData.serizesId == null || myTestData.caseires == undefined || myTestData.caseires == '') {
         alert("请添加有效的数据！")
         return
-    } else {
+    }else if (myTestData.caoweight == null || myTestData.caoweight == undefined || myTestData.caoweight == ''){
+        alert("请输入槽宽！")
+    }else {
         myTestData.dataIndex = dataIndex;
         tableData.push(myTestData);
         dataIndex = dataIndex + 1;
