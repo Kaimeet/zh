@@ -9,6 +9,9 @@ import com.pzm.zh.service.MainService;
 import com.pzm.zh.util.Dto;
 import com.pzm.zh.util.DtoUtil;
 import net.sf.json.JSONArray;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,7 +47,6 @@ public class MainController {
 
     @Resource
     private DataHeService dataHeServiceImpl;
-
     @RequestMapping(value = "/")
     public String homePage() {
         return "Material/inventorySelect";

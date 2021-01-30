@@ -45,24 +45,24 @@ public class DataHeServiceImpl implements DataHeService {
             if ("边框".equals(emp.getPartName())) {
                 emp.setHigh(new Double(variablesMapper.selecthigh("边框").getHigh()));
             } else if ("上帽".equals(emp.getPartName())) {
-                if (serid == 30 || serid == 32 || serid == 35 || serid == 36 || serid == 37 || serid == 38 || serid == 39 || serid == 40 || serid == 41 || serid == 43) {
+                if (serid == 130 || serid == 132 || serid == 135 || serid == 136 || serid == 137 || serid == 138 || serid == 139 || serid == 140 || serid == 141 || serid == 143) {
                     emp.setHigh(new Double(variablesMapper.selecthigh("插玻上帽").getHigh()));
-                } else if (serid == 42) {
+                } else if (serid == 142) {
                     emp.setHigh(new Double(variablesMapper.selecthigh("069上帽").getHigh()));
                 } else {
                     emp.setHigh(new Double(variablesMapper.selecthigh("上帽").getHigh()));
 
                 }
             } else if ("下帽".equals(emp.getPartName())) {
-                if (serid == 42) {
+                if (serid == 142) {
                     emp.setHigh(new Double(variablesMapper.selecthigh("069下帽").getHigh()));
                 } else {
                     emp.setHigh(new Double(variablesMapper.selecthigh("下帽").getHigh()));
                 }
             } else if ("中档".equals(emp.getPartName())) {
-                if (serid == 42) {
+                if (serid == 142) {
                     emp.setHigh(new Double(variablesMapper.selecthigh("069中档").getHigh()));
-                } else if (serid == 32 || serid == 40) {
+                } else if (serid == 140) {
                     emp.setHigh(new Double(variablesMapper.selecthigh("插玻中档").getHigh()));
                 } else {
                     emp.setHigh(new Double(variablesMapper.selecthigh("中档").getHigh()));
@@ -73,7 +73,7 @@ public class DataHeServiceImpl implements DataHeService {
                 emp.setHigh(new Double(variablesMapper.selecthigh("中中挺").getHigh()));
             } else if ("下中挺".equals(emp.getPartName())) {
                 emp.setHigh(new Double(variablesMapper.selecthigh("下中挺").getHigh()));
-            } else if ("小中挡".equals(emp.getPartName())) {
+            } else if ("小中档".equals(emp.getPartName())) {
                 emp.setHigh(new Double(variablesMapper.selecthigh("小中挡").getHigh()));
             } else if ("小中挺".equals(emp.getPartName())) {
                 emp.setHigh(new Double(variablesMapper.selecthigh("小中挺").getHigh()));
@@ -352,7 +352,7 @@ public class DataHeServiceImpl implements DataHeService {
         Double smlength = (doorweight - 2 * bkweight + 2 * zxWeight);
         emp1.setLength(smlength);
         //8.计算上帽宽（含造型）
-        emp1.setWidth(smlength);
+        emp1.setWidth(smWeight);
         //9.计算上帽数量（个）
         Double smnumsGe = doornums;
         emp1.setNumbyGe(smnumsGe);
@@ -516,7 +516,9 @@ public class DataHeServiceImpl implements DataHeService {
             Double smweight = caseDto.getSmWeight().doubleValue();
             Double xmweight = caseDto.getXmWeight().doubleValue();
             Double xbDepth = caseDto.getXbDepth().doubleValue();
-            zxblength = (doorhigh - smweight - xmweight + 2 * xbDepth);
+            Double xxhigh=caseDto.getXxHigh().doubleValue();
+            Double zdweight=caseDto.getZdWeight().doubleValue();
+            zxblength = (doorhigh - smweight - xmweight + 4 * xbDepth-zdweight-xxhigh);
             xxblength = (460 + 2 * xbDepth);
         }
         //计算中、下芯板宽
@@ -834,7 +836,7 @@ public class DataHeServiceImpl implements DataHeService {
             empList.add(emp1);
         }
         //中中挺长
-        Double zztlenth = caseDoubles.getDoorhigh() - caseDoubles.getSmWeight() - caseDoubles.getXmWeight() - caseDoubles.getXxHigh() - caseDoubles.getZdWeight() + 4 * caseDoubles.getZxWeight();
+        Double zztlenth = caseDoubles.getDoorhigh() - caseDoubles.getSmWeight() - caseDoubles.getXmWeight() - caseDoubles.getXxHigh() - caseDoubles.getZdWeight() + 3 * caseDoubles.getZxWeight();
         //中中挺宽
         Double zztwidth = caseDoubles.getZztWeight();
         //中中挺数量（个）
@@ -932,7 +934,7 @@ public class DataHeServiceImpl implements DataHeService {
             empList.add(emp1);
         }
         //中中挺长
-        Double zztlenth = caseDoubles.getDoorhigh() - caseDoubles.getSmWeight() - caseDoubles.getXmWeight() - caseDoubles.getXxHigh() - caseDoubles.getZdWeight() + 4 * caseDoubles.getZxWeight();
+        Double zztlenth = caseDoubles.getDoorhigh() - caseDoubles.getSmWeight() - caseDoubles.getXmWeight() - caseDoubles.getXxHigh() - caseDoubles.getZdWeight() + 3 * caseDoubles.getZxWeight();
         //下中挺长
         Double xztlenth = caseDoubles.getXzthigh();
         //中中挺宽
@@ -1033,7 +1035,7 @@ public class DataHeServiceImpl implements DataHeService {
 
         //中芯板长
         Double zxblength = new Double(0);
-        zxblength = caseDoubles.getDoorhigh() - caseDoubles.getSmWeight() - caseDoubles.getXmWeight() - caseDoubles.getXxHigh() - caseDoubles.getZdWeight() + 4 * caseDoubles.getXbDepth();
+        zxblength=caseDoubles.getDoorhigh()-caseDoubles.getSmWeight()-caseDoubles.getXmWeight()-caseDoubles.getXxHigh()-caseDoubles.getSxHigh()-2*caseDoubles.getZdWeight()+6*caseDoubles.getXbDepth();
         //下芯板长
         Double xxblength = new Double(0);
         xxblength = caseDoubles.getXxHigh();
@@ -1085,7 +1087,7 @@ public class DataHeServiceImpl implements DataHeService {
         //上中挺长
         Double sztlenth = caseDoubles.getSzthigh();
         //中中挺长
-        Double zztlenth = caseDoubles.getDoorhigh() - caseDoubles.getSmWeight() - caseDoubles.getXmWeight() - caseDoubles.getSzthigh() - caseDoubles.getXzthigh() - 2 * caseDoubles.getZdWeight() + 6 * caseDoubles.getZxWeight();
+        Double zztlenth=caseDoubles.getDoorhigh()-caseDoubles.getSmWeight()-caseDoubles.getXmWeight()-caseDoubles.getSzthigh()-caseDoubles.getXzthigh()-2*caseDoubles.getZdWeight()+6*caseDoubles.getZxWeight();
         //下中挺长
         Double xztlenth = caseDoubles.getXzthigh();
         //上中挺宽

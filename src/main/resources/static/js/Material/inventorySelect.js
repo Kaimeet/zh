@@ -814,21 +814,40 @@ function getSourceData() {
         xztWeight: $('#xztkuan').val(),//下中挺宽度
         glassDepth: $('#bolijincao').val(),//玻璃进槽深度
         memo3: $('#xzthigh').val(),//下中挺长
-        memo1: $('#szthigh').val(),//下中挺长
+        memo1: $('#szthigh').val(),//上中挺长
         memo4: $('#memo4').val(),//小中档宽
         memo5: $('#memo5').val(),//小中挺宽
         caseires: $('#suanfaxilie').val(),
         serizesId: $('#kuanshi').val()
     };
-     if (myTestData.caseires == null || myTestData.caseires == undefined || myTestData.caseires == '') {
+    if (myTestData.caseires == null || myTestData.caseires == undefined || myTestData.caseires == '') {
         alert("请添加有效的数据！")
         return
     } else if (myTestData.serizesId == null || myTestData.caseires == undefined || myTestData.caseires == '') {
         alert("请添加有效的数据！")
         return
-    }else if (myTestData.caoweight == null || myTestData.caoweight == undefined || myTestData.caoweight == ''){
+    } else if (myTestData.caoweight == null || myTestData.caoweight == undefined || myTestData.caoweight == '') {
         alert("请输入槽宽！")
-    }else {
+        return
+    } else if (myTestData.caseires == 7 && myTestData.serizesId == 29) {
+        myTestData.memo3 = "500";
+        myTestData.dataIndex = dataIndex;
+        tableData.push(myTestData);
+        dataIndex = dataIndex + 1;
+        return tableData;
+    } else if (myTestData.caseires == 7 && myTestData.serizesId == 30) {
+        myTestData.memo3 = "500";
+        myTestData.dataIndex = dataIndex;
+        tableData.push(myTestData);
+        dataIndex = dataIndex + 1;
+        return tableData;
+    } else if (myTestData.caseires == 8 && myTestData.serizesId == 33) {
+        myTestData.memo3 = "500";
+        myTestData.dataIndex = dataIndex;
+        tableData.push(myTestData);
+        dataIndex = dataIndex + 1;
+        return tableData;
+    } else {
         myTestData.dataIndex = dataIndex;
         tableData.push(myTestData);
         dataIndex = dataIndex + 1;

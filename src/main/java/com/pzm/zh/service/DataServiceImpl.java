@@ -101,6 +101,12 @@ public class DataServiceImpl implements DataService {
                 } else {
                     emp.setHigh(new Double(34));
                 }
+            } else if ("中挺".equals(emp.getPartName())) {
+                if (serid == 21) {
+                    emp.setHigh(new Double(33));
+                } else {
+                    emp.setHigh(new Double(34));
+                }
             } else if ("小中挡".equals(emp.getPartName())) {
                 emp.setHigh(new Double(34));
             } else if ("小中挺".equals(emp.getPartName())) {
@@ -516,7 +522,7 @@ public class DataServiceImpl implements DataService {
         if (flagzt) {
             //10.计算下中挺长
             Double xztlength = new Double(0);
-            if (caseDto.getMemo1() != null) {
+            if (caseDto.getMemo1() != null && !caseDto.getMemo1().equals("")) {
                 xztlength = new Double(caseDto.getMemo1());
             }
             //11.计算下中挺宽
@@ -539,7 +545,7 @@ public class DataServiceImpl implements DataService {
             }
             //14.计算下中挺数量（张）
             Double xztnumZhuang = new Double(0);
-            if (caseDto.getXztWeight() != null ) {
+            if (caseDto.getXztWeight() != null) {
                 double xztweights = caseDto.getXztWeight().doubleValue();
                 double xztnums = Double.valueOf(xztnumGen);
                 double numszhauang = xztnums / (int) (1220 / (xztweights + 5));
@@ -1137,6 +1143,8 @@ public class DataServiceImpl implements DataService {
         Double zxbnumspian = new Double(0);
         int N = 0;
         if (caseDto.getPlaThick() != null && caseDto.getPlaThick().compareTo(new BigDecimal(15)) == 0) {
+            N = 1;
+        } else if (caseDto.getPlaThick() != null && caseDto.getPlaThick().compareTo(new BigDecimal(8)) == 0) {
             N = 1;
         } else {
             N = 2;
