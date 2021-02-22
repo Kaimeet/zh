@@ -265,7 +265,7 @@ $("#kuanshi").change(function () {
     caserizes($("#kuanshi").val());
 
     //chooseDepartmentTwo($("#xilie").val())
-    alert("111111");
+    // alert("111111");
     //要触发的事件
 });
 
