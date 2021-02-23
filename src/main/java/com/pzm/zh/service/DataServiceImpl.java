@@ -1145,8 +1145,6 @@ public class DataServiceImpl implements DataService {
         if (caseDto.getPlaThick() != null && caseDto.getPlaThick().compareTo(new BigDecimal(15)) == 0) {
             N = 1;
         } else if (caseDto.getPlaThick() != null && caseDto.getPlaThick().compareTo(new BigDecimal(8)) == 0) {
-            N = 1;
-        } else {
             N = 2;
         }
         if (caseDto.getDoornums() != null) {
