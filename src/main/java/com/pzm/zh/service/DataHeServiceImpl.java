@@ -32,16 +32,22 @@ public class DataHeServiceImpl implements DataHeService {
     @Override
     public List<Emp> mainfinalcase(CaseDto caseDto) {
         // 槽宽
-        Double caoweight = caseDto.getCaoweight();
+        BigDecimal caoweight = caseDto.getCaoweight();
         // 板材厚度 = 芯板高度
         BigDecimal plaThick = caseDto.getPlaThick();
-        // 序号
-        String dataIndex = caseDto.getDataIndex();
+        // 工单号
+        String jobNum = caseDto.getJobNum();
+        // 销售订单
+        String salesOrderNum = caseDto.getSalesOrderNum();
+        // 颜色
+        String colorInfo = caseDto.getColorInfo();
         List<Emp> maincase = maincase(caseDto);
         int serid = caseDto.getSerizesId();
         for (Emp emp : maincase) {
             emp.setCaoweight(caoweight);
-            emp.setDataIndex(dataIndex);
+            emp.setJobNum(jobNum);
+            emp.setSalesOrderNum(salesOrderNum);
+            emp.setColorInfo(colorInfo);
             if ("边框".equals(emp.getPartName())) {
                 emp.setHigh(new Double(variablesMapper.selecthigh("边框").getHigh()));
             } else if ("上帽".equals(emp.getPartName())) {
@@ -516,9 +522,9 @@ public class DataHeServiceImpl implements DataHeService {
             Double smweight = caseDto.getSmWeight().doubleValue();
             Double xmweight = caseDto.getXmWeight().doubleValue();
             Double xbDepth = caseDto.getXbDepth().doubleValue();
-            Double xxhigh=caseDto.getXxHigh().doubleValue();
-            Double zdweight=caseDto.getZdWeight().doubleValue();
-            zxblength = (doorhigh - smweight - xmweight + 4 * xbDepth-zdweight-xxhigh);
+            Double xxhigh = caseDto.getXxHigh().doubleValue();
+            Double zdweight = caseDto.getZdWeight().doubleValue();
+            zxblength = (doorhigh - smweight - xmweight + 4 * xbDepth - zdweight - xxhigh);
             xxblength = (460 + 2 * xbDepth);
         }
         //计算中、下芯板宽
@@ -1035,7 +1041,7 @@ public class DataHeServiceImpl implements DataHeService {
 
         //中芯板长
         Double zxblength = new Double(0);
-        zxblength=caseDoubles.getDoorhigh()-caseDoubles.getSmWeight()-caseDoubles.getXmWeight()-caseDoubles.getXxHigh()-caseDoubles.getSxHigh()-2*caseDoubles.getZdWeight()+6*caseDoubles.getXbDepth();
+        zxblength = caseDoubles.getDoorhigh() - caseDoubles.getSmWeight() - caseDoubles.getXmWeight() - caseDoubles.getXxHigh() - caseDoubles.getSxHigh() - 2 * caseDoubles.getZdWeight() + 6 * caseDoubles.getXbDepth();
         //下芯板长
         Double xxblength = new Double(0);
         xxblength = caseDoubles.getXxHigh();
@@ -1087,7 +1093,7 @@ public class DataHeServiceImpl implements DataHeService {
         //上中挺长
         Double sztlenth = caseDoubles.getSzthigh();
         //中中挺长
-        Double zztlenth=caseDoubles.getDoorhigh()-caseDoubles.getSmWeight()-caseDoubles.getXmWeight()-caseDoubles.getSzthigh()-caseDoubles.getXzthigh()-2*caseDoubles.getZdWeight()+6*caseDoubles.getZxWeight();
+        Double zztlenth = caseDoubles.getDoorhigh() - caseDoubles.getSmWeight() - caseDoubles.getXmWeight() - caseDoubles.getSzthigh() - caseDoubles.getXzthigh() - 2 * caseDoubles.getZdWeight() + 6 * caseDoubles.getZxWeight();
         //下中挺长
         Double xztlenth = caseDoubles.getXzthigh();
         //上中挺宽

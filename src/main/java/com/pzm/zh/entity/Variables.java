@@ -70,7 +70,11 @@ public class Variables {
 
     private Integer serizesId;
 
-    public Variables(Integer id, Integer REVISION, String CREATED_BY, Date CREATED_TIME, String UPDATED_BY, Date UPDATED_TIME, BigDecimal doorhigh, String style, BigDecimal doorweight, Integer doornums, String serizes, BigDecimal ztweight, BigDecimal plaThick, BigDecimal sztweight, BigDecimal bkweight, BigDecimal sxHigh, BigDecimal zxHigh, BigDecimal xxHigh, BigDecimal zdWeight, BigDecimal xbDepth, BigDecimal zxWeight, BigDecimal smWeight, BigDecimal xmWeight, BigDecimal glassDepth, BigDecimal zztWeight, BigDecimal xztWeight, String memo1, String memo2, String memo3, String memo4, String memo5, String memo6, Integer serizesId) {
+    private BigDecimal caoweight;
+
+
+    public Variables(Integer id, Integer REVISION, String CREATED_BY, Date CREATED_TIME, String UPDATED_BY, Date UPDATED_TIME, BigDecimal doorhigh, String style, BigDecimal doorweight, Integer doornums, String serizes, BigDecimal ztweight, BigDecimal plaThick, BigDecimal sztweight, BigDecimal bkweight, BigDecimal sxHigh, BigDecimal zxHigh, BigDecimal xxHigh, BigDecimal zdWeight, BigDecimal xbDepth, BigDecimal zxWeight, BigDecimal smWeight, BigDecimal xmWeight, BigDecimal glassDepth, BigDecimal zztWeight,
+                     BigDecimal xztWeight, String memo1, String memo2, String memo3, String memo4, String memo5, String memo6, Integer serizesId,BigDecimal caoweight) {
         this.id = id;
         this.REVISION = REVISION;
         this.CREATED_BY = CREATED_BY;
@@ -104,10 +108,19 @@ public class Variables {
         this.memo5 = memo5;
         this.memo6 = memo6;
         this.serizesId = serizesId;
+        this.caoweight = caoweight;
     }
 
     public Variables() {
         super();
+    }
+
+    public BigDecimal getCaoweight() {
+        return caoweight;
+    }
+
+    public void setCaoweight(BigDecimal caoweight) {
+        this.caoweight = caoweight;
     }
 
     public Integer getId() {

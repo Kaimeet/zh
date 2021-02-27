@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-cn" xmlns:th="http://www.thymeleaf.org" style="overflow: auto;">
 <head>
-    <title>拼装门拆单系统</title>
+    <title>拆单运算</title>
     <meta charset="UTF-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -65,6 +65,25 @@
                                 </div>
                             </div>
 
+                            <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12 nopadding" style="margin-top:8px;">
+                                <label class="col-md-3 text-right visible-lg visible-md title"
+                                       style="width:150px;line-height: 34px;">工单号：</label>
+                                <label class="col-xs-12 text-left visible-xs visible-sm nopadding title">工单号</label>
+                                <div class="col-md-5 col-xs-12 nopadding">
+                                    <input id="jobNum"  placeholder=""
+                                           class="layui-input"/>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12 nopadding" style="margin-top:8px;">
+                                <label class="col-md-3 text-right visible-lg visible-md title"
+                                       style="width:150px;line-height: 34px;">销售订单号：</label>
+                                <label class="col-xs-12 text-left visible-xs visible-sm nopadding title">销售订单号</label>
+                                <div class="col-md-5 col-xs-12 nopadding">
+                                    <input id="salesOrderNum"  placeholder=""
+                                           class="layui-input"/>
+                                </div>
+                            </div>
 
                             <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12 nopadding" style="margin-top:8px;">
                                 <label class="col-md-3 text-right visible-lg visible-md title"
@@ -89,6 +108,15 @@
                                 <label class="col-xs-12 text-left visible-xs visible-sm nopadding title">门扇宽度</label>
                                 <div class="col-md-5 col-xs-12 nopadding">
                                     <input id="menshankuan" placeholder="" class="layui-input"/>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12 nopadding" style="margin-top:8px;">
+                                <label class="col-md-3 text-right visible-lg visible-md title"
+                                       style="width:150px;line-height: 34px;">颜色：</label>
+                                <label class="col-xs-12 text-left visible-xs visible-sm nopadding title">颜色</label>
+                                <div class="col-md-5 col-xs-12 nopadding">
+                                    <input id="colorInfo" placeholder="" class="layui-input"/>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12 nopadding" style="margin-top:8px;">
@@ -251,11 +279,40 @@
                                     <input id="memo5" placeholder="" class="layui-input"/>
                                 </div>
                             </div>
+<!--                            <div class="col-lg-11 col-md-9 col-xs-12 piccondition " style="text-align: center;">-->
+<!--                                <input type="file" id="file" name="myfile" style="display: none"  value="选择文件" />-->
+<!--                                <input type="text" id="filename" style="display:none"></span>-->
+<!--                                <input id="uploadExcel" class="layui-btn" type="button" onclick="uploadFile()" value="导入excel" />-->
+<!--                                <button type="button" class="layui-btn" onclick="addItem()">添加</button>-->
+<!--                                <button type="button" class="layui-btn" onclick="calculate()">运算</button>-->
+<!--                                <button type="button" class="layui-btn" onclick="excelExport()">导出excel</button>-->
+<!--                                <button type="button" class="layui-btn" onclick="javascript:location.reload()">刷新</button>-->
+<!--                            </div>-->
+                            <span></span>
                             <div class="col-lg-11 col-md-9 col-xs-12 piccondition " style="text-align: center;">
-                                <button type="button" class="btn btn-s-xs btn-red" onclick="addItem()">添加</button>
-                                <button type="button" class="btn btn-s-xs defaultbtn" onclick="calculate()">运算</button>
-                                <button type="button" class="btn btn-s-xs btn-gray" onclick="excelExport()">导出excel</button>
-                                <button type="button" class="btn btn-s-xs btn-gray" onclick="javascript:location.reload()">刷新</button>
+                                <button type="button" class="layui-btn" onclick="addItem()">添加</button>
+                                <button type="button" class="layui-btn layui-btn-normal" id="testList">选择文件</button>
+                                <button type="button" class="layui-btn" id="testListAction">开始上传</button>
+                                <div class="layui-upload-list">
+                                    <table class="layui-table">
+                                        <thead>
+                                        <tr><th>文件名</th>
+                                            <th>大小</th>
+                                            <th>状态</th>
+                                            <th>操作</th>
+                                        </tr></thead>
+                                        <tbody id="demoList"></tbody>
+                                    </table>
+                                </div>
+<!--                                <button type="button" class="layui-btn" id="testListAction">开始上传</button>-->
+                            </div>
+                            <div class="col-lg-11 col-md-9 col-xs-12 piccondition " style="text-align: center;">
+<!--                                <button type="button" class="layui-btn layui-btn-normal" id="file">选择文件</button>-->
+<!--                                <button type="button" class="layui-btn" id="fileUpdate">开始上传</button>-->
+<!--                                <button type="button" class="layui-btn" onclick="addItem()">添加</button>-->
+                                <button type="button" class="layui-btn" onclick="calculate()">运算</button>
+                                <button type="button" class="layui-btn" onclick="excelExport()">导出excel</button>
+                                <button type="button" class="layui-btn" onclick="javascript:location.reload()">刷新</button>
                             </div>
                         </div>
                         <table class="layui-hide" id="reportTable0" lay-filter="reportTable0"></table>

@@ -36,13 +36,14 @@
       <arg column="memo5" jdbcType="NVARCHAR" javaType="java.lang.String" />
       <arg column="memo6" jdbcType="NVARCHAR" javaType="java.lang.String" />
       <arg column="serizesId" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="caoweight" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
     id, REVISION, CREATED_BY, CREATED_TIME, UPDATED_BY, UPDATED_TIME, doorhigh, style, 
     doorweight, doornums, serizes, ztweight, plaThick, sztweight, bkweight, sxHigh, zxHigh, 
     xxHigh, zdWeight, xbDepth, zxWeight, smWeight, xmWeight, glassDepth, zztWeight, xztWeight, 
-    memo1, memo2, memo3, memo4, memo5, memo6, serizesId
+    memo1, memo2, memo3, memo4, memo5, memo6, serizesId,caoweight
   </sql>
   <select id="selecthigh" resultType="com.pzm.zh.entity.HighDto" parameterType="string">
     select * from pzmhigh where name=#{name}

@@ -211,9 +211,9 @@ function sheet2blob(sheet, cols, sheetName) {
  * @param sheetName
  * @returns {Blob}s
  */
-function sheets2blob(sheet1, sheet2, cols1, cols2, sheetName1, sheetName2) {
+function sheets2blob(sheet1, sheet2,sheet3, sheet4, cols1, cols2,cols3, cols4, sheetName1, sheetName2, sheetName3, sheetName4) {
     let workbook = {
-        SheetNames: [sheetName1, sheetName2],
+        SheetNames: [sheetName1, sheetName2,sheetName3,sheetName4],
         Sheets: {}
     };
     workbook.Sheets[sheetName1] = Object.assign({}, sheet1, {
@@ -236,6 +236,40 @@ function sheets2blob(sheet1, sheet2, cols1, cols2, sheetName1, sheetName2) {
     workbook.Sheets[sheetName2] = Object.assign({}, sheet2, {
         // 设置 excel 单元格列的宽度
         '!cols': cols2,
+        // // excel 表格渲染范围
+        // '!ref': ref,
+        // // 合并 excel 单元格
+        // '!merges': [{
+        //     s: { // s开始
+        //         c: 0, // 开始列
+        //         r: 1  // 开始取值范围
+        //     },
+        //     e: { // e结束
+        //         c: 0, // 结束列
+        //         r: 3   // 结束范围
+        //     }
+        // }]
+    })
+    workbook.Sheets[sheetName3] = Object.assign({}, sheet3, {
+        // 设置 excel 单元格列的宽度
+        '!cols': cols3,
+        // // excel 表格渲染范围
+        // '!ref': ref,
+        // // 合并 excel 单元格
+        // '!merges': [{
+        //     s: { // s开始
+        //         c: 0, // 开始列
+        //         r: 1  // 开始取值范围
+        //     },
+        //     e: { // e结束
+        //         c: 0, // 结束列
+        //         r: 3   // 结束范围
+        //     }
+        // }]
+    })
+    workbook.Sheets[sheetName4] = Object.assign({}, sheet4, {
+        // 设置 excel 单元格列的宽度
+        '!cols': cols4,
         // // excel 表格渲染范围
         // '!ref': ref,
         // // 合并 excel 单元格

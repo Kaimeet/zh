@@ -23,7 +23,9 @@ public interface SerizesMapper {
 
     int updateByPrimaryKey(Serizes record);
 
-    List<Serizes>selectbyname(String name);
+    List<Serizes> selectbyname(String name);
 
-    List<Serizes>selectCase();
+    Serizes selectByName(String name);
+
+    List<Serizes> selectCase();
 }

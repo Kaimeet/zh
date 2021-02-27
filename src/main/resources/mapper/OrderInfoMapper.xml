@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pzm.zh.dao.OrderInfoMapper">
+    <!--    <resultMap id="BaseResultMap" type="com.pzm.zh.entity.OrderInfo">-->
+    <!--        <constructor>-->
+    <!--        <arg column="salesOrderNum" jdbcType="VARCHAR" javaType="java.lang.String"/>-->
+    <!--        <arg column="jobNum" jdbcType="VARCHAR" javaType="java.lang.String"/>-->
+    <!--        <arg column="colorInfo" jdbcType="VARCHAR" javaType="java.lang.String"/>-->
+    <!--        <arg column="numberInfo" jdbcType="VARCHAR" javaType="java.lang.String"/>-->
+    <!--        <arg column="sizeInfo" jdbcType="VARCHAR" javaType="java.lang.String"/>-->
+    <!--    </constructor>-->
+    <!--    </resultMap>-->
+
+    <resultMap id="OrderInfo" type="com.pzm.zh.entity.OrderInfo"></resultMap>
+
+    <sql id="Base_Column_List">
+        ProjectItemSaleBillCode AS salesOrderNum,
+        projectItemCode AS jobNum,
+        ProjectItemAttribute1Code AS colorInfo,
+        ProjectItemObjectFQty AS numberInfo,
+        ProjectItemAttribute2Code AS sizeInfo,
+        ProjectItemObjectModel AS styleName
+  </sql>
+
+    <select id="selectOrderInfo" resultMap="OrderInfo" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from CCPM_ProjectItem
+        where ProjectItemCode = #{jobNum}
+    </select>
+</mapper>

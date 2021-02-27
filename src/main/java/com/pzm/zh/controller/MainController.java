@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -47,6 +48,7 @@ public class MainController {
 
     @Resource
     private DataHeService dataHeServiceImpl;
+
     @RequestMapping(value = "/")
     public String homePage() {
         return "Material/inventorySelect";
@@ -55,6 +57,11 @@ public class MainController {
     @RequestMapping(value = "/material/inventorySum")
     public String sum() {
         return "Material/inventorySum";
+    }
+
+    @RequestMapping(value = "/material/inventorySelectForBatch")
+    public String inventorySelectForBatch() {
+        return "/material/inventorySelectForBatch";
     }
 
     @RequestMapping(value = "/excelPlug/excelPage")
@@ -105,14 +112,17 @@ public class MainController {
         // 处理后余料汇总
         List<Emp> removeList = new ArrayList<>();
         // 对正常料进行分组
-        Map<String, List<Emp>> resultCollect = list.stream().collect(Collectors.groupingBy(e -> e.getPartName() + "," + e.getHigh() + "," + e.getLength() + "," + e.getWidth() + "," + e.getCaoweight()));
+        Map<String, List<Emp>> resultCollect = list.stream().collect(Collectors.groupingBy(e -> e.getPartName() + "," + e.getHigh() + "," +
+                e.getLength() + "," + e.getWidth() + "," + e.getCaoweight() + "," + e.getColorInfo() + "," + e.getSalesOrderNum()));
         for (String string : resultCollect.keySet()) {
             List<Emp> emps = resultCollect.get(string);
             String partName = emps.get(0).getPartName();
             Double length = emps.get(0).getLength();
             Double width = emps.get(0).getWidth();
             Double hight = emps.get(0).getHigh();
-            Double caoweight = emps.get(0).getCaoweight();
+            BigDecimal caoweight = emps.get(0).getCaoweight();
+            String colorInfo = emps.get(0).getColorInfo();
+            String salesOrderNum = emps.get(0).getSalesOrderNum();
             // 向上取整
             Double numbyZhuang = Math.ceil(emps.stream().collect(Collectors.summingDouble(Emp::getNumbyZhuang))); // 数量张(片)
             Double numbyGens = Math.ceil(emps.stream().collect(Collectors.summingDouble(Emp::getNumbyGens))); // 数量根
@@ -126,12 +136,17 @@ public class MainController {
             emp.setNumbyZhuang(numbyZhuang);
             emp.setNumbyGens(numbyGens);
             emp.setNumbyGe(numbyGe);
+            emp.setSalesOrderNum(salesOrderNum);
+            emp.setColorInfo(colorInfo);
             resultList.add(emp);
         }
         // 对余料进行分组
-        Map<String, List<Emp>> removeCollect = list.stream().collect(Collectors.groupingBy(e -> e.getPartName() + "," + e.getHigh() + "," + e.getYuliaoLen() + "," + e.getYuliaoWidth()));
+        Map<String, List<Emp>> removeCollect = list.stream().collect(Collectors.groupingBy(e -> e.getPartName() + "," + e.getHigh() + "," + e.getYuliaoLen()
+                + "," + e.getYuliaoWidth() + e.getColorInfo() + "," + e.getSalesOrderNum()));
         for (String string : removeCollect.keySet()) {
             List<Emp> emps = removeCollect.get(string);
+            String colorInfo = emps.get(0).getColorInfo();
+            String salesOrderNum = emps.get(0).getSalesOrderNum();
             String partName = emps.get(0).getPartName();
             Double hight = emps.get(0).getHigh();
             Double yuliaolen = emps.get(0).getYuliaoLen();
@@ -153,9 +168,12 @@ public class MainController {
             emp.setNumbyZhuang(numbyZhuang);
             emp.setYuliaoWidth(yuliaowidth);
             emp.setYuliaoLen(yuliaolen);
+            emp.setSalesOrderNum(salesOrderNum);
+            emp.setColorInfo(colorInfo);
             removeList.add(emp);
         }
         EmpData empData = new EmpData();
+        empData.setOriginal(caseDtos);
         empData.setNormal(list);
         empData.setResult(resultList);
         empData.setRemove(removeList);

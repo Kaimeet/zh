@@ -6,15 +6,11 @@ import com.pzm.zh.entity.Serizes;
 import com.pzm.zh.entity.Variables;
 import com.pzm.zh.util.Dto;
 import com.pzm.zh.util.DtoUtil;
-import org.apache.poi.hssf.record.common.FtrHeader;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.CheckForNull;
 import javax.annotation.Resource;
-import java.util.HashMap;
 import java.util.List;
 
 /**

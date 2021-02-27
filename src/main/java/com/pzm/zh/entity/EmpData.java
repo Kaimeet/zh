@@ -5,6 +5,12 @@ import java.util.List;
 
 public class EmpData {
 
+    // 无法计算的数据
+    private List<CaseDto> notCorrect;
+
+    // 计算前的原始数据
+    private List<CaseDto> original;
+
     // 计算后
     private List<Emp> normal;
 
@@ -13,6 +19,22 @@ public class EmpData {
 
     // 余料
     private List<Emp> remove;
+
+    public List<CaseDto> getNotCorrect() {
+        return notCorrect;
+    }
+
+    public void setNotCorrect(List<CaseDto> notCorrect) {
+        this.notCorrect = notCorrect;
+    }
+
+    public List<CaseDto> getOriginal() {
+        return original;
+    }
+
+    public void setOriginal(List<CaseDto> original) {
+        this.original = original;
+    }
 
     public List<Emp> getResult() {
         if (result == null || result.size() == 0){

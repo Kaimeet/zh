@@ -269,6 +269,44 @@ $("#kuanshi").change(function () {
     //要触发的事件
 });
 
+// 输入订单号进入回车事件
+$("#jobNum").keydown(function (e) {
+    if (e.keyCode == 13) {
+        getOrderInfo($("#jobNum").val());
+    }
+});
+
+// 通过工单号获取相关信息
+function getOrderInfo(jobNum) {
+    $.ajax({
+        url: '../orderInfo/getOrderInfo',   //url地址
+        type: 'GET',                 //上传方式
+        dataType: 'JSON',
+        async: true,    //请求是否异步，默认为异步，这也是ajax重要特性
+        data: {"jobNum": jobNum},
+        success: function (req) {//成功回调
+            console.log(req.success)
+            if (req.success == '200') {
+                $('#salesOrderNum').val(req.data.salesOrderNum);//销售订单号
+                $('#menshangao').val(req.data.hight);// 门扇高度
+                $('#menshankuan').val(req.data.width);// 门扇宽度
+                $('#colorInfo').val(req.data.colorInfo);// 颜色
+                $('#menshannums').val(parseInt(req.data.numberInfo));// 门扇数量
+            } else {
+                $('#salesOrderNum').val("");//销售订单号
+                $('#menshangao').val("");// 门扇高度
+                $('#menshankuan').val("");// 门扇宽度
+                $('#colorInfo').val("");// 颜色
+                $('#menshannums').val("");// 门扇数量
+                alert("工单号为" + jobNum + "找不到对应的数据，请确认当前输入的订单号是否正确！")
+            }
+        },
+        error: function (req) {//失败回调
+            console.log(req);
+        }
+    });
+}
+
 function vari(id) {
     $.ajax({
         url: "../serizescontroll/choosevari",    //请求的url地址
@@ -278,9 +316,10 @@ function vari(id) {
         type: "GET",   //请求方式
         success: function (req) {
             //请求成功时处理
-            $('#menshangao').val(req.data.doorhigh);//门扇高度
-            $('#menshannums').val(req.data.doornums);//门扇数量
-            $('#menshankuan').val(req.data.doorweight);//门扇宽度
+            $('#caokuan').val(req.data.caoweight);
+            // $('#menshangao').val(req.data.doorhigh);//门扇高度
+            // $('#menshannums').val(req.data.doornums);//门扇数量
+            // $('#menshankuan').val(req.data.doorweight);//门扇宽度
             // $('#employeeName').val( req.data.variablename);
             // $('#employeecode').val( req.data.variablecode);
             $('#bancaihou').val(req.data.plaThick);//板材厚度
@@ -778,8 +817,6 @@ function excelExport() {
 
 
 var tableData = [];
-// 序号
-var dataIndex = 1;
 
 function addItem() {
     // 获取数据
@@ -791,9 +828,23 @@ function addItem() {
     }
 }
 
+function addItemForImport(importData) {
+    for (var i = 0; i < importData.length; i++) {
+        tableData.push(importData[i]);
+    }
+    if (tableData != null && tableData != undefined) {
+        transSourceData(tableData)
+        // 清空所有输入框、单选框中的值
+        clearSourceData();
+    }
+}
+
 // 获取表单传入的数据
 function getSourceData() {
     let myTestData = {
+        jobNum: $('#jobNum').val(), // 工单号
+        salesOrderNum: $('#salesOrderNum').val(), // 销售订单号
+        colorInfo: $('#colorInfo').val(), // 颜色
         doorhigh: $('#menshangao').val(),//门扇高度
         doornums: $('#menshannums').val(),//门扇数量
         doorweight: $('#menshankuan').val(),//门扇宽度
@@ -817,8 +868,8 @@ function getSourceData() {
         memo1: $('#szthigh').val(),//上中挺长
         memo4: $('#memo4').val(),//小中档宽
         memo5: $('#memo5').val(),//小中挺宽
-        caseires: $('#suanfaxilie').val(),
-        serizesId: $('#kuanshi').val()
+        caseires: $('#suanfaxilie').val(), // 款式系列ID
+        serizesId: $('#kuanshi').val(), // 算法系列ID
     };
     if (myTestData.caseires == null || myTestData.caseires == undefined || myTestData.caseires == '') {
         alert("请添加有效的数据！")
@@ -831,26 +882,18 @@ function getSourceData() {
         return
     } else if (myTestData.caseires == 7 && myTestData.serizesId == 29) {
         myTestData.memo3 = "500";
-        myTestData.dataIndex = dataIndex;
         tableData.push(myTestData);
-        dataIndex = dataIndex + 1;
         return tableData;
     } else if (myTestData.caseires == 7 && myTestData.serizesId == 30) {
         myTestData.memo3 = "500";
-        myTestData.dataIndex = dataIndex;
         tableData.push(myTestData);
-        dataIndex = dataIndex + 1;
         return tableData;
     } else if (myTestData.caseires == 8 && myTestData.serizesId == 33) {
         myTestData.memo3 = "500";
-        myTestData.dataIndex = dataIndex;
         tableData.push(myTestData);
-        dataIndex = dataIndex + 1;
         return tableData;
     } else {
-        myTestData.dataIndex = dataIndex;
         tableData.push(myTestData);
-        dataIndex = dataIndex + 1;
         return tableData;
     }
 }
@@ -865,9 +908,11 @@ function transSourceData(tableData) {
             , title: '原始数据表'
             , cols: [[ //标题栏
                 {type: 'checkbox'}
-                , {field: 'dataIndex', title: '序号', width: 80}
+                , {field: 'jobNum', title: '工单号', width: 180}
+                , {field: 'salesOrderNum', title: '销售订单号', width: 180}
                 , {field: 'caseires', title: '系列', width: 80}
                 , {field: 'serizesId', title: '款式', width: 80}
+                , {field: 'colorInfo', title: '颜色', width: 180}
                 , {field: 'doorhigh', title: '门扇高度', width: 100}
                 , {field: 'doornums', title: '门扇数量', width: 100}
                 , {field: 'doorweight', title: '门扇宽度', minWidth: 100}
@@ -888,7 +933,7 @@ function transSourceData(tableData) {
                 , {field: 'xztWeight', title: '下中挺宽度', width: 100}
                 , {field: 'glassDepth', title: '玻璃进槽深度', width: 120}
                 , {field: 'memo3', title: '下中挺长', width: 100}
-                , {field: 'memo1', title: '下中挺长', width: 100}
+                , {field: 'memo1', title: '上中挺长', width: 100}
                 , {field: 'memo4', title: '小中档宽', width: 100}
                 , {field: 'memo5', title: '小中挺宽', width: 100}
                 , {fixed: 'right', title: '操作', toolbar: '#barDemo', width: 80}
@@ -903,11 +948,10 @@ function transSourceData(tableData) {
 
         table.on('tool(reportTable0)', function (obj) {
             var data = obj.data;
-            console.log(obj)
             if (obj.event === 'del') {
                 layer.confirm('是否需要删除该行！', function (index) {
-                    obj.del();
                     tableData.pop(index)
+                    obj.del();
                     layer.close(index);
                 });
             } else if (obj.event === 'edit') {
@@ -927,8 +971,8 @@ function transSourceData(tableData) {
 
 // 清空表达中所有的数据
 function clearSourceData() {
-    $('#menshangao').val("");
-    $('#menshannums').val(""),//门扇数量
+    $('#menshangao').val(""),
+        $('#menshannums').val(""),//门扇数量
         $('#menshankuan').val(""),//门扇宽度
         $('#bancaihou').val(""),//板材厚度
         $('#caokuan').val(""),//板材厚度
@@ -951,11 +995,16 @@ function clearSourceData() {
         $('#memo4').val(""),//小中档宽
         $('#memo5').val(""),//小中挺宽
         $('#suanfaxilie').val(""),
-        $('#kuanshi').val("")
+        $('#kuanshi').val(""),
+        $('#salesOrderNum').val(""),
+        $('#jobNum').val(""),
+        $('#colorInfo').val("")
 }
 
 // 计算后返回的数据
 var myData;
+// 计算前的原始数据
+var tableData;
 
 // 运算
 function calculate() {
@@ -981,7 +1030,9 @@ function calculate() {
                     elem: '#reportTable1'
                     , title: '运算结果数据表'
                     , cols: [[ //标题栏
-                        {field: 'dataIndex', title: '序号', width: 120}
+                        {field: 'jobNum', title: '工单号', width: 180}
+                        , {field: 'salesOrderNum', title: '销售订单号', width: 180}
+                        , {field: 'colorInfo', title: '颜色', width: 180}
                         , {field: 'partName', title: '部件名称', width: 120}
                         , {field: 'length', title: '长', width: 80}
                         , {field: 'width', title: '宽', width: 80}
@@ -1006,7 +1057,9 @@ function calculate() {
                     , tabBar: true
                     , totalrow: true
                     , cols: [[ //标题栏
-                        {field: 'partName', title: '部件名称', width: 180}
+                        {field: 'salesOrderNum', title: '销售订单号', width: 180}
+                        , {field: 'partName', title: '部件名称', width: 120}
+                        , {field: 'colorInfo', title: '颜色', width: 180}
                         , {field: 'length', title: '长', minWidth: 100}
                         , {field: 'width', title: '宽', minWidth: 100}
                         , {field: 'high', title: '高', width: 100}
@@ -1024,7 +1077,9 @@ function calculate() {
                     , tabBar: true
                     , totalrow: true
                     , cols: [[ //标题栏
-                        {field: 'partName', title: '部件名称', width: 180}
+                        {field: 'salesOrderNum', title: '销售订单号', width: 180}
+                        , {field: 'colorInfo', title: '颜色', width: 180}
+                        , {field: 'partName', title: '部件名称', width: 180}
                         , {field: 'yuliaoLen', title: '余料长', width: 100}
                         , {field: 'yuliaoWidth', title: '余料宽', width: 100}
                         , {field: 'high', title: '高', width: 100}
@@ -1048,87 +1103,403 @@ function excelExport() {
         alert("暂时没有要导出的数据,请添加完数据，进行计算后再进行导出！")
         return;
     }
+    // 原始计算数据
+    var originalList = myData.data.original;
+    console.log(originalList);
+    if (originalList == null || originalList == "" || originalList == undefined || originalList.length == 0) {
+        // layer.msg("暂时没有要导出的数据。", {icon: 5, anim: 6, time: 3000});
+        // return;
+    } else {
+        var aoa1 = new Array();
+        aoa1.push(
+            [
+                '工单号',
+                '销售订单号',
+                '系列',
+                '款式',
+                '颜色',
+                '门扇高度',
+                '门扇数量',
+                '门扇宽度',
+                '槽宽',
+                '板材厚度',
+                '中中挺宽度',
+                '上中挺宽度',
+                '边框',
+                '上芯板',
+                '中芯板',
+                '下芯板',
+                '中档宽',
+                '造型宽',
+                '芯板进槽深度',
+                '上帽',
+                '下帽',
+                '中中挺长度',
+                '下中挺宽度',
+                '玻璃进槽深度',
+                '下中挺长',
+                '上中挺长',
+                '小中档宽',
+                '小中挺宽'
+            ]
+        )
+        if (originalList != null && originalList.length > 0) {
+            for (var i = 0; i < originalList.length; i++) {
+                let temp = new Array;
+                temp.push(originalList[i].jobNum);
+                temp.push(originalList[i].salesOrderNum);
+                temp.push(originalList[i].caseires);
+                temp.push(originalList[i].serizesId);
+                temp.push(originalList[i].colorInfo);
+                temp.push(originalList[i].doorhigh);
+                temp.push(originalList[i].doornums);
+                temp.push(originalList[i].doorweight);
+                temp.push(originalList[i].caoweight);
+                temp.push(originalList[i].plaThick);
+                temp.push(originalList[i].zztWeight);
+                temp.push(originalList[i].sztweight);
+                temp.push(originalList[i].bkweight);
+                temp.push(originalList[i].sxHigh);
+                temp.push(originalList[i].zxHigh);
+                temp.push(originalList[i].xxHigh);
+                temp.push(originalList[i].zdWeight);
+                temp.push(originalList[i].zxWeight);
+                temp.push(originalList[i].xbDepth);
+                temp.push(originalList[i].smWeight);
+                temp.push(originalList[i].xmWeight);
+                temp.push(originalList[i].memo2);
+                temp.push(originalList[i].xztWeight);
+                temp.push(originalList[i].glassDepth);
+                temp.push(originalList[i].memo3);
+                temp.push(originalList[i].memo1);
+                temp.push(originalList[i].memo4);
+                temp.push(originalList[i].memo5);
+                aoa1.push(temp);
+            }
+        }
+        var cols1 = [
+            {wch: 10},
+            {wch: 10},
+            {wch: 10},
+            {wch: 10},
+            {wch: 10},
+            {wch: 10},
+            {wch: 10},
+            {wch: 10},
+            {wch: 10},
+            {wch: 10},
+            {wch: 10},
+            {wch: 10},
+            {wch: 10},
+            {wch: 10},
+            {wch: 10},
+            {wch: 10},
+            {wch: 10},
+            {wch: 10},
+            {wch: 10},
+            {wch: 10},
+            {wch: 10},
+            {wch: 10},
+            {wch: 10},
+            {wch: 10},
+            {wch: 10},
+            {wch: 10},
+            {wch: 10}
+        ]
+        var sheet1 = XLSX.utils.aoa_to_sheet(aoa1);
+    }
+
+    // 计算后的数据
+    var normalList = myData.data.normal;
+    console.log(originalList);
+    if (normalList == null || normalList == "" || normalList == undefined || normalList.length == 0) {
+        // layer.msg("暂时没有要导出的数据。", {icon: 5, anim: 6, time: 3000});
+        // return;
+    } else {
+        var aoa2 = new Array();
+        aoa2.push(
+            [
+                '工单号',
+                '销售订单号',
+                '颜色',
+                '部件名称',
+                '长',
+                '宽',
+                '高',
+                '槽宽',
+                '数量张(片)',
+                '数量根',
+                '数量个',
+                '余料长',
+                '余料宽'
+            ]
+        )
+        if (normalList != null && normalList.length > 0) {
+            for (var i = 0; i < normalList.length; i++) {
+                let temp = new Array;
+                temp.push(normalList[i].jobNum);
+                temp.push(normalList[i].salesOrderNum);
+                temp.push(normalList[i].colorInfo);
+                temp.push(normalList[i].partName);
+                temp.push(normalList[i].length);
+                temp.push(normalList[i].width);
+                temp.push(normalList[i].high);
+                temp.push(normalList[i].caoweight);
+                temp.push(normalList[i].numbyZhuang);
+                temp.push(normalList[i].numbyGens);
+                temp.push(normalList[i].numbyGe);
+                temp.push(normalList[i].yuliaoLen);
+                temp.push(normalList[i].yuliaoWidth);
+                aoa2.push(temp);
+            }
+        }
+        var cols2 = [
+            {wch: 10},
+        ]
+        var sheet2 = XLSX.utils.aoa_to_sheet(aoa2);
+    }
     // 正常料
     var infoMS = myData.data.result;
     console.log(infoMS);
     if (infoMS == null || infoMS == "" || infoMS == undefined || infoMS.length == 0) {
-        layer.msg("暂时没有要导出的数据。", {icon: 5, anim: 6, time: 3000});
-        return;
-    }
-    var aoa = new Array();
-    aoa.push(
-        [
-            '部件名称',
-            '长',
-            '宽',
-            '高',
-            '数量个',
-            '数量根',
-            '数量张(片)',
-        ]);
-    if (infoMS != null && infoMS.length > 0) {
-        for (var i = 0; i < infoMS.length; i++) {
-            let temp = new Array;
-            temp.push(infoMS[i].partName);
-            temp.push(infoMS[i].length);
-            temp.push(infoMS[i].width);
-            temp.push(infoMS[i].high);
-            temp.push(infoMS[i].numbyGe);
-            temp.push(infoMS[i].numbyGens);
-            temp.push(infoMS[i].numbyZhuang);
-            aoa.push(temp);
+        // layer.msg("暂时没有要导出的数据。", {icon: 5, anim: 6, time: 3000});
+        // return;
+    } else {
+        var aoa3 = new Array();
+        aoa3.push(
+            [
+                '销售订单号',
+                '颜色',
+                '部件名称',
+                '长',
+                '宽',
+                '高',
+                '数量个',
+                '数量根',
+                '数量张(片)',
+            ]);
+        if (infoMS != null && infoMS.length > 0) {
+            for (var i = 0; i < infoMS.length; i++) {
+                let temp = new Array;
+                temp.push(infoMS[i].salesOrderNum);
+                temp.push(infoMS[i].colorInfo);
+                temp.push(infoMS[i].partName);
+                temp.push(infoMS[i].length);
+                temp.push(infoMS[i].width);
+                temp.push(infoMS[i].high);
+                temp.push(infoMS[i].numbyGe);
+                temp.push(infoMS[i].numbyGens);
+                temp.push(infoMS[i].numbyZhuang);
+                aoa3.push(temp);
+            }
         }
+        var cols3 = [
+            {wch: 10},
+            {wch: 10},
+            {wch: 10},
+            {wch: 10},
+            {wch: 10},
+            {wch: 10},
+            {wch: 10},
+            {wch: 10},
+            {wch: 10}
+        ];
+        var sheet3 = XLSX.utils.aoa_to_sheet(aoa3);
     }
-    var cols = [
-        {wch: 8},
-        {wch: 11},
-        {wch: 30},
-        {wch: 30},
-        {wch: 10},
-        {wch: 10},
-        {wch: 10},
-        {wch: 10},
-        {wch: 10},
-        {wch: 10},
-        {wch: 10},
-    ];
-    let sheet = XLSX.utils.aoa_to_sheet(aoa);
     // openDownloadDialog(sheet2blob(sheet, cols), '正常料合并导出结果.xlsx');
     // 余料
     var infoMs2 = myData.data.remove;
     console.log(infoMs2);
     if (infoMs2 == null || infoMs2 == "" || infoMs2 == undefined || infoMs2.length == 0) {
-        layer.msg("暂时没有要导出的数据。", {icon: 5, anim: 6, time: 3000});
-        return;
-    }
-    var aoa2 = new Array();
-    aoa2.push(
-        [
-            '部件名称',
-            '余料长',
-            '余料宽',
-            '高',
-            '数量张(片)',
-        ]);
-    if (infoMs2 != null && infoMs2.length > 0) {
-        for (var i = 0; i < infoMs2.length; i++) {
-            let temp = new Array;
-            temp.push(infoMs2[i].partName);
-            temp.push(infoMs2[i].yuliaoLen);
-            temp.push(infoMs2[i].yuliaoWidth);
-            temp.push(infoMs2[i].high);
-            temp.push(infoMs2[i].numbyZhuang);
-            aoa2.push(temp);
+        // layer.msg("暂时没有要导出的数据。", {icon: 5, anim: 6, time: 3000});
+    } else {
+        var aoa4 = new Array();
+        aoa4.push(
+            [
+                '销售订单号',
+                '颜色',
+                '部件名称',
+                '余料长',
+                '余料宽',
+                '高',
+                '数量张(片)',
+            ]);
+        if (infoMs2 != null && infoMs2.length > 0) {
+            for (var i = 0; i < infoMs2.length; i++) {
+                let temp = new Array;
+                temp.push(infoMs2[i].salesOrderNum);
+                temp.push(infoMs2[i].colorInfo);
+                temp.push(infoMs2[i].partName);
+                temp.push(infoMs2[i].yuliaoLen);
+                temp.push(infoMs2[i].yuliaoWidth);
+                temp.push(infoMs2[i].high);
+                temp.push(infoMs2[i].numbyZhuang);
+                aoa4.push(temp);
+            }
         }
+        var cols4 = [
+            {wch: 10},
+            {wch: 10},
+            {wch: 10},
+            {wch: 10},
+            {wch: 10},
+            {wch: 10},
+            {wch: 10},
+            {wch: 10}
+        ];
+        var sheet4 = XLSX.utils.aoa_to_sheet(aoa4);
     }
-    var cols2 = [
-        {wch: 8},
-        {wch: 11},
-        {wch: 30},
-        {wch: 30},
-        {wch: 10}
-    ];
-    let sheet2 = XLSX.utils.aoa_to_sheet(aoa2);
-    // openDownloadDialog(sheet2blob(sheet2, cols), '余料合并导出结果.xlsx');
-    openDownloadDialog(sheets2blob(sheet, sheet2, cols, cols2, "正常料合并结果", "余料合并结果"), '合并导出结果.xlsx')
+    openDownloadDialog(sheets2blob(sheet1, sheet2, sheet3, sheet4, cols1, cols2, cols3, cols4,
+        "原始计算数据", "计算后数据", "正常料合并结果", "余料合并结果"), '计算结果.xlsx');
 }
+
+
+// 导入
+// function uploadFile() {
+//     $("#file").click();
+//     console.log("进入的导入窗口！")
+//     $('#file').change(function (e) {
+//         console.log("点击了导入！")
+//         var fileName = e.target.files[0];//js 获取文件对象
+//         if (fileName !== undefined) {
+//             var file_typename = fileName.name.substring(fileName.name.lastIndexOf('.'));
+//             if (file_typename === '.xlsx' || file_typename === '.xls') {
+//                 $("#filename").css("display", "block");
+//                 $("#filename").val(fileName.name);
+//                 Upload(fileName);
+//             } else {
+//                 alert("请选择正确的文件类型！");
+//             }
+//         } else {
+//             alert("上传失败！");
+//         }
+//     })
+// }
+
+// // 将excel 传人后台，并显示合并结果到前端，并且下载该文件
+// function Upload(fileObj) {
+//     var form = new FormData(); // FormData 对象
+//     form.append("file", fileObj); // 文件对象
+//     $.ajax({
+//         url: '/api/excel/readExcel',   //url地址
+//         type: 'POST',                 //上传方式
+//         data: form,                   // 上传formdata封装的数据
+//         dataType: 'JSON',
+//         cache: false,                  // 不缓存
+//         processData: false,        // jQuery不要去处理发送的数据
+//         contentType: false,         // jQuery不要去设置Content-Type请求头
+//         success: function (data) {//成功回调
+//             console.log(data);
+//             addItemForImport(data.data.original);
+//         },
+//         error: function (data) {//失败回调
+//             console.log(data);
+//         }
+//     });
+// }
+
+layui.use('upload', function () {
+    var $ = layui.jquery
+        , upload = layui.upload;
+    //选完文件后不自动上传
+    upload.render({
+        elem: '#file'
+        , url: '/api/excel/readExcel' //改成您自己的上传接口
+        , accept: 'file' //普通文件
+        , auto: false
+        , multiple: true
+        , bindAction: '#fileUpdate'
+        , done: function (res) {
+            if (res.success == "200") {
+                addItemForImport(res.data.original);
+                if (res.data.notCorrect.length > 0) {
+                    var msg = [];
+                    for (var i = 0; i < res.data.notCorrect.length; i++) {
+                        msg.push(res.data.notCorrect[i].jobNum);
+                    }
+                    alert("上传成功工单数:" + res.data.original.length + ",上传失败工单数:" + res.data.notCorrect.length + ",以下工单号上传失败：" + msg);
+                } else {
+                    layer.msg("上传成功!");
+                }
+
+
+            } else {
+                layer.msg("上传失败！");
+            }
+            console.log(res)
+        }
+    });
+
+    //多文件列表示例
+    var demoListView = $('#demoList')
+        , uploadListIns = upload.render({
+        elem: '#testList'
+        , url: '/api/excel/readExcel' //改成您自己的上传接口
+        , accept: 'file'
+        , multiple: true
+        , auto: false
+        , bindAction: '#testListAction'
+        , choose: function (obj) {
+            var files = this.files = obj.pushFile(); //将每次选择的文件追加到文件队列
+            //读取本地文件
+            obj.preview(function (index, file, result) {
+                var file_typename = file.name.substring(file.name.lastIndexOf('.'));
+                if (file_typename === '.xlsx' || file_typename === '.xls') {
+                    var tr = $(['<tr id="upload-' + index + '">'
+                        , '<td>' + file.name + '</td>'
+                        , '<td>' + (file.size / 1024).toFixed(1) + 'kb</td>'
+                        , '<td>等待上传</td>'
+                        , '<td>'
+                        , '<button class="layui-btn layui-btn-xs demo-reload layui-hide">重传</button>'
+                        , '<button class="layui-btn layui-btn-xs layui-btn-danger demo-delete">删除</button>'
+                        , '</td>'
+                        , '</tr>'].join(''));
+
+                    //单个重传
+                    tr.find('.demo-reload').on('click', function () {
+                        obj.upload(index, file);
+                    });
+
+                    //删除
+                    tr.find('.demo-delete').on('click', function () {
+                        delete files[index]; //删除对应的文件
+                        tr.remove();
+                        uploadListIns.config.elem.next()[0].value = ''; //清空 input file 值，以免删除后出现同名文件不可选
+                    });
+                    demoListView.append(tr);
+                } else {
+                    alert("请上传excel类型的文件！")
+                }
+            });
+        }
+        , done: function (res, index, upload) {
+            if (res.success == "200") {//上传成功
+                addItemForImport(res.data.original);
+                if (res.data.notCorrect.length > 0) {
+                    var msg = [];
+                    for (var i = 0; i < res.data.notCorrect.length; i++) {
+                        msg.push(res.data.notCorrect[i].jobNum);
+                    }
+                    alert("上传成功工单数:" + res.data.original.length + ",上传失败工单数:" + res.data.notCorrect.length + ",以下工单号上传失败：" + msg);
+                } else {
+                    layer.msg("上传成功!");
+                }
+                var tr = demoListView.find('tr#upload-' + index)
+                    , tds = tr.children();
+                tds.eq(2).html('<span style="color: #5FB878;">上传成功</span>');
+                tds.eq(3).html(''); //清空操作
+                return delete this.files[index]; //删除文件队列已经上传成功的文件
+            }
+            console.log(res)
+            this.error(index, upload);
+        }
+        , error: function (index, upload) {
+            var tr = demoListView.find('tr#upload-' + index)
+                , tds = tr.children();
+            tds.eq(2).html('<span style="color: #FF5722;">上传失败</span>');
+            tds.eq(3).find('.demo-reload').removeClass('layui-hide'); //显示重传
+        }
+    });
+
+});
+

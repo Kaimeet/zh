@@ -45,14 +45,20 @@ public class DataServiceImpl implements DataService {
         // 板材厚度 = 芯板高度
         BigDecimal plaThick = caseDto.getPlaThick();
         // 槽宽
-        Double caoweight = caseDto.getCaoweight();
-        // 序号
-        String dataIndex = caseDto.getDataIndex();
+        BigDecimal caoweight = caseDto.getCaoweight();
+        // 工单号
+        String jobNum = caseDto.getJobNum();
+        // 销售订单
+        String salesOrderNum = caseDto.getSalesOrderNum();
+        // 颜色
+        String colorInfo = caseDto.getColorInfo();
         List<Emp> maincase = maincase(caseDto);
         int serid = caseDto.getSerizesId();
         for (Emp emp : maincase) {
             emp.setCaoweight(caoweight);
-            emp.setDataIndex(dataIndex);
+            emp.setJobNum(jobNum);
+            emp.setSalesOrderNum(salesOrderNum);
+            emp.setColorInfo(colorInfo);
             if ("边框".equals(emp.getPartName())) {
                 if (serid == 18) {
                     emp.setHigh(new Double(45));

@@ -2,10 +2,12 @@ package com.pzm.zh.entity;
 
 import com.pzm.zh.annotation.ExcelColumn;
 
+import java.math.BigDecimal;
+
 public class Emp {
 
-    @ExcelColumn(value = "序号",col = 1)
-    private String dataIndex;
+    @ExcelColumn(value = "工单号",col = 1)
+    private String jobNum;
 
     @ExcelColumn(value = "部件名称", col = 2)
     private String partName;//部件名称
@@ -20,7 +22,7 @@ public class Emp {
     private Double high;//高
 
     @ExcelColumn(value = "槽宽", col = 6)
-    private Double caoweight;//槽宽
+    private BigDecimal caoweight;//槽宽
 
     @ExcelColumn(value = "数量张(片)", col = 7)
     private Double numbyZhuang;//数量张(片)
@@ -36,6 +38,12 @@ public class Emp {
 
     @ExcelColumn(value = "余料宽", col = 11)
     private Double yuliaoWidth;//余料宽
+
+    @ExcelColumn(value = "销售订单号", col = 12)
+    private String salesOrderNum;// 销售订单号
+
+    @ExcelColumn(value = "颜色", col = 13)
+    private String colorInfo; // 颜色
 
     public String getPartName() {
         return partName;
@@ -109,19 +117,36 @@ public class Emp {
         this.yuliaoWidth = yuliaoWidth;
     }
 
-    public String getDataIndex() {
-        return dataIndex;
-    }
 
-    public void setDataIndex(String dataIndex) {
-        this.dataIndex = dataIndex;
-    }
-
-    public Double getCaoweight() {
+    public BigDecimal getCaoweight() {
         return caoweight;
     }
 
-    public void setCaoweight(Double caoweight) {
+    public void setCaoweight(BigDecimal caoweight) {
         this.caoweight = caoweight;
+    }
+
+    public String getJobNum() {
+        return jobNum;
+    }
+
+    public void setJobNum(String jobNum) {
+        this.jobNum = jobNum;
+    }
+
+    public String getSalesOrderNum() {
+        return salesOrderNum;
+    }
+
+    public void setSalesOrderNum(String salesOrderNum) {
+        this.salesOrderNum = salesOrderNum;
+    }
+
+    public String getColorInfo() {
+        return colorInfo;
+    }
+
+    public void setColorInfo(String colorInfo) {
+        this.colorInfo = colorInfo;
     }
 }

@@ -35,6 +35,12 @@
             select * from serizes
             where untitled4=#{name}
   </select>
+
+  <select id="selectByName" parameterType="string" resultType="com.pzm.zh.entity.Serizes">
+            select * from serizes
+            where name =#{name}
+  </select>
+
   <select id="selectCase" resultType="com.pzm.zh.entity.Serizes">
 select distinct * from serizes
   </select>
