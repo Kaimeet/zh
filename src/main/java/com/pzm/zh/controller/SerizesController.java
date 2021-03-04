@@ -40,6 +40,16 @@ public class SerizesController {
             for (Serizes serizes : serizesList) {
                 selectHtml += "<option  value=\"" + serizes.getId() + "\"><span>" + serizes.getName() + "</span></option>";
             }
+        }else if (type == 3) {
+            List<Serizes> serizesList = serizesMapper.selectbyname("GC系列");
+            for (Serizes serizes : serizesList) {
+                selectHtml += "<option  value=\"" + serizes.getId() + "\"><span>" + serizes.getName() + "</span></option>";
+            }
+        }else if (type == 4) {
+            List<Serizes> serizesList = serizesMapper.selectbyname("旭辉系列");
+            for (Serizes serizes : serizesList) {
+                selectHtml += "<option  value=\"" + serizes.getId() + "\"><span>" + serizes.getName() + "</span></option>";
+            }
         }
         return DtoUtil.returnDataSuccess(selectHtml, "001");
     }

@@ -2,10 +2,7 @@ package com.pzm.zh.controller;
 
 import com.pzm.zh.dao.SerizesMapper;
 import com.pzm.zh.entity.*;
-import com.pzm.zh.service.DataHeService;
-import com.pzm.zh.service.DataService;
-import com.pzm.zh.service.KunHeService;
-import com.pzm.zh.service.MainService;
+import com.pzm.zh.service.*;
 import com.pzm.zh.util.Dto;
 import com.pzm.zh.util.DtoUtil;
 import net.sf.json.JSONArray;
@@ -48,6 +45,12 @@ public class MainController {
 
     @Resource
     private DataHeService dataHeServiceImpl;
+
+    @Resource
+    private DataGcService dataGcServiceImpl;
+
+    @Resource
+    private DataXhService dataXhServiceImpl;
 
     @RequestMapping(value = "/")
     public String homePage() {
@@ -102,9 +105,15 @@ public class MainController {
                 System.out.println(JSONArray.fromObject(caseDto));
                 System.out.println("如图计算");
                 list.addAll(dataServiceImpl.mainfinalcase(caseDto));
-            } else {
+            } else if (caseid > 25 && caseid < 44) {
                 System.out.println("坤和计算");
                 list.addAll(dataHeServiceImpl.mainfinalcase(caseDto));
+            } else if (caseid > 44 && caseid < 53) {
+                System.out.println("GC计算");
+                list.addAll(dataGcServiceImpl.mainfinalcase(caseDto));
+            }else {
+                System.out.println("旭辉系列计算");
+                list.addAll(dataXhServiceImpl.mainfinalcase(caseDto));
             }
         }
         // 处理后正常料汇总
