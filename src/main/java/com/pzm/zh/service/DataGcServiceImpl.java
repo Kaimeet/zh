@@ -505,7 +505,7 @@ public class DataGcServiceImpl implements DataGcService {
             Double xxhigh = caseDto.getXxHigh().doubleValue();
             Double zdweight = caseDto.getZdWeight().doubleValue();
             zxblength = (doorhigh - smweight - xmweight + 4 * xbDepth - zdweight - xxhigh);
-            xxblength = (460 + 2 * xbDepth);
+            xxblength = xxhigh;
         }
         //计算中、下芯板宽
         Double zxbwidth = new Double(0);
@@ -606,6 +606,7 @@ public class DataGcServiceImpl implements DataGcService {
         double xxbnums = 0.0;
         double zxbnums = 0.0;
         double zztnums = 0.0;
+        double xztnums = 0.0;
         if (!StringUtils.isEmpty(numbyser.getZxbnums())) {
             zxbnums = Double.valueOf(numbyser.getZxbnums());
             flagzxb = true;
@@ -614,11 +615,19 @@ public class DataGcServiceImpl implements DataGcService {
             xxbnums = Double.valueOf(numbyser.getXxbnums());
             flagxxb = true;
         }
+        // 中中挺
         boolean flagzzt = false;
         if (!StringUtils.isEmpty(numbyser.getZztnums())) {
             zztnums = Double.valueOf(numbyser.getZztnums());
             flagzzt = true;
         }
+        // 下中挺
+        boolean flagxzt = false;
+        if (!StringUtils.isEmpty(numbyser.getXztnums())) {
+            xztnums = Double.valueOf(numbyser.getXztnums());
+            flagxzt = true;
+        }
+
         //中芯板长
         Double zxblength = new Double(0);
         zxblength = caseDoubles.getDoorhigh() - caseDoubles.getSmWeight() - caseDoubles.getXmWeight() - caseDoubles.getXxHigh() - caseDoubles.getZdWeight() + 4 * caseDoubles.getXbDepth();
@@ -630,7 +639,8 @@ public class DataGcServiceImpl implements DataGcService {
         zxbwidth = (caseDoubles.getDoorweight() - 2 * caseDoubles.getBkweight() - caseDoubles.getZztWeight()) / 2 + 2 * caseDoubles.getXbDepth();
         //下芯板宽
         Double xxbwidth = new Double(0);
-        xxbwidth = caseDoubles.getDoorweight() - 2 * caseDoubles.getBkweight() + 2 * caseDoubles.getXbDepth();
+        // 计算方法：(doorweight-2*bkweight-zztWeight）/2+2*xbDepth
+        xxbwidth = (caseDoubles.getDoorweight() - 2 * caseDoubles.getBkweight() - caseDoubles.getZztWeight()) / 2 + 2 * caseDoubles.getXbDepth();
         //中、下芯板数量
         Double zxbnumspian = new Double(0);
         Double xxbnumspian = new Double(0);
@@ -658,8 +668,8 @@ public class DataGcServiceImpl implements DataGcService {
         if (flagxxb) {
             empList.add(emp1);
         }
-        //中中挺长
-        Double zztlenth = caseDoubles.getDoorhigh() - caseDoubles.getSmWeight() - caseDoubles.getXmWeight() - caseDoubles.getXxHigh() - caseDoubles.getZdWeight() + 3 * caseDoubles.getZxWeight();
+        //中中挺长 doorHigh-smWeight-xmWeight-xxHigh-zdWeight+4*zxWeight
+        Double zztlenth = caseDoubles.getDoorhigh() - caseDoubles.getSmWeight() - caseDoubles.getXmWeight() - caseDoubles.getXxHigh() - caseDoubles.getZdWeight() + 4 * caseDoubles.getZxWeight();
         //中中挺宽
         Double zztwidth = caseDoubles.getZztWeight();
         //中中挺数量（个）
@@ -668,7 +678,7 @@ public class DataGcServiceImpl implements DataGcService {
         Double zztnumsGen = Double.valueOf(zztnumsge) / (int) (2440 / (Double.valueOf(zztlenth) + 4 + 5));
         //中中挺数量（张）
         Double zztnumsZhuang = Double.valueOf(zztnumsGen) / (int) (1220 / (caseDoubles.getZztWeight() + 5));
-        //中中挺余料长
+        // 中中挺余料长
         Double zztYuliaoLen = caseYuliaoLenth(Double.valueOf(zztlenth));
         //中中挺余料宽
         Double zztYuLiaoWidth = caseYuliaoKuan(Double.valueOf(zztwidth));
@@ -684,11 +694,39 @@ public class DataGcServiceImpl implements DataGcService {
         if (flagzzt) {
             empList.add(emp2);
         }
+        // 下中挺长
+        Double xztLength = caseDoubles.getXzthigh();
+        // 下中挺宽
+        Double xztwidth = caseDoubles.getXztWeight();
+        // 下中梃数量 (个) doornums*下中梃部件数量
+        Double xztnumsge = caseDoubles.getDoornums() * xztnums;
+        // 下中梃数量(根) doornums*中中梃部件数量/((INT)2440/( doorHigh-smWeight-xmWeight-xxHigh-zdWeight+4*zxWeight +4+5))
+        Double xztnumsGen = Double.valueOf(xztnumsge) / (int) (2440 / (caseDoubles.getDoorhigh() - caseDoubles.getSmWeight() - caseDoubles.getXmWeight() - caseDoubles.getXxHigh() - caseDoubles.getZdWeight() + 4 * caseDoubles.getZxWeight() + 4 + 5));
+        //下中挺数量（张） 下中梃根数/(INT)(1220/(zztWeight+5))
+        Double xztnumsZhuang = Double.valueOf(xztnumsGen) / (int) (1220 / (caseDoubles.getZztWeight() + 5));
+        //  (doorHigh-smWeight-xmWeight-xxHigh-zdWeight+4*zxWeight +4+5)
+        Double mid = caseDoubles.getDoorhigh() - caseDoubles.getSmWeight() - caseDoubles.getXmWeight() - caseDoubles.getXxHigh() - caseDoubles.getZdWeight() + 4 * caseDoubles.getZxWeight();
+        // 下中挺余料长
+        Double xztYuliaoLen = caseYuliaoLenth(Double.valueOf(mid));
+        // 下中挺余料宽
+        Double xztYuLiaoWidth = caseYuliaoKuan(Double.valueOf(xztwidth));
+        Emp emp3 = new Emp();
+        emp3.setPartName("下中挺");
+        emp3.setLength(xztLength);
+        emp3.setWidth(xztwidth);
+        emp3.setNumbyGe(xztnumsge);
+        emp3.setNumbyGens(xztnumsGen);
+        emp3.setNumbyZhuang(xztnumsZhuang);
+        emp3.setYuliaoLen(xztYuliaoLen);
+        emp.setYuliaoWidth(xztYuLiaoWidth);
+        if (flagxzt) {
+            empList.add(emp3);
+        }
         return empList;
     }
 
     /**
-     * 中中挺余料长
+     * 中中挺余料长x
      *
      * @param c
      * @return
