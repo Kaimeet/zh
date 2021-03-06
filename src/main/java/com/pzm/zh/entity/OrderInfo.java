@@ -32,6 +32,17 @@ public class OrderInfo {
     // 款式名称
     public String styleName;
 
+    // 款式名称(全)，与上面的款式名称2选1，进行查找
+    public String styleNameAll;
+
+    public String getStyleNameAll() {
+        return styleNameAll;
+    }
+
+    public void setStyleNameAll(String styleNameAll) {
+        this.styleNameAll = styleNameAll;
+    }
+
     public String getStyleName() {
         return styleName;
     }

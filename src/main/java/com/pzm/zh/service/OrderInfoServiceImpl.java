@@ -109,7 +109,7 @@ public class OrderInfoServiceImpl implements OrderInfoService {
         if (orderInfo != null) {
             flag = true;
         }
-        if (orderInfo != null && orderInfo.getSizeInfo() != null) {
+        if (orderInfo != null && orderInfo.getStyleName() != null) {
             Serizes serizes = serizesMapper.selectByName(orderInfo.getStyleName());
             if (serizes != null) {
                 Integer id = serizes.getId();
@@ -123,6 +123,23 @@ public class OrderInfoServiceImpl implements OrderInfoService {
                 flag = false;
             }
 
+        }
+        if (!flag) {
+            if (orderInfo != null && orderInfo.getStyleNameAll() != null) {
+                Serizes serizes = serizesMapper.selectByName(orderInfo.getStyleNameAll());
+                if (serizes != null) {
+                    Integer id = serizes.getId();
+                    Variables variables = variablesMapper.selectbyseid(id);
+                    if (variables != null) {
+                        flag = true;
+                    } else {
+                        flag = false;
+                    }
+                } else {
+                    flag = false;
+                }
+
+            }
         }
         return flag;
     }

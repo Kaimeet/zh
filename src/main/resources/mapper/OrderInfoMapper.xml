@@ -19,7 +19,8 @@
         ProjectItemAttribute1Code AS colorInfo,
         ProjectItemObjectFQty AS numberInfo,
         ProjectItemAttribute2Code AS sizeInfo,
-        ProjectItemObjectModel AS styleName
+        ProjectItemObjectModel AS styleName,
+        projectItemObjectName AS styleNameAll
   </sql>
 
     <select id="selectOrderInfo" resultMap="OrderInfo" parameterType="java.lang.String">
