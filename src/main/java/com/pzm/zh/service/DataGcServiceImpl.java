@@ -33,9 +33,13 @@ public class DataGcServiceImpl implements DataGcService {
         if ("1".equals(caseDto.getCaseires())) {
             return case1(caseDto, numbyser, emps);
         } else if ("2".equals(caseDto.getCaseires())) {
+            return case3(caseDto, numbyser, emps, caseDoubles);
+        } else if ("3".equals(caseDto.getCaseires())) {
             return case2(caseDto, numbyser, emps);
         } else if ("4".equals(caseDto.getCaseires())) {
             return case4(numbyser, emps, caseDoubles);
+        } else if ("5".equals(caseDto.getCaseires())) {
+            return case5(numbyser, emps, caseDoubles);
         } else if ("6".equals(caseDto.getCaseires())) {
             return case6(numbyser, emps, caseDoubles);
         }
@@ -421,7 +425,7 @@ public class DataGcServiceImpl implements DataGcService {
      */
     private List<Emp> case1(CaseDto caseDto, Numbyser numbyser, List<Emp> empList) {
         Double zxbnums = 0.0;
-        //增加中心板判断
+        //增加中芯板判断
         boolean flagzxb = false;
         if (!StringUtils.isEmpty(numbyser.getZxbnums())) {
             zxbnums = Double.valueOf(numbyser.getZxbnums());
@@ -549,6 +553,101 @@ public class DataGcServiceImpl implements DataGcService {
         return empList;
     }
 
+
+    /**
+     * 三类 2中档无中挺，含上中下芯板/玻璃
+     *
+     * @param caseDto
+     * @param numbyser
+     * @param empList
+     * @param caseDoubles
+     * @return
+     */
+    private List<Emp> case3(CaseDto caseDto, Numbyser numbyser, List<Emp> empList, CaseDoubles caseDoubles) {
+        Double zxbnums = new Double(0);
+        Double xxbnums = new Double(0);
+        Double sxbnums = new Double(0);
+        // 增加对上、中、下芯板的判断
+        Boolean flagsxb = false;
+        Boolean flagzxb = false;
+        Boolean flagxxb = false;
+        if (!StringUtils.isEmpty(numbyser.getSxbnums())) {
+            sxbnums = Double.valueOf(numbyser.getSxbnums());
+            flagsxb = true;
+        }
+        if (!StringUtils.isEmpty(numbyser.getZxbnums())) {
+            zxbnums = Double.valueOf(numbyser.getZxbnums());
+            flagzxb = true;
+        }
+        if (!StringUtils.isEmpty(numbyser.getXzdnums())) {
+            xxbnums = Double.valueOf(numbyser.getXxbnums());
+            flagxxb = true;
+        }
+        // 计算上、中、下芯板长
+        Double sxblength = new Double(0);
+        sxblength = (caseDoubles.getDoorhigh() - caseDoubles.getSmWeight() - caseDoubles.getXmWeight() - 2 * caseDoubles.getZdWeight() - caseDoubles.getZxHigh() - caseDoubles.getXxHigh() + 6 * caseDoubles.getXbDepth());
+        Double zxblength = new Double(0);
+        if (caseDto.getZxHigh() != null) {
+            zxblength = caseDto.getZxHigh().doubleValue();
+        }
+        Double xxblength = new Double(0);
+        if (caseDto.getXxHigh() != null) {
+            xxblength = caseDto.getXxHigh().doubleValue();
+        }
+        // 计算上、中、下芯板宽
+        Double zxbwidth = new Double(0);
+        Double xxbwidth = new Double(0);
+        Double sxbwidth = new Double(0);
+        if (caseDto.getXbDepth() != null && caseDto.getDoorweight() != null && caseDto.getBkweight() != null) {
+            double doorWeight = caseDto.getDoorweight().doubleValue();
+            double bkWeight = caseDto.getBkweight().doubleValue();
+            double xbDepth = caseDto.getXbDepth().doubleValue();
+            zxbwidth = (doorWeight - 2 * bkWeight + 2 * xbDepth);
+            xxbwidth = zxbwidth;
+            sxbwidth = zxbwidth;
+        }
+        //  计算上、中、下芯板数量（片）
+        Double zxbnumspian = new Double(0);
+        Double xxbnumspian = new Double(0);
+        Double sxbnumspian = new Double(0);
+        int N = 0;
+        if (caseDto.getPlaThick() != null && caseDto.getPlaThick().compareTo(new BigDecimal(15)) == 0) {
+            N = 1;
+        } else {
+            N = 2;
+        }
+        if (caseDto.getDoornums() != null) {
+            zxbnumspian = (caseDto.getDoornums().doubleValue() * N * zxbnums);
+            xxbnumspian = (caseDto.getDoornums().doubleValue() * N * xxbnums);
+            sxbnumspian = (caseDto.getDoornums().doubleValue() * N * sxbnums);
+        }
+        Emp emp = new Emp();
+        emp.setPartName("中芯板");
+        emp.setLength(zxblength);
+        emp.setWidth(zxbwidth);
+        emp.setNumbyZhuang(zxbnumspian);
+        if (flagzxb) {
+            empList.add(emp);
+        }
+        Emp emp1 = new Emp();
+        emp1.setPartName("下芯板");
+        emp1.setLength(xxblength);
+        emp1.setWidth(xxbwidth);
+        emp1.setNumbyZhuang(xxbnumspian);
+        if (flagxxb) {
+            empList.add(emp1);
+        }
+        Emp emp2 = new Emp();
+        emp2.setPartName("上芯板");
+        emp2.setLength(sxblength);
+        emp2.setWidth(sxbwidth);
+        emp2.setNumbyZhuang(sxbnumspian);
+        if (flagsxb) {
+            empList.add(emp2);
+        }
+        return empList;
+    }
+
     /**
      * 四类 3中档无中挺，4*中芯板均分
      *
@@ -567,6 +666,50 @@ public class DataGcServiceImpl implements DataGcService {
         //中芯板长
         Double zxblength = new Double(0);
         zxblength = (caseDoubles.getDoorhigh() - caseDoubles.getSmWeight() - caseDoubles.getXmWeight() - 3 * caseDoubles.getZdWeight()) / 4 + 2 * caseDoubles.getXbDepth();
+
+        //中芯板宽
+        Double zxbwidth = new Double(0);
+        zxbwidth = caseDoubles.getDoorweight() - 2 * caseDoubles.getBkweight() + 2 * caseDoubles.getXbDepth();
+
+        //中芯板数量
+        Double zxbnumspian = new Double(0);
+        int N = 0;
+        if (caseDoubles.getPlaThick() == 15) {
+            N = 1;
+        } else {
+            N = 2;
+        }
+        zxbnumspian = (caseDoubles.getDoornums() * N * zxbnums);
+        Emp emp = new Emp();
+        emp.setPartName("中芯板");
+        emp.setLength(zxblength);
+        emp.setWidth(zxbwidth);
+        emp.setNumbyZhuang(zxbnumspian);
+        if (flagzxb) {
+            empList.add(emp);
+        }
+        return empList;
+    }
+
+
+    /**
+     * 五类 2中档无中挺，3*中芯板/玻璃均分
+     *
+     * @param numbyser
+     * @param empList
+     * @param caseDoubles
+     * @return
+     */
+    private List<Emp> case5(Numbyser numbyser, List<Emp> empList, CaseDoubles caseDoubles) {
+        boolean flagzxb = false;
+        double zxbnums = 0.0;
+        if (!StringUtils.isEmpty(numbyser.getZxbnums())) {
+            zxbnums = Double.valueOf(numbyser.getZxbnums());
+            flagzxb = true;
+        }
+        //中芯板长
+        Double zxblength = new Double(0);
+        zxblength = (caseDoubles.getDoorhigh() - caseDoubles.getSmWeight() - caseDoubles.getXmWeight()) / 3 + 2 * caseDoubles.getXbDepth();
 
         //中芯板宽
         Double zxbwidth = new Double(0);

@@ -111,9 +111,12 @@ public class MainController {
             } else if (caseid > 44 && caseid < 53) {
                 System.out.println("GC计算");
                 list.addAll(dataGcServiceImpl.mainfinalcase(caseDto));
-            }else {
+            } else if (caseid > 52 && caseid < 55) {
                 System.out.println("旭辉系列计算");
                 list.addAll(dataXhServiceImpl.mainfinalcase(caseDto));
+            } else if (caseid > 54 && caseid < 61) {
+                System.out.println("GC计算");
+                list.addAll(dataGcServiceImpl.mainfinalcase(caseDto));
             }
         }
         // 处理后正常料汇总
