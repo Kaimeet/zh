@@ -1034,10 +1034,9 @@ function calculate() {
                         , {field: 'salesOrderNum', title: '销售订单号', width: 180}
                         , {field: 'colorInfo', title: '颜色', width: 180}
                         , {field: 'partName', title: '部件名称', width: 120}
-                        , {field: 'length', title: '长', width: 80}
-                        , {field: 'width', title: '宽', width: 80}
-                        , {field: 'high', title: '高', width: 80}
                         , {field: 'caoweight', title: '槽宽', width: 80}
+                        , {field: 'preSize', title: '备料尺寸', width: 200}
+                        , {field: 'size', title: '精截尺寸', width: 200}
                         , {field: 'numbyZhuang', title: '数量张(片)', width: 100}
                         , {field: 'numbyGens', title: '数量根', width: 100}
                         , {field: 'numbyGe', title: '数量个', width: 80}
@@ -1060,10 +1059,9 @@ function calculate() {
                         {field: 'salesOrderNum', title: '销售订单号', width: 180}
                         , {field: 'partName', title: '部件名称', width: 120}
                         , {field: 'colorInfo', title: '颜色', width: 180}
-                        , {field: 'length', title: '长', minWidth: 100}
-                        , {field: 'width', title: '宽', minWidth: 100}
-                        , {field: 'high', title: '高', width: 100}
                         , {field: 'caoweight', title: '槽宽', width: 100}
+                        , {field: 'preSize', title: '备料尺寸', width: 200}
+                        , {field: 'size', title: '精截尺寸', width: 200}
                         , {field: 'numbyGe', title: '数量个', width: 100}
                         , {field: 'numbyGens', title: '数量根', width: 100}
                         , {field: 'numbyZhuang', title: '数量张(片)', width: 180}
@@ -1080,9 +1078,8 @@ function calculate() {
                         {field: 'salesOrderNum', title: '销售订单号', width: 180}
                         , {field: 'colorInfo', title: '颜色', width: 180}
                         , {field: 'partName', title: '部件名称', width: 180}
-                        , {field: 'yuliaoLen', title: '余料长', width: 100}
-                        , {field: 'yuliaoWidth', title: '余料宽', width: 100}
-                        , {field: 'high', title: '高', width: 100}
+                        , {field: 'caoweight', title: '槽宽', width: 100}
+                        , {field: 'size', title: '余料尺寸', width: 200}
                         , {field: 'numbyZhuang', title: '数量张(片)', width: 180}
                     ]]
                     , data: myData.data.remove
@@ -1223,10 +1220,9 @@ function excelExport() {
                 '销售订单号',
                 '颜色',
                 '部件名称',
-                '长',
-                '宽',
-                '高',
                 '槽宽',
+                '备料尺寸',
+                '精截尺寸',
                 '数量张(片)',
                 '数量根',
                 '数量个',
@@ -1241,10 +1237,9 @@ function excelExport() {
                 temp.push(normalList[i].salesOrderNum);
                 temp.push(normalList[i].colorInfo);
                 temp.push(normalList[i].partName);
-                temp.push(normalList[i].length);
-                temp.push(normalList[i].width);
-                temp.push(normalList[i].high);
                 temp.push(normalList[i].caoweight);
+                temp.push(normalList[i].preSize);
+                temp.push(normalList[i].size);
                 temp.push(normalList[i].numbyZhuang);
                 temp.push(normalList[i].numbyGens);
                 temp.push(normalList[i].numbyGe);
@@ -1255,6 +1250,16 @@ function excelExport() {
         }
         var cols2 = [
             {wch: 10},
+            {wch: 10},
+            {wch: 10},
+            {wch: 10},
+            {wch: 10},
+            {wch: 30},
+            {wch: 30},
+            {wch: 10},
+            {wch: 10},
+            {wch: 10},
+            {wch: 10}
         ]
         var sheet2 = XLSX.utils.aoa_to_sheet(aoa2);
     }
@@ -1271,9 +1276,9 @@ function excelExport() {
                 '销售订单号',
                 '颜色',
                 '部件名称',
-                '长',
-                '宽',
-                '高',
+                '槽宽',
+                '备料尺寸',
+                '精截尺寸',
                 '数量个',
                 '数量根',
                 '数量张(片)',
@@ -1284,9 +1289,9 @@ function excelExport() {
                 temp.push(infoMS[i].salesOrderNum);
                 temp.push(infoMS[i].colorInfo);
                 temp.push(infoMS[i].partName);
-                temp.push(infoMS[i].length);
-                temp.push(infoMS[i].width);
-                temp.push(infoMS[i].high);
+                temp.push(infoMS[i].caoweight);
+                temp.push(infoMS[i].preSize);
+                temp.push(infoMS[i].size);
                 temp.push(infoMS[i].numbyGe);
                 temp.push(infoMS[i].numbyGens);
                 temp.push(infoMS[i].numbyZhuang);
@@ -1298,8 +1303,8 @@ function excelExport() {
             {wch: 10},
             {wch: 10},
             {wch: 10},
-            {wch: 10},
-            {wch: 10},
+            {wch: 30},
+            {wch: 30},
             {wch: 10},
             {wch: 10},
             {wch: 10}
@@ -1319,9 +1324,8 @@ function excelExport() {
                 '销售订单号',
                 '颜色',
                 '部件名称',
-                '余料长',
-                '余料宽',
-                '高',
+                '槽宽',
+                '余料尺寸',
                 '数量张(片)',
             ]);
         if (infoMs2 != null && infoMs2.length > 0) {
@@ -1330,9 +1334,8 @@ function excelExport() {
                 temp.push(infoMs2[i].salesOrderNum);
                 temp.push(infoMs2[i].colorInfo);
                 temp.push(infoMs2[i].partName);
-                temp.push(infoMs2[i].yuliaoLen);
-                temp.push(infoMs2[i].yuliaoWidth);
-                temp.push(infoMs2[i].high);
+                temp.push(infoMS[i].caoweight);
+                temp.push(infoMs2[i].size);
                 temp.push(infoMs2[i].numbyZhuang);
                 aoa4.push(temp);
             }
@@ -1341,10 +1344,7 @@ function excelExport() {
             {wch: 10},
             {wch: 10},
             {wch: 10},
-            {wch: 10},
-            {wch: 10},
-            {wch: 10},
-            {wch: 10},
+            {wch: 30},
             {wch: 10}
         ];
         var sheet4 = XLSX.utils.aoa_to_sheet(aoa4);

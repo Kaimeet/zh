@@ -57,45 +57,62 @@ public class DataXhServiceImpl implements DataXhService {
             emp.setColorInfo(colorInfo);
             if ("边框".equals(emp.getPartName())) {
                 emp.setHigh(new Double(variablesMapper.selecthigh("边框").getHigh()));
+                emp.setPreHight(new Double(variablesMapper.selecthigh("边框").getHigh()));
             } else if ("上帽".equals(emp.getPartName())) {
                 if (serid == 130 || serid == 132 || serid == 135 || serid == 136 || serid == 137 || serid == 138 || serid == 139 || serid == 140 || serid == 141 || serid == 143) {
                     emp.setHigh(new Double(variablesMapper.selecthigh("插玻上帽").getHigh()));
+                    emp.setPreHight(new Double(variablesMapper.selecthigh("插玻上帽").getHigh()));
                 } else if (serid == 142) {
                     emp.setHigh(new Double(variablesMapper.selecthigh("069上帽").getHigh()));
+                    emp.setPreHight(new Double(variablesMapper.selecthigh("069上帽").getHigh()));
                 } else {
                     emp.setHigh(new Double(variablesMapper.selecthigh("上帽").getHigh()));
+                    emp.setPreHight(new Double(variablesMapper.selecthigh("上帽").getHigh()));
 
                 }
             } else if ("下帽".equals(emp.getPartName())) {
                 if (serid == 142) {
                     emp.setHigh(new Double(variablesMapper.selecthigh("069下帽").getHigh()));
+                    emp.setPreHight(new Double(variablesMapper.selecthigh("069下帽").getHigh()));
                 } else {
                     emp.setHigh(new Double(variablesMapper.selecthigh("下帽").getHigh()));
+                    emp.setPreHight(new Double(variablesMapper.selecthigh("下帽").getHigh()));
                 }
             } else if ("中档".equals(emp.getPartName())) {
                 if (serid == 142) {
                     emp.setHigh(new Double(variablesMapper.selecthigh("069中档").getHigh()));
+                    emp.setPreHight(new Double(variablesMapper.selecthigh("069中档").getHigh()));
                 } else if (serid == 140) {
                     emp.setHigh(new Double(variablesMapper.selecthigh("插玻中档").getHigh()));
+                    emp.setPreHight(new Double(variablesMapper.selecthigh("插玻中档").getHigh()));
                 } else {
                     emp.setHigh(new Double(variablesMapper.selecthigh("中档").getHigh()));
+                    emp.setPreHight(new Double(variablesMapper.selecthigh("中档").getHigh()));
                 }
             } else if ("上中挺".equals(emp.getPartName())) {
                 emp.setHigh(new Double(variablesMapper.selecthigh("上中挺").getHigh()));
+                emp.setPreHight(new Double(variablesMapper.selecthigh("上中挺").getHigh()));
             } else if ("中中挺".equals(emp.getPartName())) {
                 emp.setHigh(new Double(variablesMapper.selecthigh("中中挺").getHigh()));
+                emp.setPreHight(new Double(variablesMapper.selecthigh("中中挺").getHigh()));
             } else if ("下中挺".equals(emp.getPartName())) {
                 emp.setHigh(new Double(variablesMapper.selecthigh("下中挺").getHigh()));
+                emp.setPreHight(new Double(variablesMapper.selecthigh("下中挺").getHigh()));
             } else if ("小中档".equals(emp.getPartName())) {
                 emp.setHigh(new Double(variablesMapper.selecthigh("小中挡").getHigh()));
+                emp.setPreHight(new Double(variablesMapper.selecthigh("小中挡").getHigh()));
             } else if ("小中挺".equals(emp.getPartName())) {
                 emp.setHigh(new Double(variablesMapper.selecthigh("小中挺").getHigh()));
+                emp.setPreHight(new Double(variablesMapper.selecthigh("小中挺").getHigh()));
             } else if ("上芯板".equals(emp.getPartName())) {
                 emp.setHigh(plaThick.doubleValue());
+                emp.setPreHight(plaThick.doubleValue());
             } else if ("中芯板".equals(emp.getPartName())) {
                 emp.setHigh(plaThick.doubleValue());
+                emp.setPreHight(plaThick.doubleValue());
             } else if ("下芯板".equals(emp.getPartName())) {
                 emp.setHigh(plaThick.doubleValue());
+                emp.setPreHight(plaThick.doubleValue());
             }
             if (emp.getYuliaoWidth() == null) {
                 emp.setYuliaoWidth(new Double(0));
@@ -121,6 +138,9 @@ public class DataXhServiceImpl implements DataXhService {
             if (emp.getNumbyGens() == null) {
                 emp.setNumbyGens(new Double(0));
             }
+            // 拼接备料尺寸和精截尺寸
+            emp.setPreSize(emp.getPreLenght() + "*" + emp.getPreWidth() + "*" + emp.getPreHight());
+            emp.setSize(emp.getLength() + "*" + emp.getWidth() + "*" + emp.getHigh());
         }
         return maincase;
     }
@@ -207,8 +227,10 @@ public class DataXhServiceImpl implements DataXhService {
             biankuanglength = new Double(2440);
         }
         emp.setLength(biankuanglength);
+        emp.setPreLenght(biankuanglength);
         // 计算边框宽
         emp.setWidth(bkweight);
+        emp.setPreWidth(bkweight);
         // 计算边框高
         Double bkhigh = new Double(40);
         emp.setHigh(bkhigh);
@@ -235,6 +257,7 @@ public class DataXhServiceImpl implements DataXhService {
         // 计算上帽宽(含造型)
         Double smweights = smWeight;
         emp1.setWidth(smweights);
+        emp1.setPreWidth(smweights);
         // 计算上帽数量(个)
         Double smnumsGe = doornums;
         emp1.setNumbyGe(smnumsGe);
@@ -252,10 +275,9 @@ public class DataXhServiceImpl implements DataXhService {
         smyuliaokuan = c;
         emp1.setYuliaoWidth(smyuliaokuan);
         // 计算上帽余料长
-        Double smyuliaochang = new Double(0);
-        double d = (2440 / (doorweight - 2 * bkweight + 2 * zxWeight + 4 + 5) - ((int) (2440 / (doorweight - 2 * bkweight + 2 * zxWeight + 4 + 5)))) * (doorweight - 2 * bkweight + 2 * zxWeight + 4 + 5);
-        smyuliaochang = d;
-        emp1.setYuliaoLen(smyuliaochang);
+        Double preLenght = preLength((int) (2440/(doorweight - 2 * bkweight + 2 * zxWeight + 4 + 5)) * (doorweight - 2 * bkweight + 2 * zxWeight + 4 + 5) + 50);
+        emp1.setPreLenght(preLenght);
+        emp1.setYuliaoLen(2440 - preLenght);
         emps.add(emp1);
         Emp emp2 = new Emp();
         emp2.setPartName("下帽");
@@ -265,6 +287,7 @@ public class DataXhServiceImpl implements DataXhService {
         // 计算下帽宽
         Double xmwidth = xmWeight;
         emp2.setWidth(xmwidth);
+        emp2.setPreWidth(xmwidth);
         // 计算下帽数量(个)
         Double xmnumsGe = doornums;
         emp2.setNumbyGe(xmnumsGe);
@@ -279,10 +302,9 @@ public class DataXhServiceImpl implements DataXhService {
         xmnumsZhuang = h;
         emp2.setNumbyZhuang(xmnumsZhuang);
         // 计算下帽余料长
-        Double xmyuliaochang = new Double(0);
-        Double i = (2440 / (doorweight - 2 * bkweight + 2 * zxWeight + 4 + 5) - ((int) (2440 / (doorweight - 2 * bkweight + 2 * zxWeight + 4 + 5)))) * (doorweight - 2 * bkweight + 2 * zxWeight + 4 + 5);
-        xmyuliaochang = i;
-        emp2.setYuliaoLen(xmyuliaochang);
+        preLenght = preLength((int) (2440/(doorweight - 2 * bkweight + 2 * zxWeight + 4 + 5)) * (doorweight - 2 * bkweight + 2 * zxWeight + 4 + 5) + 50);
+        emp2.setPreLenght(preLenght);
+        emp2.setYuliaoLen(2440 - preLenght);
         // 计算下帽余料宽
         Double xmyuliaokuan = new Double(0);
         Double m = ((1220 / (xmWeight + 5)) - (int) (1220 / (xmWeight + 5))) * (xmWeight + 5);
@@ -407,23 +429,41 @@ public class DataXhServiceImpl implements DataXhService {
         }
         // 计算中芯板数量
         Double zxbnumspian = new Double(0);
-        int N = 0;
-        if (caseDto.getPlaThick().compareTo(new BigDecimal(15)) == 0) {
-            N = 1;
-        } else if (caseDto.getPlaThick().compareTo(new BigDecimal(8)) == 0) {
-            N = 2;
-        }
         if (caseDto.getDoornums() != null) {
-            zxbnumspian = (caseDto.getDoornums().doubleValue() * N * zxbnums);
+            zxbnumspian = (caseDto.getDoornums().doubleValue() * zxbnums);
         }
         Emp emp = new Emp();
         emp.setPartName("中芯板");
         emp.setLength(zxblength);
+        emp.setPreLenght(zxblength);
         emp.setWidth(zxbwidth);
+        emp.setPreWidth(zxbwidth);
         emp.setNumbyZhuang(zxbnumspian);
         if (flagzxb) {
             emps.add(emp);
         }
         return emps;
+    }
+
+
+    /**
+     * 计算备件长
+     *
+     * @param length
+     * @return
+     */
+    private Double preLength(Double length) {
+        if (length.compareTo(new Double(2100)) < 0) {
+            length = new Double(2100);
+        } else if (length.compareTo(new Double(2150)) >= 0 && length.compareTo(new Double(2200)) < 0) {
+            length = new Double(2200);
+        } else if (length.compareTo(new Double(2200)) >= 0 && length.compareTo(new Double(2250)) < 0) {
+            length = new Double(2250);
+        } else if (length.compareTo(new Double(2250)) >= 0 && length.compareTo(new Double(2300)) < 0) {
+            length = new Double(2300);
+        } else if (length.compareTo(new Double(2300)) >= 0) {
+            length = new Double(2440);
+        }
+        return length;
     }
 }

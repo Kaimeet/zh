@@ -6,44 +6,83 @@ import java.math.BigDecimal;
 
 public class Emp {
 
-    @ExcelColumn(value = "工单号",col = 1)
+    @ExcelColumn(value = "工单号", col = 1)
     private String jobNum;
 
-    @ExcelColumn(value = "部件名称", col = 2)
     private String partName;//部件名称
 
-    @ExcelColumn(value = "长", col = 3)
-    private Double length;//长
+    private Double preLenght; // 备料长
 
-    @ExcelColumn(value = "宽", col = 4)
-    private Double width;//宽
+    private Double preWidth; // 备料宽
 
-    @ExcelColumn(value = "高", col = 5)
-    private Double high;//高
+    private Double preHight; // 备料高
 
-    @ExcelColumn(value = "槽宽", col = 6)
+    private String preSize; // 备料尺寸
+
+    private Double length;//精截长
+
+    private Double width;//精截长宽
+
+    private Double high;//精截长高
+
+    private String size; // 精截尺寸
+
     private BigDecimal caoweight;//槽宽
 
-    @ExcelColumn(value = "数量张(片)", col = 7)
     private Double numbyZhuang;//数量张(片)
 
-    @ExcelColumn(value = "数量根", col = 8)
     private Double numbyGens;//数量根
 
-    @ExcelColumn(value = "数量个", col = 9)
     private Double numbyGe;//数量个
 
-    @ExcelColumn(value = "余料长", col = 10)
     private Double yuliaoLen;//余料长
 
-    @ExcelColumn(value = "余料宽", col = 11)
     private Double yuliaoWidth;//余料宽
 
-    @ExcelColumn(value = "销售订单号", col = 12)
     private String salesOrderNum;// 销售订单号
 
-    @ExcelColumn(value = "颜色", col = 13)
     private String colorInfo; // 颜色
+
+
+    public Double getPreLenght() {
+        return preLenght;
+    }
+
+    public void setPreLenght(Double preLenght) {
+        this.preLenght = preLenght;
+    }
+
+    public Double getPreWidth() {
+        return preWidth;
+    }
+
+    public void setPreWidth(Double preWidth) {
+        this.preWidth = preWidth;
+    }
+
+    public Double getPreHight() {
+        return preHight;
+    }
+
+    public void setPreHight(Double preHight) {
+        this.preHight = preHight;
+    }
+
+    public String getPreSize() {
+        return preSize;
+    }
+
+    public void setPreSize(String preSize) {
+        this.preSize = preSize;
+    }
+
+    public String getSize() {
+        return size;
+    }
+
+    public void setSize(String size) {
+        this.size = size;
+    }
 
     public String getPartName() {
         return partName;

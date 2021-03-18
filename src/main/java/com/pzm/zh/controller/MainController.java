@@ -125,16 +125,22 @@ public class MainController {
         List<Emp> removeList = new ArrayList<>();
         // 对正常料进行分组
         Map<String, List<Emp>> resultCollect = list.stream().collect(Collectors.groupingBy(e -> e.getPartName() + "," + e.getHigh() + "," +
+                e.getPreHight() + "," + e.getPreWidth() + "," + e.getPreHight() + "," +
                 e.getLength() + "," + e.getWidth() + "," + e.getCaoweight() + "," + e.getColorInfo() + "," + e.getSalesOrderNum()));
         for (String string : resultCollect.keySet()) {
             List<Emp> emps = resultCollect.get(string);
             String partName = emps.get(0).getPartName();
             Double length = emps.get(0).getLength();
+            Double preLength = emps.get(0).getPreHight();
             Double width = emps.get(0).getWidth();
+            Double preWidth = emps.get(0).getPreWidth();
             Double hight = emps.get(0).getHigh();
+            Double preHight = emps.get(0).getPreHight();
             BigDecimal caoweight = emps.get(0).getCaoweight();
             String colorInfo = emps.get(0).getColorInfo();
             String salesOrderNum = emps.get(0).getSalesOrderNum();
+            String size = emps.get(0).getSize();
+            String preSize = emps.get(0).getPreSize();
             // 向上取整
             Double numbyZhuang = Math.ceil(emps.stream().collect(Collectors.summingDouble(Emp::getNumbyZhuang))); // 数量张(片)
             Double numbyGens = Math.ceil(emps.stream().collect(Collectors.summingDouble(Emp::getNumbyGens))); // 数量根
@@ -142,19 +148,24 @@ public class MainController {
             Emp emp = new Emp();
             emp.setPartName(partName);
             emp.setLength(length);
+            emp.setPreLenght(preLength);
             emp.setWidth(width);
+            emp.setPreWidth(preWidth);
             emp.setHigh(hight);
+            emp.setPreHight(preHight);
             emp.setCaoweight(caoweight);
             emp.setNumbyZhuang(numbyZhuang);
             emp.setNumbyGens(numbyGens);
             emp.setNumbyGe(numbyGe);
             emp.setSalesOrderNum(salesOrderNum);
             emp.setColorInfo(colorInfo);
+            emp.setSize(size);
+            emp.setPreSize(preSize);
             resultList.add(emp);
         }
         // 对余料进行分组
         Map<String, List<Emp>> removeCollect = list.stream().collect(Collectors.groupingBy(e -> e.getPartName() + "," + e.getHigh() + "," + e.getYuliaoLen()
-                + "," + e.getYuliaoWidth() + e.getColorInfo() + "," + e.getSalesOrderNum()));
+                + "," + e.getYuliaoWidth() + e.getColorInfo() + "," + e.getSalesOrderNum() + "," + e.getCaoweight()));
         for (String string : removeCollect.keySet()) {
             List<Emp> emps = removeCollect.get(string);
             String colorInfo = emps.get(0).getColorInfo();
@@ -163,6 +174,7 @@ public class MainController {
             Double hight = emps.get(0).getHigh();
             Double yuliaolen = emps.get(0).getYuliaoLen();
             Double yuliaowidth = emps.get(0).getYuliaoWidth();
+            BigDecimal caoweight = emps.get(0).getCaoweight();
             // 向下取整
             Double numbyZhuang = Math.floor(emps.stream().collect(Collectors.summingDouble(Emp::getNumbyZhuang))); // 数量张(片)
             if (yuliaolen == 0) {
@@ -180,6 +192,8 @@ public class MainController {
             emp.setNumbyZhuang(numbyZhuang);
             emp.setYuliaoWidth(yuliaowidth);
             emp.setYuliaoLen(yuliaolen);
+            emp.setCaoweight(caoweight);
+            emp.setSize(hight + "*" + yuliaowidth + "*" + yuliaowidth);
             emp.setSalesOrderNum(salesOrderNum);
             emp.setColorInfo(colorInfo);
             removeList.add(emp);

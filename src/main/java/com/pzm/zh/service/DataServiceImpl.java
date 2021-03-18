@@ -62,71 +62,96 @@ public class DataServiceImpl implements DataService {
             if ("边框".equals(emp.getPartName())) {
                 if (serid == 18) {
                     emp.setHigh(new Double(45));
+                    emp.setPreHight(new Double(45));
                 } else if (serid == 25) {
                     emp.setHigh(new Double(35));
+                    emp.setPreHight(new Double(35));
                 } else {
                     emp.setHigh(new Double(40));
+                    emp.setPreHight(new Double(40));
                 }
             } else if ("上帽".equals(emp.getPartName())) {
                 if (serid == 18) {
                     emp.setHigh(new Double(40));
+                    emp.setPreHight(new Double(40));
                 } else if (serid == 25) {
                     emp.setHigh(new Double(32));
+                    emp.setPreHight(new Double(32));
                 } else {
                     emp.setHigh(new Double(37));
+                    emp.setPreHight(new Double(37));
                 }
             } else if ("下帽".equals(emp.getPartName())) {
                 if (serid == 18) {
                     emp.setHigh(new Double(40));
+                    emp.setPreHight(new Double(40));
                 } else if (serid == 25) {
                     emp.setHigh(new Double(32));
+                    emp.setPreHight(new Double(32));
                 } else {
                     emp.setHigh(new Double(37));
+                    emp.setPreHight(new Double(37));
                 }
             } else if ("中档".equals(emp.getPartName())) {
                 if (serid == 18) {
                     emp.setHigh(new Double(40));
+                    emp.setPreHight(new Double(40));
                 } else {
                     emp.setHigh(new Double(37));
+                    emp.setPreHight(new Double(37));
                 }
             } else if ("上中挺".equals(emp.getPartName())) {
                 if (serid == 21) {
                     emp.setHigh(new Double(33));
+                    emp.setPreHight(new Double(33));
                 } else {
                     emp.setHigh(new Double(34));
+                    emp.setPreHight(new Double(34));
                 }
             } else if ("中中挺".equals(emp.getPartName())) {
                 if (serid == 21) {
                     emp.setHigh(new Double(33));
+                    emp.setPreHight(new Double(33));
                 } else {
                     emp.setHigh(new Double(34));
+                    emp.setPreHight(new Double(34));
                 }
             } else if ("下中挺".equals(emp.getPartName())) {
                 if (serid == 21) {
                     emp.setHigh(new Double(33));
+                    emp.setPreHight(new Double(33));
                 } else {
                     emp.setHigh(new Double(34));
+                    emp.setPreHight(new Double(34));
                 }
             } else if ("中挺".equals(emp.getPartName())) {
                 if (serid == 21) {
                     emp.setHigh(new Double(33));
+                    emp.setPreHight(new Double(33));
                 } else {
                     emp.setHigh(new Double(34));
+                    emp.setPreHight(new Double(34));
                 }
             } else if ("小中挡".equals(emp.getPartName())) {
                 emp.setHigh(new Double(34));
+                emp.setPreHight(new Double(34));
             } else if ("小中挺".equals(emp.getPartName())) {
                 if (serid == 21) {
                     emp.setHigh(new Double(33));
+                    emp.setPreHight(new Double(33));
                 } else {
                     emp.setHigh(new Double(34));
+                    emp.setPreHight(new Double(34));
                 }
             } else if ("上芯板".equals(emp.getPartName())) {
                 emp.setHigh(plaThick.doubleValue());
+                emp.setPreHight(plaThick.doubleValue());
             } else if ("中芯板".equals(emp.getPartName())) {
                 emp.setHigh(plaThick.doubleValue());
+                emp.setPreHight(plaThick.doubleValue());
             } else if ("下芯板".equals(emp.getPartName())) {
                 emp.setHigh(plaThick.doubleValue());
+                emp.setPreHight(plaThick.doubleValue());
             }
             if (emp.getYuliaoWidth() == null) {
                 emp.setYuliaoWidth(new Double(0));
@@ -152,6 +177,9 @@ public class DataServiceImpl implements DataService {
             if (emp.getNumbyGens() == null) {
                 emp.setNumbyGens(new Double(0));
             }
+            // 拼接备料尺寸和精截尺寸
+            emp.setPreSize(emp.getPreLenght() + "*" + emp.getPreWidth() + "*" + emp.getPreHight());
+            emp.setSize(emp.getLength() + "*" + emp.getWidth() + "*" + emp.getHigh());
         }
         return maincase;
     }
@@ -278,8 +306,10 @@ public class DataServiceImpl implements DataService {
         }
 
         emp.setLength(biankuanglength);
+        emp.setPreLenght(biankuanglength);
         //2.计算边框宽
         emp.setWidth(bkweight);
+        emp.setPreWidth(bkweight);
         //3.计算边框高
         Double bkhigh = new Double(40);
         emp.setHigh(bkhigh);
@@ -306,6 +336,7 @@ public class DataServiceImpl implements DataService {
         //8.计算上帽宽（含造型）
         Double smweights = smWeight;
         emp1.setWidth(smweights);
+        emp1.setPreWidth(smweights);
         //9.计算上帽数量（个）
         Double smnumsGe = doornums;
         emp1.setNumbyGe(smnumsGe);
@@ -323,10 +354,13 @@ public class DataServiceImpl implements DataService {
         smyuliaokuan = c;
         emp1.setYuliaoWidth(smyuliaokuan);
         //13.计算上帽余料长
-        Double smyuliaochang = new Double(0);
-        double d = (2440 / (doorweight - 2 * bkweight + 2 * zxWeight + 4 + 5) - ((int) (2440 / (doorweight - 2 * bkweight + 2 * zxWeight + 4 + 5)))) * (doorweight - 2 * bkweight + 2 * zxWeight + 4 + 5);
-        smyuliaochang = d;
-        emp1.setYuliaoLen(smyuliaochang);
+//        Double smyuliaochang = new Double(0);
+//        double d = (2440 / (doorweight - 2 * bkweight + 2 * zxWeight + 4 + 5) - ((int) (2440 / (doorweight - 2 * bkweight + 2 * zxWeight + 4 + 5)))) * (doorweight - 2 * bkweight + 2 * zxWeight + 4 + 5);
+//        smyuliaochang = d;
+//        emp1.setYuliaoLen(smyuliaochang);
+        Double preLenght = preLength((int) (2440 / (doorweight - 2 * bkweight + 2 * zxWeight + 4 + 5)) * (doorweight - 2 * bkweight + 2 * zxWeight + 4 + 5) + 50);
+        emp1.setPreLenght(preLenght);
+        emp1.setYuliaoLen(2440 - preLenght);
         emps.add(emp1);
         Emp emp2 = new Emp();
         emp2.setPartName("下帽");
@@ -336,6 +370,7 @@ public class DataServiceImpl implements DataService {
         //15.计算下帽宽
         Double xmwidth = xmWeight;
         emp2.setWidth(xmwidth);
+        emp2.setPreWidth(xmwidth);
         //16.计算下帽数量（个）
         Double xmnumsGe = doornums;
         emp2.setNumbyGe(xmnumsGe);
@@ -350,10 +385,13 @@ public class DataServiceImpl implements DataService {
         xmnumsZhuang = h;
         emp2.setNumbyZhuang(xmnumsZhuang);
         //19.计算下帽余料长
-        Double xmyuliaochang = new Double(0);
-        Double i = (2440 / (doorweight - 2 * bkweight + 2 * zxWeight + 4 + 5) - ((int) (2440 / (doorweight - 2 * bkweight + 2 * zxWeight + 4 + 5)))) * (doorweight - 2 * bkweight + 2 * zxWeight + 4 + 5);
-        xmyuliaochang = i;
-        emp2.setYuliaoLen(xmyuliaochang);
+//        Double xmyuliaochang = new Double(0);
+//        Double i = (2440 / (doorweight - 2 * bkweight + 2 * zxWeight + 4 + 5) - ((int) (2440 / (doorweight - 2 * bkweight + 2 * zxWeight + 4 + 5)))) * (doorweight - 2 * bkweight + 2 * zxWeight + 4 + 5);
+//        xmyuliaochang = i;
+//        emp2.setYuliaoLen(xmyuliaochang);
+        preLenght = preLength((int) (2440 / (doorweight - 2 * bkweight + 2 * zxWeight + 4 + 5)) * (doorweight - 2 * bkweight + 2 * zxWeight + 4 + 5) + 50);
+        emp2.setPreLenght(preLenght);
+        emp2.setYuliaoLen(2440 - preLenght);
         //20.计算下帽余料宽
         Double xmyuliaokuan = new Double(0);
         Double m = ((1220 / (xmWeight + 5)) - (int) (1220 / (xmWeight + 5))) * (xmWeight + 5);
@@ -368,6 +406,7 @@ public class DataServiceImpl implements DataService {
         //22.计算中档宽
         Double zdwidth = zdWeight;
         emp3.setWidth(zdwidth);
+        emp3.setPreWidth(zdwidth);
         //23.计算中档数量（个），（根）,(张)
         Double zdnumsGe = new Double(0);
         Double zdnumsGen = new Double(0);
@@ -383,10 +422,13 @@ public class DataServiceImpl implements DataService {
         emp3.setNumbyGens(zdnumsGen);
         emp3.setNumbyGe(zdnumsGe);
         //24.计算中档余料长
-        Double zdyuliaolen = new Double(0);
-        Double t = (2440 / (doorweight - 2 * bkweight + 2 * zxWeight + 4 + 5) - ((int) (2440 / (doorweight - 2 * bkweight + 2 * zxWeight + 4 + 5)))) * (doorweight - 2 * bkweight + 2 * zxWeight + 4 + 5);
-        zdyuliaolen = t;
-        emp3.setYuliaoLen(zdyuliaolen);
+//        Double zdyuliaolen = new Double(0);
+//        Double t = (2440 / (doorweight - 2 * bkweight + 2 * zxWeight + 4 + 5) - ((int) (2440 / (doorweight - 2 * bkweight + 2 * zxWeight + 4 + 5)))) * (doorweight - 2 * bkweight + 2 * zxWeight + 4 + 5);
+//        zdyuliaolen = t;
+//        emp3.setYuliaoLen(zdyuliaolen);
+        preLenght = preLength((int) (2440 / (doorweight - 2 * bkweight + 2 * zxWeight + 4 + 5)) * (doorweight - 2 * bkweight + 2 * zxWeight + 4 + 5) + 50);
+        emp3.setPreLenght(preLenght);
+        emp3.setYuliaoLen(2440 - preLenght);
         //25.计算中档余料宽
         Double zdyuliaokuan = new Double(0);
         double v = ((1220 / (zdWeight + 5)) - (int) (1220 / (zdWeight + 5))) * (zdWeight + 5);
@@ -478,7 +520,9 @@ public class DataServiceImpl implements DataService {
         xxnumpian = new Double(caseDto.getDoornums() * N);
         Emp emp = new Emp();
         emp.setLength(xxlength);
+        emp.setPreLenght(xxlength);
         emp.setWidth(xxwidth);
+        emp.setPreWidth(xxwidth);
         emp.setNumbyZhuang(xxnumpian);
         emp.setPartName("下芯板");
         if (flagxxb) {
@@ -499,8 +543,10 @@ public class DataServiceImpl implements DataService {
         //5.计算中芯板宽，数量与下芯板一致。
         Emp emp1 = new Emp();
         emp1.setLength(zxblenth);
+        emp1.setPreLenght(zxblenth);
         emp1.setPartName("中芯板");
         emp1.setWidth(xxwidth);
+        emp1.setPreWidth(xxwidth);
         emp1.setNumbyZhuang(xxnumpian);
         if (flagzxb) {
             empList.add(emp1);
@@ -583,8 +629,13 @@ public class DataServiceImpl implements DataService {
                 }
                 Double zxweight = caseDto.getZxWeight().doubleValue();
                 zztlength = doorhigh1 - smweight1 - xmweight1 - zdweight1 - xxhigh1 + 2 * zxweight;
-                Double zztyuliaolen = caseYuliaoLenth(doorhigh1 - smweight1 - xmweight1 - zdweight1 - xxhigh1 + 2 * zxweight);
-                empzzt.setYuliaoLen(zztyuliaolen);
+                // 中中挺余料长
+//                Double zztyuliaolen = caseYuliaoLenth(doorhigh1 - smweight1 - xmweight1 - zdweight1 - xxhigh1 + 2 * zxweight);
+//                empzzt.setYuliaoLen(zztyuliaolen);
+                // (INT)2440/(doorHigh-smWeight-xmWeight-xxHigh-zdWeight+4*zxWeight+4+5))*(doorHigh-smWeight-xmWeight-xxHigh-zdWeight+4*zxWeight +4+5)+50
+                Double preLength = preLength((int) (2440 / (doorhigh1 - smweight1 - xmweight1 - xxhigh1 - zdweight1 + 4 * zdweight1 + 4 + 5)) * (doorhigh1 - smweight1 - xmweight1 - xxhigh1 - zdweight1 + 4 * zdweight1 + 4 + 5) + 50);
+                empzzt.setPreLenght(preLength);
+                empzzt.setYuliaoLen(2440 - preLength);
                 Double doornums = caseDto.getDoornums().doubleValue();
                 Double c = doornums / ((int) (2440 / (doorhigh1 - smweight1 - xmweight1 - zdweight1 - xxhigh1 + 2 * zxweight + 4 + 5)));
                 zztnumsGen = c;
@@ -605,6 +656,7 @@ public class DataServiceImpl implements DataService {
             }
             empzzt.setLength(zztlength);
             empzzt.setWidth(zztwidth);
+            empzzt.setPreWidth(zztwidth);
             empzzt.setNumbyGe(zztnumsGe);
             empzzt.setNumbyGens(zztnumsGen);
             empzzt.setNumbyZhuang(zztnumsZhang);
@@ -708,7 +760,9 @@ public class DataServiceImpl implements DataService {
         xxnumpian = new Double(caseDto.getDoornums() * N);
         Emp emp = new Emp();
         emp.setLength(xxlength);
+        emp.setPreLenght(xxlength);
         emp.setWidth(xxwidth);
+        emp.setPreWidth(xxwidth);
         emp.setNumbyZhuang(xxnumpian);
         emp.setPartName("下芯板");
         if (flagxxb) {
@@ -716,7 +770,9 @@ public class DataServiceImpl implements DataService {
         }
         Emp emp1 = new Emp();
         emp1.setLength(xxlength);
+        emp1.setPreLenght(xxlength);
         emp1.setWidth(xxwidth);
+        emp1.setPreWidth(xxwidth);
         emp1.setNumbyZhuang(xxnumpian);
         emp1.setPartName("上芯板");
         if (flagsxb) {
@@ -738,8 +794,10 @@ public class DataServiceImpl implements DataService {
         //5.计算中芯板宽，数量与下芯板一致。
         Emp emp2 = new Emp();
         emp2.setLength(zxblenth);
+        emp2.setPreLenght(zxblenth);
         emp2.setPartName("中芯板");
         emp2.setWidth(xxwidth);
+        emp2.setPreWidth(xxwidth);
         emp2.setNumbyZhuang(xxnumpian);
         if (flagzxb) {
             empList.add(emp2);
@@ -756,14 +814,14 @@ public class DataServiceImpl implements DataService {
             //10.计算上、下中挺长
             Double xztlength = new Double(0);
             if (caseDto.getMemo1() != null) {
-                Double sztyuliaochang = new Double(0);
-                Double d = (2440 / (Double.valueOf(caseDto.getMemo1()) + 4 + 5) - ((int) (2440 / (Double.valueOf(caseDto.getMemo1()) + 4 + 5)))) * (Double.valueOf(caseDto.getMemo1()) + 4 + 5);
-                sztyuliaochang = d;
-                empxzt.setYuliaoLen(sztyuliaochang);
-                empszt.setYuliaoLen(sztyuliaochang);
                 xztlength = new Double(caseDto.getMemo1());
-
             }
+            // ztblHigh=(INT)2440/(xztlength+4+5))*( xztlength+4+5)+50 下中挺备料长
+            Double preLength = preLength((int) (2240 / (xztlength + 4 + 5)) * (xztlength + 4 + 5));
+            empxzt.setPreLenght(preLength);
+            empszt.setPreLenght(preLength);
+            empxzt.setYuliaoLen(2440 - preLength);
+            empszt.setYuliaoLen(2440 - preLength);
             //11.计算上、下中挺宽
             Double xztweight = new Double(0);
             if (caseDto.getXztWeight() != null) {
@@ -797,16 +855,16 @@ public class DataServiceImpl implements DataService {
             }
             empxzt.setLength(xztlength);
             empxzt.setWidth(xztweight);
+            empxzt.setPreWidth(xztweight);
             empxzt.setNumbyGe(xztnumGe);
             empxzt.setNumbyGens(xztnumGen);
             empxzt.setNumbyZhuang(xztnumZhuang);
             empszt.setLength(xztlength);
             empszt.setWidth(xztweight);
+            empszt.setPreWidth(xztweight);
             empszt.setNumbyGe(xztnumGe);
             empszt.setNumbyGens(xztnumGen);
             empszt.setNumbyZhuang(xztnumZhuang);
-
-
             //7.计算中中挺长//中中挺数量（根）
             Double zztnumsGen = new Double(0);
             Double zztlength = new Double(0);
@@ -816,15 +874,17 @@ public class DataServiceImpl implements DataService {
                 Double smweight1 = caseDto.getSmWeight().doubleValue();
                 Double zdweight1 = caseDto.getZdWeight().doubleValue();
                 Double xmweight1 = caseDto.getXmWeight().doubleValue();
-                // Double xxhigh1=caseDto.getXxHigh().doubleValue();
-                //Double sxhighs=caseDto.getSxHigh().doubleValue();
                 Double zxweights = caseDto.getZxWeight().doubleValue();
                 zztlength = doorhigh1 - smweight1 - xmweight1 - 2 * zdweight1 - 2 * Double.valueOf(xztlength) + 6 * zxweights;
                 //13.计算中中挺余料长
-                Double zztyuliaochang = new Double(0);
-                Double d = (2440 / (doorhigh1 - smweight1 - xmweight1 - 2 * zdweight1 - 2 * Double.valueOf(xztlength) + 6 * zxweights + 4 + 5) - ((int) (2440 / (doorhigh1 - smweight1 - xmweight1 - 2 * zdweight1 - 2 * Double.valueOf(xztlength) + 6 * zxweights + 4 + 5)))) * (doorhigh1 - smweight1 - xmweight1 - 2 * zdweight1 - 2 * Double.valueOf(xztlength) + 6 * zxweights + 4 + 5);
-                zztyuliaochang = d;
-                empzzt.setYuliaoLen(zztyuliaochang);
+                // 计算方法：zztblHigh=(INT)2440/(doorHigh-smWeight-xmWeight-xxHigh-zdWeight+4*zxWeight+4+5))*(doorHigh-smWeight-xmWeight-xxHigh-zdWeight+4*zxWeight +4+5)+50
+                Double lenght = (int) (2440 / (doorhigh1 - smweight1 - xmweight1 - caseDto.getXxHigh().doubleValue() - zdweight1 - zdweight1 + 4 * zxweights + 4 + 5) )* (doorhigh1 - smweight1 - xmweight1 - caseDto.getXxHigh().doubleValue() - zdweight1 - zdweight1 + 4 * zxweights + 4 + 5) + 50;
+                preLength = preLength(lenght);
+//                Double zztyuliaochang = new Double(0);
+//                Double d = (2440 / (doorhigh1 - smweight1 - xmweight1 - 2 * zdweight1 - 2 * Double.valueOf(xztlength) + 6 * zxweights + 4 + 5) - ((int) (2440 / (doorhigh1 - smweight1 - xmweight1 - 2 * zdweight1 - 2 * Double.valueOf(xztlength) + 6 * zxweights + 4 + 5)))) * (doorhigh1 - smweight1 - xmweight1 - 2 * zdweight1 - 2 * Double.valueOf(xztlength) + 6 * zxweights + 4 + 5);
+//                zztyuliaochang = d;
+                empzzt.setPreLenght(preLength);
+                empzzt.setYuliaoLen(2440 - preLength);
                 Double doornums = caseDto.getDoornums().doubleValue();
                 Double c = doornums / ((int) (2440 / (doorhigh1 - smweight1 - xmweight1 - 2 * zdweight1 - 2 * Double.valueOf(xztlength) + 2 * zxweights + 4 + 5)));
                 zztnumsGen = c;
@@ -850,6 +910,7 @@ public class DataServiceImpl implements DataService {
             }
             empzzt.setLength(zztlength);
             empzzt.setWidth(zztwidth);
+            empzzt.setPreWidth(zztwidth);
             empzzt.setNumbyGe(zztnumsGe);
             empzzt.setNumbyGens(zztnumsGen);
             empzzt.setNumbyZhuang(zztnumsZhang);
@@ -949,19 +1010,25 @@ public class DataServiceImpl implements DataService {
         xxnumpian = new Double(caseDto.getDoornums() * N * (zdnumsGe + 1));
         Emp empsxb = new Emp();
         empsxb.setLength(xxlength);
+        empsxb.setPreLenght(xxlength);
         empsxb.setWidth(xxwidth);
+        empsxb.setPreWidth(xxwidth);
         empsxb.setNumbyZhuang(xxnumpian);
         empsxb.setPartName("上芯板");
 
         Emp empzxb = new Emp();
         empzxb.setLength(xxlength);
+        empzxb.setPreLenght(xxlength);
         empzxb.setWidth(xxwidth);
+        empzxb.setPreWidth(xxwidth);
         empzxb.setNumbyZhuang(xxnumpian);
         empzxb.setPartName("中芯板");
 
         Emp empxxb = new Emp();
         empxxb.setLength(xxlength);
+        empxxb.setPreLenght(xxlength);
         empxxb.setWidth(xxwidth);
+        empxxb.setPreWidth(xxwidth);
         empxxb.setNumbyZhuang(xxnumpian);
         empxxb.setPartName("下芯板");
         if (flagsxb) {
@@ -977,60 +1044,59 @@ public class DataServiceImpl implements DataService {
 
         //caseDto.getDoorweight().subtract(new BigDecimal(2).multiply(caseDto.getBkweight())).add(new BigDecimal(2).multiply(caseDto.getZxWeight())).subtract(new BigDecimal(2));
         //6.若有中挺，计算中挺
-        Emp empszt = new Emp();
-        Emp empzzt = new Emp();
-        Emp empxzt = new Emp();
-        empszt.setPartName("中挺");
-        //empxzt.setPartName("中挺");
-        //empzzt.setPartName("中中挺");
-        if (flagzt) {
-            //7.计算上中下挺长//中中挺数量（根）
-            Double zztnumsGen = new Double(0);
-            Double zztlength = xxlength;
-            Double zztlengthsou = Double.valueOf(xxlength);
-            Double zztnumsZhang = new Double(0);
-            Double doornums = caseDto.getDoornums().doubleValue();
-            Double c = doornums * (zdnumsGe + 1) / ((int) (2440 / (zztlengthsou + 4 + 5)));
-            zztnumsGen = c;
-            if (caseDto.getZztWeight() != null) {
-                Double zhangs = c / (int) (1220 / (caseDto.getZztWeight().doubleValue() + 5));
-                zztnumsZhang = zhangs;
-            }
-
-            //8.计算中中挺宽,中中挺数量（张）
-            Double zztwidth = new Double(0);
-            if (caseDto.getZztWeight() != null) {
-                zztwidth = caseDto.getZztWeight().doubleValue();
-            }
-            //9.中中挺数量（个）
-            Double zztnumsGe = new Double(0);
-            if (caseDto.getDoornums() != null) {
-                zztnumsGe = (doornums * (zdnumsGe + 1));
-            }
-            Double zztyuliaolenth = caseYuliaoLenth(Double.valueOf(zztlength));
-            empszt.setYuliaoLen(zztyuliaolenth);
-            Double yuliaowidth = caseYuliaoKuan(Double.valueOf(zztwidth));
-            empszt.setYuliaoWidth(yuliaowidth);
-            empzzt.setLength(zztlength);
-            empzzt.setWidth(zztwidth);
-            empzzt.setNumbyGe(zztnumsGe);
-            empzzt.setNumbyGens(zztnumsGen);
-            empzzt.setNumbyZhuang(zztnumsZhang);
-            empszt.setLength(zztlength);
-            empszt.setWidth(zztwidth);
-            empszt.setNumbyGe(zztnumsGe);
-            empszt.setNumbyGens(zztnumsGen);
-            empszt.setNumbyZhuang(zztnumsZhang);
-            empxzt.setLength(zztlength);
-            empxzt.setWidth(zztwidth);
-            empxzt.setNumbyGe(zztnumsGe);
-            empxzt.setNumbyGens(zztnumsGen);
-            empxzt.setNumbyZhuang(zztnumsZhang);
-            empList.add(empszt);
-            //resultDtoList.add(empxzt);
-            //resultDtoList.add(empzzt);
-        }
-
+//        Emp empszt = new Emp();
+//        Emp empzzt = new Emp();
+//        Emp empxzt = new Emp();
+//        empszt.setPartName("中挺");
+//        //empxzt.setPartName("中挺");
+//        //empzzt.setPartName("中中挺");
+//        if (flagzt) {
+//            //7.计算上中下挺长//中中挺数量（根）
+//            Double zztnumsGen = new Double(0);
+//            Double zztlength = xxlength;
+//            Double zztlengthsou = Double.valueOf(xxlength);
+//            Double zztnumsZhang = new Double(0);
+//            Double doornums = caseDto.getDoornums().doubleValue();
+//            Double c = doornums * (zdnumsGe + 1) / ((int) (2440 / (zztlengthsou + 4 + 5)));
+//            zztnumsGen = c;
+//            if (caseDto.getZztWeight() != null) {
+//                Double zhangs = c / (int) (1220 / (caseDto.getZztWeight().doubleValue() + 5));
+//                zztnumsZhang = zhangs;
+//            }
+//
+//            //8.计算中中挺宽,中中挺数量（张）
+//            Double zztwidth = new Double(0);
+//            if (caseDto.getZztWeight() != null) {
+//                zztwidth = caseDto.getZztWeight().doubleValue();
+//            }
+//            //9.中中挺数量（个）
+//            Double zztnumsGe = new Double(0);
+//            if (caseDto.getDoornums() != null) {
+//                zztnumsGe = (doornums * (zdnumsGe + 1));
+//            }
+//            Double zztyuliaolenth = caseYuliaoLenth(Double.valueOf(zztlength));
+//            empszt.setYuliaoLen(zztyuliaolenth);
+//            Double yuliaowidth = caseYuliaoKuan(Double.valueOf(zztwidth));
+//            empszt.setYuliaoWidth(yuliaowidth);
+//            empzzt.setLength(zztlength);
+//            empzzt.setWidth(zztwidth);
+//            empzzt.setNumbyGe(zztnumsGe);
+//            empzzt.setNumbyGens(zztnumsGen);
+//            empzzt.setNumbyZhuang(zztnumsZhang);
+//            empszt.setLength(zztlength);
+//            empszt.setWidth(zztwidth);
+//            empszt.setNumbyGe(zztnumsGe);
+//            empszt.setNumbyGens(zztnumsGen);
+//            empszt.setNumbyZhuang(zztnumsZhang);
+//            empxzt.setLength(zztlength);
+//            empxzt.setWidth(zztwidth);
+//            empxzt.setNumbyGe(zztnumsGe);
+//            empxzt.setNumbyGens(zztnumsGen);
+//            empxzt.setNumbyZhuang(zztnumsZhang);
+//            empList.add(empszt);
+//            //resultDtoList.add(empxzt);
+//            //resultDtoList.add(empzzt);
+//        }
         return empList;
     }
 
@@ -1038,8 +1104,6 @@ public class DataServiceImpl implements DataService {
      * Ⅳ类，此类只含有中芯板/中玻璃，无中档、中挺
      */
     public List<Emp> case4(CaseDto caseDto, Numbyser numbyser, List<Emp> empList) {
-
-
         //增加中心板判断
         boolean flagzxb = false;
         if (!StringUtils.isEmpty(numbyser.getZxbnums())) {
@@ -1081,7 +1145,9 @@ public class DataServiceImpl implements DataService {
         Emp empzxb = new Emp();
         empzxb.setPartName("中芯板");
         empzxb.setLength(zxblength);
+        empzxb.setPreLenght(zxblength);
         empzxb.setWidth(zxbwidth);
+        empzxb.setPreWidth(zxbwidth);
         empzxb.setNumbyZhuang(zxbnumspian);
         if (flagzxb) {
             emps.add(empzxb);
@@ -1094,8 +1160,6 @@ public class DataServiceImpl implements DataService {
      * 1、部件只含有上、中、下芯板，此时只需计算上、中、下芯板尺寸，不含中挺，含中档。
      */
     public List<Emp> case5(CaseDto caseDto, Numbyser numbyser, List<Emp> empList) {
-
-
         //增加中心板判断
         boolean flagzxb = false;
         if (!StringUtils.isEmpty(numbyser.getZxbnums())) {
@@ -1114,7 +1178,6 @@ public class DataServiceImpl implements DataService {
         //1.计算上芯板长
         Double sxblength = new Double(0);
         if (caseDto.getDoorhigh() != null && caseDto.getSmWeight() != null && caseDto.getXmWeight() != null && caseDto.getZdWeight() != null && caseDto.getXxHigh() != null && caseDto.getZxHigh() != null && caseDto.getZxWeight() != null) {
-
             Double doorhigh = caseDto.getDoorhigh().doubleValue();
             Double smweight = caseDto.getSmWeight().doubleValue();
             Double xmweight = caseDto.getXmWeight().doubleValue();
@@ -1159,7 +1222,9 @@ public class DataServiceImpl implements DataService {
         Emp empzxb = new Emp();
         empzxb.setPartName("中芯板");
         empzxb.setLength(zxblength);
+        empzxb.setPreLenght(zxblength);
         empzxb.setWidth(zxbwidth);
+        empzxb.setPreWidth(zxbwidth);
         empzxb.setNumbyZhuang(zxbnumspian);
         if (flagzxb) {
             empList.add(empzxb);
@@ -1176,14 +1241,17 @@ public class DataServiceImpl implements DataService {
         Emp empsxb = new Emp();
         empsxb.setPartName("上芯板");
         empsxb.setLength(sxblength);
+        empsxb.setPreLenght(sxblength);
         empsxb.setWidth(sxbwidth);
+        empsxb.setPreWidth(sxbwidth);
         empsxb.setNumbyZhuang(zxbnumspian);
-
 
         Emp empxxb = new Emp();
         empxxb.setPartName("下芯板");
         empxxb.setLength(xxblenth);
+        empxxb.setPreLenght(xxblenth);
         empxxb.setWidth(zxbwidth);
+        empxxb.setPreWidth(zxbwidth);
         empxxb.setNumbyZhuang(zxbnumspian);
 
         if (flagsxb) {
@@ -1193,5 +1261,26 @@ public class DataServiceImpl implements DataService {
             empList.add(empxxb);
         }
         return empList;
+    }
+
+    /**
+     * 计算备件长
+     *
+     * @param length
+     * @return
+     */
+    private Double preLength(Double length) {
+        if (length.compareTo(new Double(2100)) < 0) {
+            length = new Double(2100);
+        } else if (length.compareTo(new Double(2150)) >= 0 && length.compareTo(new Double(2200)) < 0) {
+            length = new Double(2200);
+        } else if (length.compareTo(new Double(2200)) >= 0 && length.compareTo(new Double(2250)) < 0) {
+            length = new Double(2250);
+        } else if (length.compareTo(new Double(2250)) >= 0 && length.compareTo(new Double(2300)) < 0) {
+            length = new Double(2300);
+        } else if (length.compareTo(new Double(2300)) >= 0) {
+            length = new Double(2440);
+        }
+        return length;
     }
 }
