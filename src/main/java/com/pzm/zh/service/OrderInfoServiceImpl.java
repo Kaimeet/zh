@@ -63,31 +63,62 @@ public class OrderInfoServiceImpl implements OrderInfoService {
         Variables variables = new Variables();
         if (orderInfo != null && orderInfo.getSizeInfo() != null) {
             serizes = serizesMapper.selectByName(orderInfo.getStyleName());
-            Integer id = serizes.getId();
-            variables = variablesMapper.selectbyseid(id);
-            caseDto.setColorInfo(orderInfo.getColorInfo());
-            caseDto.setCaoweight(variables.getCaoweight());
-            caseDto.setPlaThick(variables.getPlaThick());
-            caseDto.setZztWeight(variables.getZztWeight());
-            caseDto.setSztweight(variables.getSztweight());
-            caseDto.setBkweight(variables.getBkweight());
-            caseDto.setSxHigh(variables.getSxHigh());
-            caseDto.setZxHigh(variables.getZxHigh());
-            caseDto.setXxHigh(variables.getXxHigh());
-            caseDto.setZdWeight(variables.getZdWeight());
-            caseDto.setZxWeight(variables.getZxWeight());
-            caseDto.setXbDepth(variables.getXbDepth());
-            caseDto.setSmWeight(variables.getSmWeight());
-            caseDto.setXmWeight(variables.getXmWeight());
-            caseDto.setMemo2(variables.getMemo2());
-            caseDto.setXztWeight(variables.getXztWeight());
-            caseDto.setGlassDepth(variables.getGlassDepth());
-            caseDto.setMemo3(variables.getMemo3());
-            caseDto.setMemo1(variables.getMemo1());
-            caseDto.setMemo4(variables.getMemo4());
-            caseDto.setMemo5(variables.getMemo5());
-            caseDto.setSerizesId(serizes.getId());
-            caseDto.setCaseires(serizes.getUntitled3());
+            if (serizes != null && serizes.getId() != null) {
+                Integer id = serizes.getId();
+                variables = variablesMapper.selectbyseid(id);
+                caseDto.setColorInfo(orderInfo.getColorInfo());
+                caseDto.setCaoweight(variables.getCaoweight());
+                caseDto.setPlaThick(variables.getPlaThick());
+                caseDto.setZztWeight(variables.getZztWeight());
+                caseDto.setSztweight(variables.getSztweight());
+                caseDto.setBkweight(variables.getBkweight());
+                caseDto.setSxHigh(variables.getSxHigh());
+                caseDto.setZxHigh(variables.getZxHigh());
+                caseDto.setXxHigh(variables.getXxHigh());
+                caseDto.setZdWeight(variables.getZdWeight());
+                caseDto.setZxWeight(variables.getZxWeight());
+                caseDto.setXbDepth(variables.getXbDepth());
+                caseDto.setSmWeight(variables.getSmWeight());
+                caseDto.setXmWeight(variables.getXmWeight());
+                caseDto.setMemo2(variables.getMemo2());
+                caseDto.setXztWeight(variables.getXztWeight());
+                caseDto.setGlassDepth(variables.getGlassDepth());
+                caseDto.setMemo3(variables.getMemo3());
+                caseDto.setMemo1(variables.getMemo1());
+                caseDto.setMemo4(variables.getMemo4());
+                caseDto.setMemo5(variables.getMemo5());
+                caseDto.setSerizesId(serizes.getId());
+                caseDto.setCaseires(serizes.getUntitled3());
+            } else {
+                serizes = serizesMapper.selectByName(orderInfo.getStyleNameAll());
+                if (serizes != null && serizes.getId() != null) {
+                    Integer id = serizes.getId();
+                    variables = variablesMapper.selectbyseid(id);
+                    caseDto.setColorInfo(orderInfo.getColorInfo());
+                    caseDto.setCaoweight(variables.getCaoweight());
+                    caseDto.setPlaThick(variables.getPlaThick());
+                    caseDto.setZztWeight(variables.getZztWeight());
+                    caseDto.setSztweight(variables.getSztweight());
+                    caseDto.setBkweight(variables.getBkweight());
+                    caseDto.setSxHigh(variables.getSxHigh());
+                    caseDto.setZxHigh(variables.getZxHigh());
+                    caseDto.setXxHigh(variables.getXxHigh());
+                    caseDto.setZdWeight(variables.getZdWeight());
+                    caseDto.setZxWeight(variables.getZxWeight());
+                    caseDto.setXbDepth(variables.getXbDepth());
+                    caseDto.setSmWeight(variables.getSmWeight());
+                    caseDto.setXmWeight(variables.getXmWeight());
+                    caseDto.setMemo2(variables.getMemo2());
+                    caseDto.setXztWeight(variables.getXztWeight());
+                    caseDto.setGlassDepth(variables.getGlassDepth());
+                    caseDto.setMemo3(variables.getMemo3());
+                    caseDto.setMemo1(variables.getMemo1());
+                    caseDto.setMemo4(variables.getMemo4());
+                    caseDto.setMemo5(variables.getMemo5());
+                    caseDto.setSerizesId(serizes.getId());
+                    caseDto.setCaseires(serizes.getUntitled3());
+                }
+            }
         }
         return caseDto;
     }
