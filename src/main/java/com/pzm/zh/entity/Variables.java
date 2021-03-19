@@ -386,4 +386,44 @@ public class Variables {
     public void setSerizesId(Integer serizesId) {
         this.serizesId = serizesId;
     }
+
+    @Override
+    public String toString() {
+        return "Variables{" +
+                "id=" + id +
+                ", REVISION=" + REVISION +
+                ", CREATED_BY='" + CREATED_BY + '\'' +
+                ", CREATED_TIME=" + CREATED_TIME +
+                ", UPDATED_BY='" + UPDATED_BY + '\'' +
+                ", UPDATED_TIME=" + UPDATED_TIME +
+                ", doorhigh=" + doorhigh +
+                ", style='" + style + '\'' +
+                ", doorweight=" + doorweight +
+                ", doornums=" + doornums +
+                ", serizes='" + serizes + '\'' +
+                ", ztweight=" + ztweight +
+                ", plaThick=" + plaThick +
+                ", sztweight=" + sztweight +
+                ", bkweight=" + bkweight +
+                ", sxHigh=" + sxHigh +
+                ", zxHigh=" + zxHigh +
+                ", xxHigh=" + xxHigh +
+                ", zdWeight=" + zdWeight +
+                ", xbDepth=" + xbDepth +
+                ", zxWeight=" + zxWeight +
+                ", smWeight=" + smWeight +
+                ", xmWeight=" + xmWeight +
+                ", glassDepth=" + glassDepth +
+                ", zztWeight=" + zztWeight +
+                ", xztWeight=" + xztWeight +
+                ", memo1='" + memo1 + '\'' +
+                ", memo2='" + memo2 + '\'' +
+                ", memo3='" + memo3 + '\'' +
+                ", memo4='" + memo4 + '\'' +
+                ", memo5='" + memo5 + '\'' +
+                ", memo6='" + memo6 + '\'' +
+                ", serizesId=" + serizesId +
+                ", caoweight=" + caoweight +
+                '}';
+    }
 }

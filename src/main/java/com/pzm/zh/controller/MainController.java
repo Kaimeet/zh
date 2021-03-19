@@ -6,6 +6,8 @@ import com.pzm.zh.service.*;
 import com.pzm.zh.util.Dto;
 import com.pzm.zh.util.DtoUtil;
 import net.sf.json.JSONArray;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +32,8 @@ import java.util.stream.Collectors;
  * 主页跳转设置
  */
 public class MainController {
+    private static final Logger log = LogManager.getLogger(MainController.class);
+
     @Resource
     private KunHeService kunHeService;
     @Resource
@@ -109,20 +113,19 @@ public class MainController {
         for (CaseDto caseDto : caseDtos) {
             int caseid = caseDto.getSerizesId();
             if (caseid < 26) {
-                System.out.println(JSONArray.fromObject(caseDto));
-                System.out.println("如图计算");
+                log.info("如图计算：" + caseDto.toString());
                 list.addAll(dataServiceImpl.mainfinalcase(caseDto));
             } else if (caseid > 25 && caseid < 44) {
-                System.out.println("坤和计算");
+                log.info("坤和计算" + caseDto.toString());
                 list.addAll(dataHeServiceImpl.mainfinalcase(caseDto));
             } else if (caseid > 44 && caseid < 53) {
-                System.out.println("GC计算");
+                log.info("GC计算" + caseDto.toString());
                 list.addAll(dataGcServiceImpl.mainfinalcase(caseDto));
             } else if (caseid > 52 && caseid < 55) {
-                System.out.println("旭辉系列计算");
+                log.info("旭辉系列计算" + caseDto.toString());
                 list.addAll(dataXhServiceImpl.mainfinalcase(caseDto));
             } else if (caseid > 54 && caseid < 61) {
-                System.out.println("GC计算");
+                log.info("GC计算" + caseDto.toString());
                 list.addAll(dataGcServiceImpl.mainfinalcase(caseDto));
             }
         }

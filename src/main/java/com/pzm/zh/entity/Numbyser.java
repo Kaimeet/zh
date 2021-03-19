@@ -346,4 +346,38 @@ public class Numbyser {
     public void setMemo3(String memo3) {
         this.memo3 = memo3 == null ? null : memo3.trim();
     }
+
+    @Override
+    public String toString() {
+        return "Numbyser{" +
+                "id=" + id +
+                ", REVISION=" + REVISION +
+                ", CREATED_BY='" + CREATED_BY + '\'' +
+                ", CREATED_TIME=" + CREATED_TIME +
+                ", UPDATED_BY='" + UPDATED_BY + '\'' +
+                ", UPDATED_TIME=" + UPDATED_TIME +
+                ", serizesId=" + serizesId +
+                ", biannums='" + biannums + '\'' +
+                ", zhismnums='" + zhismnums + '\'' +
+                ", zzdnums='" + zzdnums + '\'' +
+                ", xzdnums='" + xzdnums + '\'' +
+                ", wxzdnums='" + wxzdnums + '\'' +
+                ", sztnums='" + sztnums + '\'' +
+                ", zztnums='" + zztnums + '\'' +
+                ", xztnums='" + xztnums + '\'' +
+                ", xmnums='" + xmnums + '\'' +
+                ", sxbnums='" + sxbnums + '\'' +
+                ", zxbnums='" + zxbnums + '\'' +
+                ", xxbnums='" + xxbnums + '\'' +
+                ", sblnums='" + sblnums + '\'' +
+                ", zblnums='" + zblnums + '\'' +
+                ", xblnums='" + xblnums + '\'' +
+                ", msnums='" + msnums + '\'' +
+                ", memo1='" + memo1 + '\'' +
+                ", memo2='" + memo2 + '\'' +
+                ", memo3='" + memo3 + '\'' +
+                ", serizes='" + serizes + '\'' +
+                ", style='" + style + '\'' +
+                '}';
+    }
 }

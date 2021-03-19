@@ -40,10 +40,13 @@ public class ExcelController {
         long t1 = System.currentTimeMillis();
         log.info("上传的文件：" + file);
         List<OrderInfo> orderInfos = ExcelUtils.readExcel("", OrderInfo.class, file);
+        long t2 = System.currentTimeMillis();
+        log.info("上传文件耗时：" + (t2 - t1));
         // 可以计算出结果的集合
         List<CaseDto> caseDtos = new ArrayList<>();
         // 不可以计算结果的集合
         List<CaseDto> caseDtosList = new ArrayList<>();
+        long t3 = System.currentTimeMillis();
         for (OrderInfo orderInfo : orderInfos) {
             Boolean serizes = orderInfoServiceImpl.isSerizes(orderInfo.getJobNum());
             if (serizes) {
@@ -54,7 +57,10 @@ public class ExcelController {
                 caseDto.setJobNum(orderInfo.getJobNum());
                 caseDtosList.add(caseDto);
             }
+
         }
+        long t4 = System.currentTimeMillis();
+        log.info("处理上传数据耗时：" + (t4 - t3));
         EmpData empData = new EmpData();
         empData.setOriginal(caseDtos);
         empData.setNotCorrect(caseDtosList);

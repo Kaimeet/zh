@@ -6,6 +6,8 @@ import com.pzm.zh.dao.VariablesMapper;
 import com.pzm.zh.entity.*;
 import com.pzm.zh.util.Dto;
 import com.pzm.zh.util.DtoUtil;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -22,6 +24,7 @@ import java.util.List;
  **/
 @Service
 public class DataHeServiceImpl implements DataHeService {
+    private static final Logger log = LogManager.getLogger(DataHeServiceImpl.class);
     @Resource
     private NumbyserMapper numbyserMapper;
 
@@ -141,7 +144,7 @@ public class DataHeServiceImpl implements DataHeService {
     public List<Emp> maincase(CaseDto caseDto) {
         //1.提取出该部件的每种部件数量
         Numbyser numbyser = numbyserMapper.selectByPrimaryKey(caseDto.getSerizesId());
-        System.out.println("numbyser值为" + numbyser);
+        log.info("numbyser值为" + numbyser.toString());
         //2.计算普通部件值
         List<Emp> emps = casenormal(caseDto, numbyser);
         CaseDoubles caseDoubles = change(caseDto);
@@ -453,7 +456,7 @@ public class DataHeServiceImpl implements DataHeService {
 //            double t = (2440 / (doorweight - 2 * bkweight + 2 * zxWeight + 4 + 5) - ((int) (2440 / (doorweight - 2 * bkweight + 2 * zxWeight + 4 + 5)))) * (doorweight - 2 * bkweight + 2 * zxWeight + 4 + 5);
 //            zdyuliaolen = t;
 //            emp3.setYuliaoLen(zdyuliaolen);
-            preLenght = preLength((int) (2440/(doorweight - 2 * bkweight + 2 * zxWeight + 4 + 5)) * (doorweight - 2 * bkweight + 2 * zxWeight + 4 + 5) + 50);
+            preLenght = preLength((int) (2440 / (doorweight - 2 * bkweight + 2 * zxWeight + 4 + 5)) * (doorweight - 2 * bkweight + 2 * zxWeight + 4 + 5) + 50);
             emp3.setPreLenght(preLenght);
             emp3.setYuliaoLen(2440 - preLenght);
             //25.计算中档余料宽
@@ -1298,7 +1301,7 @@ public class DataHeServiceImpl implements DataHeService {
         Double xzdnumsZhuang = Double.valueOf(xzdnumsGen) / (int) (1220 / (Double.valueOf(xzdwidth) + 5));
         //小中档余料长
         // xzdlHigh=(INT)2440/( doorWeight-2*bkWeight+2*zxWeight +4+5))* (doorWeight-2*bkWeight+2*zxWeight +4+5)+50
-        Double preLength = preLength((int) (2440 * (caseDoubles.getDoorhigh() - 2 * caseDoubles.getBkweight() + 2 * caseDoubles.getZxWeight() + 4 + 5) )* (caseDoubles.getDoorhigh() - 2 * caseDoubles.getBkweight() + 2 * caseDoubles.getZxWeight() + 4 + 5) + 50);
+        Double preLength = preLength((int) (2440 * (caseDoubles.getDoorhigh() - 2 * caseDoubles.getBkweight() + 2 * caseDoubles.getZxWeight() + 4 + 5)) * (caseDoubles.getDoorhigh() - 2 * caseDoubles.getBkweight() + 2 * caseDoubles.getZxWeight() + 4 + 5) + 50);
         //小中档余料宽
         Double xzdYuLiaoWidth = caseYuliaoKuan(Double.valueOf(xzdwidth));
         Emp emp = new Emp();
@@ -1474,7 +1477,7 @@ public class DataHeServiceImpl implements DataHeService {
         //小中挺余料宽
         Double xztYuLiaoWidth = caseYuliaoKuan(Double.valueOf(xztwidth));
         // 余料长
-        Double preLength = preLength((int) (2440 * (caseDoubles.getDoorhigh() - 2 * caseDoubles.getBkweight() + 2 * caseDoubles.getZxWeight() + 4 + 5) )* (caseDoubles.getDoorhigh() - 2 * caseDoubles.getBkweight() + 2 * caseDoubles.getZxWeight() + 4 + 5) + 50);
+        Double preLength = preLength((int) (2440 * (caseDoubles.getDoorhigh() - 2 * caseDoubles.getBkweight() + 2 * caseDoubles.getZxWeight() + 4 + 5)) * (caseDoubles.getDoorhigh() - 2 * caseDoubles.getBkweight() + 2 * caseDoubles.getZxWeight() + 4 + 5) + 50);
         Emp emp1 = new Emp();
         emp1.setPartName("小中档");
         emp1.setLength(xzdlength);
