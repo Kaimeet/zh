@@ -20,6 +20,28 @@ public class EmpData {
     // 余料
     private List<Emp> remove;
 
+    // 部件数据
+    private List<Variables> variables;
+
+    // 部件数量
+    private List<Numbyser> numbysers;
+
+    public List<Numbyser> getNumbysers() {
+        return numbysers;
+    }
+
+    public void setNumbysers(List<Numbyser> numbysers) {
+        this.numbysers = numbysers;
+    }
+
+    public List<Variables> getVariables() {
+        return variables;
+    }
+
+    public void setVariables(List<Variables> variables) {
+        this.variables = variables;
+    }
+
     public List<CaseDto> getNotCorrect() {
         return notCorrect;
     }
@@ -37,7 +59,7 @@ public class EmpData {
     }
 
     public List<Emp> getResult() {
-        if (result == null || result.size() == 0){
+        if (result == null || result.size() == 0) {
             this.result = new ArrayList<>();
         }
         return result;
@@ -48,7 +70,7 @@ public class EmpData {
     }
 
     public List<Emp> getRemove() {
-        if (remove == null || remove.size() ==0 ){
+        if (remove == null || remove.size() == 0) {
             this.remove = new ArrayList<>();
         }
         return remove;

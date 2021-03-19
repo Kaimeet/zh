@@ -1,58 +1,91 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.pzm.zh.dao.NumbyserMapper" >
-  <resultMap id="BaseResultMap" type="com.pzm.zh.entity.Numbyser" >
-    <constructor >
-      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="REVISION" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="CREATED_BY" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="CREATED_TIME" jdbcType="DATE" javaType="java.util.Date" />
-      <arg column="UPDATED_BY" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="UPDATED_TIME" jdbcType="DATE" javaType="java.util.Date" />
-      <arg column="serizesId" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="biannums" jdbcType="NVARCHAR" javaType="java.lang.String" />
-      <arg column="zhismnums" jdbcType="NVARCHAR" javaType="java.lang.String" />
-      <arg column="zzdnums" jdbcType="NVARCHAR" javaType="java.lang.String" />
-      <arg column="xzdnums" jdbcType="NVARCHAR" javaType="java.lang.String" />
-      <arg column="wxzdnums" jdbcType="NVARCHAR" javaType="java.lang.String" />
-      <arg column="sztnums" jdbcType="NVARCHAR" javaType="java.lang.String" />
-      <arg column="zztnums" jdbcType="NVARCHAR" javaType="java.lang.String" />
-      <arg column="xztnums" jdbcType="NVARCHAR" javaType="java.lang.String" />
-      <arg column="xmnums" jdbcType="NVARCHAR" javaType="java.lang.String" />
-      <arg column="sxbnums" jdbcType="NVARCHAR" javaType="java.lang.String" />
-      <arg column="zxbnums" jdbcType="NVARCHAR" javaType="java.lang.String" />
-      <arg column="xxbnums" jdbcType="NVARCHAR" javaType="java.lang.String" />
-      <arg column="sblnums" jdbcType="NVARCHAR" javaType="java.lang.String" />
-      <arg column="zblnums" jdbcType="NVARCHAR" javaType="java.lang.String" />
-      <arg column="xblnums" jdbcType="NVARCHAR" javaType="java.lang.String" />
-      <arg column="msnums" jdbcType="NVARCHAR" javaType="java.lang.String" />
-      <arg column="memo1" jdbcType="NVARCHAR" javaType="java.lang.String" />
-      <arg column="memo2" jdbcType="NVARCHAR" javaType="java.lang.String" />
-      <arg column="memo3" jdbcType="NVARCHAR" javaType="java.lang.String" />
-    </constructor>
-  </resultMap>
-  <sql id="Base_Column_List" >
+<mapper namespace="com.pzm.zh.dao.NumbyserMapper">
+    <resultMap id="BaseResultMap" type="com.pzm.zh.entity.Numbyser">
+        <constructor>
+            <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="REVISION" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="CREATED_BY" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="CREATED_TIME" jdbcType="DATE" javaType="java.util.Date"/>
+            <arg column="UPDATED_BY" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="UPDATED_TIME" jdbcType="DATE" javaType="java.util.Date"/>
+            <arg column="serizesId" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="biannums" jdbcType="NVARCHAR" javaType="java.lang.String"/>
+            <arg column="zhismnums" jdbcType="NVARCHAR" javaType="java.lang.String"/>
+            <arg column="zzdnums" jdbcType="NVARCHAR" javaType="java.lang.String"/>
+            <arg column="xzdnums" jdbcType="NVARCHAR" javaType="java.lang.String"/>
+            <arg column="wxzdnums" jdbcType="NVARCHAR" javaType="java.lang.String"/>
+            <arg column="sztnums" jdbcType="NVARCHAR" javaType="java.lang.String"/>
+            <arg column="zztnums" jdbcType="NVARCHAR" javaType="java.lang.String"/>
+            <arg column="xztnums" jdbcType="NVARCHAR" javaType="java.lang.String"/>
+            <arg column="xmnums" jdbcType="NVARCHAR" javaType="java.lang.String"/>
+            <arg column="sxbnums" jdbcType="NVARCHAR" javaType="java.lang.String"/>
+            <arg column="zxbnums" jdbcType="NVARCHAR" javaType="java.lang.String"/>
+            <arg column="xxbnums" jdbcType="NVARCHAR" javaType="java.lang.String"/>
+            <arg column="sblnums" jdbcType="NVARCHAR" javaType="java.lang.String"/>
+            <arg column="zblnums" jdbcType="NVARCHAR" javaType="java.lang.String"/>
+            <arg column="xblnums" jdbcType="NVARCHAR" javaType="java.lang.String"/>
+            <arg column="msnums" jdbcType="NVARCHAR" javaType="java.lang.String"/>
+            <arg column="memo1" jdbcType="NVARCHAR" javaType="java.lang.String"/>
+            <arg column="memo2" jdbcType="NVARCHAR" javaType="java.lang.String"/>
+            <arg column="memo3" jdbcType="NVARCHAR" javaType="java.lang.String"/>
+        </constructor>
+    </resultMap>
+
+    <resultMap id="BaseResultMapForAll" type="com.pzm.zh.entity.Numbyser">
+        <constructor>
+            <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="REVISION" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="CREATED_BY" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="CREATED_TIME" jdbcType="DATE" javaType="java.util.Date"/>
+            <arg column="UPDATED_BY" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="UPDATED_TIME" jdbcType="DATE" javaType="java.util.Date"/>
+            <arg column="serizesId" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="biannums" jdbcType="NVARCHAR" javaType="java.lang.String"/>
+            <arg column="zhismnums" jdbcType="NVARCHAR" javaType="java.lang.String"/>
+            <arg column="zzdnums" jdbcType="NVARCHAR" javaType="java.lang.String"/>
+            <arg column="xzdnums" jdbcType="NVARCHAR" javaType="java.lang.String"/>
+            <arg column="wxzdnums" jdbcType="NVARCHAR" javaType="java.lang.String"/>
+            <arg column="sztnums" jdbcType="NVARCHAR" javaType="java.lang.String"/>
+            <arg column="zztnums" jdbcType="NVARCHAR" javaType="java.lang.String"/>
+            <arg column="xztnums" jdbcType="NVARCHAR" javaType="java.lang.String"/>
+            <arg column="xmnums" jdbcType="NVARCHAR" javaType="java.lang.String"/>
+            <arg column="sxbnums" jdbcType="NVARCHAR" javaType="java.lang.String"/>
+            <arg column="zxbnums" jdbcType="NVARCHAR" javaType="java.lang.String"/>
+            <arg column="xxbnums" jdbcType="NVARCHAR" javaType="java.lang.String"/>
+            <arg column="sblnums" jdbcType="NVARCHAR" javaType="java.lang.String"/>
+            <arg column="zblnums" jdbcType="NVARCHAR" javaType="java.lang.String"/>
+            <arg column="xblnums" jdbcType="NVARCHAR" javaType="java.lang.String"/>
+            <arg column="msnums" jdbcType="NVARCHAR" javaType="java.lang.String"/>
+            <arg column="memo1" jdbcType="NVARCHAR" javaType="java.lang.String"/>
+            <arg column="memo2" jdbcType="NVARCHAR" javaType="java.lang.String"/>
+            <arg column="memo3" jdbcType="NVARCHAR" javaType="java.lang.String"/>
+            <arg column="style" jdbcType="NVARCHAR" javaType="java.lang.String"/>
+            <arg column="serizes" jdbcType="NVARCHAR" javaType="java.lang.String"/>
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List">
     id, REVISION, CREATED_BY, CREATED_TIME, UPDATED_BY, UPDATED_TIME, serizesId, biannums, 
     zhismnums, zzdnums, xzdnums, wxzdnums, sztnums, zztnums, xztnums, xmnums, sxbnums, 
     zxbnums, xxbnums, sblnums, zblnums, xblnums, msnums, memo1, memo2, memo3
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from numbyser
-    where serizesId = #{id,jdbcType=INTEGER}
-  </select>
-  <select id="selectBySerizes" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select
-    <include refid="Base_Column_List" />
-    from numbyser
-    where serizesId = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from numbyser
+        where serizesId = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="selectBySerizes" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from numbyser
+        where serizesId = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from numbyser
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.pzm.zh.entity.Numbyser" >
+    <insert id="insert" parameterType="com.pzm.zh.entity.Numbyser">
     insert into numbyser (id, REVISION, CREATED_BY, 
       CREATED_TIME, UPDATED_BY, UPDATED_TIME, 
       serizesId, biannums, zhismnums, 
@@ -72,251 +105,251 @@
       #{xblnums,jdbcType=NVARCHAR}, #{msnums,jdbcType=NVARCHAR}, #{memo1,jdbcType=NVARCHAR}, 
       #{memo2,jdbcType=NVARCHAR}, #{memo3,jdbcType=NVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.pzm.zh.entity.Numbyser" >
-    insert into numbyser
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
-      <if test="REVISION != null" >
-        REVISION,
-      </if>
-      <if test="CREATED_BY != null" >
-        CREATED_BY,
-      </if>
-      <if test="CREATED_TIME != null" >
-        CREATED_TIME,
-      </if>
-      <if test="UPDATED_BY != null" >
-        UPDATED_BY,
-      </if>
-      <if test="UPDATED_TIME != null" >
-        UPDATED_TIME,
-      </if>
-      <if test="serizesId != null" >
-        serizesId,
-      </if>
-      <if test="biannums != null" >
-        biannums,
-      </if>
-      <if test="zhismnums != null" >
-        zhismnums,
-      </if>
-      <if test="zzdnums != null" >
-        zzdnums,
-      </if>
-      <if test="xzdnums != null" >
-        xzdnums,
-      </if>
-      <if test="wxzdnums != null" >
-        wxzdnums,
-      </if>
-      <if test="sztnums != null" >
-        sztnums,
-      </if>
-      <if test="zztnums != null" >
-        zztnums,
-      </if>
-      <if test="xztnums != null" >
-        xztnums,
-      </if>
-      <if test="xmnums != null" >
-        xmnums,
-      </if>
-      <if test="sxbnums != null" >
-        sxbnums,
-      </if>
-      <if test="zxbnums != null" >
-        zxbnums,
-      </if>
-      <if test="xxbnums != null" >
-        xxbnums,
-      </if>
-      <if test="sblnums != null" >
-        sblnums,
-      </if>
-      <if test="zblnums != null" >
-        zblnums,
-      </if>
-      <if test="xblnums != null" >
-        xblnums,
-      </if>
-      <if test="msnums != null" >
-        msnums,
-      </if>
-      <if test="memo1 != null" >
-        memo1,
-      </if>
-      <if test="memo2 != null" >
-        memo2,
-      </if>
-      <if test="memo3 != null" >
-        memo3,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="REVISION != null" >
-        #{REVISION,jdbcType=INTEGER},
-      </if>
-      <if test="CREATED_BY != null" >
-        #{CREATED_BY,jdbcType=VARCHAR},
-      </if>
-      <if test="CREATED_TIME != null" >
-        #{CREATED_TIME,jdbcType=DATE},
-      </if>
-      <if test="UPDATED_BY != null" >
-        #{UPDATED_BY,jdbcType=VARCHAR},
-      </if>
-      <if test="UPDATED_TIME != null" >
-        #{UPDATED_TIME,jdbcType=DATE},
-      </if>
-      <if test="serizesId != null" >
-        #{serizesId,jdbcType=INTEGER},
-      </if>
-      <if test="biannums != null" >
-        #{biannums,jdbcType=NVARCHAR},
-      </if>
-      <if test="zhismnums != null" >
-        #{zhismnums,jdbcType=NVARCHAR},
-      </if>
-      <if test="zzdnums != null" >
-        #{zzdnums,jdbcType=NVARCHAR},
-      </if>
-      <if test="xzdnums != null" >
-        #{xzdnums,jdbcType=NVARCHAR},
-      </if>
-      <if test="wxzdnums != null" >
-        #{wxzdnums,jdbcType=NVARCHAR},
-      </if>
-      <if test="sztnums != null" >
-        #{sztnums,jdbcType=NVARCHAR},
-      </if>
-      <if test="zztnums != null" >
-        #{zztnums,jdbcType=NVARCHAR},
-      </if>
-      <if test="xztnums != null" >
-        #{xztnums,jdbcType=NVARCHAR},
-      </if>
-      <if test="xmnums != null" >
-        #{xmnums,jdbcType=NVARCHAR},
-      </if>
-      <if test="sxbnums != null" >
-        #{sxbnums,jdbcType=NVARCHAR},
-      </if>
-      <if test="zxbnums != null" >
-        #{zxbnums,jdbcType=NVARCHAR},
-      </if>
-      <if test="xxbnums != null" >
-        #{xxbnums,jdbcType=NVARCHAR},
-      </if>
-      <if test="sblnums != null" >
-        #{sblnums,jdbcType=NVARCHAR},
-      </if>
-      <if test="zblnums != null" >
-        #{zblnums,jdbcType=NVARCHAR},
-      </if>
-      <if test="xblnums != null" >
-        #{xblnums,jdbcType=NVARCHAR},
-      </if>
-      <if test="msnums != null" >
-        #{msnums,jdbcType=NVARCHAR},
-      </if>
-      <if test="memo1 != null" >
-        #{memo1,jdbcType=NVARCHAR},
-      </if>
-      <if test="memo2 != null" >
-        #{memo2,jdbcType=NVARCHAR},
-      </if>
-      <if test="memo3 != null" >
-        #{memo3,jdbcType=NVARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.pzm.zh.entity.Numbyser" >
-    update numbyser
-    <set >
-      <if test="REVISION != null" >
-        REVISION = #{REVISION,jdbcType=INTEGER},
-      </if>
-      <if test="CREATED_BY != null" >
-        CREATED_BY = #{CREATED_BY,jdbcType=VARCHAR},
-      </if>
-      <if test="CREATED_TIME != null" >
-        CREATED_TIME = #{CREATED_TIME,jdbcType=DATE},
-      </if>
-      <if test="UPDATED_BY != null" >
-        UPDATED_BY = #{UPDATED_BY,jdbcType=VARCHAR},
-      </if>
-      <if test="UPDATED_TIME != null" >
-        UPDATED_TIME = #{UPDATED_TIME,jdbcType=DATE},
-      </if>
-      <if test="serizesId != null" >
-        serizesId = #{serizesId,jdbcType=INTEGER},
-      </if>
-      <if test="biannums != null" >
-        biannums = #{biannums,jdbcType=NVARCHAR},
-      </if>
-      <if test="zhismnums != null" >
-        zhismnums = #{zhismnums,jdbcType=NVARCHAR},
-      </if>
-      <if test="zzdnums != null" >
-        zzdnums = #{zzdnums,jdbcType=NVARCHAR},
-      </if>
-      <if test="xzdnums != null" >
-        xzdnums = #{xzdnums,jdbcType=NVARCHAR},
-      </if>
-      <if test="wxzdnums != null" >
-        wxzdnums = #{wxzdnums,jdbcType=NVARCHAR},
-      </if>
-      <if test="sztnums != null" >
-        sztnums = #{sztnums,jdbcType=NVARCHAR},
-      </if>
-      <if test="zztnums != null" >
-        zztnums = #{zztnums,jdbcType=NVARCHAR},
-      </if>
-      <if test="xztnums != null" >
-        xztnums = #{xztnums,jdbcType=NVARCHAR},
-      </if>
-      <if test="xmnums != null" >
-        xmnums = #{xmnums,jdbcType=NVARCHAR},
-      </if>
-      <if test="sxbnums != null" >
-        sxbnums = #{sxbnums,jdbcType=NVARCHAR},
-      </if>
-      <if test="zxbnums != null" >
-        zxbnums = #{zxbnums,jdbcType=NVARCHAR},
-      </if>
-      <if test="xxbnums != null" >
-        xxbnums = #{xxbnums,jdbcType=NVARCHAR},
-      </if>
-      <if test="sblnums != null" >
-        sblnums = #{sblnums,jdbcType=NVARCHAR},
-      </if>
-      <if test="zblnums != null" >
-        zblnums = #{zblnums,jdbcType=NVARCHAR},
-      </if>
-      <if test="xblnums != null" >
-        xblnums = #{xblnums,jdbcType=NVARCHAR},
-      </if>
-      <if test="msnums != null" >
-        msnums = #{msnums,jdbcType=NVARCHAR},
-      </if>
-      <if test="memo1 != null" >
-        memo1 = #{memo1,jdbcType=NVARCHAR},
-      </if>
-      <if test="memo2 != null" >
-        memo2 = #{memo2,jdbcType=NVARCHAR},
-      </if>
-      <if test="memo3 != null" >
-        memo3 = #{memo3,jdbcType=NVARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.pzm.zh.entity.Numbyser" >
+    <insert id="insertSelective" parameterType="com.pzm.zh.entity.Numbyser">
+        insert into numbyser
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="REVISION != null">
+                REVISION,
+            </if>
+            <if test="CREATED_BY != null">
+                CREATED_BY,
+            </if>
+            <if test="CREATED_TIME != null">
+                CREATED_TIME,
+            </if>
+            <if test="UPDATED_BY != null">
+                UPDATED_BY,
+            </if>
+            <if test="UPDATED_TIME != null">
+                UPDATED_TIME,
+            </if>
+            <if test="serizesId != null">
+                serizesId,
+            </if>
+            <if test="biannums != null">
+                biannums,
+            </if>
+            <if test="zhismnums != null">
+                zhismnums,
+            </if>
+            <if test="zzdnums != null">
+                zzdnums,
+            </if>
+            <if test="xzdnums != null">
+                xzdnums,
+            </if>
+            <if test="wxzdnums != null">
+                wxzdnums,
+            </if>
+            <if test="sztnums != null">
+                sztnums,
+            </if>
+            <if test="zztnums != null">
+                zztnums,
+            </if>
+            <if test="xztnums != null">
+                xztnums,
+            </if>
+            <if test="xmnums != null">
+                xmnums,
+            </if>
+            <if test="sxbnums != null">
+                sxbnums,
+            </if>
+            <if test="zxbnums != null">
+                zxbnums,
+            </if>
+            <if test="xxbnums != null">
+                xxbnums,
+            </if>
+            <if test="sblnums != null">
+                sblnums,
+            </if>
+            <if test="zblnums != null">
+                zblnums,
+            </if>
+            <if test="xblnums != null">
+                xblnums,
+            </if>
+            <if test="msnums != null">
+                msnums,
+            </if>
+            <if test="memo1 != null">
+                memo1,
+            </if>
+            <if test="memo2 != null">
+                memo2,
+            </if>
+            <if test="memo3 != null">
+                memo3,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="REVISION != null">
+                #{REVISION,jdbcType=INTEGER},
+            </if>
+            <if test="CREATED_BY != null">
+                #{CREATED_BY,jdbcType=VARCHAR},
+            </if>
+            <if test="CREATED_TIME != null">
+                #{CREATED_TIME,jdbcType=DATE},
+            </if>
+            <if test="UPDATED_BY != null">
+                #{UPDATED_BY,jdbcType=VARCHAR},
+            </if>
+            <if test="UPDATED_TIME != null">
+                #{UPDATED_TIME,jdbcType=DATE},
+            </if>
+            <if test="serizesId != null">
+                #{serizesId,jdbcType=INTEGER},
+            </if>
+            <if test="biannums != null">
+                #{biannums,jdbcType=NVARCHAR},
+            </if>
+            <if test="zhismnums != null">
+                #{zhismnums,jdbcType=NVARCHAR},
+            </if>
+            <if test="zzdnums != null">
+                #{zzdnums,jdbcType=NVARCHAR},
+            </if>
+            <if test="xzdnums != null">
+                #{xzdnums,jdbcType=NVARCHAR},
+            </if>
+            <if test="wxzdnums != null">
+                #{wxzdnums,jdbcType=NVARCHAR},
+            </if>
+            <if test="sztnums != null">
+                #{sztnums,jdbcType=NVARCHAR},
+            </if>
+            <if test="zztnums != null">
+                #{zztnums,jdbcType=NVARCHAR},
+            </if>
+            <if test="xztnums != null">
+                #{xztnums,jdbcType=NVARCHAR},
+            </if>
+            <if test="xmnums != null">
+                #{xmnums,jdbcType=NVARCHAR},
+            </if>
+            <if test="sxbnums != null">
+                #{sxbnums,jdbcType=NVARCHAR},
+            </if>
+            <if test="zxbnums != null">
+                #{zxbnums,jdbcType=NVARCHAR},
+            </if>
+            <if test="xxbnums != null">
+                #{xxbnums,jdbcType=NVARCHAR},
+            </if>
+            <if test="sblnums != null">
+                #{sblnums,jdbcType=NVARCHAR},
+            </if>
+            <if test="zblnums != null">
+                #{zblnums,jdbcType=NVARCHAR},
+            </if>
+            <if test="xblnums != null">
+                #{xblnums,jdbcType=NVARCHAR},
+            </if>
+            <if test="msnums != null">
+                #{msnums,jdbcType=NVARCHAR},
+            </if>
+            <if test="memo1 != null">
+                #{memo1,jdbcType=NVARCHAR},
+            </if>
+            <if test="memo2 != null">
+                #{memo2,jdbcType=NVARCHAR},
+            </if>
+            <if test="memo3 != null">
+                #{memo3,jdbcType=NVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.pzm.zh.entity.Numbyser">
+        update numbyser
+        <set>
+            <if test="REVISION != null">
+                REVISION = #{REVISION,jdbcType=INTEGER},
+            </if>
+            <if test="CREATED_BY != null">
+                CREATED_BY = #{CREATED_BY,jdbcType=VARCHAR},
+            </if>
+            <if test="CREATED_TIME != null">
+                CREATED_TIME = #{CREATED_TIME,jdbcType=DATE},
+            </if>
+            <if test="UPDATED_BY != null">
+                UPDATED_BY = #{UPDATED_BY,jdbcType=VARCHAR},
+            </if>
+            <if test="UPDATED_TIME != null">
+                UPDATED_TIME = #{UPDATED_TIME,jdbcType=DATE},
+            </if>
+            <if test="serizesId != null">
+                serizesId = #{serizesId,jdbcType=INTEGER},
+            </if>
+            <if test="biannums != null">
+                biannums = #{biannums,jdbcType=NVARCHAR},
+            </if>
+            <if test="zhismnums != null">
+                zhismnums = #{zhismnums,jdbcType=NVARCHAR},
+            </if>
+            <if test="zzdnums != null">
+                zzdnums = #{zzdnums,jdbcType=NVARCHAR},
+            </if>
+            <if test="xzdnums != null">
+                xzdnums = #{xzdnums,jdbcType=NVARCHAR},
+            </if>
+            <if test="wxzdnums != null">
+                wxzdnums = #{wxzdnums,jdbcType=NVARCHAR},
+            </if>
+            <if test="sztnums != null">
+                sztnums = #{sztnums,jdbcType=NVARCHAR},
+            </if>
+            <if test="zztnums != null">
+                zztnums = #{zztnums,jdbcType=NVARCHAR},
+            </if>
+            <if test="xztnums != null">
+                xztnums = #{xztnums,jdbcType=NVARCHAR},
+            </if>
+            <if test="xmnums != null">
+                xmnums = #{xmnums,jdbcType=NVARCHAR},
+            </if>
+            <if test="sxbnums != null">
+                sxbnums = #{sxbnums,jdbcType=NVARCHAR},
+            </if>
+            <if test="zxbnums != null">
+                zxbnums = #{zxbnums,jdbcType=NVARCHAR},
+            </if>
+            <if test="xxbnums != null">
+                xxbnums = #{xxbnums,jdbcType=NVARCHAR},
+            </if>
+            <if test="sblnums != null">
+                sblnums = #{sblnums,jdbcType=NVARCHAR},
+            </if>
+            <if test="zblnums != null">
+                zblnums = #{zblnums,jdbcType=NVARCHAR},
+            </if>
+            <if test="xblnums != null">
+                xblnums = #{xblnums,jdbcType=NVARCHAR},
+            </if>
+            <if test="msnums != null">
+                msnums = #{msnums,jdbcType=NVARCHAR},
+            </if>
+            <if test="memo1 != null">
+                memo1 = #{memo1,jdbcType=NVARCHAR},
+            </if>
+            <if test="memo2 != null">
+                memo2 = #{memo2,jdbcType=NVARCHAR},
+            </if>
+            <if test="memo3 != null">
+                memo3 = #{memo3,jdbcType=NVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.pzm.zh.entity.Numbyser">
     update numbyser
     set REVISION = #{REVISION,jdbcType=INTEGER},
       CREATED_BY = #{CREATED_BY,jdbcType=VARCHAR},
@@ -345,4 +378,42 @@
       memo3 = #{memo3,jdbcType=NVARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+    <select id="selectList" resultMap="BaseResultMapForAll">
+        SELECT
+          numbyser.id,
+          numbyser.REVISION,
+          numbyser.CREATED_BY,
+          numbyser.CREATED_TIME,
+          numbyser.UPDATED_BY,
+          numbyser.UPDATED_TIME,
+          numbyser.serizesId,
+          numbyser.biannums,
+          numbyser.zhismnums,
+          numbyser.zzdnums,
+          numbyser.xzdnums,
+          numbyser.wxzdnums,
+          numbyser.sztnums,
+          numbyser.zztnums,
+          numbyser.xztnums,
+          numbyser.xmnums,
+          numbyser.sxbnums,
+          numbyser.zxbnums,
+          numbyser.xxbnums,
+          numbyser.sblnums,
+          numbyser.zblnums,
+          numbyser.xblnums,
+          numbyser.msnums,
+          numbyser.memo1,
+          numbyser.memo2,
+          numbyser.memo3,
+          variables.style AS style,
+          variables.serizes AS serizes
+      FROM
+          numbyser LEFT join variables ON numbyser.serizesId = variables.serizesId
+      WHERE
+          1 =1
+    </select>
+
+
 </mapper>

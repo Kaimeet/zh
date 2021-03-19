@@ -6,9 +6,6 @@ import com.pzm.zh.service.*;
 import com.pzm.zh.util.Dto;
 import com.pzm.zh.util.DtoUtil;
 import net.sf.json.JSONArray;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -60,6 +57,16 @@ public class MainController {
     @RequestMapping(value = "/material/inventorySum")
     public String sum() {
         return "Material/inventorySum";
+    }
+
+    @RequestMapping(value = "/material/numbyser")
+    public String serizes() {
+        return "Material/numbyser";
+    }
+
+    @RequestMapping(value = "/material/variables")
+    public String variables() {
+        return "Material/variables";
     }
 
     @RequestMapping(value = "/material/inventorySelectForBatch")

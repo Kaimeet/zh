@@ -55,6 +55,41 @@ public class Numbyser {
 
     private String memo3;
 
+    private String serizes;
+
+    private String style;
+
+    public Numbyser(Integer id, Integer REVISION, String CREATED_BY, Date CREATED_TIME, String UPDATED_BY, Date UPDATED_TIME, Integer serizesId, String biannums, String zhismnums, String zzdnums, String xzdnums, String wxzdnums, String sztnums, String zztnums, String xztnums, String xmnums, String sxbnums, String zxbnums, String xxbnums, String sblnums, String zblnums, String xblnums, String msnums, String memo1, String memo2, String memo3, String serizes, String style) {
+        this.id = id;
+        this.REVISION = REVISION;
+        this.CREATED_BY = CREATED_BY;
+        this.CREATED_TIME = CREATED_TIME;
+        this.UPDATED_BY = UPDATED_BY;
+        this.UPDATED_TIME = UPDATED_TIME;
+        this.serizesId = serizesId;
+        this.biannums = biannums;
+        this.zhismnums = zhismnums;
+        this.zzdnums = zzdnums;
+        this.xzdnums = xzdnums;
+        this.wxzdnums = wxzdnums;
+        this.sztnums = sztnums;
+        this.zztnums = zztnums;
+        this.xztnums = xztnums;
+        this.xmnums = xmnums;
+        this.sxbnums = sxbnums;
+        this.zxbnums = zxbnums;
+        this.xxbnums = xxbnums;
+        this.sblnums = sblnums;
+        this.zblnums = zblnums;
+        this.xblnums = xblnums;
+        this.msnums = msnums;
+        this.memo1 = memo1;
+        this.memo2 = memo2;
+        this.memo3 = memo3;
+        this.style = style;
+        this.serizes = serizes;
+    }
+
     public Numbyser(Integer id, Integer REVISION, String CREATED_BY, Date CREATED_TIME, String UPDATED_BY, Date UPDATED_TIME, Integer serizesId, String biannums, String zhismnums, String zzdnums, String xzdnums, String wxzdnums, String sztnums, String zztnums, String xztnums, String xmnums, String sxbnums, String zxbnums, String xxbnums, String sblnums, String zblnums, String xblnums, String msnums, String memo1, String memo2, String memo3) {
         this.id = id;
         this.REVISION = REVISION;
@@ -82,6 +117,22 @@ public class Numbyser {
         this.memo1 = memo1;
         this.memo2 = memo2;
         this.memo3 = memo3;
+    }
+
+    public String getSerizes() {
+        return serizes;
+    }
+
+    public void setSerizes(String serizes) {
+        this.serizes = serizes;
+    }
+
+    public String getStyle() {
+        return style;
+    }
+
+    public void setStyle(String style) {
+        this.style = style;
     }
 
     public Numbyser() {
