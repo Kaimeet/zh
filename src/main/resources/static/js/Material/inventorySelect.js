@@ -1036,10 +1036,10 @@ function calculate() {
                         , {field: 'partName', title: '部件名称', width: 120}
                         , {field: 'caoweight', title: '槽宽', width: 80}
                         , {field: 'preSize', title: '备料尺寸', width: 200}
-                        , {field: 'size', title: '精截尺寸', width: 200}
-                        , {field: 'numbyZhuang', title: '数量张(片)', width: 100}
                         , {field: 'numbyGens', title: '数量根', width: 100}
                         , {field: 'numbyGe', title: '数量个', width: 80}
+                        , {field: 'size', title: '精截尺寸', width: 200}
+                        , {field: 'numbyZhuang', title: '数量张(片)', width: 100}
                         , {field: 'yuliaoLen', title: '余料长', width: 80}
                         , {field: 'yuliaoWidth', title: '余料宽', width: 80}
                     ]]
@@ -1061,10 +1061,10 @@ function calculate() {
                         , {field: 'colorInfo', title: '颜色', width: 180}
                         , {field: 'caoweight', title: '槽宽', width: 100}
                         , {field: 'preSize', title: '备料尺寸', width: 200}
-                        , {field: 'size', title: '精截尺寸', width: 200}
-                        , {field: 'numbyGe', title: '数量个', width: 100}
                         , {field: 'numbyGens', title: '数量根', width: 100}
                         , {field: 'numbyZhuang', title: '数量张(片)', width: 180}
+                        , {field: 'size', title: '精截尺寸', width: 200}
+                        , {field: 'numbyGe', title: '数量个', width: 100}
                     ]]
                     , data: myData.data.result
                     , even: true
@@ -1222,10 +1222,10 @@ function excelExport() {
                 '部件名称',
                 '槽宽',
                 '备料尺寸',
-                '精截尺寸',
-                '数量张(片)',
-                '数量根',
                 '数量个',
+                '数量张(片)',
+                '精截尺寸',
+                '数量根',
                 '余料长',
                 '余料宽'
             ]
@@ -1239,10 +1239,10 @@ function excelExport() {
                 temp.push(normalList[i].partName);
                 temp.push(normalList[i].caoweight);
                 temp.push(normalList[i].preSize);
-                temp.push(normalList[i].size);
-                temp.push(normalList[i].numbyZhuang);
                 temp.push(normalList[i].numbyGens);
                 temp.push(normalList[i].numbyGe);
+                temp.push(normalList[i].size);
+                temp.push(normalList[i].numbyZhuang);
                 temp.push(normalList[i].yuliaoLen);
                 temp.push(normalList[i].yuliaoWidth);
                 aoa2.push(temp);
@@ -1278,9 +1278,9 @@ function excelExport() {
                 '部件名称',
                 '槽宽',
                 '备料尺寸',
-                '精截尺寸',
                 '数量个',
                 '数量根',
+                '精截尺寸',
                 '数量张(片)',
             ]);
         if (infoMS != null && infoMS.length > 0) {
@@ -1291,10 +1291,10 @@ function excelExport() {
                 temp.push(infoMS[i].partName);
                 temp.push(infoMS[i].caoweight);
                 temp.push(infoMS[i].preSize);
-                temp.push(infoMS[i].size);
-                temp.push(infoMS[i].numbyGe);
                 temp.push(infoMS[i].numbyGens);
                 temp.push(infoMS[i].numbyZhuang);
+                temp.push(infoMS[i].size);
+                temp.push(infoMS[i].numbyGe);
                 aoa3.push(temp);
             }
         }
@@ -1304,9 +1304,9 @@ function excelExport() {
             {wch: 10},
             {wch: 10},
             {wch: 30},
+            {wch: 10},
+            {wch: 10},
             {wch: 30},
-            {wch: 10},
-            {wch: 10},
             {wch: 10}
         ];
         var sheet3 = XLSX.utils.aoa_to_sheet(aoa3);
