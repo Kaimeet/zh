@@ -10,8 +10,8 @@ function getNumbyser() {
             , cols: [[
                 {type: 'checkbox'}
                 , {field: 'id', title: 'id', width: 80}
-                , {field: 'serizes', title: '系列', width: 120}
-                , {field: 'style', title: '款式', width: 120}
+                , {field: 'style', title: '系列', width: 120}
+                , {field: 'serizes', title: '款式', width: 120}
                 , {field: 'biannums', title: '边框数量', minWidth: 100}
                 , {field: 'zhismnums', title: '直上帽数量', minWidth: 100}
                 , {field: 'zzdnums', title: '直中档数量', minWidth: 100}
