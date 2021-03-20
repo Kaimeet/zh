@@ -129,6 +129,14 @@ public class MainController {
                 list.addAll(dataGcServiceImpl.mainfinalcase(caseDto));
             }
         }
+
+        for (Emp emp : list) {
+            emp.setNumbyZhuang(new BigDecimal(emp.getNumbyZhuang()).setScale(1, BigDecimal.ROUND_HALF_UP).doubleValue());
+            emp.setNumbyGens(new BigDecimal(emp.getNumbyGens()).setScale(1, BigDecimal.ROUND_HALF_UP).doubleValue());
+            emp.setNumbyGe(new BigDecimal(emp.getNumbyGe()).setScale(1, BigDecimal.ROUND_HALF_UP).doubleValue());
+            emp.setYuliaoLen(new BigDecimal(emp.getYuliaoLen()).setScale(1, BigDecimal.ROUND_HALF_UP).doubleValue());
+            emp.setYuliaoWidth(new BigDecimal(emp.getYuliaoWidth()).setScale(1, BigDecimal.ROUND_HALF_UP).doubleValue());
+        }
         // 处理后正常料汇总
         List<Emp> resultList = new ArrayList<>();
         // 处理后余料汇总
@@ -200,10 +208,8 @@ public class MainController {
             emp.setPartName(partName);
             emp.setHigh(hight);
             emp.setNumbyZhuang(numbyZhuang);
-            emp.setYuliaoWidth(yuliaowidth);
-            emp.setYuliaoLen(yuliaolen);
             emp.setCaoweight(caoweight);
-            emp.setSize(hight + "*" + yuliaowidth + "*" + yuliaowidth);
+            emp.setSize(hight.intValue() + "*" + yuliaowidth.intValue() + "*" + yuliaowidth.intValue());
             emp.setSalesOrderNum(salesOrderNum);
             emp.setColorInfo(colorInfo);
             removeList.add(emp);

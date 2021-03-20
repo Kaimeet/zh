@@ -149,8 +149,8 @@ public class DataGcServiceImpl implements DataGcService {
                 emp.setNumbyGens(new Double(0));
             }
             // 拼接备料尺寸和精截尺寸
-            emp.setPreSize(emp.getPreLenght() + "*" + emp.getPreWidth() + "*" + emp.getPreHight());
-            emp.setSize(emp.getLength() + "*" + emp.getWidth() + "*" + emp.getHigh());
+            emp.setPreSize(emp.getPreLenght().intValue() + "*" + emp.getPreWidth().intValue() + "*" + emp.getPreHight().intValue());
+            emp.setSize(emp.getLength().intValue() + "*" + emp.getWidth().intValue() + "*" + emp.getHigh().intValue());
         }
 
         return maincase;
@@ -286,7 +286,7 @@ public class DataGcServiceImpl implements DataGcService {
         smyuliaokuan = c;
         emp1.setYuliaoWidth(smyuliaokuan);
         // 计算上帽余料长
-        Double preLenght = preLength((int) (2440/(doorweight - 2 * bkweight + 2 * zxWeight + 4 + 5)) * (doorweight - 2 * bkweight + 2 * zxWeight + 4 + 5) + 50);
+        Double preLenght = preLength((int) (2440 / (doorweight - 2 * bkweight + 2 * zxWeight + 4 + 5)) * (doorweight - 2 * bkweight + 2 * zxWeight + 4 + 5) + 50);
         emp1.setPreLenght(preLenght);
         emp1.setYuliaoLen(2440 - preLenght);
         emps.add(emp1);
@@ -313,7 +313,7 @@ public class DataGcServiceImpl implements DataGcService {
         xmnumsZhuang = h;
         emp2.setNumbyZhuang(xmnumsZhuang);
         // 计算下帽余料长
-        preLenght = preLength((int) (2440/(doorweight - 2 * bkweight + 2 * zxWeight + 4 + 5)) * (doorweight - 2 * bkweight + 2 * zxWeight + 4 + 5) + 50);
+        preLenght = preLength((int) (2440 / (doorweight - 2 * bkweight + 2 * zxWeight + 4 + 5)) * (doorweight - 2 * bkweight + 2 * zxWeight + 4 + 5) + 50);
         emp2.setPreLenght(preLenght);
         emp2.setYuliaoLen(2440 - preLenght);
         // 计算下帽余料宽
@@ -346,7 +346,7 @@ public class DataGcServiceImpl implements DataGcService {
         emp3.setNumbyGens(zdnumsGen);
         emp3.setNumbyGe(zdnumsGe);
         // 计算中档余料长
-        preLenght = preLength((int) (2440/(doorweight - 2 * bkweight + 2 * zxWeight + 4 + 5)) * (doorweight - 2 * bkweight + 2 * zxWeight + 4 + 5) + 50);
+        preLenght = preLength((int) (2440 / (doorweight - 2 * bkweight + 2 * zxWeight + 4 + 5)) * (doorweight - 2 * bkweight + 2 * zxWeight + 4 + 5) + 50);
         emp3.setPreLenght(preLenght);
         emp3.setYuliaoLen(2440 - preLenght);
         //25.计算中档余料宽
@@ -868,7 +868,7 @@ public class DataGcServiceImpl implements DataGcService {
         // 中中挺余料长
 //        Double zztYuliaoLen = caseYuliaoLenth(Double.valueOf(zztlenth));
         //zztblHigh=(INT)2440/(doorHigh-smWeight-xmWeight-xxHigh-zdWeight+4*zxWeight +4+5))* (doorHigh-smWeight-xmWeight-xxHigh-zdWeight+4*zxWeight +4+5)+50
-        Double preLength = preLength((int) (2440 / (caseDoubles.getDoorhigh() - caseDoubles.getSmWeight() - caseDoubles.getXmWeight() - caseDoubles.getXxHigh() - caseDoubles.getZdWeight() + 4 * caseDoubles.getZxWeight()) )*
+        Double preLength = preLength((int) (2440 / (caseDoubles.getDoorhigh() - caseDoubles.getSmWeight() - caseDoubles.getXmWeight() - caseDoubles.getXxHigh() - caseDoubles.getZdWeight() + 4 * caseDoubles.getZxWeight())) *
                 (caseDoubles.getDoorhigh() - caseDoubles.getSmWeight() - caseDoubles.getXmWeight() - caseDoubles.getXxHigh() - caseDoubles.getXzdWeight() + 4 * caseDoubles.getZxWeight() + 4 + 5) + 50);
         //中中挺余料宽
         Double zztYuLiaoWidth = caseYuliaoKuan(Double.valueOf(zztwidth));

@@ -134,8 +134,8 @@ public class DataHeServiceImpl implements DataHeService {
                 emp.setNumbyGens(new Double(0));
             }
             // 拼接备料尺寸和精截尺寸
-            emp.setPreSize(emp.getPreLenght() + "*" + emp.getPreWidth() + "*" + emp.getPreHight());
-            emp.setSize(emp.getLength() + "*" + emp.getWidth() + "*" + emp.getHigh());
+            emp.setPreSize(emp.getPreLenght().intValue() + "*" + emp.getPreWidth().intValue() + "*" + emp.getPreHight().intValue());
+            emp.setSize(emp.getLength().intValue() + "*" + emp.getWidth().intValue() + "*" + emp.getHigh().intValue());
         }
         return maincase;
     }
