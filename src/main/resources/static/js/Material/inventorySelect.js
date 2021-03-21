@@ -1239,10 +1239,10 @@ function excelExport() {
                 temp.push(normalList[i].partName);
                 temp.push(normalList[i].caoweight);
                 temp.push(normalList[i].preSize);
-                temp.push(normalList[i].numbyGens);
                 temp.push(normalList[i].numbyGe);
-                temp.push(normalList[i].size);
                 temp.push(normalList[i].numbyZhuang);
+                temp.push(normalList[i].size);
+                temp.push(normalList[i].numbyGens);
                 temp.push(normalList[i].yuliaoLen);
                 temp.push(normalList[i].yuliaoWidth);
                 aoa2.push(temp);
