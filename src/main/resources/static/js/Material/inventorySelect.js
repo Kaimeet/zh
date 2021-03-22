@@ -1037,9 +1037,9 @@ function calculate() {
                         , {field: 'caoweight', title: '槽宽', width: 80}
                         , {field: 'preSize', title: '备料尺寸', width: 200}
                         , {field: 'numbyGens', title: '数量根', width: 100}
-                        , {field: 'numbyGe', title: '数量个', width: 80}
-                        , {field: 'size', title: '精截尺寸', width: 200}
                         , {field: 'numbyZhuang', title: '数量张(片)', width: 100}
+                        , {field: 'size', title: '精截尺寸', width: 200}
+                        , {field: 'numbyGe', title: '数量个', width: 80}
                         , {field: 'yuliaoLen', title: '余料长', width: 80}
                         , {field: 'yuliaoWidth', title: '余料宽', width: 80}
                     ]]
@@ -1222,10 +1222,10 @@ function excelExport() {
                 '部件名称',
                 '槽宽',
                 '备料尺寸',
-                '数量个',
+                '数量根',
                 '数量张(片)',
                 '精截尺寸',
-                '数量根',
+                '数量个',
                 '余料长',
                 '余料宽'
             ]
@@ -1239,10 +1239,10 @@ function excelExport() {
                 temp.push(normalList[i].partName);
                 temp.push(normalList[i].caoweight);
                 temp.push(normalList[i].preSize);
-                temp.push(normalList[i].numbyGe);
+                temp.push(normalList[i].numbyGens);
                 temp.push(normalList[i].numbyZhuang);
                 temp.push(normalList[i].size);
-                temp.push(normalList[i].numbyGens);
+                temp.push(normalList[i].numbyGe);
                 temp.push(normalList[i].yuliaoLen);
                 temp.push(normalList[i].yuliaoWidth);
                 aoa2.push(temp);
@@ -1278,10 +1278,10 @@ function excelExport() {
                 '部件名称',
                 '槽宽',
                 '备料尺寸',
-                '数量个',
                 '数量根',
-                '精截尺寸',
                 '数量张(片)',
+                '精截尺寸',
+                '数量个',
             ]);
         if (infoMS != null && infoMS.length > 0) {
             for (var i = 0; i < infoMS.length; i++) {
