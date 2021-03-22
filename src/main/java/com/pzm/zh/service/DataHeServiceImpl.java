@@ -1512,7 +1512,9 @@ public class DataHeServiceImpl implements DataHeService {
     private Double preLength(Double length) {
         if (length.compareTo(new Double(2100)) < 0) {
             length = new Double(2100);
-        } else if (length.compareTo(new Double(2150)) >= 0 && length.compareTo(new Double(2200)) < 0) {
+        } else if (length.compareTo(new Double(2100)) >= 0 && length.compareTo(new Double(2150)) < 0) {
+            length = new Double(2150);
+        }else if (length.compareTo(new Double(2150)) >= 0 && length.compareTo(new Double(2200)) < 0) {
             length = new Double(2200);
         } else if (length.compareTo(new Double(2200)) >= 0 && length.compareTo(new Double(2250)) < 0) {
             length = new Double(2250);
