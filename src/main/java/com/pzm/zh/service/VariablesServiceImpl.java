@@ -31,6 +31,6 @@ public class VariablesServiceImpl implements VariablesService {
      */
     @Override
     public Integer updateVariables(Variables variables) {
-        return variablesMapper.updateByPrimaryKey(variables);
+        return variablesMapper.updateByPrimaryKeySelective(variables);
     }
 }

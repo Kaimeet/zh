@@ -609,7 +609,7 @@ public class DataGcServiceImpl implements DataGcService {
             zxbnums = Double.valueOf(numbyser.getZxbnums());
             flagzxb = true;
         }
-        if (!StringUtils.isEmpty(numbyser.getXzdnums())) {
+        if (!StringUtils.isEmpty(numbyser.getXxbnums())) {
             xxbnums = Double.valueOf(numbyser.getXxbnums());
             flagxxb = true;
         }

@@ -394,6 +394,9 @@
             <if test="serizesId != null">
                 serizesId = #{serizesId,jdbcType=INTEGER},
             </if>
+            <if test="caoweight != null">
+                caoweight = #{caoweight,jdbcType=NVARCHAR},
+            </if>
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>

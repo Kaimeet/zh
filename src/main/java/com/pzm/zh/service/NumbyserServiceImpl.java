@@ -20,6 +20,6 @@ public class NumbyserServiceImpl implements NumbyserService {
 
     @Override
     public Integer updateVariables(Numbyser numbyser) {
-        return numbyserMapper.updateByPrimaryKey(numbyser);
+        return numbyserMapper.updateByPrimaryKeySelective(numbyser);
     }
 }
