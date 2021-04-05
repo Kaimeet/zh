@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -131,6 +132,7 @@ public class MainController {
         }
 
         for (Emp emp : list) {
+            emp = this.setEmpOrder(emp);
             emp.setNumbyZhuang(new BigDecimal(emp.getNumbyZhuang()).setScale(1, BigDecimal.ROUND_HALF_UP).doubleValue());
             emp.setNumbyGens(new BigDecimal(emp.getNumbyGens()).setScale(1, BigDecimal.ROUND_HALF_UP).doubleValue());
             emp.setNumbyGe(new BigDecimal(emp.getNumbyGe()).setScale(1, BigDecimal.ROUND_HALF_UP).doubleValue());
@@ -165,6 +167,7 @@ public class MainController {
             Double numbyGe = Math.ceil(emps.stream().collect(Collectors.summingDouble(Emp::getNumbyGe))); // 数量个
             Emp emp = new Emp();
             emp.setPartName(partName);
+            emp = this.setEmpOrder(emp);
             emp.setLength(length);
             emp.setPreLenght(preLength);
             emp.setWidth(width);
@@ -206,6 +209,7 @@ public class MainController {
             }
             Emp emp = new Emp();
             emp.setPartName(partName);
+            emp = this.setEmpOrder(emp);
             emp.setHigh(hight);
             emp.setNumbyZhuang(numbyZhuang);
             emp.setCaoweight(caoweight);
@@ -214,6 +218,10 @@ public class MainController {
             emp.setColorInfo(colorInfo);
             removeList.add(emp);
         }
+        // 对三个列表进行排序
+        list = list.stream().sorted(Comparator.comparing(Emp::getSalesOrderNum).thenComparing(Emp::getOrderNum)).collect(Collectors.toList());
+        resultList = resultList.stream().sorted(Comparator.comparing(Emp::getSalesOrderNum).thenComparing(Emp::getOrderNum)).collect(Collectors.toList());
+        removeList = removeList.stream().sorted(Comparator.comparing(Emp::getSalesOrderNum).thenComparing(Emp::getOrderNum)).collect(Collectors.toList());
         EmpData empData = new EmpData();
         empData.setOriginal(caseDtos);
         empData.setNormal(list);
@@ -222,5 +230,38 @@ public class MainController {
         Dto<EmpData> dtoDto = new Dto<>();
         dtoDto.setData(empData);
         return dtoDto;
+    }
+
+    /**
+     * 对部件进行排序
+     *
+     * @param emp
+     * @return
+     */
+    private Emp setEmpOrder(Emp emp) {
+        if ("边框".equals(emp.getPartName())) {
+            emp.setOrderNum(1);
+        } else if ("上帽".equals(emp.getPartName())) {
+            emp.setOrderNum(2);
+        } else if ("下帽".equals(emp.getPartName())) {
+            emp.setOrderNum(3);
+        } else if ("中档".equals(emp.getPartName())) {
+            emp.setOrderNum(4);
+        } else if ("上中挺".equals(emp.getPartName())) {
+            emp.setOrderNum(5);
+        } else if ("中中挺".equals(emp.getPartName())) {
+            emp.setOrderNum(6);
+        } else if ("下中挺".equals(emp.getPartName())) {
+            emp.setOrderNum(7);
+        } else if ("上芯板".equals(emp.getPartName())) {
+            emp.setOrderNum(8);
+        } else if ("中芯板".equals(emp.getPartName())) {
+            emp.setOrderNum(9);
+        } else if ("下芯板".equals(emp.getPartName())) {
+            emp.setOrderNum(10);
+        } else {
+            emp.setOrderNum(0);
+        }
+        return emp;
     }
 }

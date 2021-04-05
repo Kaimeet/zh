@@ -43,6 +43,7 @@ public class Emp {
 
     private String colorInfo; // 颜色
 
+    private Integer orderNum; //排序字段
 
     public Double getPreLenght() {
         return preLenght;
@@ -187,5 +188,13 @@ public class Emp {
 
     public void setColorInfo(String colorInfo) {
         this.colorInfo = colorInfo;
+    }
+
+    public Integer getOrderNum() {
+        return orderNum;
+    }
+
+    public void setOrderNum(Integer orderNum) {
+        this.orderNum = orderNum;
     }
 }
